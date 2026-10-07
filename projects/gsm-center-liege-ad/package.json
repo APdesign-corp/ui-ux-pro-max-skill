@@ -1,0 +1,22 @@
+{
+  "name": "gsm-center-liege-ad",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Motion design publicitaire GSM Center Liège — rendu 4K image par image (Three.js + SVG + Canvas, Chromium headless, ffmpeg)",
+  "type": "module",
+  "scripts": {
+    "preview": "node scripts/serve.mjs",
+    "render": "node scripts/render.mjs",
+    "render:preview": "node scripts/render.mjs --width 1280 --height 720 --fps 30 --out out/preview-720p.mp4",
+    "render:vertical": "node scripts/render.mjs --format 9x16 --width 2160 --height 3840 --out out/gsm-center-liege-9x16-4k.mp4",
+    "still": "node scripts/render.mjs --still",
+    "audio": "python3 scripts/sound_design.py"
+  },
+  "dependencies": {
+    "@fontsource/space-grotesk": "5.2.10",
+    "playwright-core": "1.56.1",
+    "three": "0.180.0",
+    "topojson-client": "3.1.0",
+    "world-atlas": "2.0.2"
+  }
+}

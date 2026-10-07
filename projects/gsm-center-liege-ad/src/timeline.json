@@ -1,0 +1,67 @@
+{
+  "_doc": "Timeline maître, partagée par le rendu (JS) et le sound design (Python). Les scènes sont écrites sur une durée de référence ('design'). Si vous changez 'start' ou 'end', le contenu de la scène s'étire ou se compresse, et ses cues sonores suivent. 'pre' et 'post' (en secondes) : marge pendant laquelle la scène continue de dessiner ses calques 2D, pour les transitions. Les cues sont en temps local de scène (référence design).",
+  "duration": 20,
+  "scenes": [
+    { "id": "intro",       "start": 0,  "end": 3,  "design": 3, "pre": 0,   "post": 0.05 },
+    { "id": "phones",      "start": 3,  "end": 6,  "design": 3, "pre": 0,   "post": 0.05 },
+    { "id": "repair",      "start": 6,  "end": 9,  "design": 3, "pre": 0,   "post": 0.05 },
+    { "id": "accessories", "start": 9,  "end": 12, "design": 3, "pre": 0,   "post": 0.05 },
+    { "id": "transfer",    "start": 12, "end": 15, "design": 3, "pre": 0,   "post": 0.05 },
+    { "id": "final",       "start": 15, "end": 20, "design": 5, "pre": 0,   "post": 0 }
+  ],
+  "music": { "bpm": 120, "pulseFrom": 3.0, "pulseTo": 15.0, "hatsFrom": 9.0, "padFrom": 16.0 },
+  "cues": [
+    { "scene": "intro", "at": 0.0,  "type": "drone",   "dur": 2.0,  "gain": 0.55 },
+    { "scene": "intro", "at": 0.15, "type": "ticks",   "dur": 1.1,  "gain": 0.35 },
+    { "scene": "intro", "at": 0.75, "type": "shimmer", "dur": 0.8,  "gain": 0.3 },
+    { "scene": "intro", "at": 1.45, "type": "suck",    "dur": 0.55, "gain": 0.6 },
+    { "scene": "intro", "at": 2.0,  "type": "impact",  "dur": 2.2,  "gain": 1.0 },
+    { "scene": "intro", "at": 2.08, "type": "shimmer", "dur": 0.6,  "gain": 0.35 },
+    { "scene": "intro", "at": 2.7,  "type": "whoosh",  "dur": 0.4,  "gain": 0.75, "pan": [-0.8, 0.8] },
+
+    { "scene": "phones", "at": 0.0,  "type": "hit",    "dur": 1.2,  "gain": 0.85 },
+    { "scene": "phones", "at": 0.45, "type": "blip",   "dur": 0.2,  "gain": 0.3 },
+    { "scene": "phones", "at": 1.0,  "type": "hit",    "dur": 1.0,  "gain": 0.6 },
+    { "scene": "phones", "at": 1.0,  "type": "glass",  "dur": 0.9,  "gain": 0.35 },
+    { "scene": "phones", "at": 1.55, "type": "swish",  "dur": 0.5,  "gain": 0.3, "pan": [0.5, -0.5] },
+    { "scene": "phones", "at": 2.45, "type": "riser",  "dur": 0.55, "gain": 0.45 },
+    { "scene": "phones", "at": 2.6,  "type": "whoosh", "dur": 0.4,  "gain": 0.7, "pan": [0, 0] },
+
+    { "scene": "repair", "at": 0.4,  "type": "burst",   "dur": 0.6,  "gain": 0.7 },
+    { "scene": "repair", "at": 0.8,  "type": "blip",    "dur": 0.15, "gain": 0.32 },
+    { "scene": "repair", "at": 0.9,  "type": "blip",    "dur": 0.15, "gain": 0.32 },
+    { "scene": "repair", "at": 1.0,  "type": "blip",    "dur": 0.15, "gain": 0.32 },
+    { "scene": "repair", "at": 0.85, "type": "servo",   "dur": 0.75, "gain": 0.25 },
+    { "scene": "repair", "at": 1.6,  "type": "suck",    "dur": 0.4,  "gain": 0.45 },
+    { "scene": "repair", "at": 2.0,  "type": "snap",    "dur": 0.9,  "gain": 0.9 },
+    { "scene": "repair", "at": 2.05, "type": "scan",    "dur": 0.5,  "gain": 0.35 },
+    { "scene": "repair", "at": 2.55, "type": "success", "dur": 1.0,  "gain": 0.45 },
+    { "scene": "repair", "at": 2.72, "type": "whoosh",  "dur": 0.35, "gain": 0.7, "pan": [-0.9, 0.9] },
+
+    { "scene": "accessories", "at": 0.0,  "type": "hit",   "dur": 0.9,  "gain": 0.6 },
+    { "scene": "accessories", "at": 0.3,  "type": "pop",   "dur": 0.2,  "gain": 0.4 },
+    { "scene": "accessories", "at": 0.4,  "type": "pop",   "dur": 0.2,  "gain": 0.35 },
+    { "scene": "accessories", "at": 0.5,  "type": "hit",   "dur": 0.9,  "gain": 0.75 },
+    { "scene": "accessories", "at": 1.0,  "type": "hit",   "dur": 0.9,  "gain": 0.75 },
+    { "scene": "accessories", "at": 1.5,  "type": "hit",   "dur": 0.9,  "gain": 0.8 },
+    { "scene": "accessories", "at": 1.5,  "type": "data",  "dur": 0.5,  "gain": 0.3 },
+    { "scene": "accessories", "at": 2.55, "type": "riser", "dur": 0.45, "gain": 0.4 },
+    { "scene": "accessories", "at": 2.65, "type": "whoosh","dur": 0.4,  "gain": 0.7, "pan": [0, 0] },
+
+    { "scene": "transfer", "at": 0.05, "type": "pulse",  "dur": 1.2,  "gain": 0.6 },
+    { "scene": "transfer", "at": 0.4,  "type": "zips",   "dur": 1.3,  "gain": 0.35 },
+    { "scene": "transfer", "at": 0.5,  "type": "hit",    "dur": 1.0,  "gain": 0.8 },
+    { "scene": "transfer", "at": 1.0,  "type": "hit",    "dur": 1.0,  "gain": 0.8 },
+    { "scene": "transfer", "at": 1.5,  "type": "blip",   "dur": 0.2,  "gain": 0.3 },
+    { "scene": "transfer", "at": 1.6,  "type": "riser",  "dur": 1.4,  "gain": 0.65 },
+    { "scene": "transfer", "at": 2.45, "type": "whoosh", "dur": 0.55, "gain": 0.8, "pan": [0, 0] },
+
+    { "scene": "final", "at": 0.0,  "type": "suck",    "dur": 0.9,  "gain": 0.8 },
+    { "scene": "final", "at": 1.0,  "type": "impact",  "dur": 3.0,  "gain": 1.0 },
+    { "scene": "final", "at": 1.05, "type": "shimmer", "dur": 0.9,  "gain": 0.35 },
+    { "scene": "final", "at": 2.3,  "type": "blip",    "dur": 0.2,  "gain": 0.25 },
+    { "scene": "final", "at": 2.6,  "type": "ticks",   "dur": 0.5,  "gain": 0.3 },
+    { "scene": "final", "at": 3.5,  "type": "impact",  "dur": 1.5,  "gain": 0.7, "tone": "bright" },
+    { "scene": "final", "at": 3.5,  "type": "glass",   "dur": 1.4,  "gain": 0.4 }
+  ]
+}
