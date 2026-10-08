@@ -11,6 +11,7 @@ import { createStudio } from './world/studio.js';
 import { createPhone } from './world/phone.js';
 import { createAccessories } from './world/accessories.js';
 import { createObjects } from './world/objects.js';
+import { loadFeedImages } from './world/posts.js';
 
 import hook from './scenes/01-hook.js';
 import showreel from './scenes/02-showreel.js';
@@ -56,7 +57,7 @@ export async function boot(canvas) {
   const sideA = createPhone(cfg, { variant: 'graphite' });
   const sideB = createPhone(cfg, { variant: 'green' });
   const acc = createAccessories(cfg, assets);
-  const obj = createObjects(cfg);
+  const obj = createObjects(cfg, await loadFeedImages());
   scene.add(hero.group, sideA.group, sideB.group, acc.group, obj.group);
 
   const W = cfg.video.width, H = cfg.video.height;

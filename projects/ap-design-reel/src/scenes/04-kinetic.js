@@ -99,7 +99,7 @@ export default function createKinetic({ cfg, W, H }) {
       studio.update(T, { glow: 0.15 + 0.6 * pulse(tStop, 0, 0.01, 0.5), backdrop: true, beams: 0.15, grid: 0, dust: 0.5, motes: 0.3, env: 1, envRot: T, rim: 1 });
       obj.feed.visible = true;
       obj.feed.position.set(0, y, 0);
-      obj.feed.rotation.set(-0.06, 0, 0.02);
+      obj.feed.rotation.set(0, 0, 0); // pas de rotation : sinon les cartes basses (y≈-41) se décalent
       f.camera([0, 0.1, 6.4 + 0.6 * (1 - E.outCubic(seg(T, m4, m4 + 0.4)))], [0, 0, 0], 32, -0.03);
       post.blur = [0, Math.min(0.09, (v / CARD) / 30 * 1.6) * cfg.vfx.motionBlur];
       post.flash += 0.55 * pulse(tStop, 0, 0.004, 0.09) + 0.3 * pulse(T - mS, 0, 0.005, 0.14) + 0.3 * pulse(T - m4, 0, 0.005, 0.1);
@@ -110,7 +110,7 @@ export default function createKinetic({ cfg, W, H }) {
       post.fade *= 1 - E.inCubic(seg(T, end - 0.24, end));
       post.uiBlur = 0; // la typo reste nette sur le flux flou
       // le contenu banal s'efface derrière le message
-      const dim = 0.12 + 0.43 * seg(T, mI - 0.1, mI + 0.1) + 0.2 * seg(T, mS, mS + 0.15);
+      const dim = 0.3 * seg(T, mI - 0.1, mI + 0.1) + 0.25 * seg(T, mS, mS + 0.15); // les posts restent visibles
       ui.save();
       ui.fillStyle = `rgba(3,3,4,${dim})`;
       ui.fillRect(-W, -H, W * 3, H * 3);

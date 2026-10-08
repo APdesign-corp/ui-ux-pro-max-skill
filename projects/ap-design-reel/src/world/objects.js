@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { rng } from '../core/anim.js';
 import { canvasTexture } from './textures.js';
 import { setFont } from '../core/draw.js';
+import { FEED, drawPost } from './posts.js';
 
 // Monogramme AP (géométrie propre, unités ~1.3 x 1)
 export function apShapes() {
@@ -40,7 +41,7 @@ export function apPath2D() {
   return p;
 }
 
-export function createObjects(cfg) {
+export function createObjects(cfg, feedImages = []) {
   const accent = new THREE.Color(cfg.colors.neon);
   const chrome = new THREE.MeshPhysicalMaterial({ color: '#c2c5cc', metalness: 1, roughness: 0.14, clearcoat: 0.6, clearcoatRoughness: 0.08, envMapIntensity: 0.85 });
   const darkMetal = new THREE.MeshPhysicalMaterial({ color: '#2a2a31', metalness: 1, roughness: 0.22, clearcoat: 0.6, envMapIntensity: 1.3 });
@@ -93,23 +94,8 @@ export function createObjects(cfg) {
     shards.add(m);
   }
 
-  // flux vertical de "posts" pour la séquence SCROLL
-  const cardTex = Array.from({ length: 6 }, (_, k) => canvasTexture(540, 960, (g, w, h) => {
-    const rr = rng(300 + k);
-    const grd = g.createLinearGradient(0, 0, w, h);
-    const hues = [['#4a4a55', '#2a2a32'], ['#55555f', '#30303a'], ['#45454f', '#2c2c35']][k % 3];
-    grd.addColorStop(0, hues[0]); grd.addColorStop(1, hues[1]);
-    g.fillStyle = grd; g.fillRect(0, 0, w, h);
-    // contenu "banal" : blocs gris, texte factice
-    g.fillStyle = 'rgba(255,255,255,0.2)';
-    g.fillRect(40, 120, w - 80, h * 0.45);
-    for (let i = 0; i < 4; i++) g.fillRect(40, h * 0.62 + i * 46, (w - 80) * (0.5 + rr() * 0.5), 22);
-    g.beginPath(); g.arc(80, 60, 28, 0, Math.PI * 2); g.fill();
-    g.fillRect(124, 48, 160, 22);
-    g.strokeStyle = 'rgba(255,255,255,0.25)'; g.lineWidth = 6; g.strokeRect(3, 3, w - 6, h - 6);
-    setFont(g, 26, 500, 0.1); g.fillStyle = 'rgba(255,255,255,0.45)';
-    g.fillText('♡     ↗', 40, h - 60);
-  }));
+  // flux vertical de vrais posts (photo + interface Reels) pour la séquence SCROLL
+  const cardTex = FEED.map((p, k) => canvasTexture(540, 960, (g, w, h) => drawPost(g, w, h, p, feedImages[k])));
   const feed = new THREE.Group();
   for (let i = 0; i < 14; i++) {
     const m = new THREE.Mesh(new THREE.PlaneGeometry(2.0, 3.55), new THREE.MeshBasicMaterial({ map: cardTex[i % cardTex.length], toneMapped: false }));
