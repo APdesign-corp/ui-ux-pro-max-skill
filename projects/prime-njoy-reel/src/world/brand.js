@@ -185,7 +185,8 @@ export function drawWatermark(g, W, H, wm, t) {
   g.fillRect(0, H * 0.035, W, bh);
   g.fillStyle = '#fff'; g.font = `700 ${26 * u}px Poppins, sans-serif`; g.textAlign = 'center';
   g.fillText(`${wm.text} ${wm.by} — ${wm.note}`, W / 2, H * 0.035 + bh / 2 + 1);
-  // compteur de temps (empêche de recadrer proprement)
+  // compteur de temps (empêche de recadrer proprement) — omis si t est null (ajouté par ffmpeg)
+  if (t == null) { g.restore(); return; }
   g.font = `600 ${22 * u}px Poppins, sans-serif`; g.textAlign = 'right';
   g.fillStyle = 'rgba(255,255,255,0.75)'; g.strokeStyle = 'rgba(0,0,0,0.35)'; g.lineWidth = 3 * u;
   const tc = `APERÇU ${t.toFixed(2)} s`;
