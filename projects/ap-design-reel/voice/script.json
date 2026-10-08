@@ -1,0 +1,155 @@
+{
+ "_doc": "Script voix off EXACT du brief AP Design. Moteur Supertonic 3 (graphèmes) : 'respell' n'adapte que ce qui se lit mal (sigles). Plusieurs prises par phrase, la meilleure est choisie par 2 ASR ; les mots horodatés pilotent le montage.",
+ "respell": {
+  "3D": "trois-D",
+  "VFX": "V.F.X.",
+  "DM": "D.M.",
+  "AP": "A.P."
+ },
+ "lines": [
+  {
+   "id": "L1",
+   "scene": "hook",
+   "tone": "provocateur, direct",
+   "gap_before": 0.14,
+   "chunks": [
+    {
+     "id": "L1",
+     "text": "Tu veux vraiment qu'on remarque tes vidéos ?",
+     "speed": 1.0,
+     "gain_db": 1.0,
+     "breaks": []
+    }
+   ]
+  },
+  {
+   "id": "L2",
+   "scene": "showreel",
+   "tone": "tranchant",
+   "gap_before": 0.14,
+   "chunks": [
+    {
+     "id": "L2",
+     "text": "Alors arrête le contenu banal.",
+     "speed": 1.0,
+     "gain_db": 1.0,
+     "breaks": [],
+     "takes_mul": 2
+    }
+   ]
+  },
+  {
+   "id": "L3",
+   "scene": "hero",
+   "tone": "précis",
+   "gap_before": 0.3,
+   "chunks": [
+    {
+     "id": "L3",
+     "text": "Motion design. 3D. VFX.",
+     "speed": 0.95,
+     "gain_db": 1.5,
+     "breaks": [
+      {
+       "after": "design",
+       "sec": 0.12
+      },
+      {
+       "after": "3D",
+       "sec": 0.1
+      }
+     ],
+     "takes_mul": 2
+    }
+   ]
+  },
+  {
+   "id": "L4",
+   "scene": "scroll",
+   "tone": "cœur du message, énergique",
+   "gap_before": 0.2,
+   "chunks": [
+    {
+     "id": "L4",
+     "text": "On transforme tes idées en images qui arrêtent le scroll.",
+     "speed": 1.0,
+     "gain_db": 1.5,
+     "breaks": [],
+     "takes_mul": 2
+    }
+   ]
+  },
+  {
+   "id": "L5",
+   "scene": "reveal",
+   "tone": "plus posé, signature",
+   "gap_before": 0.9,
+   "chunks": [
+    {
+     "id": "L5",
+     "text": "Ça, c'est AP Design.",
+     "speed": 0.9,
+     "gain_db": 1.5,
+     "breaks": [
+      {
+       "after": "Ça",
+       "sec": 0.1
+      }
+     ],
+     "takes_mul": 3
+    }
+   ]
+  },
+  {
+   "id": "L6",
+   "scene": "cta",
+   "tone": "complice, énergique",
+   "gap_before": 0.4,
+   "chunks": [
+    {
+     "id": "L6",
+     "text": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… DM.",
+     "speed": 1.0,
+     "gain_db": 1.5,
+     "breaks": [
+      {
+       "after": "prochaine",
+       "sec": 0.1
+      },
+      {
+       "after": "compte",
+       "sec": 0.12
+      },
+      {
+       "after": "collaborer",
+       "sec": 0.28
+      }
+     ],
+     "takes_mul": 2
+    }
+   ]
+  }
+ ],
+ "emphasis": [
+  {
+   "word": "L2.banal",
+   "db": 1.5
+  },
+  {
+   "word": "L4.arrêtent",
+   "db": 2.0
+  },
+  {
+   "word": "L4.scroll",
+   "db": 1.5
+  },
+  {
+   "word": "L5.AP",
+   "db": 1.5
+  },
+  {
+   "word": "L6.DM",
+   "db": 2.5
+  }
+ ]
+}
