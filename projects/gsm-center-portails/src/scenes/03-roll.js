@@ -79,14 +79,15 @@ export default function create(ctx) {
   // ------------------------------------------------------------------ géométrie de mise en scène
   const H0 = new THREE.Vector3(0, 0, 0);               // héros
   const AX = V ? -3.0 : -3.3;                            // axe de l'essaim (phase A)
-  const A_Z0 = 9.4, A_Z1 = 1.2;
+  const A_Z0 = 9.4, A_Z1 = 4.4;
 
   // essaim de la phase A : hélice de téléphones autour de l'axe de vol, écrans tournés vers la caméra
   const RX = V ? 0.78 : 1.12, RY = V ? 1.25 : 0.92;
   const APPS = ['list', 'counter', 'search', 'pills', 'home'];
   const FIELD = [1, 2, 3, 4, 5].map((i, k) => ({
-    i, th: 0.5 + k * 2.2, z: 7.3 - k * 1.28, app: APPS[k], spin: (k % 2 ? -1 : 1) * (1.2 + k * 0.25),
+    i, th: 0.5 + k * 2.2, d0: 1.3 + k * 1.5, app: APPS[k], spin: (k % 2 ? -1 : 1) * (1.2 + k * 0.25),
   }));
+  const SPAN = 7.5, PH_V = 3.2;                          // les téléphones foncent aussi vers la caméra
   // éclats de lumière 3D (traînées fixes dans l'espace : la caméra les traverse en roulant)
   const shardCount = 90;
   const shardGeo = new THREE.BoxGeometry(0.014, 0.014, 1);
@@ -95,7 +96,7 @@ export default function create(ctx) {
   {
     const r = (() => { let s0 = 4242; return () => ((s0 = (s0 * 16807) % 2147483647) / 2147483647); })();
     const m = new THREE.Matrix4(), q = new THREE.Quaternion(), p = new THREE.Vector3(), sc = new THREE.Vector3();
-    const cols = [new THREE.Color(C.neon).multiplyScalar(2.2), new THREE.Color('#eaffea').multiplyScalar(1.8), new THREE.Color(C.teal).multiplyScalar(1.8)];
+    const cols = [new THREE.Color(C.neon).multiplyScalar(1.5), new THREE.Color('#eaffea').multiplyScalar(1.5), new THREE.Color(C.teal).multiplyScalar(1.2)];
     for (let k = 0; k < shardCount; k++) {
       const a = r() * TAU, rad = 1.5 + r() * 2.6;
       p.set(AX + Math.cos(a) * rad * (V ? 0.8 : 1.2), Math.sin(a) * rad * (V ? 1.3 : 0.9), -3 + r() * 14);
@@ -110,7 +111,7 @@ export default function create(ctx) {
 
   // plan produit (phase C) : orbite autour du héros
   const ANG0 = V ? -1.05 : -1.18, ANG1 = V ? -0.36 : -0.42;
-  const R0 = V ? 3.55 : 2.75, R1 = V ? 3.05 : 2.3;
+  const R0 = V ? 2.95 : 2.75, R1 = V ? 2.45 : 2.3;
   const HY0 = V ? -0.5 : -0.6, HY1 = V ? -0.3 : -0.36;
   const angMid = (ANG0 + ANG1) / 2;
   const fwdMid = new THREE.Vector3(-Math.sin(angMid), 0, -Math.cos(angMid)); // direction de visée moyenne
@@ -171,14 +172,14 @@ export default function create(ctx) {
   const BEHIND = S.clone().addScaledVector(nDive, -1.2);
   function camD(lt) {
     const s = seg(lt, T_DIVE, T_END);
-    const k = 0.35 * E.inCubic(s) + 0.65 * E.inExpo(s);
+    const k = 0.5 * E.inCubic(s) + 0.5 * E.inExpo(s);
     const b = camCbase(lt);
     const tk = E.inOutCubic(seg(lt, T_DIVE, 2.72));
     return {
       pos: [lerp(b.pos[0], END.x, k), lerp(b.pos[1], END.y, k), lerp(b.pos[2], END.z, k)],
       target: [lerp(b.target[0], BEHIND.x, tk), lerp(b.target[1], BEHIND.y, tk), lerp(b.target[2], BEHIND.z, tk)],
       roll: TAU + dutch(lt) + 0.3 * E.inCubic(s),
-      fov: b.fov + 16 * E.inExpo(s),
+      fov: b.fov + 7 * E.inExpo(s),
       near: 0.004,
       far: 120,
     };
@@ -230,7 +231,7 @@ export default function create(ctx) {
     const cam = f.camera;
     const studio = f.world.studio;
     studio.update(t, {
-      backdrop: false, grid: 0, beams: lt > 1.1 && lt < 2.6 ? 0.55 : 0, dust: 1.2, motes: 1.1,
+      backdrop: false, grid: 0, beams: 0, dust: 0.5, motes: 0.35,
       env: 1.15, envRot: lt * 1.3, rim: lt < T_WHIP ? 0.35 : 0.55, key: 1.1, glow: 0,
     });
     sky.mesh.position.copy(cam.position);
@@ -241,13 +242,19 @@ export default function create(ctx) {
     shards.visible = lt < T_HIT;
     if (lt < T_HIT) {
       const ca = camA(Math.min(lt, T_WHIP));
+      const closing = (A_Z0 - ca.pos[2]) + PH_V * Math.min(lt, T_HIT);
       FIELD.forEach((p, k) => {
         const ph = phones[p.i];
-        ph.group.visible = true;
+        // distance devant la caméra, recyclée : l'essaim ne s'épuise jamais pendant le roll
+        const d = ((((p.d0 - closing) + 0.7) % SPAN) + SPAN) % SPAN - 0.7;
+        const sc = 1 - smoother(seg(d, SPAN - 2.2, SPAN - 0.75));
+        ph.group.visible = sc > 0.01;
         const th = p.th + lt * 0.9;
-        ph.group.position.set(AX + Math.cos(th) * RX, Math.sin(th) * RY + 0.06 * Math.sin(lt * 3 + k), p.z);
+        const z = ca.pos[2] - d;
+        ph.group.position.set(AX + Math.cos(th) * RX, Math.sin(th) * RY + 0.06 * Math.sin(lt * 3 + k), z);
+        ph.group.scale.setScalar(Math.max(0.01, sc));
         // l'écran regarde un point de l'axe en amont (vers la caméra), puis tourne sur lui-même
-        ph.group.lookAt(AX, 0, p.z + 3.2);
+        ph.group.lookAt(AX, 0, z + 3.2);
         ph.group.rotateZ(th + p.spin * lt);
         ph.group.rotateY(0.45 * Math.sin(lt * 2.4 + k * 1.7));
         ph.screen.draw(p.app, 0.9 + lt + k * 0.12, { variant: k, title: 'Services', label: 'CHARGEMENT', to: 100, text: 'Choisis ton smartphone', gridAt: 0.2 });
@@ -269,7 +276,7 @@ export default function create(ctx) {
       // écran : app search qui tape « Choisis ton smartphone », toucher, puis portail qui envahit
       const at0 = lt - T_WHIP;
       const touch = lt >= 2.5 ? { x: 0.27, y: 0.345, t: lt - 2.5 } : undefined;
-      hero.screen.draw('search', at0, { text: 'Choisis ton smartphone', cps: 24, delay: 0.12, gridAt: 1.12, touch });
+      hero.screen.draw('search', at0, { text: 'Choisis ton smartphone', cps: 24, delay: 0.12, gridAt: 0.75, touch });
       const pa = E.outCubic(seg(lt, 2.52, 2.7));
       if (pa > 0) {
         const g = hero.screen.g;
@@ -317,13 +324,13 @@ export default function create(ctx) {
       const hp = at(0.18, 0.35, 0.9);
       halo.position.set(hp[0], hp[1], hp[2]);
       halo.quaternion.copy(cam.quaternion);
-      halo.scale.setScalar(V ? 2.6 : 2.3);
-      halo.material.opacity = (0.3 + 0.06 * Math.sin(lt * 5)) * (1 - 0.8 * seg(lt, 2.4, 2.8));
+      halo.scale.setScalar(V ? 2.4 : 2.1);
+      halo.material.opacity = (0.22 + 0.05 * Math.sin(lt * 5)) * (1 - 0.8 * seg(lt, 2.4, 2.8));
       const hp2 = at(-1.2, -0.9, 2.4);
       halo2.position.set(hp2[0], hp2[1], hp2[2]);
       halo2.quaternion.copy(cam.quaternion);
       halo2.scale.setScalar(4);
-      halo2.material.opacity = 0.12;
+      halo2.material.opacity = 0.05;
       const tubeDefs = V
         ? [[1.05, 0.6, 2.9, 0, 5.5], [-1.15, -0.4, 3.4, 0.15, 6], [0.0, -1.9, 2.6, Math.PI / 2 - 0.25, 4]]
         : [[2.1, 0.0, 3.0, 0.08, 5.5], [-2.3, 0.3, 3.6, -0.12, 6], [0.4, -1.55, 2.6, Math.PI / 2 - 0.1, 7]];
@@ -338,7 +345,7 @@ export default function create(ctx) {
 
       // lumières studio produit : rim blanc en contre-jour, néon latéral, teal au sol
       const kp = at(0.85, 1.35, 0.85);
-      lKey.intensity = 26; lKey.position.set(kp[0], kp[1], kp[2]);
+      lKey.intensity = 42; lKey.position.set(kp[0], kp[1], kp[2]);
       const rp = at(-1.4, -0.4, 0.45);
       lRim.intensity = 12; lRim.position.set(rp[0], rp[1], rp[2]);
       const tp = at(1.3 * Math.cos(lt * 2), -1.1, -0.6 + 0.6 * Math.sin(lt * 2));
@@ -349,6 +356,7 @@ export default function create(ctx) {
 
     // ---------------- POST / FX
     post.bloom = 0.62;
+    post.bloomRadius = 0.32;
     post.vignette = 1.0;
     post.flashColor = [0.85, 1, 0.85];
     // flash d'arrivée (raccord orbit → roll) : 0.8 → 0 en 0.25 s
@@ -369,12 +377,12 @@ export default function create(ctx) {
       const sgn = post.blur[0] === 0 ? -1 : Math.sign(post.blur[0]);
       post.blur[0] += sgn * 0.075 * wk;
       post.blur[1] *= 0.4;
-      whipStreaks(fx, W, H, t, wk, f.u, 9);
-      post.flash = Math.max(post.flash, 0.22 * wk);
+      whipStreaks(fx, W, H, t, wk * 0.6, f.u, 9);
+      post.flash = Math.max(post.flash, 0.08 * wk);
       post.uiBlur = 1;
     }
     // impact du redressement
-    post.flash = Math.max(post.flash, 0.4 * pulse(lt, T_HIT, 0.012, 0.09));
+    post.flash = Math.max(post.flash, 0.28 * pulse(lt, T_HIT, 0.012, 0.08));
     if (lt >= T_HIT) {
       const hc = f.project([H0.x, H0.y, H0.z]);
       shockRing(fx, hc[0], hc[1], lt - T_HIT, f, { dur: 0.55, radius: 900, width: 14, alpha: 0.8 });

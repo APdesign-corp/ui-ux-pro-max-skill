@@ -14,7 +14,7 @@ import { BackdropShader, GridFloorShader } from '../engine/shaders.js';
 
 // --------------------------------------------------------------------------- profils de vitesse
 // Avancée radiale de la caméra (unités/s) en fonction de τ = T + 2
-const VK = [[0, 0.45], [0.75, 0.75], [1.6, 1.15], [1.85, 5.6], [2.0, 7.2], [2.12, 3.6], [2.5, 1.1], [3.0, 0.45], [3.4, 0]];
+const VK = [[0, 0.45], [0.75, 1.15], [1.6, 1.75], [1.85, 5.6], [2.0, 7.2], [2.12, 3.6], [2.5, 1.1], [3.0, 0.45], [3.4, 0]];
 // Vitesse angulaire de l'orbite (rad/s) en fonction de τ
 const WK = [[0, 0], [1.6, 0], [2.0, 0.05], [2.35, 0.32], [2.65, 0.95], [3.4, 2.9], [4.15, 6.3], [4.5, 7.4], [4.57, 7.4],
   [4.64, 0.34], [4.85, 0.24], [5.0, 0.22]];
@@ -42,18 +42,18 @@ export const warp = (T) => (T <= 0 ? T : speedRamp(T, SK));
 // Index = world.phones[i] : 0 héros titane (avec internes), 1 graphite, 2 vert, 3 titane, 4 graphite.
 const LAYOUT_H = [
   { i: 0, az: 0, rad: 0, y: 0, arrive: 0.0, wake: 0.3, app: 'home', yaw0: 0, roll: 0.16, spin: 0 },
-  { i: 3, az: 0.6, rad: 2.2, y: 0.46, arrive: 0.035, wake: 0.45, app: 'home', yaw0: -0.5, roll: -0.2, spin: 0.55, variant: 2 },
+  { i: 3, az: 0.6, rad: 2.2, y: 0.46, arrive: 0.035, wake: 0.45, dim: 0.85, app: 'home', yaw0: -0.5, roll: -0.2, spin: 0.55, variant: 2 },
   { i: 4, az: -0.74, rad: 2.3, y: -0.46, arrive: 0.07, wake: 0.6, app: 'pills', yaw0: 0.55, roll: 0.24, spin: -0.5 },
-  { i: 1, az: 2.4, rad: 3.95, y: -0.2, arrive: 0.11, wake: 0.75, app: 'list', yaw0: 0.4, roll: -0.12, spin: 0.7 },
-  { i: 2, az: 3.75, rad: 2.5, y: 0.3, arrive: 0.15, wake: 0.9, app: 'home', yaw0: -0.3, roll: 0.2, spin: -0.65, variant: 4 },
+  { i: 1, az: 2.4, rad: 3.95, y: -0.2, arrive: 0.11, wake: 0.75, app: 'find', yaw0: 0.4, roll: -0.12, spin: 0.7 },
+  { i: 2, az: 3.75, rad: 2.5, y: 0.3, arrive: 0.15, wake: 0.9, app: 'home', yaw0: -0.3, roll: 0.2, spin: -0.65, variant: 4, dim: 0.55 },
 ];
 // 9:16 : téléphones étagés en hauteur (au-dessus / en dessous du héros), profondeur forte
 const LAYOUT_V = [
   { i: 0, az: 0, rad: 0, y: 0, arrive: 0.0, wake: 0.3, app: 'home', yaw0: 0, roll: 0.12, spin: 0 },
-  { i: 3, az: 0.55, rad: 1.75, y: 1.62, arrive: 0.035, wake: 0.45, app: 'home', yaw0: -0.5, roll: -0.18, spin: 0.55, variant: 2 },
+  { i: 3, az: 0.55, rad: 1.75, y: 1.62, arrive: 0.035, wake: 0.45, dim: 0.85, app: 'home', yaw0: -0.5, roll: -0.18, spin: 0.55, variant: 2 },
   { i: 4, az: -0.6, rad: 1.85, y: -1.66, arrive: 0.07, wake: 0.6, app: 'pills', yaw0: 0.55, roll: 0.22, spin: -0.5 },
-  { i: 1, az: 2.45, rad: 2.6, y: 1.25, arrive: 0.11, wake: 0.75, app: 'list', yaw0: 0.4, roll: -0.12, spin: 0.7 },
-  { i: 2, az: 3.9, rad: 2.5, y: -1.3, arrive: 0.15, wake: 0.9, app: 'home', yaw0: -0.3, roll: 0.2, spin: -0.65, variant: 4 },
+  { i: 1, az: 2.45, rad: 2.6, y: 1.25, arrive: 0.11, wake: 0.75, app: 'find', yaw0: 0.4, roll: -0.12, spin: 0.7 },
+  { i: 2, az: 3.9, rad: 2.5, y: -1.3, arrive: 0.15, wake: 0.9, app: 'home', yaw0: -0.3, roll: 0.2, spin: -0.65, variant: 4, dim: 0.55 },
 ];
 
 export function makeRig(V) {
@@ -66,7 +66,7 @@ export function makeRig(V) {
   const omega = (T) => KW * keyAt(WK, T + 2);
 
   // pose du ralenti (plan héros penché, contre-plongée)
-  const SLOW = V ? { r: 2.55, y: -0.85, ty: 0.12, fov: 48 } : { r: 2.25, y: -0.5, ty: 0.1, fov: 40 };
+  const SLOW = V ? { r: 2.1, y: -0.78, ty: 0.06, fov: 48 } : { r: 2.25, y: -0.5, ty: 0.1, fov: 40 };
 
   // Passages : en fonction de l'AZIMUT de la caméra, le rayon et la hauteur s'écartent pour
   // frôler chaque téléphone (à côté, au-dessus, en dessous). [k, dr (rayon visé - base), dy, sigma]
@@ -130,14 +130,14 @@ export function makeRig(V) {
   // d'où les téléphones surgissent vers leur place (ce sont les « points lumineux » de la fin d'ignite).
   function farPos(L) {
     const sx = L.rad * Math.sin(L.az), sz = L.rad * Math.cos(L.az);
-    return [sx * 0.16 + (L.i % 2 ? 0.6 : -0.5), L.y * 0.22 + (V ? 0.4 : 0.2), -46 - L.i * 4.5];
+    return [sx * (V ? 0.9 : 1.5) + (L.i % 2 ? 0.35 : -0.3), L.y * (V ? 2.2 : 3.4) + (V ? 0.3 : 0.15), -44 - L.i * 5];
   }
 
   /** État d'un téléphone (index dans la disposition) au temps T. */
   function phone(k, T) {
     const L = LAY[k];
     const w = warp(T);
-    const ar = E.outExpo(seg(T, L.arrive, L.arrive + 0.78));
+    const ar = E.outExpo(seg(T, L.arrive, L.arrive + 0.62));
     const slot = [L.rad * Math.sin(L.az), L.y + 0.06 * Math.sin(w * 1.3 + k * 1.7), L.rad * Math.cos(L.az)];
     if (k === 0) slot[1] = heroBob(T);
     const far = farPos(L);
@@ -210,24 +210,35 @@ export function buildStage(ctx) {
   bg.frustumCulled = false;
   root.add(bg);
 
-  // ---- couronne de tubes néon
-  const tubeGeo = new THREE.CylinderGeometry(0.03, 0.03, 1, 8, 1, true);
+  // ---- couronne de tubes néon (extrémités fondues : couleurs de sommets, additif)
+  const tubeGeo = new THREE.CylinderGeometry(0.026, 0.026, 1, 8, 12, true);
+  {
+    const pa = tubeGeo.attributes.position;
+    const col = new Float32Array(pa.count * 3);
+    for (let i = 0; i < pa.count; i++) {
+      const k = Math.max(0, 1 - Math.pow(Math.abs(pa.getY(i)) * 2, 3));
+      col[i * 3] = col[i * 3 + 1] = col[i * 3 + 2] = k;
+    }
+    tubeGeo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  }
   const tubes = [];
   const r = rng(77);
-  const N = 22;
+  const N = 20;
   for (let i = 0; i < N; i++) {
-    const a = (i / N) * TAU + (r() - 0.5) * 0.12;
-    const rad = (V ? 8.5 : 10.5) + r() * 3;
-    const h = 2.2 + r() * (V ? 9 : 6.5);
-    const yc = (r() - 0.45) * (V ? 4 : 2.5);
+    const a = (i / N) * TAU + (r() - 0.5) * 0.14;
+    const rad = (V ? 9 : 11) + r() * 3.5;
+    const h = 2.4 + r() * (V ? 8 : 5.5);
+    const yc = (r() - 0.45) * (V ? 4 : 2.6);
     const white = i % 4 === 1;
-    const mat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    const mat = new THREE.MeshBasicMaterial({
+      color: 0x000000, vertexColors: true, blending: THREE.AdditiveBlending, transparent: true, depthWrite: false,
+    });
     const m = new THREE.Mesh(tubeGeo, mat);
     m.position.set(rad * Math.sin(a), yc, rad * Math.cos(a));
     m.scale.y = h;
     m.rotation.z = (r() - 0.5) * 0.12;
     root.add(m);
-    tubes.push({ m, mat, a, base: white ? new THREE.Color(1, 1, 1).multiplyScalar(1.6) : neon.clone().multiplyScalar(1.5 + r()), ph: r() * 10, order: r() });
+    tubes.push({ m, mat, a, base: white ? new THREE.Color(1, 1, 1).multiplyScalar(1.1) : neon.clone().multiplyScalar(0.8 + 0.8 * r()), ph: r() * 10, order: r() });
   }
 
   // ---- sol grille (rappel de la grille du site)
@@ -259,7 +270,7 @@ export function buildStage(ctx) {
     const sc = 5 + r2() * 5;
     s.scale.set(sc, sc * (V ? 1.6 : 0.9), 1);
     root.add(s);
-    hz.push({ s, mat, base: 0.05 + r2() * 0.06 });
+    hz.push({ s, mat, base: 0.018 + r2() * 0.025 });
   }
 
   // ---- contre-jour : halo derrière le héros (occulté par le téléphone)
@@ -303,10 +314,10 @@ export function buildStage(ctx) {
       if (b && b.k > 0.002) {
         back.position.set(...b.pos);
         back.scale.set(b.scale, b.scale * 1.25, 1);
-        backMat.opacity = 0.55 * b.k;
+        backMat.opacity = 0.2 * b.k;
         back2.position.set(...b.pos);
         back2.scale.set(b.scale * 0.35, b.scale * 0.5, 1);
-        back2Mat.opacity = 0.35 * b.k;
+        back2Mat.opacity = 0.14 * b.k;
       }
     },
   };

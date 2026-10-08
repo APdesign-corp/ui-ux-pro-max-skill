@@ -5,8 +5,8 @@
 // Caméra, positions et horloge ralentie : voir 02-orbit-rig.js (partagé avec 01-ignite).
 
 import { E, clamp, lerp, seg, pulse, win, noise1, rgba } from '../core/anim.js';
-import { radialGlow, streak, flare, eyebrow, drawText, textWidth, fitSize, textSweep } from '../core/draw.js';
-import { C, speedLines } from '../core/type.js';
+import { radialGlow, streak, flare, eyebrow, drawText, textWidth, fitSize, textSweep, glassPill, setFont } from '../core/draw.js';
+import { C, speedLines, typewriter } from '../core/type.js';
 import { makeRig, buildStage } from './02-orbit-rig.js';
 
 // Temps LOCAUX (0 = 2.00 s global). Grille 120 BPM : temps à 0, 0.5, 1.0, 1.5, 2.0, 2.5.
@@ -30,11 +30,21 @@ export const cues = [
   { t: 2.4, type: 'whip', gain: 0.8, pan: 0.5 },
   { t: 2.6, type: 'sub', dur: 0.4, gain: 0.9 },               // ralenti
   { t: 2.6, type: 'reverse', dur: 0.25, gain: 0.6 },
+  { t: 2.5, type: 'swish', gain: 0.5 },                      // barre de recherche (histoire, étape 1)
+  { t: 2.58, type: 'type', dur: 0.36, cps: 52, gain: 0.85 },  // « nouveau smartphone » tapé
   { t: 2.62, type: 'suck', dur: 0.38, gain: 1.0 },            // aspiration vers l'IMPACT de roll (5.00)
   { t: 2.85, type: 'whoosh', dur: 0.15, gain: 1.2 },          // punch-in
 ];
 
 const dist3 = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+
+// HISTOIRE, étape 1 (DIRECTION.md §0) : le client CHERCHE. L'écran du héros passe sur l'app `find`
+// pendant l'orbite rapide (masqué par le filé), puis la première requête se tape au ralenti, en
+// GROS sur f.ui (barre de recherche) et dans l'écran ; roll enchaîne les requêtes suivantes.
+const T_FIND = 2.45;                 // l'écran du héros passe sur `find`
+const T_TYPE = 2.58;                 // début de la frappe (temps local orbit)
+const FIND = { queries: ['nouveau smartphone', 'réparation écran', 'coque'], text: 'GSM Liège', cps: 52, delay: T_TYPE - T_FIND };
+const Q1 = 'nouveau smartphone';
 
 export default function create(ctx) {
   const { THREE, world, W, H, V, u, L } = ctx;
@@ -60,7 +70,7 @@ export default function create(ctx) {
   if (!V) {
     const size = 74 * u;
     const w1 = textWidth(g0, T1 + ' ', size, 300, 0);
-    typo = { size, w1, x: S.l, yEye: S.b - 122 * u, y: S.b - 18 * u };
+    typo = { size, w1, x: S.l, yEye: S.b - 128 * u, y: S.b - 18 * u };
   } else {
     const s2 = Math.min(104 * u, fitSize(g0, T2, 800, -0.01, S.w * 0.92, 200 * u));
     typo = { s1: s2 * 0.82, s2, yEye: S.b - 268 * u, y1: S.b - 150 * u, y2: S.b - 22 * u };
@@ -93,7 +103,7 @@ export default function create(ctx) {
 
       // ------------------------------------------------------------- monde
       wd.studio.update(2 + w, {
-        backdrop: false, grid: 0, beams: 0.5, dust: 1.15, motes: 1.25, env: 1.15,
+        backdrop: false, grid: 0, beams: 0.12 + 0.12 * slowK, dust: 1.1, motes: 1.2, env: 1.05,
         envRot: -0.55 * rig.theta(T) + 0.6 * Math.sin(w * 0.9), rim: 0.9, key: 0.95, glow: 1,
       });
 
@@ -108,9 +118,9 @@ export default function create(ctx) {
       const behind = [hp[0] + vA.x * 1.7, hp[1] + vA.y * 1.7 + 0.15, hp[2] + vA.z * 1.7];
 
       stage.update({
-        t: 2 + w, bg: 1.05, tubes: 1, tubesOn: 1, grid: V ? 0.45 : 0.7, haze: 1.0,
+        t: 2 + w, bg: 0.22, tubes: 1, tubesOn: 1, grid: V ? 0.4 : 0.55, haze: 0.5,
         bgCenter: [0.5, 0.5],
-        back: { pos: behind, k: (0.75 + 0.45 * slowK) * hero.ar, scale: V ? 4.4 : 3.6 },
+        back: { pos: behind, k: (0.45 + 0.75 * slowK) * hero.ar, scale: 3.0 },
       });
 
       // téléphones + écrans
@@ -120,24 +130,31 @@ export default function create(ctx) {
         P.group.visible = true;
         P.group.position.set(s.pos[0], s.pos[1], s.pos[2]);
         P.group.quaternion.setFromEuler(eul.set(s.pitch, s.yaw, s.roll, 'YXZ'));
+        // écran hors champ : inutile de le redessiner (son contenu n'apparaît pas dans l'image)
+        const q = f.project(s.pos);
+        const R = pxSize(f, s.pos, 1.7);
+        const onScreen = q[2] > -1 && q[2] < 1 && Math.abs(q[0] - W / 2) < W / 2 + R && Math.abs(q[1] - H / 2) < H / 2 + R;
+        if (!onScreen) continue;
         const tw = T - s.L.wake;
-        const br = k === 0 ? 1 : 0.8;
+        const br = k === 0 ? 0.88 : s.L.dim ?? 0.68;
         if (tw < 0) P.screen.draw('off', 0);
         else if (tw < 0.36) P.screen.draw('wake', tw, { p: E.outCubic(tw / 0.36), brightness: br });
-        else P.screen.draw(s.L.app, (w - s.L.wake - 0.36) * 1.0, { variant: s.L.variant || 0, brightness: br });
+        else if (k === 0 && T >= T_FIND) P.screen.draw('find', T - T_FIND, { ...FIND, brightness: br });
+        else if (s.L.app === 'find') P.screen.draw('find', w - s.L.wake - 0.36, { ...FIND, cps: 15, delay: 0.25, brightness: br });
+        else P.screen.draw(s.L.app, w - s.L.wake - 0.36, { variant: s.L.variant || 0, brightness: br });
       }
 
       // lumières : contre-jour vert derrière le héros, teal en dessous, balayage blanc
       rim.position.set(behind[0] + vR.x * 0.5, behind[1] + 0.85, behind[2] + vR.z * 0.5);
-      rim.intensity = (22 + 14 * slowK) * hero.ar;
+      rim.intensity = (13 + 20 * slowK) * hero.ar;
       rim2.position.set(hp[0] + vA.x * 1.0 - vR.x * 0.8, hp[1] - 0.9, hp[2] + vA.z * 1.0 - vR.z * 0.8);
       rim2.intensity = 9 * hero.ar;
-      const sw1 = seg(T, 0.85, 1.35), sw2 = seg(T, 2.58, 2.92);
-      const swp = sw1 > 0 && sw1 < 1 ? sw1 : sw2;
-      const swa = sw1 > 0 && sw1 < 1 ? Math.sin(Math.PI * sw1) : Math.sin(Math.PI * sw2) * 1.2;
+      const sw0 = seg(T, 0.06, 0.5), sw1 = seg(T, 0.85, 1.35), sw2 = seg(T, 2.58, 2.92);
+      const swp = sw0 > 0 && sw0 < 1 ? sw0 : sw1 > 0 && sw1 < 1 ? sw1 : sw2;
+      const swa = sw0 > 0 && sw0 < 1 ? 1.4 * Math.sin(Math.PI * sw0) : sw1 > 0 && sw1 < 1 ? Math.sin(Math.PI * sw1) : Math.sin(Math.PI * sw2) * 1.2;
       const sx = lerp(-2.4, 2.4, E.inOutSine(swp));
-      sweep.position.set(hp[0] - vA.x * 1.0 + vR.x * sx, hp[1] + 0.55, hp[2] - vA.z * 1.0 + vR.z * sx);
-      sweep.intensity = 30 * swa;
+      sweep.position.set(hp[0] - vA.x * 1.6 + vR.x * sx, hp[1] + 0.7, hp[2] - vA.z * 1.6 + vR.z * sx);
+      sweep.intensity = 16 * swa;
 
       // ------------------------------------------------------------- calque lumière (fx)
       // arrivée : traînées lumineuses et points (continuité avec la fin d'ignite)
@@ -145,13 +162,13 @@ export default function create(ctx) {
         const s = st[k];
         if (s.ar >= 0.995) continue;
         const cur = proj(f, s.pos);
-        const pr = rig.phone(k, Math.max(0, T - 0.04));
+        const pr = rig.phone(k, Math.max(0, T - 0.1));
         const prev = proj(f, pr.pos);
         const kk = 1 - s.ar;
         if (cur && prev) {
           fx.save();
           fx.globalCompositeOperation = 'lighter';
-          streak(fx, prev[0], prev[1], cur[0], cur[1], (2 + 7 * s.ar) * u, C.neon, 0.9 * Math.sqrt(kk));
+          streak(fx, prev[0], prev[1], cur[0], cur[1], (3 + 9 * s.ar) * u, C.neon, Math.sqrt(kk));
           fx.restore();
         }
         if (cur) {
@@ -205,17 +222,17 @@ export default function create(ctx) {
       }
 
       // ------------------------------------------------------------- typo (ui)
-      const outK = seg(T, 2.8, 2.95);
+      const outK = seg(T, 2.42, 2.6);
       const aT = 1 - outK;
       if (!V) {
-        eyebrow(ui, '01 — CHOISIR', typo.x, typo.yEye, T - 0.95, f, { size: 30, alpha: aT });
+        eyebrow(ui, '01 — CHOISIR', typo.x, typo.yEye, T - 0.95, f, { size: 36, alpha: aT });
         const o = { size: typo.size, t: T - 1.08, mode: 'rise', stagger: 0.022, dur: 0.5, out: outK };
         drawText(ui, T1, typo.x, typo.y, { ...o, weight: 300, color: C.white });
         drawText(ui, T2, typo.x + typo.w1, typo.y, { ...o, t: T - 1.2, weight: 800, color: C.white });
         textSweep(ui, T2, typo.x + typo.w1, typo.y, { size: typo.size, weight: 800 }, seg(T, 1.75, 2.25), C.neon, 0.95);
       } else {
         // voile sombre en bas pour la lisibilité (format réseaux)
-        const k = E.outCubic(seg(T, 0.85, 1.2)) * aT;
+        const k = E.outCubic(seg(T, 0.85, 1.2)) * (1 - E.inCubic(seg(T, 2.5, 2.7)));
         if (k > 0) {
           const grd = ui.createLinearGradient(0, S.b - 420 * u, 0, H);
           grd.addColorStop(0, 'rgba(2,6,4,0)');
@@ -224,17 +241,38 @@ export default function create(ctx) {
           ui.fillStyle = grd;
           ui.fillRect(0, S.b - 420 * u, W, H - (S.b - 420 * u));
         }
-        eyebrow(ui, '01 — CHOISIR', W / 2, typo.yEye, T - 0.95, f, { size: 34, align: 'center', alpha: aT });
+        eyebrow(ui, '01 — CHOISIR', W / 2, typo.yEye, T - 0.95, f, { size: 40, align: 'center', alpha: aT });
         const o = { align: 'center', mode: 'rise', stagger: 0.022, dur: 0.5, out: outK };
         drawText(ui, T1, W / 2, typo.y1, { ...o, size: typo.s1, weight: 300, t: T - 1.08, color: C.white });
         drawText(ui, T2, W / 2, typo.y2, { ...o, size: typo.s2, weight: 800, tracking: -0.01, t: T - 1.2, color: C.white });
         textSweep(ui, T2, W / 2, typo.y2, { size: typo.s2, weight: 800, tracking: -0.01, align: 'center' }, seg(T, 1.75, 2.25), C.neon, 0.95);
       }
 
+      // histoire, étape 1 : barre de recherche géante, la requête se tape (lisible sans le son)
+      const pa = E.outExpo(seg(T, 2.48, 2.64)) * (1 - E.inCubic(seg(T, 2.9, 2.985)));
+      if (pa > 0.003) {
+        const fs = V ? 60 * u : 62 * u;
+        const ph = fs * 1.85, pw = V ? S.w * 0.94 : Math.min(S.w * 0.5, 980 * u);
+        const px = V ? W / 2 - pw / 2 : S.l;
+        const py = (V ? S.b - 150 * u : S.b - 40 * u) - ph + (1 - pa) * 60 * u;
+        ui.save();
+        ui.globalAlpha = pa;
+        glassPill(ui, px, py, pw, ph, ph / 2, 1, f, { tint: 'rgba(3,9,5,0.78)', stroke: rgba(C.neon, 0.85), border: 2.5, top: 0.1, bottom: 0.02 });
+        // loupe
+        const ix = px + ph * 0.52, iy = py + ph / 2, ir = fs * 0.27;
+        ui.strokeStyle = C.white; ui.lineWidth = Math.max(2, fs * 0.075); ui.lineCap = 'round';
+        ui.beginPath(); ui.arc(ix - ir * 0.2, iy - ir * 0.2, ir, 0, Math.PI * 2); ui.stroke();
+        ui.beginPath(); ui.moveTo(ix + ir * 0.5, iy + ir * 0.5); ui.lineTo(ix + ir * 1.1, iy + ir * 1.1); ui.stroke();
+        ui.restore();
+        typewriter(ui, Q1, px + ph * 1.02, py + ph / 2 + fs * 0.36, {
+          size: fs, weight: 600, t: T - T_TYPE, cps: FIND.cps, color: C.white, highlight: null, alpha: pa, cursorColor: C.neon,
+        });
+      }
+
       // ------------------------------------------------------------- post-production
       // flou d'orbite (le point visé reste fixe : on ajoute le filé de l'arrière-plan)
-      post.blur[0] += clamp(om * 0.0058, 0, 0.045) * (1 - slowK);
-      post.uiBlur = 0.12;
+      post.blur[0] += clamp(om * 0.0042, 0, 0.028) * (1 - slowK);
+      post.uiBlur = lerp(0.12, 1, punch);
       // sortie de l'explosion du titre (continuité du zoom blur d'ignite)
       post.zoomBlur += 0.2 * (1 - E.outCubic(seg(T, 0, 0.28)));
       post.zoomBlur += 0.12 * punch;
@@ -244,13 +282,13 @@ export default function create(ctx) {
       const dHero = dist3(cam.pos, hp);
       let focus = dHero;
       focus = lerp(focus, dist3(cam.pos, st[1].pos), win(T, 0.42, 0.55, 0.72, 0.95, E.inOutCubic, E.inOutCubic));
-      focus = lerp(focus, dist3(cam.pos, st[4].pos), (1 - E.inOutCubic(seg(T, 2.64, 2.8))) * seg(T, 2.5, 2.56));
+      focus = lerp(focus, dist3(cam.pos, st[2].pos), (1 - E.inOutCubic(seg(T, 2.64, 2.8))) * seg(T, 2.5, 2.56));
       post.dof = { focus, aperture: 0.0016 + 0.0034 * slowK, maxblur: 0.0085 };
-      post.bloom = 0.65 + 0.15 * slowK + 0.4 * punch;
+      post.bloom = 0.55 + 0.1 * (1 - seg(T, 0, 0.4)) + 0.1 * slowK + 0.4 * punch;
       // raccord IMPACT avec roll : flash vert-blanc qui monte à 0.8 sur la dernière image
       post.flash = Math.max(post.flash, 0.8 * E.inQuad(seg(T, 2.8, 2.9834)));
       post.flashColor = [0.82, 1, 0.84];
-      post.vignette = 0.95 + 0.25 * slowK;
+      post.vignette = 0.95 + 0.3 * (1 - E.inOutSine(seg(T, 0, 0.5))) + 0.25 * slowK;
     },
   };
 }
