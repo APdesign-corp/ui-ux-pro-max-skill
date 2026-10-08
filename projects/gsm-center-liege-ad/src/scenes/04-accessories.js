@@ -113,7 +113,7 @@ export default function createAccessories({ cfg, assets, W, H, u }) {
       }
 
       // ---- ligne typographique cumulative
-      const yL = isV ? H * 0.86 : H * 0.88;
+      const yL = isV ? H * 0.72 : H * 0.88;
       const out = E.inCubic(seg(lt, 2.5, 2.78));
       const eyeY = yL - lsize * 1.25;
       eyebrow(ui, T.stepGear, W / 2, eyeY, lt - 0.1, f, { align: 'center', alpha: 1 - out });

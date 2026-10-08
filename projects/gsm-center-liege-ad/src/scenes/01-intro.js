@@ -247,7 +247,7 @@ export default function createIntro({ cfg, assets, W, H, u }) {
       const tl = lt - f.ml('L1.Liège', 0.6);
       const la = seg(tl, 0, 0.5) * (1 - seg(lt, 1.6, 1.95)) * fade;
       if (la > 0) {
-        drawText(ui, cfg.texts.cityLabel, cx, isV ? cy + minWH * 0.62 : H * 0.9, {
+        drawText(ui, cfg.texts.cityLabel, cx, isV ? H * 0.2 : H * 0.9, {
           size: 30 * u, weight: 600, tracking: 0.9, align: 'center', t: tl, mode: 'track', trackFrom: 1.6, dur: 0.9,
           color: C.white, alpha: la * 0.85,
         });

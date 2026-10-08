@@ -5,7 +5,7 @@
 import * as THREE from 'three';
 import { E, seg, win, pulse, lerp, rgba } from '../core/anim.js';
 import {
-  drawText, fitSize, eyebrow, drawSvg, sparks, shockRing, setFont, radialGlow, streak, flare,
+  drawText, fitSize, eyebrow, drawSvg, sparks, shockRing, setFont, radialGlow, streak, flare, textWidth,
 } from '../core/draw.js';
 import { PHONE } from '../world/phone.js';
 
@@ -85,9 +85,12 @@ export default function createRepair({ cfg, assets, W, H, u }) {
             const obj = hero.anchors[L.key];
             const a = f.project(obj, L.local);
             const p = E.outExpo(seg(lt, L.at, L.at + 0.35));
-            const len = 150 * u * p;
+            const len = 150 * u * p * (isV ? 0.55 : 1);
             const b = [a[0] + L.dir[0] * len, a[1] + L.dir[1] * len * 0.55];
-            const c = [b[0] + L.dir[0] * 200 * u * p, b[1]];
+            const c = [b[0] + L.dir[0] * 200 * u * p * (isV ? 0.4 : 1), b[1]];
+            // garde l'étiquette dans le cadre (format vertical)
+            const lw = textWidth(ui, L.part, 34 * u, 600, 0.16) + 30 * u;
+            c[0] = L.dir[0] > 0 ? Math.min(c[0], W * 0.96 - lw) : Math.max(c[0], W * 0.04 + lw);
             fx.strokeStyle = rgba(C.neon, 0.9 * la);
             fx.lineWidth = 2 * u;
             fx.beginPath();
@@ -150,8 +153,8 @@ export default function createRepair({ cfg, assets, W, H, u }) {
       // ---- mini-animation SVG : fissures qui se résorbent → validation
       const ma = win(lt, 1.75, 1.95, 2.7, 2.9);
       if (ma > 0) {
-        const sc = (H * (isV ? 0.16 : 0.3)) / 400;
-        const tf = { x: isV ? W * 0.5 : W * 0.84, y: isV ? H * 0.78 : H * 0.5, s: sc, rot: 0, origin: rep.center };
+        const sc = (H * (isV ? 0.1 : 0.3)) / 400;
+        const tf = { x: isV ? W * 0.86 : W * 0.84, y: isV ? H * 0.42 : H * 0.5, s: sc, rot: 0, origin: rep.center };
         const glow = 1;
         fx.save();
         fx.globalCompositeOperation = 'lighter';

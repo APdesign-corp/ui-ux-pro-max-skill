@@ -176,7 +176,7 @@ export default function createTransfer({ cfg, assets, W, H, u }) {
         icon('send', x1 - tsize * 0.85, yT - tsize * 0.36, tsize * 0.8, dW);
         icon('globe', x1 + w1 + gap + w2 + tsize * 0.85, yT - tsize * 0.36, tsize * 0.8, dRia);
       }
-      const ss = tsize * (isV ? 0.36 : 0.3);
+      const ss = isV ? Math.min(tsize * 0.36, fitSize(ui, T.transferSub, 500, 0.26, W * 0.88, tsize)) : tsize * 0.3;
       drawText(ui, T.transferSub, W / 2, yT + (isV ? tsize * 2.25 : tsize * 0.9), {
         size: ss, weight: 500, tracking: 0.26, align: 'center', t: dRia - 0.32, mode: 'track', trackFrom: 0.6, dur: 0.6, color: C.white, alpha: 0.9 * (1 - out),
       });
