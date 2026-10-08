@@ -5,7 +5,45 @@
   "file": "voice/vo_master.wav",
   "dry": "voice/vo_dry.wav",
   "voice": "tjiho3",
-  "gender": "M"
+  "gender": "M",
+  "emphasis": [
+   {
+    "word": "L1.mieux",
+    "from": 2.69,
+    "to": 2.876,
+    "db": 2.0
+   },
+   {
+    "word": "L2.Center",
+    "from": 4.668,
+    "to": 5.263,
+    "db": 1.0
+   },
+   {
+    "word": "L3.expertise",
+    "from": 7.845,
+    "to": 8.413,
+    "db": 1.5
+   },
+   {
+    "word": "L5.Ria",
+    "from": 14.25,
+    "to": 14.423,
+    "db": 1.0
+   },
+   {
+    "word": "L7a.GSM",
+    "from": 17.757,
+    "to": 18.627,
+    "db": 1.0
+   },
+   {
+    "word": "L7b.expertise",
+    "from": 21.514,
+    "to": 22.216,
+    "db": 2.0
+   }
+  ]
  },
  "markers": {
   "L1.À": 0.392,

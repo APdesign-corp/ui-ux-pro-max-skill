@@ -65,6 +65,34 @@ Pour remplacer la voix IA par un comédien, enregistrez le même script, dépose
 `voice/vo_dry.wav` et produisez `vo_layout.json` avec l'aligneur (`voice_tts.py` contient
 `recognize()` et `align()`). Lancez ensuite `build_timeline.py` : tout le montage se recale.
 
+### Casting de la voix
+
+Dix voix neuronales françaises disponibles hors ligne ont été comparées. Pour chacune : débit calibré,
+6 à 18 prises par phrase, intelligibilité mesurée par deux transcriptions automatiques (Parakeet TDT
+0.6B v3 et Whisper small), registre (F0) et bande passante.
+
+| Voix | Genre (F0 médiane) | Erreurs Parakeet | Erreurs Whisper | Bande |
+|---|---|---|---|---|
+| **Piper tjiho model 3 (retenue)** | homme, ~139 Hz | **0 %** | 7,6 % | 44,1 kHz |
+| Piper tom medium (même voix, entraînement plus court) | homme, 137 Hz | 0 % | 16,7 % | 44,1 kHz |
+| Piper upmc « pierre » | homme, 133 Hz | 0 % | 19,5 % | 22 kHz |
+| Piper miro high | homme, 109 Hz | 4,2 % | 29,5 % | 22 kHz |
+| Kokoro ff_siwis (alternative féminine) | femme, 211 Hz | 3,1 % | 11,4 % | 24 kHz |
+| Piper gilles, Coqui css10, Piper siwis | — | 8 à 21 % | 30 à 47 % | 16 à 22 kHz |
+
+La voix retenue suit naturellement la courbe demandée : F0 de 130 Hz, posée, au début ; 147 Hz,
+plus énergique, sur les transferts ; 129 Hz, assurée, sur la signature. Les erreurs résiduelles de
+Whisper-small portent sur l'accent de « Liège » et sur « accessoires » au singulier : ce sont des
+faiblesses de ce petit modèle, Parakeet ne relève aucune erreur.
+
+**Licence de la voix tjiho/tom** : les poids sont sous AGPL-3.0 et la voix est celle d'une personne
+réelle. Son usage est autorisé gratuitement à deux conditions : (1) ne pas présenter la voix comme
+celle d'une personne réelle ou identifiée, ni citer son auteur dans le service ; (2) publier sous
+AGPL-3.0 tout modèle de voix entraîné à partir des poids ou de l'audio généré. L'utilisation de
+l'audio dans une publicité respecte ces conditions. Voir https://github.com/tjiho/French-tts-model-piper.
+Pour une diffusion TV nationale, une voix de comédien professionnel enregistrée sur le même script
+reste l'option la plus sûre. Le pipeline la recale automatiquement.
+
 ## Direction artistique
 
 - **Couleurs (celles du site) :** fond `#040605`, vert néon `#39ff14` (signature), dégradé logo

@@ -463,12 +463,19 @@ def compressor(x, thr_db=-20, ratio=3.0, att=0.005, rel=0.09, knee=6):
     return x * gain
 
 
-def process_vo(x):
-    """Chaîne studio : EQ, de-esser, compression légère, saturation douce, réverbe courte."""
+def process_vo(x, emphasis=()):
+    """Chaîne studio : EQ, de-esser, compression légère, accentuation des mots, saturation douce, réverbe courte."""
     X = np.fft.rfft(x)
     x = np.fft.irfft(X * eq_curve(np.fft.rfftfreq(len(x), 1 / SR)), len(x))
     x = deesser(x)
     x = compressor(x, thr_db=-21, ratio=3.0)
+    if emphasis:
+        g = np.zeros(len(x))
+        t = np.arange(len(x)) / SR
+        for e in emphasis:
+            ramp = np.clip(np.minimum((t - e['from']) / 0.025, (e['to'] - t) / 0.025), 0, 1)
+            g = np.maximum(g, ramp * e['db'])
+        x = x * 10 ** (g / 20)
     x = norm(x, 0.7)
     x = np.tanh(x * 1.15) / np.tanh(1.15)
     st = pan(x, 0)
@@ -551,7 +558,7 @@ def main():
     vo_cfg = tl.get('vo')
     if vo_cfg and not a.no_vo and os.path.exists(os.path.join(ROOT, vo_cfg['dry'])):
         raw = read_wav_mono(os.path.join(ROOT, vo_cfg['dry']))[:N]
-        proc = process_vo(np.concatenate([raw, np.zeros(max(0, N - len(raw)))]))[:N]
+        proc = process_vo(np.concatenate([raw, np.zeros(max(0, N - len(raw)))]), vo_cfg.get('emphasis', []))[:N]
         vo[:len(proc)] = proc
         env = vo_envelope(vo[:, 0])
         write_st(os.path.join(ROOT, vo_cfg['file']), vo / max(1e-6, np.max(np.abs(vo))) * 0.9)

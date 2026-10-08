@@ -156,10 +156,26 @@ def main():
         'swellFrom': r3(m('L7b.Votre')), 'resolveAt': r3(FINAL_HIT),
         'roots': [[r3(B12), 55.0], [r3(B23), 43.65], [r3(B34), 49.0], [r3(B45), 41.2], [r3(B56), 46.25]],
     }
+    # accentuation de mots (direction d'acteur) : plage [début du mot, début du mot suivant]
+    script = json.load(open(os.path.join(ROOT, 'voice', 'script.json')))
+    emph = []
+    for e in script.get('emphasis', []):
+        cid, w = e['word'].split('.', 1)
+        for L in lay['lines']:
+            for c in L['chunks']:
+                if c['id'] != cid:
+                    continue
+                ws = c['words']
+                for i, (ww, tw) in enumerate(ws):
+                    if ww == w:
+                        end = ws[i + 1][1] if i + 1 < len(ws) else c['speech'][1] + 0.05
+                        emph.append({'word': e['word'], 'from': r3(tw - 0.03), 'to': r3(end), 'db': e['db']})
+                        break
     tl = {
         '_doc': "GÉNÉRÉ par scripts/build_timeline.py à partir de voice/vo_layout.json — ne pas éditer à la main. Les scènes sont recalées sur la voix off (ancres [temps design, temps global]) ; cues = sound design en temps absolu.",
         'duration': r3(END),
-        'vo': {'file': 'voice/vo_master.wav', 'dry': 'voice/vo_dry.wav', 'voice': lay['voice'], 'gender': lay['gender']},
+        'vo': {'file': 'voice/vo_master.wav', 'dry': 'voice/vo_dry.wav', 'voice': lay['voice'], 'gender': lay['gender'],
+               'emphasis': emph},
         'markers': {k: r3(v) for k, v in M.items()},
         'scenes': scenes,
         'music': music,

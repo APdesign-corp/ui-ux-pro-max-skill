@@ -181,5 +181,32 @@
         }
       ]
     }
-  ]
+  ],
+  "emphasis": [
+    {
+      "word": "L1.mieux",
+      "db": 2.0
+    },
+    {
+      "word": "L2.Center",
+      "db": 1.0
+    },
+    {
+      "word": "L3.expertise",
+      "db": 1.5
+    },
+    {
+      "word": "L5.Ria",
+      "db": 1.0
+    },
+    {
+      "word": "L7a.GSM",
+      "db": 1.0
+    },
+    {
+      "word": "L7b.expertise",
+      "db": 2.0
+    }
+  ],
+  "_doc_emphasis": "Accentuation (direction d'acteur) : gain appliqué au mixage sur la durée du mot, après compression (rampes 25 ms)."
 }
