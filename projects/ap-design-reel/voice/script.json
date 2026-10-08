@@ -16,7 +16,7 @@
     {
      "id": "L1",
      "text": "Tu veux vraiment qu'on remarque tes vidéos ?",
-     "speed": 1.0,
+     "speed": 0.95,
      "gain_db": 1.0,
      "breaks": []
     }
@@ -31,7 +31,7 @@
     {
      "id": "L2",
      "text": "Alors arrête le contenu banal.",
-     "speed": 1.0,
+     "speed": 0.95,
      "gain_db": 1.0,
      "breaks": [],
      "takes_mul": 2
@@ -45,21 +45,28 @@
    "gap_before": 0.3,
    "chunks": [
     {
-     "id": "L3",
-     "text": "Motion design. 3D. VFX.",
+     "id": "L3a",
+     "text": "Motion design.",
      "speed": 0.95,
      "gain_db": 1.5,
-     "breaks": [
-      {
-       "after": "design",
-       "sec": 0.12
-      },
-      {
-       "after": "3D",
-       "sec": 0.1
-      }
-     ],
-     "takes_mul": 2
+     "pause": 0.12
+    },
+    {
+     "id": "L3b",
+     "text": "3D.",
+     "speed": 0.9,
+     "gain_db": 1.5,
+     "pause": 0.1,
+     "takes_mul": 2,
+     "judge": "whisper"
+    },
+    {
+     "id": "L3c",
+     "text": "VFX.",
+     "speed": 0.9,
+     "gain_db": 1.5,
+     "takes_mul": 2,
+     "judge": "whisper"
     }
    ]
   },
@@ -72,7 +79,7 @@
     {
      "id": "L4",
      "text": "On transforme tes idées en images qui arrêtent le scroll.",
-     "speed": 1.0,
+     "speed": 0.95,
      "gain_db": 1.5,
      "breaks": [],
      "takes_mul": 2
@@ -88,7 +95,7 @@
     {
      "id": "L5",
      "text": "Ça, c'est AP Design.",
-     "speed": 0.9,
+     "speed": 0.855,
      "gain_db": 1.5,
      "breaks": [
       {
@@ -107,25 +114,34 @@
    "gap_before": 0.4,
    "chunks": [
     {
-     "id": "L6",
-     "text": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… DM.",
-     "speed": 1.0,
+     "id": "L6a",
+     "text": "Tu veux la prochaine ?",
+     "speed": 0.95,
      "gain_db": 1.5,
-     "breaks": [
-      {
-       "after": "prochaine",
-       "sec": 0.1
-      },
-      {
-       "after": "compte",
-       "sec": 0.12
-      },
-      {
-       "after": "collaborer",
-       "sec": 0.28
-      }
-     ],
+     "pause": 0.12
+    },
+    {
+     "id": "L6b",
+     "text": "Suis le compte.",
+     "speed": 0.92,
+     "gain_db": 2,
+     "pause": 0.22,
      "takes_mul": 2
+    },
+    {
+     "id": "L6c",
+     "text": "Et pour collaborer…",
+     "speed": 0.95,
+     "gain_db": 1.5,
+     "pause": 0.16
+    },
+    {
+     "id": "L6d",
+     "text": "DM.",
+     "speed": 0.9,
+     "gain_db": 2.5,
+     "takes_mul": 2,
+     "judge": "whisper"
     }
    ]
   }

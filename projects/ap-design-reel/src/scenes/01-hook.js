@@ -1,18 +1,16 @@
 // SCENE 01 — HOOK (0 → « Alors ») : impact dès la 3e image, la sculpture chromée fonce
-// vers la caméra, typo « TU VEUX DES VIDÉOS / COMME ÇA ? » en slam, puis rush dans l'objet.
+// vers la caméra, sous-titres cinétiques calés mot à mot sur la voix, puis rush dans l'objet.
 
 import { flare, sparks, shockRing, radialGlow } from '../core/draw.js';
 import { pulse, win } from '../core/anim.js';
-import { layout, slam, E, seg, lerp, fitSize } from './kit.js';
+import { layout, captions, E, seg, lerp, fitSize } from './kit.js';
 
 export default function createHook({ cfg, W, H }) {
   const C = cfg.colors;
   const Lp = layout(W, H);
   const probe = document.createElement('canvas').getContext('2d');
-  const [l1, l2] = cfg.texts.hook;
-  const s1 = fitSize(probe, l1, 700, -0.02, Lp.maxW, 150 * Lp.u);
-  const s2 = fitSize(probe, l2, 700, -0.03, Lp.maxW * 0.9, 210 * Lp.u);
-  const y1 = H * 0.25, y2 = y1 + s2 * 1.05;
+  const capS = 104 * Lp.u;
+  void probe;
 
   return {
     update(f) {
@@ -64,10 +62,8 @@ export default function createHook({ cfg, W, H }) {
 
       // Typo cinétique
       const out = seg(lt, end - 0.22, end - 0.05);
-      const tA = f.t - f.mark('L1.Tu', 0.15) + 0.04;
-      const tB = f.t - f.mark('L1.vidéos', 1.0) + 0.04;
-      slam(f, l1, Lp.cx, y1, { t: tA, size: s1, color: C.white, from: 2.2, dur: 0.3, out, glow: 0.18 });
-      slam(f, l2, Lp.cx, y2, { t: tB, size: s2, color: C.neon2, glowColor: C.neon, from: 3, dur: 0.28, out, glow: 0.5, pulse: 0.04 * pulse(tB, 0.3, 0.01, 0.3) });
+      // sous-titres cinétiques = exactement ce que dit la voix
+      captions(f, 'L1', cfg.texts.vo.L1, Lp.cx, H * 0.2, { size: capS, maxW: Lp.maxW, emph: ['VRAIMENT', 'VIDÉOS'], out });
     },
   };
 }

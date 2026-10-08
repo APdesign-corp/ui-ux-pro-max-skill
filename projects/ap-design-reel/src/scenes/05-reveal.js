@@ -4,7 +4,7 @@
 
 import { pulse, win } from '../core/anim.js';
 import { flare, sparks, shockRing, radialGlow, drawText, textSweep } from '../core/draw.js';
-import { layout, E, seg, lerp, fitSize, textWidth } from './kit.js';
+import { layout, captions, E, seg, lerp, fitSize, textWidth } from './kit.js';
 
 export default function createReveal({ cfg, W, H }) {
   const C = cfg.colors;
@@ -36,6 +36,8 @@ export default function createReveal({ cfg, W, H }) {
         radialGlow(fx, W * 0.5, H * LOGO_Y, 26 * Lp.u, '#ffffff', 0.5 * k);
         fx.restore();
         post.vignette = 1.2;
+        // « Ça, c'est… » dans le noir, mot à mot
+        captions(f, 'L5', cfg.texts.vo.L5, Lp.cx, H * 0.6, { size: 92 * Lp.u, maxW: Lp.maxW, upto: 2, color: '#d7d7de' });
         return;
       }
       const dur = f.clock.end + 4 - mAP; // la CTA prolonge l'environnement

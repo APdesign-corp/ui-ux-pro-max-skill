@@ -5,7 +5,7 @@
 
 import { pulse, TAU, rgba } from '../core/anim.js';
 import { glassPill, radialGlow, shockRing, sparks, flare, drawText, setFont as sf } from '../core/draw.js';
-import { layout, drawLogo, E, seg, lerp, fitSize, textWidth, setFont } from './kit.js';
+import { layout, drawLogo, captions, E, seg, lerp, fitSize, textWidth, setFont } from './kit.js';
 
 // petit avion en papier (icône DM)
 function plane(g, x, y, s, color, a) {
@@ -120,6 +120,11 @@ export default function createCta({ cfg, W, H }) {
         fx.restore();
         sparks(fx, bx + folW / 2, ay, ts - 0.02, f, { count: 30, seed: 31, speed: 900, life: 0.4, color: C.neon2 });
       }
+
+      // ---- sous-titres = la voix : « Tu veux la prochaine ? » puis « Et pour collaborer… » (remplacé par le bouton sur « DM »)
+      const capS = 74 * u;
+      captions(f, 'L6a', T_.vo.L6a, Lp.cx, Y.btn + capS * 0.2, { size: capS, maxW: Lp.maxW, emph: ['PROCHAINE'], out: seg(T, mSuis - 0.12, mSuis + 0.05) });
+      if (T > f.mark('L6c.start', mDM - 0.9) - 0.1) captions(f, 'L6c', T_.vo.L6c, Lp.cx, Y.btn + capS * 0.2, { size: capS, maxW: Lp.maxW, emph: ['COLLABORER'], out: seg(tDM, -0.08, 0.02) });
 
       // ---- bouton DM (EXACTEMENT sur « DM ») : arrive en slam, pulse en continu
       if (tDM >= -0.02) {

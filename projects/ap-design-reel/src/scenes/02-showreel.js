@@ -4,7 +4,7 @@
 
 import { hudRing, radialGlow, streak } from '../core/draw.js';
 import { pulse, noise1 } from '../core/anim.js';
-import { E, seg, lerp, setFont } from './kit.js';
+import { E, seg, lerp, setFont, captions } from './kit.js';
 
 export default function createShowreel({ cfg, assets, W, H, u }) {
   const C = cfg.colors;
@@ -90,6 +90,11 @@ export default function createShowreel({ cfg, assets, W, H, u }) {
         post.dof = { focus: f.dist(obj.orb), aperture: 0.01, maxblur: 0.006 };
         post.zoomBlur += 0.12 * E.inCubic(seg(p, 0.6, 1));
       }
+      // sous-titres = la voix (« Alors arrête le contenu banal. »), sur un voile sombre pour la lisibilité
+      const vg = ui.createLinearGradient(0, H * 0.1, 0, H * 0.36);
+      vg.addColorStop(0, 'rgba(3,3,4,0)'); vg.addColorStop(0.5, 'rgba(3,3,4,0.55)'); vg.addColorStop(1, 'rgba(3,3,4,0)');
+      ui.fillStyle = vg; ui.fillRect(0, H * 0.1, W, H * 0.26);
+      captions(f, 'L2', cfg.texts.vo.L2, W * 0.47, H * 0.22, { size: 112 * u, maxW: W * 0.74, emph: ['BANAL'], out: seg(lt, dur - 0.12, dur) });
       // compteur de plan discret (hors safe zones critiques, à gauche)
       setFont(ui, 26 * u, 600, 0.3);
       ui.save();

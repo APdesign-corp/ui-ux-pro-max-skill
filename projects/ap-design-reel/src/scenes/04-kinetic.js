@@ -7,7 +7,7 @@
 import * as THREE from 'three';
 import { pulse, win } from '../core/anim.js';
 import { flare, sparks, shockRing, radialGlow } from '../core/draw.js';
-import { layout, slam, E, seg, lerp, clamp, fitSize } from './kit.js';
+import { layout, slam, captions, E, seg, lerp, clamp, fitSize } from './kit.js';
 
 export default function createKinetic({ cfg, W, H }) {
   const C = cfg.colors;
@@ -122,9 +122,10 @@ export default function createKinetic({ cfg, W, H }) {
       sparks(fx, W * 0.5, H * 0.53, T - mS, f, { count: 90, seed: 12, speed: 2600, life: 0.7, flat: 0.4, color: C.neon2 });
       shockRing(fx, W * 0.5, H * 0.53, T - mS, f, { radius: 1300, width: 10, dur: 0.6, flat: 0.3, color: C.neon });
       const out = seg(T, end - 0.22, end - 0.06);
-      const yA = H * 0.33, yB = yA + szB * 1.15, yC = yB + szC * 0.98;
-      slam(f, sA, Lp.cx, yA, { t: T - mI + 0.04, size: szA, color: C.white, from: 1.6, dur: 0.3, out, glow: 0.12 });
-      slam(f, sB, Lp.cx, yB, { t: tStop + 0.02, size: szB, color: C.white, from: 2.6, dur: 0.16, out, glow: 0.2 });
+      // sous-titres = la voix mot à mot ; « SCROLL » en énorme sur le mot
+      const yA = H * 0.27;
+      const capH = captions(f, 'L4', cfg.texts.vo.L4, Lp.cx, yA, { size: 96 * Lp.u, maxW: Lp.maxW, upto: 9, emph: ['IDÉES', 'IMAGES', 'ARRÊTENT'], out });
+      const yC = yA + capH + szC * 0.55;
       slam(f, sC, Lp.cx, yC, { t: T - mS + 0.03, size: szC, color: C.neon2, glowColor: C.neon, from: 3.4, dur: 0.22, out, glow: 0.6, pulse: 0.05 * pulse(T - mS, 0.22, 0.01, 0.25) });
     },
   };

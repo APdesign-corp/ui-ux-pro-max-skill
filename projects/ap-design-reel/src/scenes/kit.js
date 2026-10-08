@@ -47,6 +47,72 @@ export function slam(f, str, x, y, o) {
   return p;
 }
 
+/**
+ * Sous-titres cinétiques qui SUIVENT LA VOIX : chaque mot apparaît à l'instant exact où il est
+ * prononcé (marqueurs "L1.vidéos"…), retour à la ligne automatique, mots clés en couleur accent.
+ * o = { size, maxW, emph: ['VIDÉOS'], color, accent, out (0→1), lead, upto (nb de mots affichés), lineH }
+ */
+export function captions(f, line, text, x, y, o) {
+  const { ui, fx } = f;
+  const C = f.cfg.colors;
+  const size = o.size, wgt = o.weight ?? 700, trk = o.tracking ?? -0.01;
+  // jetons affichés (la ponctuation isolée « ? » se colle au mot précédent) + clé du marqueur
+  const toks = [];
+  const seen = {};
+  for (const raw of text.split(/\s+/)) {
+    const core = (raw.match(/[\wÀ-ÿ'’-]+/g) || [])[0];
+    if (!core) { if (toks.length) toks[toks.length - 1].s += raw; continue; }
+    const n = (seen[core] = (seen[core] || 0) + 1);
+    toks.push({ s: raw, key: `${line}.${core}${n > 1 ? '#' + n : ''}` });
+  }
+  const list = toks.slice(0, o.upto ?? toks.length);
+  setFont(ui, size, wgt, 0);
+  const space = textWidth(ui, ' ', size, wgt, 0) * 1.1;
+  const rows = [[]];
+  let w = 0;
+  for (const tk of list) {
+    tk.str = tk.s.toUpperCase();
+    tk.w = textWidth(ui, tk.str, size, wgt, trk);
+    if (w > 0 && w + space + tk.w > o.maxW) { rows.push([]); w = 0; }
+    rows[rows.length - 1].push(tk);
+    w += (w > 0 ? space : 0) + tk.w;
+  }
+  const lh = size * (o.lineH ?? 1.12);
+  const out = o.out ?? 0;
+  const emph = new Set((o.emph || []).map((s) => s.toUpperCase()));
+  rows.forEach((row, r) => {
+    const rw = row.reduce((s, tk, i) => s + tk.w + (i ? space : 0), 0);
+    let cx = x - rw / 2;
+    for (const tk of row) {
+      const t0 = f.mark(tk.key, NaN);
+      const t = f.t - t0 + (o.lead ?? 0.03);
+      const p = E.outExpo(seg(t, 0, 0.2));
+      const a = (Number.isNaN(t0) ? 1 : seg(t, 0, 0.06)) * (1 - out);
+      if (a > 0.003) {
+        const core = tk.str.replace(/[^\wÀ-ÿ'’-]/g, '');
+        const hot = emph.has(core);
+        const sc = lerp(1.45, 1, p);
+        const yy = y + r * lh + (1 - p) * size * 0.22 - out * size * 0.4;
+        const ccx = cx + tk.w / 2;
+        for (const [g, alpha, col] of [[ui, a, hot ? (o.accent ?? C.neon2) : (o.color ?? C.white)], ...(hot ? [[fx, a * 0.5, C.neon]] : [])]) {
+          g.save();
+          if (g === fx) g.globalCompositeOperation = 'lighter';
+          g.translate(ccx, yy - size * 0.35); g.scale(sc, sc); g.translate(-ccx, -(yy - size * 0.35));
+          setFont(g, size, wgt, trk);
+          g.textAlign = 'left'; g.textBaseline = 'alphabetic';
+          g.globalAlpha = alpha;
+          g.fillStyle = col;
+          g.shadowColor = 'rgba(0,0,0,0.6)'; g.shadowBlur = g === ui ? size * 0.25 : 0;
+          g.fillText(tk.str, cx, yy);
+          g.restore();
+        }
+      }
+      cx += tk.w + space;
+    }
+  });
+  return rows.length * lh;
+}
+
 /** Plan texte en 3D (pour intégrer la typo dans la scène, avec profondeur de champ). */
 export function textPlane(cfg, str, { color = '#ffffff', height = 1, weight = 700, tracking = -0.02, outline = false } = {}) {
   const probe = document.createElement('canvas').getContext('2d');

@@ -19,6 +19,15 @@ export const CONFIG = {
   },
 
   texts: {
+    // texte exact de la voix off : les sous-titres cinétiques à l'écran suivent ces mots
+    vo: {
+      L1: "Tu veux vraiment qu'on remarque tes vidéos ?",
+      L2: 'Alors arrête le contenu banal.',
+      L4: 'On transforme tes idées en images qui arrêtent le scroll.',
+      L5: "Ça, c'est AP Design.",
+      L6a: 'Tu veux la prochaine ?',
+      L6c: 'Et pour collaborer…',
+    },
     hook: ['TU VEUX DES VIDÉOS', 'COMME ÇA ?'],
     hero: 'MOTION DESIGN',
     kinetic: ['3D', 'VFX'],
