@@ -1,0 +1,22 @@
+{
+  "name": "gsm-center-portails",
+  "private": true,
+  "version": "1.0.0",
+  "description": "GSM Center Liège — motion design 30 s, 60 i/s, plan-séquence 3D à travers des téléphones-portails (16:9 télé + 9:16 réseaux)",
+  "type": "module",
+  "scripts": {
+    "preview": "node scripts/serve.mjs",
+    "still": "node scripts/render.mjs --still",
+    "render:h1080": "node scripts/render.mjs --format 16x9 --width 1920 --height 1080",
+    "render:v1080": "node scripts/render.mjs --format 9x16 --width 1080 --height 1920",
+    "render:h4k": "node scripts/render.mjs --format 16x9 --width 3840 --height 2160",
+    "render:v4k": "node scripts/render.mjs --format 9x16 --width 2160 --height 3840",
+    "audio": "python3 scripts/sound_design.py"
+  },
+  "dependencies": {
+    "@fontsource/poppins": "^5.3.0",
+    "@fontsource/space-grotesk": "5.2.10",
+    "playwright-core": "1.56.1",
+    "three": "0.180.0"
+  }
+}
