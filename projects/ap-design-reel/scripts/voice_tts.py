@@ -329,6 +329,16 @@ def transcribe(rec, x):
     return st.result.text.strip()
 
 
+def expressiveness(x):
+    """Amplitude mélodique (demi-tons entre les centiles 10 et 90 de F0) : plus = moins monotone."""
+    from voice_qa import f0_track
+    f0 = f0_track(x[::3], SR // 3)
+    if len(f0) < 8:
+        return 0.0
+    lo, hi = np.percentile(f0, [10, 90])
+    return float(12 * np.log2(hi / lo))
+
+
 def apply_respell(text, respell):
     def rep(m):
         w = m.group(0)
@@ -348,6 +358,7 @@ def main():
     ap.add_argument('--noise-w', type=float, default=0.8)
     ap.add_argument('--respell', default=None, help='JSON {mot: graphie} prioritaire sur le script')
     ap.add_argument('--threads', type=int, default=2)
+    ap.add_argument('--expr', type=float, default=0.025, help="poids de l'expressivité (amplitude de F0) dans le choix des prises")
     ap.add_argument('--takes', type=int, default=1, help='prises par phrase (la meilleure est retenue)')
     ap.add_argument('--judge-whisper', default=None, help='dossier sherpa-onnx-whisper-* (2e juge ASR)')
     ap.add_argument('--variants', default=None, help='JSON {mot: [graphies]} essayées en alternance sur les prises')
@@ -393,11 +404,13 @@ def main():
                     tk['wer_p'] = wer(c['text'], tk['asr_p'])
                     tk['asr_w'] = transcribe(judge, x) if judge else None
                     tk['wer_w'] = wer(c['text'], tk['asr_w']) if judge else 0.0
+                    tk['expr'] = expressiveness(x)
                 takes.append(tk)
             if len(takes) > 1:
                 med = float(np.median([t['dur'] for t in takes]))
                 for tk in takes:
-                    tk['score'] = 2 * tk['wer_p'] + tk['wer_w'] + 0.3 * abs(tk['dur'] - med) / med
+                    tk['score'] = (2 * tk['wer_p'] + tk['wer_w'] + 0.3 * abs(tk['dur'] - med) / med
+                                   - a.expr * min(12.0, tk.get('expr', 0.0)))  # intonation vivante
                 best = min(range(len(takes)), key=lambda i: takes[i]['score'])
             else:
                 best = 0

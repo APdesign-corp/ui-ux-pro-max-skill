@@ -6,7 +6,7 @@
 
 import * as THREE from 'three';
 import { pulse, win } from '../core/anim.js';
-import { flare, sparks, shockRing, radialGlow } from '../core/draw.js';
+import { flare, sparks, shockRing, radialGlow, streak } from '../core/draw.js';
 import { layout, slam, E, seg, lerp, clamp, fitSize } from './kit.js';
 
 export default function createKinetic({ cfg, W, H }) {
@@ -66,9 +66,9 @@ export default function createKinetic({ cfg, W, H }) {
           obj.rings.children.forEach((r, k) => r.rotation.set(1.3 + k * 0.5 + T * (1 + k * 0.4), T * (0.7 - k * 0.3), 0));
         }
         post.dof = { focus: 5.4, aperture: 0.008, maxblur: 0.005 };
-        post.flash += 0.4 * pulse(t3, 0, 0.006, 0.14) + 0.7 * pulse(tv, 0, 0.006, 0.2);
+        post.flash += 0.3 * pulse(t3, 0, 0.006, 0.12) + 0.4 * pulse(tv, 0, 0.006, 0.12);
         post.ca += 0.01 * pulse(tv, 0, 0.01, 0.3) + 0.006 * pulse(t3, 0, 0.01, 0.2);
-        post.bloom += 0.4 * pulse(tv, 0, 0.01, 0.5);
+        post.bloom += 0.25 * pulse(tv, 0, 0.01, 0.4);
         post.glitch += win(t3, 0, 0.01, 0.06, 0.12) * 0.6 + win(tv, 0, 0.01, 0.05, 0.1) * 0.5;
         if (tv >= 0 && tv < 0.6) post.shock = [0.5, 0.6, 0.03 + E.outExpo(tv / 0.6) * 0.8, (1 - tv / 0.6) * 0.6];
         post.blur = [0, 0.03 * E.inCubic(seg(T, m4 - 0.15, m4))];
@@ -109,6 +109,18 @@ export default function createKinetic({ cfg, W, H }) {
       if (tStop >= 0 && tStop < 0.5) post.shock = [0.5, 0.45, 0.03 + E.outExpo(tStop / 0.5) * 0.6, (1 - tStop / 0.5) * 0.45];
       post.fade *= 1 - E.inCubic(seg(T, end - 0.24, end));
       post.uiBlur = 0; // la typo reste nette sur le flux flou
+      // lignes de vitesse verticales pendant l'emballement du scroll
+      const vs = Math.min(1, v / 40);
+      if (vs > 0.02) {
+        fx.save();
+        fx.globalCompositeOperation = 'lighter';
+        for (let i = 0; i < 28; i++) {
+          const x = W * ((i * 0.381966 + 0.05) % 1);
+          const y0 = H * (((i * 0.7548 + T * (2 + i % 5) * vs) % 1.4) - 0.2);
+          streak(fx, x, y0 + H * 0.3 * vs, x, y0, (2 + (i % 3)) * f.u, i % 2 ? C.neon2 : '#ffffff', 0.5 * vs);
+        }
+        fx.restore();
+      }
       // le contenu banal s'efface derrière le message
       const dim = 0.12 + 0.43 * seg(T, mI - 0.1, mI + 0.1) + 0.2 * seg(T, mS, mS + 0.15);
       ui.save();

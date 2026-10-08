@@ -34,7 +34,8 @@
      "speed": 1.0,
      "gain_db": 1.0,
      "breaks": [],
-     "takes_mul": 2
+     "takes_mul": 2,
+     "tts": "Alors, arrête le contenu banal !"
     }
    ]
   },
@@ -45,20 +46,28 @@
    "gap_before": 0.3,
    "chunks": [
     {
-     "id": "L3",
-     "text": "Motion design. 3D. VFX.",
+     "id": "L3a",
+     "text": "Motion design.",
+     "tts": "Motion design !",
      "speed": 0.95,
      "gain_db": 1.5,
-     "breaks": [
-      {
-       "after": "design",
-       "sec": 0.12
-      },
-      {
-       "after": "3D",
-       "sec": 0.1
-      }
-     ],
+     "pause": 0.1
+    },
+    {
+     "id": "L3b",
+     "text": "3D.",
+     "tts": "3D !",
+     "speed": 0.95,
+     "gain_db": 1.5,
+     "pause": 0.08,
+     "takes_mul": 2
+    },
+    {
+     "id": "L3c",
+     "text": "VFX.",
+     "tts": "VFX !",
+     "speed": 0.95,
+     "gain_db": 1.5,
      "takes_mul": 2
     }
    ]
@@ -75,7 +84,8 @@
      "speed": 1.0,
      "gain_db": 1.5,
      "breaks": [],
-     "takes_mul": 2
+     "takes_mul": 2,
+     "tts": "On transforme tes idées en images qui arrêtent le scroll !"
     }
    ]
   },
@@ -96,7 +106,8 @@
        "sec": 0.1
       }
      ],
-     "takes_mul": 3
+     "takes_mul": 3,
+     "tts": "Ça, c'est AP Design !"
     }
    ]
   },
@@ -107,24 +118,34 @@
    "gap_before": 0.4,
    "chunks": [
     {
-     "id": "L6",
-     "text": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… DM.",
+     "id": "L6a",
+     "text": "Tu veux la prochaine ?",
      "speed": 1.0,
      "gain_db": 1.5,
-     "breaks": [
-      {
-       "after": "prochaine",
-       "sec": 0.1
-      },
-      {
-       "after": "compte",
-       "sec": 0.12
-      },
-      {
-       "after": "collaborer",
-       "sec": 0.28
-      }
-     ],
+     "pause": 0.14
+    },
+    {
+     "id": "L6b",
+     "text": "Suis le compte.",
+     "tts": "Suis le compte !",
+     "speed": 0.95,
+     "gain_db": 2,
+     "pause": 0.22,
+     "takes_mul": 2
+    },
+    {
+     "id": "L6c",
+     "text": "Et pour collaborer…",
+     "speed": 0.95,
+     "gain_db": 1.5,
+     "pause": 0.16
+    },
+    {
+     "id": "L6d",
+     "text": "DM.",
+     "tts": "DM !",
+     "speed": 0.9,
+     "gain_db": 2.5,
      "takes_mul": 2
     }
    ]

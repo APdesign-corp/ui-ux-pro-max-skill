@@ -3,7 +3,8 @@
 
 import * as THREE from 'three';
 import { resolveConfig } from './config.js';
-import { makeSceneClock, noise1, pulse } from './core/anim.js';
+import { makeSceneClock, noise1, pulse, rng, rgba } from './core/anim.js';
+import { radialGlow } from './core/draw.js';
 import { loadSVG } from './core/svg.js';
 import { setFamily } from './core/draw.js';
 import { Engine } from './engine/renderer.js';
@@ -66,6 +67,74 @@ export async function boot(canvas) {
   for (const s of clock) instances[s.id] = SCENES[s.id]({ cfg, assets, world, engine, W, H, u });
 
   // Secousses globales dérivées des cues (impacts, snaps, hits) : caméra + calques 2D
+  // ---- couche VFX globale, synchronisée sur le sound design et le tempo
+  const hitCues = timeline.cues.filter((c) => ['impact', 'hit', 'snap', 'burst', 'click', 'pop'].includes(c.type));
+  const whooshCues = timeline.cues.filter((c) => ['whoosh', 'swish'].includes(c.type));
+  const cuts = timeline.scenes.slice(1).map((s) => s.start);
+  const mu = timeline.music;
+  const beatDur = 60 / mu.bpm;
+  const pr = rng(777);
+  const bokeh = Array.from({ length: Math.round(70 * cfg.vfx.particles) }, () => ({
+    x: pr(), y: pr(), z: 0.2 + pr() * 0.8, s: pr() * 10, w: 0.3 + pr(),
+  }));
+  function globalFX(t, post) {
+    const k = cfg.vfx.intensity;
+    // punch sur chaque impact/hit : aberration, mini flash, zoom
+    for (const c of hitCues) {
+      const g = (c.gain ?? 1) * ({ impact: 1, snap: 0.9, hit: 0.7, burst: 0.7, click: 0.35, pop: 0.3 }[c.type]);
+      const p = pulse(t, c.t, 0.006, 0.14);
+      if (p <= 0.001) continue;
+      post.ca += 0.006 * g * p * k;
+      post.flash += 0.035 * g * p * k;
+      post.zoomBlur += 0.035 * g * p * k;
+      post.bloom += 0.1 * g * p;
+    }
+    // whip blur horizontal sur chaque whoosh / swish
+    for (const c of whooshCues) {
+      const d = (c.dur ?? 0.4);
+      const p = Math.sin(Math.PI * Math.min(1, Math.max(0, (t - c.t) / d)));
+      if (p <= 0) continue;
+      const dir = c.pan ? Math.sign(c.pan[1] - c.pan[0]) || 1 : 1;
+      post.blur[0] += dir * 0.012 * (c.gain ?? 0.5) * p * cfg.vfx.motionBlur;
+    }
+    // pulsation au tempo pendant la musique (bloom + vignette qui respire)
+    if (t >= mu.pulseFrom && t < mu.pulseTo || t >= mu.padFrom) {
+      const b = pulse((t - mu.pulseFrom) % beatDur, 0, 0.01, 0.18);
+      post.bloom += 0.07 * b;
+      post.vignette *= 1 - 0.06 * b;
+    }
+    // light leak + flash aux coupes de scène
+    for (const ct of cuts) {
+      const p = pulse(t, ct, 0.02, 0.22);
+      if (p <= 0.002) continue;
+      post.flash += 0.06 * p * k;
+      engine.fx.save();
+      engine.fx.globalCompositeOperation = 'lighter';
+      const x = W * (0.15 + 0.7 * ((ct * 7.3) % 1));
+      engine.fx.save();
+      engine.fx.translate(x, H * 0.45);
+      engine.fx.rotate(-0.5);
+      engine.fx.scale(0.25, 1.6);
+      radialGlow(engine.fx, 0, 0, W * 0.9, cfg.colors.neon2, 0.55 * p);
+      engine.fx.restore();
+      radialGlow(engine.fx, W * 0.9, H * 0.1, W * 0.8, cfg.colors.teal, 0.25 * p);
+      engine.fx.restore();
+    }
+    // particules bokeh qui dérivent (profondeur) sur tout le Reel, plus visibles sur les beats
+    const fade = Math.min(1, t / 0.3);
+    engine.fx.save();
+    engine.fx.globalCompositeOperation = 'lighter';
+    for (const b of bokeh) {
+      const x = ((b.x + noise1(b.s + t * 0.15 * b.w) * 0.06 + t * 0.01 * b.w) % 1) * W;
+      const y = ((b.y - t * 0.03 * b.z * b.w + 10) % 1) * H;
+      const r = (6 + 34 * b.z) * u;
+      const a = 0.018 + 0.035 * (1 - b.z);
+      radialGlow(engine.fx, x, y, r, b.z > 0.6 ? cfg.colors.neon2 : '#ffffff', a * fade);
+    }
+    engine.fx.restore();
+    void rgba;
+  }
+
   const shakeCues = timeline.cues
     .filter((c) => ['impact', 'snap', 'hit', 'burst'].includes(c.type))
     .map((c) => ({ at: c.t, amp: { impact: 1, snap: 0.6, burst: 0.45, hit: 0.22 }[c.type] * (c.gain ?? 1) }));
@@ -147,6 +216,7 @@ export async function boot(canvas) {
       const o = acc[k] || studio[k] || (k === 'hero' ? hero.group : null);
       if (o && o.isObject3D) o.visible = false;
     }
+    if (!DEBUG_HIDE.includes('gfx')) globalFX(t, post);
     engine.render(post, t);
   }
 

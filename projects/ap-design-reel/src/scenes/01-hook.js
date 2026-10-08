@@ -1,7 +1,7 @@
 // SCENE 01 — HOOK (0 → « Alors ») : impact dès la 3e image, la sculpture chromée fonce
 // vers la caméra, typo « TU VEUX DES VIDÉOS / COMME ÇA ? » en slam, puis rush dans l'objet.
 
-import { flare, sparks, shockRing, radialGlow } from '../core/draw.js';
+import { flare, sparks, shockRing, radialGlow, streak } from '../core/draw.js';
 import { pulse, win } from '../core/anim.js';
 import { layout, slam, E, seg, lerp, fitSize } from './kit.js';
 
@@ -22,7 +22,7 @@ export default function createHook({ cfg, W, H }) {
       const rush = E.inExpo(seg(lt, end - 0.32, end));
       if (f.owner) {
         f.camera([0.25 * (1 - rush), 0.1, lerp(lerp(8.2, 7.2, E.outCubic(seg(lt, 0, end))), 1.6, rush)], [0, -0.3, 0], 30, -0.05 * (1 - seg(lt, 0, 0.6)));
-        studio.update(f.t, { glow: 0.12 + 0.9 * pulse(lt, 0.06, 0.01, 0.6), beams: 0.25, grid: 0, dust: 0.6, motes: 0.4, env: 0.9, envRot: lt * 0.8, rim: 1.4 });
+        studio.update(f.t, { glow: 0.1 + 0.6 * pulse(lt, 0.06, 0.01, 0.5), beams: 0.25, grid: 0, dust: 0.6, motes: 0.4, env: 0.9, envRot: lt * 0.8, rim: 1.4 });
         obj.knot.visible = true;
         const k = E.outExpo(seg(lt, 0.03, 0.42));
         obj.knot.position.set(0, -0.75, lerp(-38, 0, k));
@@ -39,7 +39,7 @@ export default function createHook({ cfg, W, H }) {
           m.rotation.set(lt * w * 3 + s, lt * w * 2, s);
         });
         obj.shards.position.set(0, 0, lerp(-8, 2, E.outCubic(seg(lt, 0, end))));
-        post.flash += 0.9 * pulse(lt, 0.07, 0.008, 0.18);
+        post.flash += 0.75 * pulse(lt, 0.07, 0.008, 0.14);
         post.flashColor = [0.85, 0.82, 1];
         post.ca += 0.012 * pulse(lt, 0.07, 0.01, 0.3) + 0.01 * rush;
         post.zoomBlur += 0.12 * (1 - k) * (lt > 0.03 ? 1 : 0) + 0.18 * rush;
@@ -57,6 +57,20 @@ export default function createHook({ cfg, W, H }) {
       shockRing(fx, kx, ky, ti - 0.06, f, { radius: 900, width: 6, dur: 0.6, color: C.teal, alpha: 0.6 });
       sparks(fx, kx, ky, ti, f, { count: 120, seed: 3, speed: 2400, life: 0.8, color: C.neon2 });
       flare(fx, kx, ky, 1.1 * pulse(lt, 0.42, 0.02, 0.35) * cfg.vfx.flares, f, C.neon);
+      // speed lines radiales (hyperespace) pendant l'arrivée puis pendant le rush final
+      const sl = (1 - seg(lt, 0.05, 0.45)) * seg(lt, 0.02, 0.06) + rush;
+      if (sl > 0.01) {
+        fx.save();
+        fx.globalCompositeOperation = 'lighter';
+        for (let i = 0; i < 60; i++) {
+          const ang = i * 2.39996;
+          const d0 = W * (0.12 + ((i * 0.618 + lt * 3) % 1) * 0.6);
+          const d1 = d0 + W * 0.25 * sl;
+          const c0 = Math.cos(ang), s0 = Math.sin(ang);
+          streak(fx, kx + c0 * d0, ky + s0 * d0, kx + c0 * d1, ky + s0 * d1, 3 * f.u, i % 3 ? C.neon2 : '#ffffff', 0.6 * sl);
+        }
+        fx.restore();
+      }
       fx.save();
       fx.globalCompositeOperation = 'lighter';
       radialGlow(fx, W / 2, H * 0.56, W * 0.7, C.neon, 0.18 * seg(lt, 0.3, 0.6) * (1 - rush));

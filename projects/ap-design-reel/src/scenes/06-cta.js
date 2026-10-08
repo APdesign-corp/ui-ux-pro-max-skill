@@ -152,6 +152,16 @@ export default function createCta({ cfg, W, H }) {
         }
         fx.restore();
         shockRing(fx, Lp.cx, Y.btn, tDM, f, { radius: 1300, width: 14, dur: 0.7, flat: 0.45, color: C.neon });
+        // particules en orbite autour du bouton (comète lumineuse)
+        fx.save();
+        fx.globalCompositeOperation = 'lighter';
+        for (let i = 0; i < 26; i++) {
+          const ph = T * (1.4 + (i % 3) * 0.3) + i * 0.9;
+          const rx = btnW * (0.62 + 0.05 * (i % 4)), ry = btnH * (0.95 + 0.1 * (i % 3));
+          const px = Lp.cx + Math.cos(ph) * rx, py = Y.btn + Math.sin(ph) * ry;
+          radialGlow(fx, px, py, (10 + 8 * (i % 3)) * u, i % 2 ? C.neon2 : C.teal, 0.7 * a * seg(tDM, 0.1, 0.4));
+        }
+        fx.restore();
         sparks(fx, Lp.cx, Y.btn, tDM, f, { count: 110, seed: 41, speed: 2200, life: 0.8, flat: 0.6, color: C.neon2 });
         flare(fx, Lp.cx, Y.btn, 0.9 * pulse(tDM, 0, 0.02, 0.4) * cfg.vfx.flares, f, C.neon);
         // tap du doigt

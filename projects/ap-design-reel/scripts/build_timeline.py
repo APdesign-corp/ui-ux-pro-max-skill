@@ -27,16 +27,23 @@ def main():
     a = ap.parse_args()
     lay = json.load(open(a.layout))
 
+    # marqueurs par segment ("L6b.Suis") ET par phrase ("L6.Suis") : les scènes visent la phrase
     M = {}
     for L in lay['lines']:
+        seenL = {}
         for c in L['chunks']:
             seen = {}
             for w, t in c['words']:
                 k = w if w not in seen else f"{w}#{seen[w] + 1}"
                 seen[w] = seen.get(w, 0) + 1
                 M[f"{c['id']}.{k}"] = t
+                kL = w if w not in seenL else f"{w}#{seenL[w] + 1}"
+                seenL[w] = seenL.get(w, 0) + 1
+                M.setdefault(f"{L['id']}.{kL}", t)
             M[f"{c['id']}.start"] = c['speech'][0]
             M[f"{c['id']}.end"] = c['speech'][1]
+        M[f"{L['id']}.start"] = L['chunks'][0]['speech'][0]
+        M[f"{L['id']}.end"] = L['chunks'][-1]['speech'][1]
     m = lambda k: M[k]
     r3 = lambda x: round(x, 3)
 
@@ -110,6 +117,54 @@ def main():
     cue(DM + 0.28, 'success', 0.9, 0.42)
     cue(DM + 0.3, 'pop', 0.2, 0.4)
     cue(END - 0.32, 'suck', 0.3, 0.35)                                # retour au noir → boucle
+    # ---- couche "sound effects partout" (accroche, rétention)
+    W = lambda line: [(k, t) for k, t in M.items() if k.split('.')[0] == line and not k.endswith(('.start', '.end'))]
+    cue(0.0, 'sub', 1.2, 0.6)
+    cue(0.12, 'scan', 0.5, 0.25)
+    for i, (w, t) in enumerate(sorted(W('L1'), key=lambda x: x[1])):   # un tick UI par mot du hook
+        cue(t, 'blip', 0.1, 0.16 + 0.03 * (i % 2))
+    cue(m('L1.remarque'), 'digital', 0.3, 0.3)
+    cue(m('L1.vidéos') + 0.08, 'shimmer', 0.6, 0.3)
+    cue(B12 + 0.05, 'servo', 0.3, 0.2)                                # smartphone en orbite
+    cue(B12 + 2 * d + 0.02, 'data', 0.3, 0.25)                        # hologramme
+    cue(B12 + 3 * d + 0.03, 'pop', 0.18, 0.3)                         # produits
+    cue(B12 + 4 * d + 0.03, 'glass', 0.6, 0.3)                        # orbe de verre
+    cue(m('L2.Alors'), 'swish', 0.3, 0.3, pan=[-0.6, 0.6])
+    cue(m('L3.Motion') - 0.08, 'swish', 0.35, 0.4, pan=[0.7, -0.7])   # MOTION traverse la profondeur
+    cue(m('L3.design') + 0.02, 'pop', 0.2, 0.35)
+    cue(B34 - 0.25, 'riser', 0.25, 0.35)
+    cue(m('L3.3D') + 0.05, 'scan', 0.35, 0.3)
+    cue(m('L3.VFX') + 0.05, 'shimmer', 0.8, 0.4)
+    cue(m('L3.VFX') + 0.02, 'sub', 1.0, 0.55)
+    # scroll : un "swipe" à chaque post qui défile (même courbe que la scène : y = 11 cartes · q^2.4)
+    s0 = m('L4.start') - 0.08
+    span = max(0.4, STOP - s0)
+    for k in range(1, 11):
+        t = s0 + span * (k / 11) ** (1 / 2.4)
+        cue(t - 0.05, 'swish', 0.16, 0.18 + 0.03 * k, pan=[0.3 * (-1) ** k, -0.3 * (-1) ** k])
+        cue(t, 'click', 0.08, 0.1 + 0.015 * k)
+    cue(m('L4.idées'), 'pop', 0.2, 0.3)
+    cue(m('L4.images'), 'digital', 0.3, 0.35)
+    cue(STOP + 0.02, 'glass', 0.9, 0.45)                              # verre qui casse à l'arrêt
+    cue(STOP + 0.04, 'burst', 0.5, 0.5)
+    cue(m('L4.scroll') + 0.1, 'shimmer', 0.7, 0.35)
+    cue(AP - 0.9, 'pulse', 0.45, 0.3)                                 # battement dans le noir
+    cue(AP + 0.1, 'burst', 0.7, 0.5)
+    cue(AP + 0.25, 'swish', 0.6, 0.35, pan=[-0.5, 0.5])               # recul caméra
+    cue(m('L5.Design') + 0.05, 'shimmer', 0.6, 0.3)
+    cue(m('L5.Design') + 0.3, 'blip', 0.12, 0.25)                     # signature
+    cue(B56 + 0.02, 'impact', 1.0, 0.4, tone='soft')
+    cue(B56 + 0.1, 'pop', 0.2, 0.3)                                   # logo
+    cue(B56 + 0.35, 'blip', 0.12, 0.22)                               # services
+    cue(m('L6.prochaine'), 'swish', 0.3, 0.3, pan=[0.6, -0.6])
+    cue(m('L6.Suis') - 0.15, 'swish', 0.25, 0.35)
+    cue(m('L6.Suis') + 0.03, 'shimmer', 0.4, 0.25)
+    cue(DM + 0.18, 'click', 0.2, 0.5)                                 # tap du doigt
+    cue(DM + 0.28, 'whoosh', 0.35, 0.4, pan=[-0.8, 0.2])              # la notification arrive
+    t = DM + 1.3
+    while t < END - 0.45:                                             # battement du bouton DM
+        cue(t, 'pulse2', 0.35, 0.22)
+        t += 1.0
     C.sort(key=lambda c: c['t'])
 
     music = {
@@ -125,7 +180,7 @@ def main():
         cid, w = e['word'].split('.', 1)
         for L in lay['lines']:
             for c in L['chunks']:
-                if c['id'] != cid:
+                if c['id'] != cid and L['id'] != cid:
                     continue
                 ws = c['words']
                 for i, (ww, tw) in enumerate(ws):
