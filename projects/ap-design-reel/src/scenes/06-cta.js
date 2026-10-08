@@ -1,4 +1,4 @@
-// SCENE 06 — CTA / LOOP : logo, profil « + SUIVRE » (sur « Suis le compte »), bouton glass
+// SCENE 06 — CTA / LOOP : logo, bouton argent « ABONNE-TOI » qui arrive en tournant, bouton glass
 // « DM POUR COLLABORER » qui apparaît EXACTEMENT sur « DM » (impact + tap) puis pulse,
 // notification de message entrante, services. Fin : retour au noir → boucle parfaite
 // (la 1re image du Reel est noire, l'impact d'ouverture enchaîne).
@@ -43,7 +43,7 @@ export default function createCta({ cfg, W, H }) {
       const { obj, studio } = f.world;
       const T = f.t;
       const lt = f.lt;
-      const mSuis = f.mark('L6.Suis', f.clock.start + 1.2);
+      const mSub = f.mark('L6.Abonne-toi', f.clock.start + 0.2);
       const mDM = f.mark('L6.DM', f.clock.start + 3.3);
       const end = f.clock.end;
       const tDM = T - mDM;
@@ -75,50 +75,75 @@ export default function createCta({ cfg, W, H }) {
       radialGlow(fx, Lp.cx, Y.logo, 360 * u, C.neon, 0.25 * la);
       fx.restore();
 
-      // ---- profil + « + SUIVRE » (sur « Suis »)
-      const ts = T - mSuis;
-      const pa = E.outCubic(seg(ts, -0.15, 0.15));
-      if (pa > 0) {
-        const fs = 40 * u;
-        const nameW = textWidth(ui, B.handle, fs, 700, 0.06);
-        const folW = textWidth(ui, T_.follow, fs * 0.9, 700, 0.06) + fs * 1.6;
-        const av = fs * 1.9;
-        const w = av + fs * 0.7 + nameW + fs * 0.9 + folW + fs * 0.5;
-        const h = av + fs * 0.6;
-        const x = Lp.cx - w / 2, y = Y.prof - h / 2 + (1 - pa) * 40 * u;
-        glassPill(ui, x, y, w, h, h / 2, pa, f, { stroke: 'rgba(255,255,255,0.18)', border: 1.6 });
-        ui.save();
-        ui.globalAlpha = pa;
-        // avatar
-        const ax = x + fs * 0.3 + av / 2, ay = y + h / 2;
-        const ag = ui.createLinearGradient(ax - av / 2, ay - av / 2, ax + av / 2, ay + av / 2);
-        ag.addColorStop(0, C.neon2); ag.addColorStop(1, C.neon);
-        ui.beginPath(); ui.arc(ax, ay, av / 2, 0, TAU); ui.fillStyle = ag; ui.fill();
-        ui.beginPath(); ui.arc(ax, ay, av / 2 - 4 * u, 0, TAU); ui.fillStyle = C.bg; ui.fill();
-        ui.restore();
-        drawLogo(ui, f, ax, ay, av * 0.38, pa, { word: false });
-        setFont(ui, fs, 700, 0.06);
-        ui.save();
-        ui.globalAlpha = pa;
-        ui.fillStyle = C.white;
-        ui.textAlign = 'left';
-        ui.fillText(B.handle, ax + av / 2 + fs * 0.6, ay + fs * 0.36);
-        // bouton suivre : se remplit d'accent sur « Suis », puis « ✓ ABONNÉ » sur « compte »
-        const bx = ax + av / 2 + fs * 0.6 + nameW + fs * 0.8, bh = fs * 1.7, by = ay - bh / 2;
-        const pop = 1 + 0.12 * pulse(ts, 0.02, 0.01, 0.2);
-        ui.translate(bx + folW / 2, ay); ui.scale(pop, pop); ui.translate(-(bx + folW / 2), -ay);
-        ui.beginPath(); ui.roundRect(bx, by, folW, bh, bh / 2);
-        ui.fillStyle = C.neon; ui.fill();
-        setFont(ui, fs * 0.9, 700, 0.06);
-        ui.fillStyle = '#ffffff';
-        ui.textAlign = 'center';
-        ui.fillText(T_.follow, bx + folW / 2, ay + fs * 0.32);
-        ui.restore();
+      // ---- bouton « ABONNE-TOI » en argent : arrive en tournant (sur « Abonne-toi »)
+      const ts = T - mSub;
+      if (ts > -0.02) {
+        const k = seg(ts, -0.02, 0.62);
+        const land = E.outCubic(k);
+        const fs = 58 * u;
+        const tw = textWidth(ui, T_.follow, fs, 700, 0.08);
+        const bw = tw + fs * 3.2, bh = fs * 2.3;
+        const bob = Math.sin(Math.max(0, ts - 0.7) * 2.6) * 6 * u * seg(ts, 0.7, 1.0);
+        const at = (kk) => ({ th: (1 - E.outCubic(kk)) * 3 * TAU, sc: lerp(0.25, 1, E.outBack(kk, 1.6)), y: Y.prof + (1 - E.outExpo(kk)) * H * 0.22 + bob });
+        const silver = (g, x0, w, th, shine) => {
+          const gr = g.createLinearGradient(x0, Y.prof - bh, x0 + w, Y.prof + bh);
+          const back = Math.cos(th) < 0;
+          const st = back ? ['#6b6f78', '#9a9ea8', '#5d616a'] : ['#eef0f4', '#a7abb5', '#ffffff', '#7f838e', '#d7dae0'];
+          st.forEach((c, i) => gr.addColorStop(i / (st.length - 1), c));
+          g.fillStyle = gr;
+          g.fill();
+          if (!back && shine > 0) { // reflet spéculaire qui balaie le métal
+            const sx = x0 + w * shine;
+            const sg = g.createLinearGradient(sx - w * 0.18, 0, sx + w * 0.18, 0);
+            sg.addColorStop(0, 'rgba(255,255,255,0)'); sg.addColorStop(0.5, 'rgba(255,255,255,0.85)'); sg.addColorStop(1, 'rgba(255,255,255,0)');
+            g.fillStyle = sg;
+            g.fill();
+          }
+        };
+        const draw = (kk, alpha) => {
+          const { th, sc, y } = at(kk);
+          const cx = Lp.cx;
+          const sx = Math.max(0.04, Math.abs(Math.cos(th)));
+          ui.save();
+          ui.globalAlpha = alpha;
+          ui.translate(cx, y); ui.scale(sc * sx, sc); ui.translate(-cx, -y);
+          ui.shadowColor = 'rgba(0,0,0,0.55)'; ui.shadowBlur = 30 * u; ui.shadowOffsetY = 12 * u;
+          ui.beginPath(); ui.roundRect(cx - bw / 2, y - bh / 2, bw, bh, bh / 2);
+          const sweep = ts < 0.62 ? 0.5 + 0.5 * Math.sin(th) : ((ts - 0.62) % 1.6) / 0.6 * 1.4 - 0.2;
+          silver(ui, cx - bw / 2, bw, th, sweep);
+          ui.shadowColor = 'transparent';
+          ui.lineWidth = 3 * u; ui.strokeStyle = 'rgba(255,255,255,0.9)'; ui.stroke();
+          ui.beginPath(); ui.roundRect(cx - bw / 2 + 5 * u, y - bh / 2 + 5 * u, bw - 10 * u, bh - 10 * u, bh / 2 - 5 * u);
+          ui.lineWidth = 2 * u; ui.strokeStyle = 'rgba(70,72,80,0.5)'; ui.stroke();
+          if (Math.cos(th) > 0) {
+            // cloche + texte gravés (encre sombre)
+            const ix = cx - tw / 2 - fs * 0.55, iy = y - fs * 0.05;
+            ui.fillStyle = '#17171c';
+            ui.beginPath();
+            ui.moveTo(ix - fs * 0.38, iy + fs * 0.28);
+            ui.quadraticCurveTo(ix - fs * 0.3, iy + fs * 0.12, ix - fs * 0.3, iy - fs * 0.08);
+            ui.arc(ix, iy - fs * 0.08, fs * 0.3, Math.PI, 0);
+            ui.quadraticCurveTo(ix + fs * 0.3, iy + fs * 0.12, ix + fs * 0.38, iy + fs * 0.28);
+            ui.closePath(); ui.fill();
+            ui.beginPath(); ui.arc(ix, iy + fs * 0.38, fs * 0.09, 0, TAU); ui.fill();
+            setFont(ui, fs, 700, 0.08);
+            ui.textAlign = 'left';
+            ui.fillText(T_.follow, cx - tw / 2 + fs * 0.15, y + fs * 0.36);
+          }
+          ui.restore();
+        };
+        // traînée de rotation (flou de mouvement)
+        if (k < 1) for (let g = 3; g >= 1; g--) draw(Math.max(0, k - g * 0.035), 0.18 * (1 - k));
+        draw(k, seg(ts, -0.02, 0.06));
+        const { y: by } = at(k);
         fx.save();
         fx.globalCompositeOperation = 'lighter';
-        radialGlow(fx, bx + folW / 2, ay, folW, C.neon, 0.35 * pulse(ts, 0.02, 0.01, 0.5) + 0.1 * pa);
+        radialGlow(fx, Lp.cx, by, bw * 0.75, '#dfe3ff', 0.18 * land + 0.5 * pulse(ts, 0.62, 0.01, 0.4));
         fx.restore();
-        sparks(fx, bx + folW / 2, ay, ts - 0.02, f, { count: 30, seed: 31, speed: 900, life: 0.4, color: C.neon2 });
+        sparks(fx, Lp.cx, by, ts - 0.62, f, { count: 60, seed: 31, speed: 1500, life: 0.6, flat: 0.5, color: '#e8ebf5' });
+        shockRing(fx, Lp.cx, by, ts - 0.62, f, { radius: 700, width: 6, dur: 0.5, flat: 0.4, color: '#dfe3ff', alpha: 0.6 });
+        flare(fx, Lp.cx + bw * 0.42, by - bh * 0.3, 0.6 * pulse(ts, 0.62, 0.02, 0.35) * cfg.vfx.flares, f, '#c9d0ff');
+        post.flash += 0.15 * pulse(ts, 0.62, 0.005, 0.12);
       }
 
       // ---- bouton DM (EXACTEMENT sur « DM ») : arrive en slam, pulse en continu

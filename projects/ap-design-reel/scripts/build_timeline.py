@@ -109,8 +109,8 @@ def main():
     cue(m('L5.Design'), 'glass', 1.0, 0.3)
     cue(B56 - 0.3, 'whoosh', 0.36, 0.5, pan=[-0.8, 0.8])
     # 06 CTA — + SUIVRE / DM
-    cue(m('L6.Suis'), 'pop', 0.2, 0.55)
-    cue(m('L6.compte'), 'blip', 0.18, 0.35)
+    cue(m('L6.Abonne-toi'), 'pop', 0.2, 0.55)                        # bouton ABONNE-TOI argenté
+    cue(m('L6.rater'), 'blip', 0.18, 0.35)
     cue(m('L6.collaborer'), 'ticks', max(0.3, DM - m('L6.collaborer') - 0.1), 0.25)
     cue(DM - 0.3, 'riser', 0.3, 0.4)
     cue(DM, 'impact', 1.6, 0.75, tone='bright')                       # « DM » → bouton + notif
@@ -158,9 +158,9 @@ def main():
         cue(B56 + 0.02, 'impact', 1.0, 0.4, tone='soft')
         cue(B56 + 0.1, 'pop', 0.2, 0.3)                                   # logo
         cue(B56 + 0.35, 'blip', 0.12, 0.22)                               # services
-        cue(m('L6.prochaine'), 'swish', 0.3, 0.3, pan=[0.6, -0.6])
-        cue(m('L6.Suis') - 0.15, 'swish', 0.25, 0.35)
-        cue(m('L6.Suis') + 0.03, 'shimmer', 0.4, 0.25)
+        cue(m('L6.partage'), 'swish', 0.3, 0.3, pan=[0.6, -0.6])
+        cue(m('L6.Abonne-toi') - 0.15, 'swish', 0.25, 0.35)
+        cue(m('L6.Abonne-toi') + 0.03, 'shimmer', 0.4, 0.25)
         cue(DM + 0.18, 'click', 0.2, 0.5)                                 # tap du doigt
         cue(DM + 0.28, 'whoosh', 0.35, 0.4, pan=[-0.8, 0.2])              # la notification arrive
         t = DM + 1.3

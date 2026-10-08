@@ -40,6 +40,8 @@ VOICES = {
     'siwis':       ('vits', 'vits-piper-fr_FR-siwis-medium', 'fr_FR-siwis-medium.onnx', 0, 1.0, 'F'),
     'kokoro-siwis': ('kokoro', 'kokoro-multi-lang-v1_0', 'model.onnx', 30, 1.0, 'F'),
     # Supertonic 3 (MIT, flow matching, 31 langues) : voix 5-9 masculines, 0-4 féminines
+    'st-f0': ('supertonic', 'sherpa-onnx-supertonic-3-tts-int8-2026-05-11', '', 0, 1.0, 'F'),  # la plus proche de la réf. client
+    'st-f2': ('supertonic', 'sherpa-onnx-supertonic-3-tts-int8-2026-05-11', '', 2, 1.0, 'F'),
     'st-m5': ('supertonic', 'sherpa-onnx-supertonic-3-tts-int8-2026-05-11', '', 5, 1.0, 'M'),
     'st-m6': ('supertonic', 'sherpa-onnx-supertonic-3-tts-int8-2026-05-11', '', 6, 1.0, 'M'),
     'st-m7': ('supertonic', 'sherpa-onnx-supertonic-3-tts-int8-2026-05-11', '', 7, 1.0, 'M'),

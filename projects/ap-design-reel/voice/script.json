@@ -1,7 +1,7 @@
 {
  "_doc": "Script voix off EXACT du brief AP Design. Moteur Supertonic 3 (graphèmes) : 'respell' n'adapte que ce qui se lit mal (sigles). Plusieurs prises par phrase, la meilleure est choisie par 2 ASR ; les mots horodatés pilotent le montage.",
  "respell": {
-  "3D": "trois-D",
+  "3D": "trois dé",
   "VFX": "V.F.X.",
   "DM": "D.M.",
   "AP": "A.P."
@@ -60,7 +60,7 @@
      "speed": 0.95,
      "gain_db": 1.5,
      "pause": 0.08,
-     "takes_mul": 2,
+     "takes_mul": 3,
      "judge": "whisper"
     },
     {
@@ -121,19 +121,19 @@
    "chunks": [
     {
      "id": "L6a",
-     "text": "Tu veux la prochaine ?",
+     "text": "Abonne-toi pour ne rien rater,",
+     "tts": "Abonne-toi pour ne rien rater !",
      "speed": 1.0,
      "gain_db": 1.5,
-     "pause": 0.14
+     "pause": 0.1
     },
     {
      "id": "L6b",
-     "text": "Suis le compte.",
-     "tts": "Suis le compte !",
-     "speed": 0.95,
-     "gain_db": 2,
-     "pause": 0.22,
-     "takes_mul": 2
+     "text": "et partage la vidéo.",
+     "tts": "Et partage la vidéo !",
+     "speed": 1.0,
+     "gain_db": 1.5,
+     "pause": 0.22
     },
     {
      "id": "L6c",

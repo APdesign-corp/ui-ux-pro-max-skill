@@ -23,7 +23,7 @@ export const CONFIG = {
     hero: 'MOTION DESIGN',
     kinetic: ['3D', 'VFX'],
     scroll: ['DES VIDÉOS QUI', 'ARRÊTENT LE', 'SCROLL'],
-    follow: '+ SUIVRE',
+    follow: 'ABONNE-TOI',
     cta: 'DM POUR COLLABORER',
     notifTitle: 'Nouveau message',
     notifBody: 'On a un projet pour vous.',
