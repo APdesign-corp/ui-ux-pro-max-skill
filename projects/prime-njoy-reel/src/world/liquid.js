@@ -1,78 +1,79 @@
-// Bulles de couleur LIQUIDES (version définitive) : gouttes aux couleurs de la marque, bords ondulants,
-// reflet brillant, qui dérivent derrière le contenu ; elles naissent au début de chaque scène et
-// éclatent en gouttelettes à la fin de la scène.
+// Petites billes de couleur (version définitive) : quelques billes brillantes aux couleurs de la marque
+// (3 à 5 à l'écran) qui naissent, se baladent puis SE DÉSINTÈGRENT en poussière de couleur
+// (éclats + anneau) ; toutes celles encore présentes éclatent au changement de scène.
 
 import { rng, TAU, E, seg, clamp } from '../core/anim.js';
 import { brandAt } from './brand.js';
 
-function blob(g, x, y, R, t, seed, col, a) {
-  const n = 14;
-  const pts = [];
-  for (let i = 0; i < n; i++) {
-    const ang = (i / n) * TAU;
-    const wob = 1 + 0.08 * Math.sin(ang * 3 + t * 2.1 + seed) + 0.05 * Math.sin(ang * 5 - t * 1.7 + seed * 2);
-    pts.push([x + Math.cos(ang) * R * wob, y + Math.sin(ang) * R * wob]);
-  }
-  g.beginPath();
-  for (let i = 0; i < n; i++) {
-    const p0 = pts[i], p1 = pts[(i + 1) % n];
-    const mx = (p0[0] + p1[0]) / 2, my = (p0[1] + p1[1]) / 2;
-    if (i === 0) g.moveTo(mx, my); else g.quadraticCurveTo(p0[0], p0[1], mx, my);
-  }
-  g.quadraticCurveTo(pts[0][0], pts[0][1], (pts[0][0] + pts[1][0]) / 2, (pts[0][1] + pts[1][1]) / 2);
-  g.closePath();
-  const gr = g.createRadialGradient(x - R * 0.35, y - R * 0.4, R * 0.05, x, y, R * 1.05);
-  gr.addColorStop(0, brandAt(clamp(col - 0.18), 0.95 * a));
-  gr.addColorStop(0.55, brandAt(col, 0.85 * a));
-  gr.addColorStop(1, brandAt(clamp(col + 0.15), 0.55 * a));
-  g.fillStyle = gr;
-  g.fill();
-  // reflet brillant (aspect liquide / verre)
-  const hl = g.createRadialGradient(x - R * 0.38, y - R * 0.42, 0, x - R * 0.38, y - R * 0.42, R * 0.45);
-  hl.addColorStop(0, `rgba(255,255,255,${0.75 * a})`); hl.addColorStop(1, 'rgba(255,255,255,0)');
-  g.fillStyle = hl; g.fill();
-  g.strokeStyle = `rgba(255,255,255,${0.35 * a})`; g.lineWidth = R * 0.03; g.stroke();
-}
+const DISSOLVE = 0.6; // durée de la désintégration (s)
 
-/** scenes = [{start, end}] ; dessine sur le calque de fond (derrière la 3D et la typo). */
-export function drawLiquid(g, W, H, t, scenes, o = {}) {
-  const u = W / 1080;
-  const k = o.k ?? 1;
+/** Calendrier déterministe des billes pour chaque scène. */
+export function schedule(scenes) {
+  const out = [];
   scenes.forEach((s, si) => {
-    if (t < s.start - 0.05 || t > s.end + 0.35) return;
-    const r = rng(500 + si * 31);
-    const n = 4 + (si % 2);
-    const life = t - s.start;
+    const r = rng(700 + si * 53);
+    const D = s.end - s.start;
+    const n = Math.max(2, Math.round(D * 1.2));
     for (let i = 0; i < n; i++) {
-      const col = r(), ox = r(), oy = r(), sp = 0.15 + r() * 0.25, R0 = (110 + r() * 150) * u, ph = r() * TAU, delay = r() * 0.35;
-      const born = E.outBack(seg(life, delay, delay + 0.55), 1.8);
-      const pop = seg(t, s.end - 0.18 + i * 0.03, s.end + 0.1 + i * 0.03);
-      if (born <= 0 || pop >= 1) {
-        // gouttelettes de l'éclatement
-        if (pop > 0 && pop < 1) splash();
-        continue;
-      }
-      // scène signature : bulles cantonnées aux bords, plus petites et plus légères (logo + texte dégagés)
-      const edge = s.id === 'brand';
-      const x = edge
-        ? W * (ox < 0.5 ? -0.02 + ox * 0.28 : 1.02 - (1 - ox) * 0.28) + Math.sin(t * sp * 2.2 + ph) * W * 0.04
-        : W * (0.12 + 0.76 * ox) + Math.sin(t * sp * 2.2 + ph) * W * 0.16;
-      const y = H * (0.1 + 0.8 * oy) + Math.cos(t * sp * 1.7 + ph) * H * 0.08 - life * 30 * u;
-      const R = R0 * (edge ? 0.62 : 1) * born * (1 + 0.25 * E.outCubic(pop)) * (1 - E.inCubic(pop));
-      if (R > 1) blob(g, x, y, R, t, i * 3 + si, col, k * (edge ? 0.6 : 1) * (1 - pop * 0.6));
-      if (pop > 0) splash();
-      function splash() {
-        const rr = rng(900 + si * 17 + i);
-        const ex = W * (0.12 + 0.76 * ox) + Math.sin((s.end) * sp * 2.2 + ph) * W * 0.16;
-        const ey = H * (0.1 + 0.8 * oy) + Math.cos((s.end) * sp * 1.7 + ph) * H * 0.08 - (s.end - s.start) * 30 * u;
-        for (let d = 0; d < 12; d++) {
-          const a = rr() * TAU, v = (0.4 + rr()) * R0 * 1.6 * E.outCubic(pop);
-          const dr = (8 + rr() * 16) * u * (1 - pop);
-          if (dr <= 0.5) continue;
-          g.fillStyle = brandAt(clamp(col + (rr() - 0.5) * 0.2), 0.8 * (1 - pop) * k);
-          g.beginPath(); g.arc(ex + Math.cos(a) * v, ey + Math.sin(a) * v + pop * pop * 60 * u, dr, 0, TAU); g.fill();
-        }
-      }
+      const birth = s.start + (i / n) * D * 0.82 + r() * 0.2;
+      const death = Math.min(birth + 1.5 + r() * 1.5, s.end);
+      if (death - birth < 0.5) continue;
+      out.push({
+        si, id: s.id, birth, death, col: r(),
+        x0: 0.1 + r() * 0.8, y0: 0.14 + r() * 0.74,
+        vx: (r() - 0.5) * 0.12, vy: (r() - 0.5) * 0.08 - 0.02,
+        R: 18 + r() * 18, ph: r() * TAU, seed: r() * 1000,
+      });
     }
   });
+  return out;
+}
+
+let cache = null;
+
+export function drawLiquid(g, W, H, t, scenes, o = {}) {
+  if (!cache || cache.n !== scenes.length) cache = { n: scenes.length, balls: schedule(scenes) };
+  const u = W / 1080, k = o.k ?? 1;
+  for (const b of cache.balls) {
+    if (t < b.birth || t > b.death + DISSOLVE) continue;
+    const edge = b.id === 'brand'; // scène signature : billes sur les bords (logo + texte dégagés)
+    const pos = (tt) => {
+      const a = tt - b.birth;
+      let x = b.x0 + b.vx * a + 0.025 * Math.sin(a * 1.9 + b.ph);
+      const y = b.y0 + b.vy * a + 0.018 * Math.cos(a * 1.5 + b.ph);
+      if (edge) x = b.x0 < 0.5 ? 0.04 + Math.abs(x - b.x0) * 0.6 + (b.x0 * 0.3) : 0.96 - Math.abs(x - b.x0) * 0.6 - ((1 - b.x0) * 0.3);
+      return [x * W, y * H];
+    };
+    const R = b.R * u;
+    if (t <= b.death) {
+      // bille vivante : apparition en « pop », légère respiration
+      const born = E.outBack(seg(t, b.birth, b.birth + 0.35), 2.2);
+      const [x, y] = pos(t);
+      const r = R * born * (1 + 0.06 * Math.sin((t - b.birth) * 5 + b.ph));
+      if (r < 0.5) continue;
+      const glow = g.createRadialGradient(x, y, 0, x, y, r * 2.6);
+      glow.addColorStop(0, brandAt(b.col, 0.35 * k)); glow.addColorStop(1, brandAt(b.col, 0));
+      g.fillStyle = glow; g.beginPath(); g.arc(x, y, r * 2.6, 0, TAU); g.fill();
+      const gr = g.createRadialGradient(x - r * 0.35, y - r * 0.35, r * 0.1, x, y, r);
+      gr.addColorStop(0, brandAt(clamp(b.col - 0.12), k)); gr.addColorStop(1, brandAt(clamp(b.col + 0.12), k));
+      g.fillStyle = gr; g.beginPath(); g.arc(x, y, r, 0, TAU); g.fill();
+      g.fillStyle = `rgba(255,255,255,${0.8 * k})`;
+      g.beginPath(); g.ellipse(x - r * 0.32, y - r * 0.38, r * 0.3, r * 0.18, -0.6, 0, TAU); g.fill();
+    } else {
+      // désintégration : éclats de couleur qui s'envolent et s'effritent + anneau qui s'étend
+      const p = (t - b.death) / DISSOLVE;
+      const [x, y] = pos(b.death);
+      const ring = E.outCubic(p);
+      g.strokeStyle = brandAt(b.col, 0.6 * (1 - p) * k); g.lineWidth = 2.5 * u * (1 - p);
+      g.beginPath(); g.arc(x, y, R * (1 + ring * 2.2), 0, TAU); g.stroke();
+      const rr = rng(Math.floor(b.seed));
+      for (let d = 0; d < 30; d++) {
+        const a = rr() * TAU, sp = (0.6 + rr() * 1.4) * R * 3.2;
+        const dd = sp * E.outCubic(p);
+        const s = (1.8 + rr() * 3.6) * u * (1 - p * 0.8);
+        g.fillStyle = brandAt(clamp(b.col + (rr() - 0.5) * 0.25), (1 - p) * k);
+        g.beginPath(); g.arc(x + Math.cos(a) * dd, y + Math.sin(a) * dd + p * p * 40 * u, s, 0, TAU); g.fill();
+      }
+    }
+  }
 }
