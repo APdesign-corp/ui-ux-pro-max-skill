@@ -13,6 +13,7 @@ import { createAccessories } from './world/accessories.js';
 import { createObjects } from './world/objects.js';
 import { createProps } from './world/props.js';
 import { drawWatermark } from './world/brand.js';
+import { drawLiquid } from './world/liquid.js';
 
 import hook from './scenes/01-hook.js';
 import unite from './scenes/02-unite.js';
@@ -189,6 +190,7 @@ export async function boot(canvas) {
       if (o && o.isObject3D) o.visible = false;
     }
     if (!DEBUG_HIDE.includes('gfx')) globalFX(t, post);
+    if (cfg.vfx.liquid) drawLiquid(bgCtx, W, H, t, clock, { k: 0.9 });
     // fond : plan au loin, cadré exactement sur le champ de la caméra
     const dz = 250, hh = 2 * dz * Math.tan((camera.fov * Math.PI) / 360);
     bgMesh.position.set(0, 0, -dz); bgMesh.scale.set(hh * camera.aspect, hh, 1);

@@ -31,7 +31,7 @@ export const CONFIG = {
   },
 
   // MAQUETTE : filigrane anti-utilisation tant que la version n'est pas payée (?wm=0 = version définitive)
-  watermark: { enabled: true, text: 'MAQUETTE', by: 'AP DESIGN', note: 'Aperçu non contractuel — diffusion interdite' },
+  watermark: { enabled: false, text: 'MAQUETTE', by: 'AP DESIGN', note: 'Aperçu non contractuel — diffusion interdite' },
 
   colors: {
     bg: '#f6f7fb',
@@ -81,6 +81,7 @@ export const CONFIG = {
     flares: 1,
     msaa: 0,               // MSAA 3D (0 recommandé avec SwiftShader : artefacts) — FXAA appliqué à la place
     fxaa: true,
+    liquid: true,          // bulles de couleur liquides (version définitive)
   },
 };
 
