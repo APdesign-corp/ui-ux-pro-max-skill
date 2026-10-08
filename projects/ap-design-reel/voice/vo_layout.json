@@ -1,24 +1,24 @@
 {
- "voice": "st-m7",
- "gender": "M",
+ "voice": "st-f0",
+ "gender": "F",
  "params": {
-  "voice": "st-m7",
+  "voice": "st-f0",
   "models": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/models",
-  "out": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/ap/v2-st-m7",
+  "out": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/ap/v3-f0",
   "script": "/home/user/ui-ux-pro-max-skill/projects/ap-design-reel/voice/script.json",
   "aligner": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/models/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
   "speed": 1.05,
   "noise_scale": 0.667,
   "noise_w": 0.8,
   "respell": null,
-  "threads": 2,
+  "threads": 4,
   "expr": 0.025,
   "takes": 6,
   "judge_whisper": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/models/sherpa-onnx-whisper-small",
-  "variants": "{\"3D\":[\"trois dé\",\"trois-D\"],\"VFX\":[\"vé èf ix\",\"V F X\"],\"AP\":[\"A-P\",\"à-pé\",\"A P\"],\"DM\":[\"dé-ème\",\"D M\"]}"
+  "variants": "{\"3D\":[\"trois dé\",\"troi dé\",\"trois-dé\",\"3 D\"],\"VFX\":[\"vé èf ix\",\"V F X\"],\"AP\":[\"ah pé\",\"A-P\",\"à-pé\"],\"DM\":[\"dé-ème\",\"D M\"]}"
  },
  "respell": {
-  "3D": "trois-D",
+  "3D": "trois dé",
   "VFX": "V.F.X.",
   "DM": "D.M.",
   "AP": "A.P."
@@ -35,10 +35,10 @@
      "text": "Tu veux vraiment qu'on remarque tes vidéos ?",
      "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
      "start": 0.14,
-     "end": 1.719,
+     "end": 2.132,
      "speech": [
       0.152,
-      1.707
+      2.12
      ],
      "words": [
       [
@@ -47,27 +47,27 @@
       ],
       [
        "veux",
-       0.192
+       0.26
       ],
       [
        "vraiment",
-       0.34
+       0.5
       ],
       [
        "qu'on",
-       0.58
+       0.74
       ],
       [
        "remarque",
-       0.9
+       1.06
       ],
       [
        "tes",
-       1.22
+       1.46
       ],
       [
        "vidéos",
-       1.38
+       1.7
       ]
      ],
      "aligned_words": 7,
@@ -77,279 +77,279 @@
       {
        "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
        "sr": 44100,
-       "dur": 1.617,
+       "dur": 2.101,
        "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
        "wer_p": 0.0,
        "asr_w": "Tu veux vraiment qu'on remarque tes vidéos ?",
        "wer_w": 0.0,
-       "expr": 6.627,
-       "score": -0.16
+       "expr": 4.913,
+       "score": -0.11
       },
       {
        "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
        "sr": 44100,
-       "dur": 1.516,
+       "dur": 1.992,
        "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
        "wer_p": 0.0,
        "asr_w": "Tu veux vraiment qu'on remarque tes vidéos ?",
        "wer_w": 0.0,
-       "expr": 7.31,
-       "score": -0.17
+       "expr": 7.105,
+       "score": -0.175
       },
       {
        "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
        "sr": 44100,
-       "dur": 1.526,
-       "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
-       "wer_p": 0.0,
-       "asr_w": "Tu veux vraiment qu'on remarque tes vidéos?",
-       "wer_w": 0.0,
-       "expr": 7.02,
-       "score": -0.164
-      },
-      {
-       "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
-       "sr": 44100,
-       "dur": 1.62,
-       "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
-       "wer_p": 0.0,
-       "asr_w": "Tu veux vraiment qu'on remarque tes vidéos?",
-       "wer_w": 0.0,
-       "expr": 6.266,
-       "score": -0.15
-      },
-      {
-       "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
-       "sr": 44100,
-       "dur": 1.579,
+       "dur": 2.018,
        "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
        "wer_p": 0.0,
        "asr_w": "Tu veux vraiment qu'on remarque tes vidéos ?",
        "wer_w": 0.0,
-       "expr": 7.623,
-       "score": -0.189
+       "expr": 6.889,
+       "score": -0.171
       },
       {
        "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
        "sr": 44100,
-       "dur": 1.592,
+       "dur": 2.007,
        "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
        "wer_p": 0.0,
        "asr_w": "Tu veux vraiment qu'on remarque tes vidéos ?",
        "wer_w": 0.0,
-       "expr": 4.822,
-       "score": -0.119
+       "expr": 6.344,
+       "score": -0.158
+      },
+      {
+       "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
+       "sr": 44100,
+       "dur": 2.098,
+       "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
+       "wer_p": 0.0,
+       "asr_w": "Tu veux vraiment qu'on remarque tes vidéos ?",
+       "wer_w": 0.0,
+       "expr": 5.398,
+       "score": -0.122
+      },
+      {
+       "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
+       "sr": 44100,
+       "dur": 1.99,
+       "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
+       "wer_p": 0.0,
+       "asr_w": "Tu veux vraiment qu'on remarque tes vidéos ?",
+       "wer_w": 0.0,
+       "expr": 5.471,
+       "score": -0.133
       }
      ],
-     "chosen_take": 4
+     "chosen_take": 1
     }
    ],
-   "end": 1.719
+   "end": 2.132
   },
   {
    "id": "L2",
    "scene": "showreel",
    "tone": "tranchant",
-   "start": 1.859,
+   "start": 2.272,
    "chunks": [
     {
      "id": "L2",
      "text": "Alors arrête le contenu banal.",
      "tts": "Alors, arrête le contenu banal !",
-     "start": 1.859,
-     "end": 3.269,
+     "start": 2.272,
+     "end": 3.818,
      "speech": [
-      1.871,
-      3.257
+      2.284,
+      3.806
      ],
      "words": [
       [
        "Alors",
-       1.871
+       2.284
       ],
       [
        "arrête",
-       2.059
+       2.472
       ],
       [
        "le",
-       2.459
+       2.952
       ],
       [
        "contenu",
-       2.539
+       3.112
       ],
       [
        "banal",
-       2.939
+       3.512
       ]
      ],
      "aligned_words": 5,
-     "asr_on_raw": "Alors, arrête le contenu banal.",
+     "asr_on_raw": "Alors arrête le contenu banal.",
      "native_sr": 44100,
      "takes": [
       {
        "tts": "Alors, arrête le contenu banal !",
        "sr": 44100,
-       "dur": 1.143,
-       "asr_p": "Alors arrête le contenu banal.",
-       "wer_p": 0.0,
-       "asr_w": "Alors arrête de compte-tu banal ?",
-       "wer_w": 0.6,
-       "expr": 5.711,
-       "score": 0.514
-      },
-      {
-       "tts": "Alors, arrête le contenu banal !",
-       "sr": 44100,
-       "dur": 1.409,
-       "asr_p": "Alors arrête le contenu banal.",
-       "wer_p": 0.0,
-       "asr_w": "Alors arrête le compte u banal.",
-       "wer_w": 0.4,
-       "expr": 7.701,
-       "score": 0.207
-      },
-      {
-       "tts": "Alors, arrête le contenu banal !",
-       "sr": 44100,
-       "dur": 1.449,
-       "asr_p": "Alors arrête le contenu banal.",
-       "wer_p": 0.0,
-       "asr_w": "Alors, arrête le compte tube banal.",
-       "wer_w": 0.4,
-       "expr": 7.623,
-       "score": 0.218
-      },
-      {
-       "tts": "Alors, arrête le contenu banal !",
-       "sr": 44100,
-       "dur": 1.411,
-       "asr_p": "Alors arrête le contenu banal.",
-       "wer_p": 0.0,
-       "asr_w": "Alors, arrête le compte banal.",
-       "wer_w": 0.2,
-       "expr": 6.632,
-       "score": 0.034
-      },
-      {
-       "tts": "Alors, arrête le contenu banal !",
-       "sr": 44100,
-       "dur": 1.497,
+       "dur": 1.585,
        "asr_p": "Alors arrête le contenu banal.",
        "wer_p": 0.0,
        "asr_w": "Alors arrête le contenu banal.",
        "wer_w": 0.0,
-       "expr": 3.944,
-       "score": -0.08
+       "expr": 5.536,
+       "score": -0.136
       },
       {
        "tts": "Alors, arrête le contenu banal !",
        "sr": 44100,
-       "dur": 1.319,
-       "asr_p": "Alors, arrête le contenu banal.",
+       "dur": 1.558,
+       "asr_p": "Alors arrête le contenu banal.",
        "wer_p": 0.0,
-       "asr_w": "Alors, arrête le contubanal.",
+       "asr_w": "Alors arrête le contenu banal.",
+       "wer_w": 0.0,
+       "expr": 6.555,
+       "score": -0.156
+      },
+      {
+       "tts": "Alors, arrête le contenu banal !",
+       "sr": 44100,
+       "dur": 1.557,
+       "asr_p": "Alors arrête le contenu banal.",
+       "wer_p": 0.0,
+       "asr_w": "Alors arrête le compte-tupanal.",
        "wer_w": 0.4,
-       "expr": 6.022,
+       "expr": 7.57,
+       "score": 0.219
+      },
+      {
+       "tts": "Alors, arrête le contenu banal !",
+       "sr": 44100,
+       "dur": 1.686,
+       "asr_p": "Alors arrête le contenu banal.",
+       "wer_p": 0.0,
+       "asr_w": "Alors arrête le contenu banal.",
+       "wer_w": 0.0,
+       "expr": 6.555,
+       "score": -0.148
+      },
+      {
+       "tts": "Alors, arrête le contenu banal !",
+       "sr": 44100,
+       "dur": 1.546,
+       "asr_p": "Alors arrête le contenu banal.",
+       "wer_p": 0.0,
+       "asr_w": "Alors arrête le contenu banal.",
+       "wer_w": 0.0,
+       "expr": 7.972,
+       "score": -0.189
+      },
+      {
+       "tts": "Alors, arrête le contenu banal !",
+       "sr": 44100,
+       "dur": 1.605,
+       "asr_p": "Alors arrête le contenu banal.",
+       "wer_p": 0.0,
+       "asr_w": "Alors arrête le compte Hubanal.",
+       "wer_w": 0.4,
+       "expr": 5.353,
+       "score": 0.267
+      },
+      {
+       "tts": "Alors, arrête le contenu banal !",
+       "sr": 44100,
+       "dur": 1.669,
+       "asr_p": "Alors arrête le contenu banal.",
+       "wer_p": 0.0,
+       "asr_w": "Alors arrête le contenu banal",
+       "wer_w": 0.0,
+       "expr": 3.769,
+       "score": -0.081
+      },
+      {
+       "tts": "Alors, arrête le contenu banal !",
+       "sr": 44100,
+       "dur": 1.687,
+       "asr_p": "Alors arrête le contenu banal.",
+       "wer_p": 0.0,
+       "asr_w": "Alors arrête le contenu banal.",
+       "wer_w": 0.0,
+       "expr": 4.923,
+       "score": -0.107
+      },
+      {
+       "tts": "Alors, arrête le contenu banal !",
+       "sr": 44100,
+       "dur": 1.641,
+       "asr_p": "Alors arrête le contenu banal.",
+       "wer_p": 0.0,
+       "asr_w": "Alors arrête le compte ubanal.",
+       "wer_w": 0.4,
+       "expr": 5.549,
        "score": 0.269
       },
       {
        "tts": "Alors, arrête le contenu banal !",
        "sr": 44100,
-       "dur": 1.394,
-       "asr_p": "Alors arrête le contu banal.",
-       "wer_p": 0.2,
+       "dur": 1.549,
+       "asr_p": "Alors arrête le contenu banal.",
+       "wer_p": 0.0,
        "asr_w": "Alors arrête le compte Hubanal.",
        "wer_w": 0.4,
-       "expr": 6.726,
-       "score": 0.635
+       "expr": 6.642,
+       "score": 0.244
       },
       {
        "tts": "Alors, arrête le contenu banal !",
        "sr": 44100,
-       "dur": 1.478,
+       "dur": 1.594,
        "asr_p": "Alors arrête le contenu banal.",
        "wer_p": 0.0,
-       "asr_w": "Alors arrête le contenu banal.",
-       "wer_w": 0.0,
-       "expr": 5.985,
-       "score": -0.135
+       "asr_w": "Alors arrête le cantu banal.",
+       "wer_w": 0.2,
+       "expr": 6.655,
+       "score": 0.035
       },
       {
        "tts": "Alors, arrête le contenu banal !",
        "sr": 44100,
-       "dur": 1.295,
-       "asr_p": "Alors arrête le contenu banal.",
-       "wer_p": 0.0,
-       "asr_w": "Alors, arrête le compte Hubanal !",
-       "wer_w": 0.4,
-       "expr": 3.973,
-       "score": 0.325
-      },
-      {
-       "tts": "Alors, arrête le contenu banal !",
-       "sr": 44100,
-       "dur": 1.412,
+       "dur": 1.605,
        "asr_p": "Alors, arrête le contenu banal.",
        "wer_p": 0.0,
-       "asr_w": "Alors, arrête le contubanal.",
-       "wer_w": 0.4,
-       "expr": 9.175,
-       "score": 0.171
-      },
-      {
-       "tts": "Alors, arrête le contenu banal !",
-       "sr": 44100,
-       "dur": 1.41,
-       "asr_p": "Alors, arrête le contenu banal.",
-       "wer_p": 0.0,
-       "asr_w": "Alors, arrête le contenu banal.",
-       "wer_w": 0.0,
-       "expr": 10.014,
-       "score": -0.25
-      },
-      {
-       "tts": "Alors, arrête le contenu banal !",
-       "sr": 44100,
-       "dur": 1.363,
-       "asr_p": "Alors arrête le contenu banal.",
-       "wer_p": 0.0,
-       "asr_w": "Alors, arrête le contubanal.",
-       "wer_w": 0.4,
-       "expr": 9.714,
-       "score": 0.167
+       "asr_w": "Alors, arrête le compte banal.",
+       "wer_w": 0.2,
+       "expr": 6.433,
+       "score": 0.04
       }
      ],
-     "chosen_take": 10
+     "chosen_take": 4
     }
    ],
-   "end": 3.269
+   "end": 3.818
   },
   {
    "id": "L3",
    "scene": "hero",
    "tone": "précis",
-   "start": 3.569,
+   "start": 4.118,
    "chunks": [
     {
      "id": "L3a",
      "text": "Motion design.",
      "tts": "Motion design !",
-     "start": 3.569,
-     "end": 4.298,
+     "start": 4.118,
+     "end": 5.007,
      "speech": [
-      3.581,
-      4.286
+      4.13,
+      4.995
      ],
      "words": [
       [
        "Motion",
-       3.581
+       4.13
       ],
       [
        "design",
-       3.929
+       4.558
       ]
      ],
      "aligned_words": 2,
@@ -359,485 +359,507 @@
       {
        "tts": "Motion design !",
        "sr": 44100,
+       "dur": 0.913,
+       "asr_p": "Motion design",
+       "wer_p": 0.0,
+       "asr_w": "Motion Design",
+       "wer_w": 0.0,
+       "expr": 5.312,
+       "score": -0.131
+      },
+      {
+       "tts": "Motion design !",
+       "sr": 44100,
+       "dur": 1.03,
+       "asr_p": "Motion design",
+       "wer_p": 0.0,
+       "asr_w": "Motion Design",
+       "wer_w": 0.0,
+       "expr": 7.236,
+       "score": -0.141
+      },
+      {
+       "tts": "Motion design !",
+       "sr": 44100,
+       "dur": 0.946,
+       "asr_p": "Motion design",
+       "wer_p": 0.0,
+       "asr_w": "Motion Design",
+       "wer_w": 0.0,
+       "expr": 7.76,
+       "score": -0.181
+      },
+      {
+       "tts": "Motion design !",
+       "sr": 44100,
        "dur": 0.889,
        "asr_p": "Motion design",
        "wer_p": 0.0,
        "asr_w": "Motion Design",
        "wer_w": 0.0,
-       "expr": 2.718,
-       "score": -0.064
+       "expr": 9.025,
+       "score": -0.219
       },
       {
        "tts": "Motion design !",
        "sr": 44100,
-       "dur": 0.871,
+       "dur": 0.903,
        "asr_p": "Motion design",
        "wer_p": 0.0,
        "asr_w": "Motion Design",
        "wer_w": 0.0,
-       "expr": 3.164,
-       "score": -0.077
-      },
-      {
-       "tts": "Motion design !",
-       "sr": 44100,
-       "dur": 1.016,
-       "asr_p": "Motion design",
-       "wer_p": 0.0,
-       "asr_w": "Motion Design",
-       "wer_w": 0.0,
-       "expr": 4.7,
-       "score": -0.07
-      },
-      {
-       "tts": "Motion design !",
-       "sr": 44100,
-       "dur": 0.859,
-       "asr_p": "Motion design.",
-       "wer_p": 0.0,
-       "asr_w": "Motion Design",
-       "wer_w": 0.0,
-       "expr": 2.124,
-       "score": -0.047
+       "expr": 4.75,
+       "score": -0.117
       },
       {
        "tts": "Motion design !",
        "sr": 44100,
        "dur": 0.881,
-       "asr_p": "Motion design.",
-       "wer_p": 0.0,
-       "asr_w": "Motion Design",
-       "wer_w": 0.0,
-       "expr": 2.524,
-       "score": -0.061
-      },
-      {
-       "tts": "Motion design !",
-       "sr": 44100,
-       "dur": 0.729,
        "asr_p": "Motion design",
        "wer_p": 0.0,
        "asr_w": "Motion Design",
        "wer_w": 0.0,
-       "expr": 5.479,
-       "score": -0.087
+       "expr": 5.568,
+       "score": -0.13
       }
      ],
-     "chosen_take": 5
+     "chosen_take": 3
     },
     {
      "id": "L3b",
      "text": "3D.",
-     "tts": "trois-D !",
-     "start": 4.398,
-     "end": 4.965,
+     "tts": "3 D !",
+     "start": 5.107,
+     "end": 6.062,
      "speech": [
-      4.41,
-      4.954
+      5.119,
+      6.05
      ],
      "words": [
       [
        "3D",
-       4.41
+       5.227
       ]
      ],
      "aligned_words": 1,
-     "asr_on_raw": "Troy's D",
+     "asr_on_raw": "3D",
      "native_sr": 44100,
      "takes": [
       {
-       "tts": "trois-D !",
+       "tts": "trois dé !",
        "sr": 44100,
-       "dur": 0.568,
-       "asr_p": "Troy's D",
+       "dur": 0.779,
+       "asr_p": "Troy's Day",
        "wer_p": 2.0,
-       "asr_w": "Trois D.",
+       "asr_w": "Trois-D",
        "wer_w": 0.0,
-       "expr": 3.136,
-       "score": 0.0
+       "expr": 4.98,
+       "score": -0.117
       },
       {
-       "tts": "trois D !",
+       "tts": "troi dé !",
        "sr": 44100,
-       "dur": 0.637,
-       "asr_p": "Troy's D.",
-       "wer_p": 2.0,
-       "asr_w": "Trois D",
-       "wer_w": 0.0,
-       "expr": 3.574,
-       "score": 0.0
-      },
-      {
-       "tts": "trois-D !",
-       "sr": 44100,
-       "dur": 0.564,
-       "asr_p": "Troy's D",
-       "wer_p": 2.0,
-       "asr_w": "Trois d",
-       "wer_w": 0.0,
-       "expr": 3.927,
-       "score": 0.0
-      },
-      {
-       "tts": "trois D !",
-       "sr": 44100,
-       "dur": 0.603,
-       "asr_p": "Troy's D.",
-       "wer_p": 2.0,
-       "asr_w": "Trois D.",
-       "wer_w": 0.0,
-       "expr": 2.027,
-       "score": 0.0
-      },
-      {
-       "tts": "trois-D !",
-       "sr": 44100,
-       "dur": 0.569,
-       "asr_p": "Troy's D.",
-       "wer_p": 2.0,
-       "asr_w": "Trois D.",
-       "wer_w": 0.0,
-       "expr": 4.272,
-       "score": 0.0
-      },
-      {
-       "tts": "trois D !",
-       "sr": 44100,
-       "dur": 0.71,
-       "asr_p": "Troy's D",
-       "wer_p": 2.0,
-       "asr_w": "Troyes D",
-       "wer_w": 2.0,
-       "expr": 2.366,
-       "score": 4.0
-      },
-      {
-       "tts": "trois-D !",
-       "sr": 44100,
-       "dur": 0.61,
-       "asr_p": "Troy's D.",
-       "wer_p": 2.0,
-       "asr_w": "Trois D.",
-       "wer_w": 0.0,
-       "expr": 4.615,
-       "score": 0.0
-      },
-      {
-       "tts": "trois D !",
-       "sr": 44100,
-       "dur": 0.654,
-       "asr_p": "Troy's D",
-       "wer_p": 2.0,
-       "asr_w": "Troyes D.",
-       "wer_w": 2.0,
-       "expr": 3.322,
-       "score": 4.0
-      },
-      {
-       "tts": "trois-D !",
-       "sr": 44100,
-       "dur": 0.573,
-       "asr_p": "Troy's D.",
-       "wer_p": 2.0,
-       "asr_w": "Trois D.",
-       "wer_w": 0.0,
-       "expr": 2.26,
-       "score": 0.0
-      },
-      {
-       "tts": "trois D !",
-       "sr": 44100,
-       "dur": 0.579,
-       "asr_p": "Troy's D",
-       "wer_p": 2.0,
-       "asr_w": "Trois D.",
-       "wer_w": 0.0,
-       "expr": 4.74,
-       "score": 0.0
-      },
-      {
-       "tts": "trois-D !",
-       "sr": 44100,
-       "dur": 0.483,
-       "asr_p": "Troyes.",
+       "dur": 0.728,
+       "asr_p": "Troid",
        "wer_p": 1.0,
-       "asr_w": "Troyes.",
-       "wer_w": 1.0,
-       "expr": 5.047,
-       "score": 2.0
-      },
-      {
-       "tts": "trois D !",
-       "sr": 44100,
-       "dur": 0.682,
-       "asr_p": "Troy's D",
-       "wer_p": 2.0,
-       "asr_w": "Trois D",
-       "wer_w": 0.0,
-       "expr": 6.077,
-       "score": 0.0
-      },
-      {
-       "tts": "trois-D !",
-       "sr": 44100,
-       "dur": 0.802,
-       "asr_p": "Troy's D",
-       "wer_p": 2.0,
-       "asr_w": "Troyes D",
+       "asr_w": "Trois days",
        "wer_w": 2.0,
-       "expr": 3.927,
-       "score": 4.0
+       "expr": 8.844,
+       "score": 3.806
       },
       {
-       "tts": "trois D !",
+       "tts": "trois-dé !",
        "sr": 44100,
-       "dur": 0.598,
-       "asr_p": "Troy's D.",
+       "dur": 0.862,
+       "asr_p": "Twy Day",
        "wer_p": 2.0,
-       "asr_w": "Trois D",
-       "wer_w": 0.0,
-       "expr": 4.259,
-       "score": 0.0
+       "asr_w": "Toy Day",
+       "wer_w": 2.0,
+       "expr": 7.893,
+       "score": 3.826
       },
       {
-       "tts": "trois-D !",
+       "tts": "3 D !",
        "sr": 44100,
-       "dur": 0.556,
+       "dur": 0.63,
+       "asr_p": "D.",
+       "wer_p": 1.0,
+       "asr_w": "D",
+       "wer_w": 1.0,
+       "expr": 5.039,
+       "score": 1.938
+      },
+      {
+       "tts": "trois dé !",
+       "sr": 44100,
+       "dur": 0.879,
+       "asr_p": "Twice day",
+       "wer_p": 2.0,
+       "asr_w": "Twice Day",
+       "wer_w": 2.0,
+       "expr": 4.809,
+       "score": 3.91
+      },
+      {
+       "tts": "troi dé !",
+       "sr": 44100,
+       "dur": 0.862,
+       "asr_p": "Troy D",
+       "wer_p": 2.0,
+       "asr_w": "Trois-deux",
+       "wer_w": 2.0,
+       "expr": 2.669,
+       "score": 3.957
+      },
+      {
+       "tts": "trois-dé !",
+       "sr": 44100,
+       "dur": 0.735,
+       "asr_p": "Twy Day",
+       "wer_p": 2.0,
+       "asr_w": "Toy Day",
+       "wer_w": 2.0,
+       "expr": 2.858,
+       "score": 3.953
+      },
+      {
+       "tts": "3 D !",
+       "sr": 44100,
+       "dur": 0.708,
+       "asr_p": "D.",
+       "wer_p": 1.0,
+       "asr_w": "D",
+       "wer_w": 1.0,
+       "expr": 2.995,
+       "score": 1.959
+      },
+      {
+       "tts": "trois dé !",
+       "sr": 44100,
+       "dur": 0.93,
        "asr_p": "Troy's D",
        "wer_p": 2.0,
        "asr_w": "Trois-D",
        "wer_w": 0.0,
-       "expr": 3.65,
-       "score": 0.0
+       "expr": 5.353,
+       "score": -0.085
       },
       {
-       "tts": "trois D !",
+       "tts": "troi dé !",
        "sr": 44100,
-       "dur": 0.679,
-       "asr_p": "Troy's D.",
+       "dur": 0.718,
+       "asr_p": "Troy D",
+       "wer_p": 2.0,
+       "asr_w": "Throi Day",
+       "wer_w": 2.0,
+       "expr": 5.59,
+       "score": 3.891
+      },
+      {
+       "tts": "trois-dé !",
+       "sr": 44100,
+       "dur": 0.793,
+       "asr_p": "Twy Day",
+       "wer_p": 2.0,
+       "asr_w": "\"TWYDAY\"",
+       "wer_w": 1.0,
+       "expr": 10.971,
+       "score": 1.728
+      },
+      {
+       "tts": "3 D !",
+       "sr": 44100,
+       "dur": 0.955,
+       "asr_p": "3D",
+       "wer_p": 0.0,
+       "asr_w": "3D",
+       "wer_w": 0.0,
+       "expr": 7.991,
+       "score": -0.141
+      },
+      {
+       "tts": "trois dé !",
+       "sr": 44100,
+       "dur": 0.891,
+       "asr_p": "Toys D",
        "wer_p": 2.0,
        "asr_w": "Trois D",
        "wer_w": 0.0,
-       "expr": 2.692,
-       "score": 0.0
+       "expr": 5.776,
+       "score": -0.11
+      },
+      {
+       "tts": "troi dé !",
+       "sr": 44100,
+       "dur": 0.829,
+       "asr_p": "Troy D",
+       "wer_p": 2.0,
+       "asr_w": "Troi-Day",
+       "wer_w": 2.0,
+       "expr": 6.506,
+       "score": 3.849
+      },
+      {
+       "tts": "trois-dé !",
+       "sr": 44100,
+       "dur": 0.806,
+       "asr_p": "Twy D",
+       "wer_p": 2.0,
+       "asr_w": "TOY Day",
+       "wer_w": 2.0,
+       "expr": 6.874,
+       "score": 3.831
+      },
+      {
+       "tts": "3 D !",
+       "sr": 44100,
+       "dur": 0.657,
+       "asr_p": "D",
+       "wer_p": 1.0,
+       "asr_w": "D",
+       "wer_w": 1.0,
+       "expr": 0.924,
+       "score": 2.03
+      },
+      {
+       "tts": "trois dé !",
+       "sr": 44100,
+       "dur": 0.769,
+       "asr_p": "Troys B",
+       "wer_p": 2.0,
+       "asr_w": "Troys Day",
+       "wer_w": 2.0,
+       "expr": 5.109,
+       "score": 3.884
+      },
+      {
+       "tts": "troi dé !",
+       "sr": 44100,
+       "dur": 0.885,
+       "asr_p": "Troy D",
+       "wer_p": 2.0,
+       "asr_w": "Trois-deux",
+       "wer_w": 2.0,
+       "expr": 5.542,
+       "score": 3.894
       }
      ],
-     "chosen_take": 0
+     "chosen_take": 11
     },
     {
      "id": "L3c",
      "text": "VFX.",
      "tts": "vé èf ix !",
-     "start": 5.045,
-     "end": 5.873,
+     "start": 6.142,
+     "end": 6.952,
      "speech": [
-      5.057,
-      5.861
+      6.154,
+      6.94
      ],
      "words": [
       [
        "VFX",
-       5.057
+       6.582
       ]
      ],
      "aligned_words": 1,
-     "asr_on_raw": "VfX.",
+     "asr_on_raw": "V fix.",
      "native_sr": 44100,
      "takes": [
       {
        "tts": "vé èf ix !",
        "sr": 44100,
-       "dur": 0.69,
-       "asr_p": "The fix.",
+       "dur": 0.758,
+       "asr_p": "V fix",
        "wer_p": 2.0,
-       "asr_w": "VFX.",
-       "wer_w": 0.0,
-       "expr": 11.615,
-       "score": 3.743
+       "asr_w": "V Fix",
+       "wer_w": 2.0,
+       "expr": 4.333,
+       "score": 3.902
       },
       {
        "tts": "V F X !",
        "sr": 44100,
-       "dur": 0.848,
-       "asr_p": "V X.",
-       "wer_p": 2.0,
+       "dur": 0.746,
+       "asr_p": "Vx",
+       "wer_p": 1.0,
        "asr_w": "VX",
        "wer_w": 1.0,
-       "expr": 5.968,
-       "score": 4.879
+       "expr": 5.634,
+       "score": 1.874
       },
       {
        "tts": "vé èf ix !",
        "sr": 44100,
-       "dur": 0.624,
+       "dur": 0.931,
+       "asr_p": "V fix",
+       "wer_p": 2.0,
+       "asr_w": "V Fix",
+       "wer_w": 2.0,
+       "expr": 5.032,
+       "score": 3.93
+      },
+      {
+       "tts": "V F X !",
+       "sr": 44100,
+       "dur": 0.929,
+       "asr_p": "V x.",
+       "wer_p": 2.0,
+       "asr_w": "VX",
+       "wer_w": 1.0,
+       "expr": 6.222,
+       "score": 1.899
+      },
+      {
+       "tts": "vé èf ix !",
+       "sr": 44100,
+       "dur": 0.916,
        "asr_p": "V fix",
        "wer_p": 2.0,
        "asr_w": "VFX",
        "wer_w": 0.0,
-       "expr": 4.151,
-       "score": 3.955
+       "expr": 1.969,
+       "score": 0.001
       },
       {
        "tts": "V F X !",
        "sr": 44100,
-       "dur": 0.943,
-       "asr_p": "The X",
+       "dur": 0.903,
+       "asr_p": "V x",
        "wer_p": 2.0,
        "asr_w": "VX",
        "wer_w": 1.0,
-       "expr": 6.442,
-       "score": 4.904
+       "expr": 6.389,
+       "score": 1.885
       },
       {
        "tts": "vé èf ix !",
        "sr": 44100,
-       "dur": 0.811,
-       "asr_p": "The Fx.",
+       "dur": 0.631,
+       "asr_p": "W fix.",
        "wer_p": 2.0,
        "asr_w": "VFX",
        "wer_w": 0.0,
-       "expr": 5.047,
-       "score": 3.887
+       "expr": 3.605,
+       "score": -0.031
       },
       {
        "tts": "V F X !",
        "sr": 44100,
-       "dur": 1.116,
-       "asr_p": "V FX",
-       "wer_p": 2.0,
-       "asr_w": "VFX",
-       "wer_w": 0.0,
-       "expr": 4.988,
-       "score": 4.007
-      },
-      {
-       "tts": "vé èf ix !",
-       "sr": 44100,
-       "dur": 0.742,
-       "asr_p": "Bf.",
-       "wer_p": 1.0,
-       "asr_w": "VFX",
-       "wer_w": 0.0,
-       "expr": 3.634,
-       "score": 1.923
-      },
-      {
-       "tts": "V F X !",
-       "sr": 44100,
-       "dur": 0.822,
+       "dur": 0.885,
        "asr_p": "VX",
        "wer_p": 1.0,
        "asr_w": "VX",
        "wer_w": 1.0,
-       "expr": 5.115,
-       "score": 2.89
+       "expr": 4.616,
+       "score": 1.922
       },
       {
        "tts": "vé èf ix !",
        "sr": 44100,
-       "dur": 0.648,
-       "asr_p": "VfX.",
-       "wer_p": 0.0,
+       "dur": 0.761,
+       "asr_p": "W fix",
+       "wer_p": 2.0,
        "asr_w": "VFX",
        "wer_w": 0.0,
-       "expr": 6.326,
-       "score": -0.108
+       "expr": 2.576,
+       "score": -0.055
       },
       {
        "tts": "V F X !",
        "sr": 44100,
-       "dur": 0.597,
-       "asr_p": "VX.",
-       "wer_p": 1.0,
+       "dur": 0.606,
+       "asr_p": "The X",
+       "wer_p": 2.0,
        "asr_w": "VX",
        "wer_w": 1.0,
-       "expr": 4.297,
-       "score": 2.962
+       "expr": 3.933,
+       "score": 1.97
       },
       {
        "tts": "vé èf ix !",
        "sr": 44100,
-       "dur": 0.827,
-       "asr_p": "VfX.",
-       "wer_p": 0.0,
+       "dur": 0.81,
+       "asr_p": "V fix.",
+       "wer_p": 2.0,
        "asr_w": "VFX",
        "wer_w": 0.0,
-       "expr": 7.707,
-       "score": -0.173
+       "expr": 4.45,
+       "score": -0.102
       },
       {
        "tts": "V F X !",
        "sr": 44100,
-       "dur": 0.691,
-       "asr_p": "VF",
-       "wer_p": 1.0,
-       "asr_w": "VF",
-       "wer_w": 1.0,
-       "expr": 2.391,
-       "score": 2.973
+       "dur": 0.658,
+       "asr_p": "V and",
+       "wer_p": 2.0,
+       "asr_w": "V.S.",
+       "wer_w": 2.0,
+       "expr": 6.555,
+       "score": 3.885
       }
      ],
      "chosen_take": 10
     }
    ],
-   "end": 5.873
+   "end": 6.952
   },
   {
    "id": "L4",
    "scene": "scroll",
    "tone": "cœur du message, énergique",
-   "start": 6.073,
+   "start": 7.152,
    "chunks": [
     {
      "id": "L4",
      "text": "On transforme tes idées en images qui arrêtent le scroll.",
      "tts": "On transforme tes idées en images qui arrêtent le scroll !",
-     "start": 6.073,
-     "end": 8.47,
+     "start": 7.152,
+     "end": 10.211,
      "speech": [
-      6.085,
-      8.457
+      7.164,
+      10.199
      ],
      "words": [
       [
        "On",
-       6.085
+       7.164
       ],
       [
        "transforme",
-       6.125
+       7.272
       ],
       [
        "tes",
-       6.593
+       7.832
       ],
       [
        "idées",
-       6.833
+       8.072
       ],
       [
        "en",
-       7.073
+       8.392
       ],
       [
        "images",
-       7.313
+       8.632
       ],
       [
        "qui",
-       7.553
+       8.952
       ],
       [
        "arrêtent",
-       7.713
+       9.112
       ],
       [
        "le",
-       8.033
+       9.512
       ],
       [
        "scroll",
-       8.113
+       9.672
       ]
      ],
      "aligned_words": 10,
@@ -847,697 +869,617 @@
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll !",
        "sr": 44100,
-       "dur": 2.501,
+       "dur": 3.103,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "expr": 4.184,
-       "score": -0.1
+       "expr": 8.101,
+       "score": -0.198
       },
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll !",
        "sr": 44100,
-       "dur": 2.563,
+       "dur": 3.005,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "expr": 6.81,
-       "score": -0.159
+       "expr": 7.377,
+       "score": -0.18
       },
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll !",
        "sr": 44100,
-       "dur": 2.502,
+       "dur": 3.048,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "expr": 3.767,
-       "score": -0.09
+       "expr": 7.058,
+       "score": -0.176
       },
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll !",
        "sr": 44100,
-       "dur": 2.397,
+       "dur": 3.069,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "expr": 7.019,
+       "expr": 7.569,
+       "score": -0.188
+      },
+      {
+       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
+       "sr": 44100,
+       "dur": 2.981,
+       "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_p": 0.0,
+       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_w": 0.0,
+       "expr": 7.999,
+       "score": -0.193
+      },
+      {
+       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
+       "sr": 44100,
+       "dur": 3.059,
+       "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_p": 0.0,
+       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_w": 0.0,
+       "expr": 8.724,
+       "score": -0.218
+      },
+      {
+       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
+       "sr": 44100,
+       "dur": 3.14,
+       "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_p": 0.0,
+       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_w": 0.0,
+       "expr": 7.183,
+       "score": -0.171
+      },
+      {
+       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
+       "sr": 44100,
+       "dur": 3.081,
+       "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_p": 0.0,
+       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_w": 0.0,
+       "expr": 7.056,
+       "score": -0.174
+      },
+      {
+       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
+       "sr": 44100,
+       "dur": 3.01,
+       "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_p": 0.0,
+       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_w": 0.0,
+       "expr": 7.02,
+       "score": -0.171
+      },
+      {
+       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
+       "sr": 44100,
+       "dur": 2.906,
+       "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_p": 0.0,
+       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_w": 0.0,
+       "expr": 6.021,
+       "score": -0.136
+      },
+      {
+       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
+       "sr": 44100,
+       "dur": 3.028,
+       "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_p": 0.0,
+       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_w": 0.0,
+       "expr": 8.063,
+       "score": -0.199
+      },
+      {
+       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
+       "sr": 44100,
+       "dur": 3.064,
+       "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_p": 0.0,
+       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
+       "wer_w": 0.0,
+       "expr": 6.737,
        "score": -0.167
-      },
-      {
-       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
-       "sr": 44100,
-       "dur": 2.49,
-       "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
-       "wer_p": 0.0,
-       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
-       "wer_w": 0.0,
-       "expr": 3.888,
-       "score": -0.094
-      },
-      {
-       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
-       "sr": 44100,
-       "dur": 2.371,
-       "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
-       "wer_p": 0.0,
-       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
-       "wer_w": 0.0,
-       "expr": 3.266,
-       "score": -0.07
-      },
-      {
-       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
-       "sr": 44100,
-       "dur": 2.431,
-       "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
-       "wer_p": 0.0,
-       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
-       "wer_w": 0.0,
-       "expr": 4.847,
-       "score": -0.117
-      },
-      {
-       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
-       "sr": 44100,
-       "dur": 2.443,
-       "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
-       "wer_p": 0.0,
-       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
-       "wer_w": 0.0,
-       "expr": 5.123,
-       "score": -0.125
-      },
-      {
-       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
-       "sr": 44100,
-       "dur": 2.604,
-       "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
-       "wer_p": 0.0,
-       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
-       "wer_w": 0.0,
-       "expr": 6.887,
-       "score": -0.155
-      },
-      {
-       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
-       "sr": 44100,
-       "dur": 2.513,
-       "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
-       "wer_p": 0.0,
-       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
-       "wer_w": 0.0,
-       "expr": 3.582,
-       "score": -0.084
-      },
-      {
-       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
-       "sr": 44100,
-       "dur": 2.402,
-       "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
-       "wer_p": 0.0,
-       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
-       "wer_w": 0.0,
-       "expr": 5.086,
-       "score": -0.119
-      },
-      {
-       "tts": "On transforme tes idées en images qui arrêtent le scroll !",
-       "sr": 44100,
-       "dur": 2.433,
-       "asr_p": "On transforme ces idées en images qui arrêtent le scroll.",
-       "wer_p": 0.1,
-       "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
-       "wer_w": 0.0,
-       "expr": 3.813,
-       "score": 0.109
       }
      ],
-     "chosen_take": 3
+     "chosen_take": 5
     }
    ],
-   "end": 8.47
+   "end": 10.211
   },
   {
    "id": "L5",
    "scene": "reveal",
    "tone": "plus posé, signature",
-   "start": 9.37,
+   "start": 11.111,
    "chunks": [
     {
      "id": "L5",
      "text": "Ça, c'est AP Design.",
-     "tts": "Ça, c'est ah pé Design !",
-     "start": 9.37,
-     "end": 10.473,
+     "tts": "Ça, c'est à-pé Design !",
+     "start": 11.111,
+     "end": 12.489,
      "speech": [
-      9.382,
-      10.461
+      11.123,
+      12.477
      ],
      "words": [
       [
        "Ça",
-       9.382
+       11.231
       ],
       [
        "c'est",
-       9.422
+       11.411
       ],
       [
        "AP",
-       9.57
+       11.811
       ],
       [
        "Design",
-       10.05
+       12.051
       ]
      ],
      "aligned_words": 4,
-     "asr_on_raw": "Ça c'est Ape Design.",
+     "asr_on_raw": "Ça c'est à P design.",
      "native_sr": 44100,
      "takes": [
       {
-       "tts": "Ça, c'est A-P Design !",
-       "sr": 44100,
-       "dur": 1.022,
-       "asr_p": "Sass a Pizzain.",
-       "wer_p": 1.0,
-       "asr_w": "Ça c'est à pédisain",
-       "wer_w": 0.5,
-       "expr": 3.736,
-       "score": 2.426
-      },
-      {
-       "tts": "Ça, c'est à-pé Design !",
-       "sr": 44100,
-       "dur": 0.96,
-       "asr_p": "Sapp design.",
-       "wer_p": 0.75,
-       "asr_w": "S'assepille des inges.",
-       "wer_w": 1.0,
-       "expr": 6.367,
-       "score": 2.378
-      },
-      {
-       "tts": "Ça, c'est A P Design !",
-       "sr": 44100,
-       "dur": 1.041,
-       "asr_p": "Sassepi design.",
-       "wer_p": 0.75,
-       "asr_w": "C'est un bon design.",
-       "wer_w": 0.75,
-       "expr": 3.381,
-       "score": 2.18
-      },
-      {
        "tts": "Ça, c'est ah pé Design !",
        "sr": 44100,
-       "dur": 1.103,
-       "asr_p": "Ça c'est Ape Design.",
-       "wer_p": 0.25,
-       "asr_w": "Ça c'est à peu design.",
-       "wer_w": 0.5,
-       "expr": 11.855,
-       "score": 0.706
-      },
-      {
-       "tts": "Ça, c'est A.P. Design !",
-       "sr": 44100,
-       "dur": 1.172,
-       "asr_p": "Sassia P design.",
+       "dur": 1.192,
+       "asr_p": "Sa c'a pay design.",
        "wer_p": 0.75,
-       "asr_w": "Ça c'est Happy Design.",
+       "asr_w": "Ça c'est Appet Design.",
        "wer_w": 0.25,
-       "expr": 8.911,
-       "score": 1.549
-      },
-      {
-       "tts": "Ça, c'est A-P Design.",
-       "sr": 44100,
-       "dur": 0.948,
-       "asr_p": "Sassia P design.",
-       "wer_p": 0.75,
-       "asr_w": "S'assez à pays design.",
-       "wer_w": 0.75,
-       "expr": 3.518,
-       "score": 2.202
-      },
-      {
-       "tts": "Ça, c'est à-pé Design.",
-       "sr": 44100,
-       "dur": 1.033,
-       "asr_p": "Sassep design.",
-       "wer_p": 0.75,
-       "asr_w": "Sa cephe design.",
-       "wer_w": 0.75,
-       "expr": 1.972,
-       "score": 2.218
-      },
-      {
-       "tts": "Ça, c'est A P Design.",
-       "sr": 44100,
-       "dur": 1.0,
-       "asr_p": "Soy.",
-       "wer_p": 1.0,
-       "asr_w": "Ça c'est un peu design.",
-       "wer_w": 0.5,
-       "expr": 2.051,
-       "score": 2.474
-      },
-      {
-       "tts": "Ça, c'est ah pé Design.",
-       "sr": 44100,
-       "dur": 1.057,
-       "asr_p": "Set up a design.",
-       "wer_p": 0.75,
-       "asr_w": "Ça c'est un peu design.",
-       "wer_w": 0.5,
-       "expr": 3.136,
-       "score": 1.932
-      },
-      {
-       "tts": "Ça, c'est A.P. Design.",
-       "sr": 44100,
-       "dur": 1.106,
-       "asr_p": "Ça c'est un design.",
-       "wer_p": 0.25,
-       "asr_w": "S'assez à peu-d'",
-       "wer_w": 1.0,
-       "expr": 6.967,
-       "score": 1.329
+       "expr": 8.679,
+       "score": 1.557
       },
       {
        "tts": "Ça, c'est A-P Design !",
        "sr": 44100,
-       "dur": 1.222,
-       "asr_p": "",
-       "wer_p": 1.0,
-       "asr_w": "Ça c'est un peu de design.",
-       "wer_w": 0.75,
-       "expr": 2.489,
-       "score": 2.723
+       "dur": 1.244,
+       "asr_p": "Sassia P design",
+       "wer_p": 0.75,
+       "asr_w": "S'est-ce que c'est un design",
+       "wer_w": 1.0,
+       "expr": 2.858,
+       "score": 2.44
       },
       {
        "tts": "Ça, c'est à-pé Design !",
        "sr": 44100,
-       "dur": 1.237,
-       "asr_p": "",
-       "wer_p": 1.0,
-       "asr_w": "Ça c'est un peu de design.",
-       "wer_w": 0.75,
-       "expr": 3.768,
-       "score": 2.695
-      },
-      {
-       "tts": "Ça, c'est A P Design !",
-       "sr": 44100,
-       "dur": 1.099,
-       "asr_p": "So it's a P design.",
-       "wer_p": 1.0,
-       "asr_w": "C'est un design.",
+       "dur": 1.278,
+       "asr_p": "Ça c'est à P design.",
+       "wer_p": 0.0,
+       "asr_w": "Ça c'est apésigné.",
        "wer_w": 0.5,
-       "expr": 4.131,
-       "score": 2.398
+       "expr": 6.719,
+       "score": 0.336
       },
       {
        "tts": "Ça, c'est ah pé Design !",
        "sr": 44100,
-       "dur": 1.09,
-       "asr_p": "Ça c'est un peu design.",
+       "dur": 1.323,
+       "asr_p": "Ça c'est à P design.",
+       "wer_p": 0.0,
+       "asr_w": "Ça c'est à peu de design.",
+       "wer_w": 0.75,
+       "expr": 4.739,
+       "score": 0.638
+      },
+      {
+       "tts": "Ça, c'est A-P Design !",
+       "sr": 44100,
+       "dur": 1.299,
+       "asr_p": "Ça c'y design.",
        "wer_p": 0.5,
-       "asr_w": "Ça s'est appelé «Design».",
-       "wer_w": 0.5,
-       "expr": 6.032,
-       "score": 1.35
+       "asr_w": "Ça c'est Appy Design.",
+       "wer_w": 0.25,
+       "expr": 10.103,
+       "score": 0.999
       },
       {
-       "tts": "Ça, c'est A.P. Design !",
+       "tts": "Ça, c'est à-pé Design !",
        "sr": 44100,
-       "dur": 1.179,
-       "asr_p": "Ça c'est un pizza.",
-       "wer_p": 0.5,
-       "asr_w": "Ça c'est un petit design.",
-       "wer_w": 0.5,
-       "expr": 2.298,
-       "score": 1.466
-      },
-      {
-       "tts": "Ça, c'est A-P Design.",
-       "sr": 44100,
-       "dur": 1.039,
-       "asr_p": "Sass a pay design.",
-       "wer_p": 0.75,
-       "asr_w": "Ça c'est AP Design.",
-       "wer_w": 0.0,
-       "expr": 2.589,
-       "score": 1.45
-      },
-      {
-       "tts": "Ça, c'est à-pé Design.",
-       "sr": 44100,
-       "dur": 1.048,
-       "asr_p": "Ça c'est appel design.",
+       "dur": 1.442,
+       "asr_p": "Ça c'est Ape Design?",
        "wer_p": 0.25,
-       "asr_w": "S'assoit à peu design.",
+       "asr_w": "Sa CEP Design",
        "wer_w": 0.75,
-       "expr": 2.141,
-       "score": 1.209
+       "expr": 7.791,
+       "score": 1.09
       },
       {
-       "tts": "Ça, c'est A P Design.",
+       "tts": "Ça, c'est ah pé Design !",
        "sr": 44100,
-       "dur": 1.107,
-       "asr_p": "Ça c'est un P design.",
-       "wer_p": 0.5,
-       "asr_w": "S'assister à Pizzaing.",
-       "wer_w": 1.0,
-       "expr": 5.045,
-       "score": 1.877
-      },
-      {
-       "tts": "Ça, c'est ah pé Design.",
-       "sr": 44100,
-       "dur": 1.11,
-       "asr_p": "Sussap design.",
+       "dur": 1.218,
+       "asr_p": "Sasta pay design",
        "wer_p": 0.75,
-       "asr_w": "S'assez à peu design.",
-       "wer_w": 0.75,
-       "expr": 3.173,
-       "score": 2.175
+       "asr_w": "S'est apprécié à la construction",
+       "wer_w": 1.25,
+       "expr": 2.312,
+       "score": 2.71
       },
       {
-       "tts": "Ça, c'est A.P. Design.",
+       "tts": "Ça, c'est A-P Design !",
        "sr": 44100,
-       "dur": 1.305,
-       "asr_p": "Sass a bid sign.",
-       "wer_p": 1.0,
-       "asr_w": "S'assez à pizzaing.",
+       "dur": 1.238,
+       "asr_p": "Sassi Api Design",
+       "wer_p": 0.75,
+       "asr_w": "Cessez à p-design",
+       "wer_w": 0.5,
+       "expr": 3.452,
+       "score": 1.926
+      },
+      {
+       "tts": "Ça, c'est à-pé Design !",
+       "sr": 44100,
+       "dur": 1.401,
+       "asr_p": "Sa c'a pay design.",
+       "wer_p": 0.75,
+       "asr_w": "Ça c'est appétit design.",
+       "wer_w": 0.25,
+       "expr": 6.879,
+       "score": 1.603
+      },
+      {
+       "tts": "Ça, c'est ah pé Design !",
+       "sr": 44100,
+       "dur": 1.38,
+       "asr_p": "Sassyapi design",
+       "wer_p": 0.75,
+       "asr_w": "S'assez à pédésign",
        "wer_w": 1.0,
-       "expr": 2.192,
-       "score": 3.003
+       "expr": 5.981,
+       "score": 2.371
+      },
+      {
+       "tts": "Ça, c'est A-P Design !",
+       "sr": 44100,
+       "dur": 1.404,
+       "asr_p": "Sasyapi design",
+       "wer_p": 0.75,
+       "asr_w": "S'est ce qui appuie le design?",
+       "wer_w": 1.25,
+       "expr": 4.733,
+       "score": 2.657
+      },
+      {
+       "tts": "Ça, c'est à-pé Design !",
+       "sr": 44100,
+       "dur": 1.343,
+       "asr_p": "Saspe Design",
+       "wer_p": 0.75,
+       "asr_w": "SAP Design",
+       "wer_w": 0.75,
+       "expr": 8.54,
+       "score": 2.048
+      },
+      {
+       "tts": "Ça, c'est ah pé Design !",
+       "sr": 44100,
+       "dur": 1.229,
+       "asr_p": "C'est AP design.",
+       "wer_p": 0.25,
+       "asr_w": "CCAP Design",
+       "wer_w": 0.75,
+       "expr": 5.769,
+       "score": 1.121
+      },
+      {
+       "tts": "Ça, c'est A-P Design !",
+       "sr": 44100,
+       "dur": 1.397,
+       "asr_p": "Sasy Api Design",
+       "wer_p": 0.75,
+       "asr_w": "S'assez à p-designes.",
+       "wer_w": 0.75,
+       "expr": 5.274,
+       "score": 2.142
+      },
+      {
+       "tts": "Ça, c'est à-pé Design !",
+       "sr": 44100,
+       "dur": 1.425,
+       "asr_p": "Sass AP design",
+       "wer_p": 0.5,
+       "asr_w": "Ça c'est à peu désigne?",
+       "wer_w": 0.75,
+       "expr": 4.827,
+       "score": 1.66
+      },
+      {
+       "tts": "Ça, c'est ah pé Design !",
+       "sr": 44100,
+       "dur": 1.287,
+       "asr_p": "Sappy Design",
+       "wer_p": 0.75,
+       "asr_w": "S'est-ce que l'appui est",
+       "wer_w": 1.25,
+       "expr": 5.754,
+       "score": 2.608
+      },
+      {
+       "tts": "Ça, c'est A-P Design !",
+       "sr": 44100,
+       "dur": 1.275,
+       "asr_p": "Sesapi design",
+       "wer_p": 0.75,
+       "asr_w": "Cessez App Design",
+       "wer_w": 0.75,
+       "expr": 11.438,
+       "score": 1.968
+      },
+      {
+       "tts": "Ça, c'est à-pé Design !",
+       "sr": 44100,
+       "dur": 1.223,
+       "asr_p": "Sessia P design",
+       "wer_p": 0.75,
+       "asr_w": "SAP Design",
+       "wer_w": 0.75,
+       "expr": 3.078,
+       "score": 2.189
       }
      ],
-     "chosen_take": 3
+     "chosen_take": 2
     }
    ],
-   "end": 10.473
+   "end": 12.489
   },
   {
    "id": "L6",
    "scene": "cta",
    "tone": "complice, énergique",
-   "start": 10.873,
+   "start": 12.889,
    "chunks": [
     {
      "id": "L6a",
-     "text": "Tu veux la prochaine ?",
-     "tts": "Tu veux la prochaine ?",
-     "start": 10.873,
-     "end": 11.866,
+     "text": "Abonne-toi pour ne rien rater,",
+     "tts": "Abonne-toi pour ne rien rater !",
+     "start": 12.889,
+     "end": 14.47,
      "speech": [
-      10.885,
-      11.855
+      12.901,
+      14.458
      ],
      "words": [
       [
-       "Tu",
-       10.885
+       "Abonne-toi",
+       12.901
       ],
       [
-       "veux",
-       10.925
+       "pour",
+       13.489
       ],
       [
-       "la",
-       11.153
+       "ne",
+       13.649
       ],
       [
-       "prochaine",
-       11.313
+       "rien",
+       13.809
+      ],
+      [
+       "rater",
+       14.049
       ]
      ],
-     "aligned_words": 4,
-     "asr_on_raw": "Tu veux la prochaine?",
+     "aligned_words": 5,
+     "asr_on_raw": "Abonne-toi pour ne rien rater.",
      "native_sr": 44100,
      "takes": [
       {
-       "tts": "Tu veux la prochaine ?",
+       "tts": "Abonne-toi pour ne rien rater !",
        "sr": 44100,
-       "dur": 0.992,
-       "asr_p": "Tu veux la prochaine?",
+       "dur": 1.679,
+       "asr_p": "Abonne-toi pour ne rien rater.",
        "wer_p": 0.0,
-       "asr_w": "Tu veux la prochaine ?",
+       "asr_w": "Abonne-toi pour ne rien rater.",
        "wer_w": 0.0,
-       "expr": 9.514,
-       "score": -0.23
+       "expr": 6.669,
+       "score": -0.16
       },
       {
-       "tts": "Tu veux la prochaine ?",
+       "tts": "Abonne-toi pour ne rien rater !",
        "sr": 44100,
-       "dur": 0.993,
-       "asr_p": "Tu veux la prochaine?",
+       "dur": 1.604,
+       "asr_p": "Abonne-toi pour ne rien rater.",
        "wer_p": 0.0,
-       "asr_w": "Tu veux la prochaine ?",
+       "asr_w": "Abonne-toi pour ne rien rater.",
        "wer_w": 0.0,
-       "expr": 11.08,
-       "score": -0.269
+       "expr": 7.047,
+       "score": -0.169
       },
       {
-       "tts": "Tu veux la prochaine ?",
+       "tts": "Abonne-toi pour ne rien rater !",
        "sr": 44100,
-       "dur": 1.138,
-       "asr_p": "Tu veux la prochaine?",
+       "dur": 1.688,
+       "asr_p": "Abonne-toi pour ne rien rater.",
        "wer_p": 0.0,
-       "asr_w": "Tu veux la prochaine ?",
+       "asr_w": "Abonne-toi pour ne rien rater.",
        "wer_w": 0.0,
-       "expr": 3.765,
-       "score": -0.041
+       "expr": 6.733,
+       "score": -0.16
       },
       {
-       "tts": "Tu veux la prochaine ?",
+       "tts": "Abonne-toi pour ne rien rater !",
        "sr": 44100,
-       "dur": 0.944,
-       "asr_p": "Tu veux la prochaine.",
+       "dur": 1.537,
+       "asr_p": "Abonne-toi pour ne rien rater.",
        "wer_p": 0.0,
-       "asr_w": "Tu veux la prochaine.",
+       "asr_w": "Abonne-toi pour ne rien rater.",
        "wer_w": 0.0,
-       "expr": 2.689,
-       "score": -0.06
+       "expr": 6.655,
+       "score": -0.147
       },
       {
-       "tts": "Tu veux la prochaine ?",
+       "tts": "Abonne-toi pour ne rien rater !",
        "sr": 44100,
-       "dur": 0.787,
-       "asr_p": "Tu veux la prochaine.",
+       "dur": 1.582,
+       "asr_p": "Abonne-toi pour ne rien rater.",
        "wer_p": 0.0,
-       "asr_w": "Tu veux la prochaine.",
+       "asr_w": "Abonne-toi pour ne rien rater.",
        "wer_w": 0.0,
-       "expr": 3.965,
-       "score": -0.043
+       "expr": 8.088,
+       "score": -0.191
       },
       {
-       "tts": "Tu veux la prochaine ?",
+       "tts": "Abonne-toi pour ne rien rater !",
        "sr": 44100,
-       "dur": 0.793,
-       "asr_p": "Tu veux la prochaine?",
+       "dur": 1.751,
+       "asr_p": "Abonne-toi pour ne rien rater.",
        "wer_p": 0.0,
-       "asr_w": "Tu veux la prochaine ?",
+       "asr_w": "Abonne-toi pour ne rien rater.",
        "wer_w": 0.0,
-       "expr": 6.243,
-       "score": -0.102
+       "expr": 7.825,
+       "score": -0.176
       }
      ],
-     "chosen_take": 1
+     "chosen_take": 4
     },
     {
      "id": "L6b",
-     "text": "Suis le compte.",
-     "tts": "Suis le compte !",
-     "start": 12.006,
-     "end": 12.698,
+     "text": "et partage la vidéo.",
+     "tts": "Et partage la vidéo !",
+     "start": 14.57,
+     "end": 15.6,
      "speech": [
-      12.018,
-      12.685
+      14.582,
+      15.588
      ],
      "words": [
       [
-       "Suis",
-       12.018
+       "et",
+       14.582
       ],
       [
-       "le",
-       12.126
+       "partage",
+       14.622
       ],
       [
-       "compte",
-       12.286
+       "la",
+       15.17
+      ],
+      [
+       "vidéo",
+       15.33
       ]
      ],
-     "aligned_words": 3,
-     "asr_on_raw": "Tu le compte.",
+     "aligned_words": 4,
+     "asr_on_raw": "Et partage la vidéo.",
      "native_sr": 44100,
      "takes": [
       {
-       "tts": "Suis le compte !",
+       "tts": "Et partage la vidéo !",
        "sr": 44100,
-       "dur": 0.654,
-       "asr_p": "S le compte.",
-       "wer_p": 0.333,
-       "asr_w": "Suis le compte.",
+       "dur": 1.188,
+       "asr_p": "Et partage la vidéo.",
+       "wer_p": 0.0,
+       "asr_w": "et partage la vidéo.",
        "wer_w": 0.0,
-       "expr": 3.649,
-       "score": 0.597
+       "expr": 8.193,
+       "score": -0.204
       },
       {
-       "tts": "Suis le compte !",
+       "tts": "Et partage la vidéo !",
        "sr": 44100,
-       "dur": 0.692,
-       "asr_p": "Tu le compte.",
-       "wer_p": 0.333,
-       "asr_w": "Suis-le compte.",
+       "dur": 1.317,
+       "asr_p": "Et partage la vidéo.",
+       "wer_p": 0.0,
+       "asr_w": "et partage la vidéo.",
        "wer_w": 0.0,
-       "expr": 9.904,
-       "score": 0.425
+       "expr": 9.229,
+       "score": -0.197
       },
       {
-       "tts": "Suis le compte !",
+       "tts": "Et partage la vidéo !",
        "sr": 44100,
-       "dur": 0.712,
-       "asr_p": "Tu le compte?",
-       "wer_p": 0.333,
-       "asr_w": "Suis-le compte.",
+       "dur": 1.183,
+       "asr_p": "Et partage la vidéo.",
+       "wer_p": 0.0,
+       "asr_w": "et partage la vidéo.",
        "wer_w": 0.0,
-       "expr": 4.287,
-       "score": 0.562
+       "expr": 2.628,
+       "score": -0.065
       },
       {
-       "tts": "Suis le compte !",
+       "tts": "Et partage la vidéo !",
        "sr": 44100,
-       "dur": 0.74,
-       "asr_p": "Si le compte.",
-       "wer_p": 0.333,
-       "asr_w": "Suis le compte.",
+       "dur": 1.216,
+       "asr_p": "et partage la vidéo.",
+       "wer_p": 0.0,
+       "asr_w": "et partage la vidéo.",
        "wer_w": 0.0,
-       "expr": 6.387,
-       "score": 0.522
+       "expr": 7.487,
+       "score": -0.179
       },
       {
-       "tts": "Suis le compte !",
+       "tts": "Et partage la vidéo !",
        "sr": 44100,
-       "dur": 0.708,
-       "asr_p": "Si le compte.",
-       "wer_p": 0.333,
-       "asr_w": "Suis le compte.",
+       "dur": 1.119,
+       "asr_p": "Et partage la vidéo.",
+       "wer_p": 0.0,
+       "asr_w": "et partage la vidéo.",
        "wer_w": 0.0,
-       "expr": 3.103,
-       "score": 0.59
+       "expr": 5.039,
+       "score": -0.109
       },
       {
-       "tts": "Suis le compte !",
+       "tts": "Et partage la vidéo !",
        "sr": 44100,
-       "dur": 0.721,
-       "asr_p": "Tu le compte?",
-       "wer_p": 0.333,
-       "asr_w": "Suis-le compte.",
+       "dur": 1.03,
+       "asr_p": "Et partage la vidéo.",
+       "wer_p": 0.0,
+       "asr_w": "et partage la vidéo.",
        "wer_w": 0.0,
-       "expr": 8.237,
-       "score": 0.467
-      },
-      {
-       "tts": "Suis le compte !",
-       "sr": 44100,
-       "dur": 0.7,
-       "asr_p": "Si le compte.",
-       "wer_p": 0.333,
-       "asr_w": "Suis le compte.",
-       "wer_w": 0.0,
-       "expr": 6.265,
-       "score": 0.512
-      },
-      {
-       "tts": "Suis le compte !",
-       "sr": 44100,
-       "dur": 0.681,
-       "asr_p": "Tu le compte?",
-       "wer_p": 0.333,
-       "asr_w": "Suis-le compte.",
-       "wer_w": 0.0,
-       "expr": 7.021,
-       "score": 0.501
-      },
-      {
-       "tts": "Suis le compte !",
-       "sr": 44100,
-       "dur": 0.722,
-       "asr_p": "Si le compte.",
-       "wer_p": 0.333,
-       "asr_w": "Suis-le compte.",
-       "wer_w": 0.0,
-       "expr": 3.176,
-       "score": 0.594
-      },
-      {
-       "tts": "Suis le compte !",
-       "sr": 44100,
-       "dur": 0.855,
-       "asr_p": "Si le compte?",
-       "wer_p": 0.333,
-       "asr_w": "Suis-le compte.",
-       "wer_w": 0.0,
-       "expr": 5.201,
-       "score": 0.6
-      },
-      {
-       "tts": "Suis le compte !",
-       "sr": 44100,
-       "dur": 0.661,
-       "asr_p": "Tu le compte.",
-       "wer_p": 0.333,
-       "asr_w": "Suis-le compte.",
-       "wer_w": 0.0,
-       "expr": 6.53,
-       "score": 0.522
-      },
-      {
-       "tts": "Suis le compte !",
-       "sr": 44100,
-       "dur": 0.703,
-       "asr_p": "Si le compte.",
-       "wer_p": 0.333,
-       "asr_w": "Suis-le compte.",
-       "wer_w": 0.0,
-       "expr": 5.312,
-       "score": 0.535
+       "expr": 11.167,
+       "score": -0.24
       }
      ],
-     "chosen_take": 1
+     "chosen_take": 5
     },
     {
      "id": "L6c",
      "text": "Et pour collaborer…",
      "tts": "Et pour collaborer…",
-     "start": 12.918,
-     "end": 13.981,
+     "start": 15.82,
+     "end": 17.049,
      "speech": [
-      12.93,
-      13.969
+      15.832,
+      17.037
      ],
      "words": [
       [
        "Et",
-       12.93
+       15.832
       ],
       [
        "pour",
-       12.97
+       15.872
       ],
       [
        "collaborer",
-       13.198
+       16.18
       ]
      ],
      "aligned_words": 3,
@@ -1547,230 +1489,230 @@
       {
        "tts": "Et pour collaborer…",
        "sr": 44100,
-       "dur": 1.063,
-       "asr_p": "Et pour collaborer.",
+       "dur": 1.467,
+       "asr_p": "Et pour collaborer",
        "wer_p": 0.0,
-       "asr_w": "et pour collaborer.",
+       "asr_w": "Et pour collaborer,",
        "wer_w": 0.0,
-       "expr": 6.587,
-       "score": -0.158
+       "expr": 3.997,
+       "score": -0.078
       },
       {
        "tts": "Et pour collaborer…",
        "sr": 44100,
-       "dur": 1.008,
+       "dur": 1.421,
+       "asr_p": "Et pour collaborer",
+       "wer_p": 0.0,
+       "asr_w": "Et pour collaborer,",
+       "wer_w": 0.0,
+       "expr": 3.591,
+       "score": -0.078
+      },
+      {
+       "tts": "Et pour collaborer…",
+       "sr": 44100,
+       "dur": 1.258,
        "asr_p": "Et pour collaborer",
        "wer_p": 0.0,
        "asr_w": "et pour collaborer.",
        "wer_w": 0.0,
-       "expr": 2.194,
-       "score": -0.045
+       "expr": 3.569,
+       "score": -0.065
       },
       {
        "tts": "Et pour collaborer…",
        "sr": 44100,
-       "dur": 1.019,
-       "asr_p": "Et pour collaborer",
-       "wer_p": 0.0,
-       "asr_w": "et pour collaborer",
-       "wer_w": 0.0,
-       "expr": 4.373,
-       "score": -0.103
-      },
-      {
-       "tts": "Et pour collaborer…",
-       "sr": 44100,
-       "dur": 1.116,
+       "dur": 1.229,
        "asr_p": "Et pour collaborer.",
        "wer_p": 0.0,
        "asr_w": "et pour collaborer.",
        "wer_w": 0.0,
-       "expr": 3.789,
-       "score": -0.073
+       "expr": 9.135,
+       "score": -0.198
       },
       {
        "tts": "Et pour collaborer…",
        "sr": 44100,
-       "dur": 1.007,
+       "dur": 1.356,
        "asr_p": "Et pour collaborer.",
        "wer_p": 0.0,
        "asr_w": "et pour collaborer.",
        "wer_w": 0.0,
-       "expr": 5.257,
-       "score": -0.122
+       "expr": 7.798,
+       "score": -0.193
       },
       {
        "tts": "Et pour collaborer…",
        "sr": 44100,
-       "dur": 1.141,
-       "asr_p": "Et pour collaborer",
+       "dur": 1.376,
+       "asr_p": "Et pour collaborer,",
        "wer_p": 0.0,
-       "asr_w": "et pour collaborer.",
+       "asr_w": "Et pour collaborer,",
        "wer_w": 0.0,
-       "expr": 3.463,
-       "score": -0.058
+       "expr": 6.799,
+       "score": -0.168
       }
      ],
-     "chosen_take": 0
+     "chosen_take": 3
     },
     {
      "id": "L6d",
      "text": "DM.",
-     "tts": "dé-ème !",
-     "start": 14.141,
-     "end": 14.885,
+     "tts": "D M !",
+     "start": 17.209,
+     "end": 17.85,
      "speech": [
-      14.153,
-      14.874
+      17.221,
+      17.838
      ],
      "words": [
       [
        "DM",
-       14.153
+       17.489
       ]
      ],
      "aligned_words": 1,
-     "asr_on_raw": "DM",
+     "asr_on_raw": "D M",
      "native_sr": 44100,
      "takes": [
       {
        "tts": "dé-ème !",
        "sr": 44100,
-       "dur": 0.744,
-       "asr_p": "DM",
+       "dur": 0.676,
+       "asr_p": "Dm",
        "wer_p": 0.0,
        "asr_w": "DM",
        "wer_w": 0.0,
-       "expr": 10.925,
-       "score": -0.221
+       "expr": 5.451,
+       "score": -0.114
       },
       {
        "tts": "D M !",
        "sr": 44100,
-       "dur": 0.605,
-       "asr_p": "DM",
-       "wer_p": 0.0,
-       "asr_w": "DM",
-       "wer_w": 0.0,
-       "expr": 4.318,
-       "score": -0.094
-      },
-      {
-       "tts": "dé-ème !",
-       "sr": 44100,
-       "dur": 0.624,
+       "dur": 0.637,
        "asr_p": "D. M.",
        "wer_p": 2.0,
        "asr_w": "DM",
        "wer_w": 0.0,
-       "expr": 5.488,
-       "score": 3.867
+       "expr": 5.665,
+       "score": -0.103
+      },
+      {
+       "tts": "dé-ème !",
+       "sr": 44100,
+       "dur": 0.668,
+       "asr_p": "Dm",
+       "wer_p": 0.0,
+       "asr_w": "DM",
+       "wer_w": 0.0,
+       "expr": 4.98,
+       "score": -0.098
       },
       {
        "tts": "D M !",
        "sr": 44100,
-       "dur": 0.636,
+       "dur": 0.578,
        "asr_p": "DM",
        "wer_p": 0.0,
        "asr_w": "DM",
        "wer_w": 0.0,
-       "expr": 2.552,
+       "expr": 3.602,
+       "score": -0.027
+      },
+      {
+       "tts": "dé-ème !",
+       "sr": 44100,
+       "dur": 0.783,
+       "asr_p": "Diem",
+       "wer_p": 1.0,
+       "asr_w": "DM",
+       "wer_w": 0.0,
+       "expr": 3.454,
+       "score": -0.065
+      },
+      {
+       "tts": "D M !",
+       "sr": 44100,
+       "dur": 0.641,
+       "asr_p": "D M",
+       "wer_p": 0.0,
+       "asr_w": "D.M.",
+       "wer_w": 0.0,
+       "expr": 10.469,
+       "score": -0.225
+      },
+      {
+       "tts": "dé-ème !",
+       "sr": 44100,
+       "dur": 0.845,
+       "asr_p": "DM",
+       "wer_p": 0.0,
+       "asr_w": "DM",
+       "wer_w": 0.0,
+       "expr": 8.428,
+       "score": -0.164
+      },
+      {
+       "tts": "D M !",
+       "sr": 44100,
+       "dur": 0.704,
+       "asr_p": "D M",
+       "wer_p": 0.0,
+       "asr_w": "Dm",
+       "wer_w": 0.0,
+       "expr": 5.513,
+       "score": -0.126
+      },
+      {
+       "tts": "dé-ème !",
+       "sr": 44100,
+       "dur": 0.839,
+       "asr_p": "Dim",
+       "wer_p": 1.0,
+       "asr_w": "DM",
+       "wer_w": 0.0,
+       "expr": 3.156,
+       "score": -0.035
+      },
+      {
+       "tts": "D M !",
+       "sr": 44100,
+       "dur": 0.759,
+       "asr_p": "D. M.",
+       "wer_p": 2.0,
+       "asr_w": "DM",
+       "wer_w": 0.0,
+       "expr": 1.89,
+       "score": -0.036
+      },
+      {
+       "tts": "dé-ème !",
+       "sr": 44100,
+       "dur": 0.833,
+       "asr_p": "D. M.",
+       "wer_p": 2.0,
+       "asr_w": "DM",
+       "wer_w": 0.0,
+       "expr": 4.186,
        "score": -0.063
       },
       {
-       "tts": "dé-ème !",
-       "sr": 44100,
-       "dur": 0.637,
-       "asr_p": "DM",
-       "wer_p": 0.0,
-       "asr_w": "DM",
-       "wer_w": 0.0,
-       "expr": 2.736,
-       "score": -0.067
-      },
-      {
        "tts": "D M !",
        "sr": 44100,
-       "dur": 0.533,
-       "asr_p": "DM",
-       "wer_p": 0.0,
-       "asr_w": "DM",
-       "wer_w": 0.0,
-       "expr": 6.223,
-       "score": -0.108
-      },
-      {
-       "tts": "dé-ème !",
-       "sr": 44100,
-       "dur": 0.639,
+       "dur": 0.789,
        "asr_p": "D. M.",
        "wer_p": 2.0,
        "asr_w": "DM",
        "wer_w": 0.0,
-       "expr": 8.926,
-       "score": 3.779
-      },
-      {
-       "tts": "D M !",
-       "sr": 44100,
-       "dur": 0.65,
-       "asr_p": "D. M.",
-       "wer_p": 2.0,
-       "asr_w": "DM",
-       "wer_w": 0.0,
-       "expr": 2.196,
-       "score": 3.953
-      },
-      {
-       "tts": "dé-ème !",
-       "sr": 44100,
-       "dur": 0.631,
-       "asr_p": "D. M.",
-       "wer_p": 2.0,
-       "asr_w": "Damn.",
-       "wer_w": 1.0,
-       "expr": 10.41,
-       "score": 4.741
-      },
-      {
-       "tts": "D M !",
-       "sr": 44100,
-       "dur": 0.599,
-       "asr_p": "DM",
-       "wer_p": 0.0,
-       "asr_w": "DM",
-       "wer_w": 0.0,
-       "expr": 4.942,
-       "score": -0.107
-      },
-      {
-       "tts": "dé-ème !",
-       "sr": 44100,
-       "dur": 0.798,
-       "asr_p": "DM",
-       "wer_p": 0.0,
-       "asr_w": "DM",
-       "wer_w": 0.0,
-       "expr": 1.593,
-       "score": 0.038
-      },
-      {
-       "tts": "D M !",
-       "sr": 44100,
-       "dur": 0.488,
-       "asr_p": "DM",
-       "wer_p": 0.0,
-       "asr_w": "DM",
-       "wer_w": 0.0,
-       "expr": 7.154,
-       "score": -0.11
+       "expr": 4.852,
+       "score": -0.098
       }
      ],
-     "chosen_take": 0
+     "chosen_take": 5
     }
    ],
-   "end": 14.885
+   "end": 17.85
   }
  ],
- "vo_end": 14.885
+ "vo_end": 17.85
 }

@@ -27,8 +27,8 @@ Reel promotionnel vertical pour **AP Design** (motion design • 3D • VFX).
 
 ## Voix off
 
-La voix est masculine, en français. Pour la rendre moins robotique et plus assurée, elle passe sur
-**Supertonic 3** (voix 7), un modèle plus expressif que Piper : F0 ≈ 115 Hz, ~10 demi-tons d'amplitude.
+La voix est féminine, en français, choisie pour se rapprocher de la voix de référence fournie par le client (hauteur ≈ 200 Hz). Elle passe sur
+**Supertonic 3** (voix 0, la plus proche de la référence en hauteur et en timbre).
 
 1. `voice/script.json` contient le texte exact, les respirations et les accents :
    - accents sur « banal », « arrêtent », « scroll », « AP » et « DM » ;
