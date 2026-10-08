@@ -48,8 +48,8 @@ export class Engine {
     };
     this.fxCanvas = mk();
     this.uiCanvas = mk();
-    this.fx = this.fxCanvas.getContext('2d');
-    this.ui = this.uiCanvas.getContext('2d');
+    this.fx = this.fxCanvas.getContext('2d', { willReadFrequently: true });
+    this.ui = this.uiCanvas.getContext('2d', { willReadFrequently: true });
     const tex = (c, srgb) => {
       const t = new THREE.CanvasTexture(c);
       t.colorSpace = srgb ? THREE.SRGBColorSpace : THREE.NoColorSpace;
@@ -74,7 +74,7 @@ export class Engine {
     composer.addPass(this.renderPass);
 
     this.bokeh = new BokehPass(this.scene, this.camera, { focus: 5, aperture: 0.0, maxblur: 0.006 });
-    this.bokeh.enabled = false;
+    this.bokeh.enabled = !!cfg.vfx.dof;
     composer.addPass(this.bokeh);
 
     this.fxPass = new ShaderPass(FXCompositeShader);
@@ -97,6 +97,8 @@ export class Engine {
 
   clear2D() {
     for (const g of [this.fx, this.ui]) {
+      // remise à zéro COMPLÈTE (contenu + pile save/clip) : aucun état ne fuit d'une image à l'autre
+      if (g.reset) g.reset();
       g.setTransform(1, 0, 0, 1, 0, 0);
       g.globalAlpha = 1;
       g.globalCompositeOperation = 'source-over';
@@ -160,7 +162,11 @@ export class Engine {
       bu.aperture.value = post.dof.aperture;
       bu.maxblur.value = post.dof.maxblur ?? 0.006;
     } else {
-      this.bokeh.enabled = false;
+      // NE PAS désactiver la passe : basculer enabled change la parité des tampons du composer
+      // et ressert une image périmée (ancienne transition). Flou nul à la place.
+      this.bokeh.enabled = !!this.cfg.vfx.dof;
+      this.bokeh.uniforms.aperture.value = 0;
+      this.bokeh.uniforms.maxblur.value = 0;
     }
     this.fxTex.needsUpdate = true;
     this.uiTex.needsUpdate = true;

@@ -65,7 +65,7 @@ export async function boot(canvas) {
   // calque de FOND 2D (derrière la 3D) : plan collé à la caméra, texture canvas redessinée à chaque image
   const bgCanvas = document.createElement('canvas');
   bgCanvas.width = cfg.video.width; bgCanvas.height = cfg.video.height;
-  const bgCtx = bgCanvas.getContext('2d');
+  const bgCtx = bgCanvas.getContext('2d', { willReadFrequently: true });
   const bgTex = new THREE.CanvasTexture(bgCanvas);
   bgTex.colorSpace = THREE.SRGBColorSpace;
   const bgMesh = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: bgTex, toneMapped: false, depthWrite: false }));
@@ -100,6 +100,7 @@ export async function boot(canvas) {
     for (const k of ['knot', 'knotWire', 'orb', 'rings', 'logo', 'shards', 'feed']) obj[k].visible = false;
     for (const c of obj.extra.children) c.visible = false;
     props.hideAll();
+    if (bgCtx.reset) bgCtx.reset();
     bgCtx.setTransform(1, 0, 0, 1, 0, 0);
     bgCtx.globalAlpha = 1; bgCtx.globalCompositeOperation = 'source-over'; bgCtx.filter = 'none';
     bgCtx.fillStyle = cfg.colors.bg; bgCtx.fillRect(0, 0, W, H);

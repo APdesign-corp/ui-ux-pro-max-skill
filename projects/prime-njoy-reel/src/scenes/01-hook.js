@@ -26,6 +26,7 @@ export default function createHook({ cfg, W, H }) {
         post.flash += 0.6 * pulse(lt, 0.02, 0.005, 0.12);
         post.flashColor = [1, 1, 1];
       }
+      if (!f.owner) return; // rien ne déborde sur la scène suivante
       const mCher = f.mark('L1b.cher', f.clock.start + 1.6);
       const tc = T - mCher;
       // ---- pastilles-icônes, une par mot
