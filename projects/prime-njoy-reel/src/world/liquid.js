@@ -52,10 +52,14 @@ export function drawLiquid(g, W, H, t, scenes, o = {}) {
         if (pop > 0 && pop < 1) splash();
         continue;
       }
-      const x = W * (0.12 + 0.76 * ox) + Math.sin(t * sp * 2.2 + ph) * W * 0.16;
+      // scène signature : bulles cantonnées aux bords, plus petites et plus légères (logo + texte dégagés)
+      const edge = s.id === 'brand';
+      const x = edge
+        ? W * (ox < 0.5 ? -0.02 + ox * 0.28 : 1.02 - (1 - ox) * 0.28) + Math.sin(t * sp * 2.2 + ph) * W * 0.04
+        : W * (0.12 + 0.76 * ox) + Math.sin(t * sp * 2.2 + ph) * W * 0.16;
       const y = H * (0.1 + 0.8 * oy) + Math.cos(t * sp * 1.7 + ph) * H * 0.08 - life * 30 * u;
-      const R = R0 * born * (1 + 0.25 * E.outCubic(pop)) * (1 - E.inCubic(pop));
-      if (R > 1) blob(g, x, y, R, t, i * 3 + si, col, k * (1 - pop * 0.6));
+      const R = R0 * (edge ? 0.62 : 1) * born * (1 + 0.25 * E.outCubic(pop)) * (1 - E.inCubic(pop));
+      if (R > 1) blob(g, x, y, R, t, i * 3 + si, col, k * (edge ? 0.6 : 1) * (1 - pop * 0.6));
       if (pop > 0) splash();
       function splash() {
         const rr = rng(900 + si * 17 + i);
