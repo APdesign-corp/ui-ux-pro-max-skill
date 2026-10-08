@@ -8,15 +8,11 @@
   },
   {
    "word": "L4.45",
-   "db": 2.0
+   "db": 1.5
   },
   {
    "word": "L5.connexion",
-   "db": 1.5
-  },
-  {
-   "word": "L6.N'Joy",
-   "db": 1.5
+   "db": 1.0
   }
  ],
  "lines": [
@@ -24,23 +20,24 @@
    "id": "L1",
    "scene": "hook",
    "tone": "accroche, interpellation",
-   "gap_before": 0.15,
+   "gap_before": 0.3,
    "chunks": [
     {
      "id": "L1a",
      "text": "Internet, télé, mobile…",
-     "tts": "Internet, télé, mobile...",
-     "speed": 1.0,
+     "tts": "Internet ! Télé ! Mobile !",
+     "speed": 0.92,
      "gain_db": 1.5,
-     "pause": 0.08
+     "pause": 0.1
     },
     {
      "id": "L1b",
      "text": "Vous payez encore trop cher ?",
-     "speed": 1.0,
+     "speed": 0.97,
      "gain_db": 1.5,
-     "tts": "Vous payez encore trop cher ?",
-     "takes_mul": 1
+     "tts_alt": [
+      "Vous payez encore... trop cher ?"
+     ]
     }
    ]
   },
@@ -48,15 +45,17 @@
    "id": "L2",
    "scene": "unite",
    "tone": "solution, chaleureux",
-   "gap_before": 0.22,
+   "gap_before": 0.38,
    "chunks": [
     {
      "id": "L2",
      "text": "Avec Prime N'Joy, tout est réuni.",
-     "speed": 1.0,
+     "tts": "Avec Praïmèndjoï, tout est réuni.",
+     "speed": 0.97,
      "gain_db": 1.5,
-     "takes_mul": 2,
-     "tts": "Avec Praïme Enne-djoï, tout est réuni."
+     "tts_alt": [
+      "Avec Praïmèndjoï... tout est réuni !"
+     ]
     }
    ]
   },
@@ -64,30 +63,14 @@
    "id": "L3",
    "scene": "products",
    "tone": "énumération rythmée",
-   "gap_before": 0.2,
+   "gap_before": 0.32,
    "chunks": [
     {
-     "id": "L3a",
-     "text": "La télé.",
-     "speed": 1.0,
-     "gain_db": 1.5,
-     "pause": 0.08
-    },
-    {
-     "id": "L3b",
-     "text": "Internet.",
-     "speed": 1.0,
-     "gain_db": 1.5,
-     "pause": 0.08
-    },
-    {
-     "id": "L3c",
-     "text": "Le GSM.",
-     "speed": 1.0,
-     "gain_db": 1.5,
-     "takes_mul": 2,
-     "pause": 0,
-     "tts": "Le G.S.M."
+     "id": "L3",
+     "text": "La télé, Internet, le GSM.",
+     "tts": "La télé. Internet. Le G.S.M.",
+     "speed": 0.92,
+     "gain_db": 1.5
     }
    ]
   },
@@ -95,15 +78,17 @@
    "id": "L4",
    "scene": "offer",
    "tone": "offre, enthousiaste",
-   "gap_before": 0.25,
+   "gap_before": 0.38,
    "chunks": [
     {
      "id": "L4a",
      "text": "Le tout pour 45 € par mois.",
      "tts": "Le tout pour quarante-cinq euros par mois !",
-     "speed": 1.0,
+     "speed": 0.97,
      "gain_db": 2,
-     "takes_mul": 2
+     "tts_alt": [
+      "Le tout... pour quarante-cinq euros par mois !"
+     ]
     }
    ]
   },
@@ -111,13 +96,16 @@
    "id": "L5",
    "scene": "promise",
    "tone": "promesse, posé",
-   "gap_before": 0.25,
+   "gap_before": 0.38,
    "chunks": [
     {
      "id": "L5",
      "text": "Plus qu'une connexion, un meilleur quotidien.",
-     "speed": 1.0,
-     "gain_db": 1.5
+     "speed": 0.95,
+     "gain_db": 1.5,
+     "tts_alt": [
+      "Plus qu'une connexion... un meilleur quotidien."
+     ]
     }
    ]
   },
@@ -125,30 +113,14 @@
    "id": "L6",
    "scene": "brand",
    "tone": "signature",
-   "gap_before": 0.3,
+   "gap_before": 0.42,
    "chunks": [
     {
-     "id": "L6a",
-     "text": "Prime N'Joy.",
-     "speed": 1.0,
-     "gain_db": 2,
-     "pause": 0.1,
-     "takes_mul": 2,
-     "tts": "Praïme Enne-djoï."
-    },
-    {
-     "id": "L6b",
-     "text": "Télécom et énergie.",
-     "speed": 1.0,
-     "gain_db": 1.5,
-     "pause": 0.1
-    },
-    {
-     "id": "L6c",
-     "text": "Ensemble, allons plus loin.",
-     "speed": 1.0,
-     "gain_db": 1.5,
-     "pause": 0
+     "id": "L6",
+     "text": "Prime N'Joy. Télécom et énergie. Ensemble, allons plus loin.",
+     "tts": "Praïmèndjoï. Télécom, et énergie. Ensemble... allons plus loin !",
+     "speed": 0.92,
+     "gain_db": 1.5
     }
    ]
   }

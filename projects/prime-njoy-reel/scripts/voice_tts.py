@@ -368,6 +368,7 @@ def main():
     ap.add_argument('--noise-w', type=float, default=0.8)
     ap.add_argument('--respell', default=None, help='JSON {mot: graphie} prioritaire sur le script')
     ap.add_argument('--threads', type=int, default=2)
+    ap.add_argument('--speed-jitter', type=float, default=0.0, help='variation de débit entre prises (moteurs déterministes)')
     ap.add_argument('--expr', type=float, default=0.025, help="poids de l'expressivité (amplitude de F0) dans le choix des prises")
     ap.add_argument('--takes', type=int, default=1, help='prises par phrase (la meilleure est retenue)')
     ap.add_argument('--judge-whisper', default=None, help='dossier sherpa-onnx-whisper-* (2e juge ASR)')
@@ -405,7 +406,8 @@ def main():
                     rs[w] = opts[(k // (j + 1)) % len(opts)] if j else opts[k % len(opts)]
                 n_opt = len(variants[present[0]]) if present else 1
                 tts_text = apply_respell(bases[(k // n_opt) % len(bases)], rs)
-                audio = tts.generate(tts_text, sid=sid, speed=c.get('speed', 1.0) * speed_mul)
+                jit = 1 + a.speed_jitter * (((k // max(1, len(bases))) % 3) - 1)
+                audio = tts.generate(tts_text, sid=sid, speed=c.get('speed', 1.0) * speed_mul * jit)
                 x = resample(np.asarray(audio.samples, dtype=np.float64), audio.sample_rate)
                 x, speech = trim(x)
                 tk = {'tts': tts_text, 'x': x, 'speech': speech, 'sr': audio.sample_rate, 'dur': len(x) / SR}

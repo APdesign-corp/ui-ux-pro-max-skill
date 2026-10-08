@@ -43,7 +43,7 @@ export default function createProducts({ cfg, W, H }) {
       const st = f.clock.start, end = f.clock.end;
       const lt = T - st;
       const { props, hero, studio } = f.world;
-      const mTV = f.mark('L3a.télé', st + 0.25), mNet = f.mark('L3b.Internet', mTV + 0.6), mGsm = f.mark('L3c.GSM', mNet + 0.7);
+      const mTV = f.mark('L3.télé', st + 0.25), mNet = f.mark('L3.Internet', mTV + 0.6), mGsm = f.mark('L3.GSM', mNet + 0.7);
 
       if (f.owner) {
         dynamicBg(bg, W, H, T, { k: 0.85, beat: beatAt(T) * 0.5, cy: 0.3 });

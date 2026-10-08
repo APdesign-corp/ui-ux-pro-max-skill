@@ -29,9 +29,9 @@ export default function createBrand({ cfg, W, H }) {
       f.camera([0, 0, 8], [0, 0, 0], 30);
       f.world.studio.update(T, { backdrop: false, beams: 0, grid: 0, dust: 0, motes: 0, env: 1 });
       post.bloom = 0.08; post.vignette = 0.08;
-      const mP = f.mark('L6a.Prime', st + 0.15), mJ = f.mark("L6a.N'Joy", mP + 0.35);
-      const mTel = f.mark('L6b.Télécom', mJ + 0.7), mEn = f.mark('L6b.énergie', mTel + 0.6);
-      const mEns = f.mark('L6c.Ensemble', mEn + 0.6);
+      const mP = f.mark('L6.Prime', st + 0.15), mJ = f.mark("L6.N'Joy", mP + 0.35);
+      const mTel = f.mark('L6.Télécom', mJ + 0.7), mEn = f.mark('L6.énergie', mTel + 0.6);
+      const mEns = f.mark('L6.Ensemble', mEn + 0.6);
 
       // cercle de points : rassemblement depuis la dispersion de la scène précédente
       const cx = W / 2, cy = H * 0.33, R = W * 0.27;

@@ -28,7 +28,7 @@ def main():
     a = ap.parse_args()
     lay = json.load(open(a.layout))
 
-    # marqueurs par segment ("L6b.Suis") ET par phrase ("L6.Suis") : les scènes visent la phrase
+    # marqueurs par segment ("L6.Suis") ET par phrase ("L6.Suis") : les scènes visent la phrase
     M = {}
     for L in lay['lines']:
         seenL = {}
@@ -82,12 +82,12 @@ def main():
     cue(m('L2.réuni') + 0.12, 'impact', 1.6, 0.8)
     cue(B23 - 0.3, 'whoosh', 0.55, 0.55, pan=[0, 0])                   # zoom à travers le logo
     # 03 produits
-    cue(m('L3a.télé'), 'digital', 0.4, 0.45)
-    cue(m('L3a.télé') + 0.15, 'hit', 0.7, 0.4)
-    cue(m('L3b.Internet'), 'transmit', 0.9, 0.4)
-    cue(m('L3b.Internet') + 0.25, 'click', 0.3, 0.45)
-    cue(m('L3c.GSM') - 0.1, 'swish', 0.35, 0.4, pan=[0.8, -0.2])
-    cue(m('L3c.GSM') + 0.3, 'click', 0.3, 0.4)
+    cue(m('L3.télé'), 'digital', 0.4, 0.45)
+    cue(m('L3.télé') + 0.15, 'hit', 0.7, 0.4)
+    cue(m('L3.Internet'), 'transmit', 0.9, 0.4)
+    cue(m('L3.Internet') + 0.25, 'click', 0.3, 0.45)
+    cue(m('L3.GSM') - 0.1, 'swish', 0.35, 0.4, pan=[0.8, -0.2])
+    cue(m('L3.GSM') + 0.3, 'click', 0.3, 0.4)
     cue(B34 - 0.32, 'whoosh', 0.45, 0.6, pan=[-0.8, 0.8])              # balayage en dégradé
     # 04 offre
     cue(B34 + 0.02, 'swish', 0.4, 0.4)
@@ -106,19 +106,19 @@ def main():
     cue(B56 - 0.35, 'zips', 0.8, 0.35)                                  # dispersion en points
     # 06 signature
     cue(B56 + 0.02, 'suck', 0.6, 0.35)
-    cue(m('L6a.Prime'), 'impact', 2.2, 0.85)
-    cue(m("L6a.N'Joy") + 0.05, 'shimmer', 0.8, 0.35)
-    cue(m('L6b.Télécom'), 'pop', 0.2, 0.45)
-    cue(m('L6b.énergie'), 'pulse2', 0.6, 0.45)
-    cue(m('L6c.Ensemble'), 'glass', 1.0, 0.3)
-    cue(m('L6c.end') + 0.15, 'impact', 1.4, 0.5, tone='bright')
+    cue(m('L6.Prime'), 'impact', 2.2, 0.85)
+    cue(m("L6.N'Joy") + 0.05, 'shimmer', 0.8, 0.35)
+    cue(m('L6.Télécom'), 'pop', 0.2, 0.45)
+    cue(m('L6.énergie'), 'pulse2', 0.6, 0.45)
+    cue(m('L6.Ensemble'), 'glass', 1.0, 0.3)
+    cue(m('L6.end') + 0.15, 'impact', 1.4, 0.5, tone='bright')
     C.sort(key=lambda c: c['t'])
 
     music = {
         'bpm': a.bpm,
         'pulseFrom': r3(B12), 'pulseTo': r3(B56 - 0.05),
-        'hatsFrom': r3(B23), 'silenceFrom': r3(B56 - 0.02), 'padFrom': r3(m('L6a.Prime')),
-        'swellFrom': r3(m('L6b.start')), 'resolveAt': r3(m('L6c.end') + 0.15),
+        'hatsFrom': r3(B23), 'silenceFrom': r3(B56 - 0.02), 'padFrom': r3(m('L6.Prime')),
+        'swellFrom': r3(m('L6.start')), 'resolveAt': r3(m('L6.end') + 0.15),
         'roots': [[0, 49.0], [r3(B12), 43.65], [r3(B23), 49.0], [r3(B34), 55.0], [r3(B45), 46.25], [r3(B56), 49.0]],
     }
     script = json.load(open(os.path.join(ROOT, 'voice', 'script.json')))
