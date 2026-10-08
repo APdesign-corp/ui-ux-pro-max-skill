@@ -81,6 +81,21 @@ export async function boot(canvas) {
   scene.add(acc.group);
   const world = { studio, phones, acc };
 
+  // Instantané de l'état initial de tout ce qui est partagé : restauré au début de CHAQUE image,
+  // pour que le rendu reste déterministe quel que soit l'ordre des images (workers parallèles).
+  const snap = [];
+  const keep = (o) => { if (o) snap.push({ o, p: o.position.clone(), q: o.quaternion.clone(), s: o.scale.clone(), order: o.rotation.order, v: o.visible }); };
+  for (const p of phones) { keep(p.group); keep(p.phone.inner); }
+  keep(acc.group); for (const c of acc.group.children) keep(c);
+  for (const l of [studio.sweep, studio.rimG, studio.rimT, studio.key]) keep(l);
+  const lightInit = [studio.sweep, studio.rimG, studio.rimT, studio.key].map((l) => ({ l, i: l.intensity, c: l.color.clone() }));
+  const restoreShared = () => {
+    for (const r of snap) { r.o.rotation.order = r.order; r.o.position.copy(r.p); r.o.quaternion.copy(r.q); r.o.scale.copy(r.s); r.o.visible = r.v; }
+    for (const r of lightInit) { r.l.intensity = r.i; r.l.color.copy(r.c); }
+    for (const p of phones) { p.phone.setScreenMap(p.screen.tex, 1.0); p.phone.setCracked && 0; }
+    scene.fog = null;
+  };
+
   // ---------- segments
   const segs = timeline.segments.map((s) => {
     const mod = MODULES[s.id];
@@ -138,10 +153,11 @@ export async function boot(canvas) {
     const t = clamp(T, 0, duration - 1e-6);
     engine.clear2D();
     const post = engine.defaultPost();
-    for (const p of phones) { p.group.visible = false; p.phone.setExplode(0, t); p.group.position.set(0, 0, 0); p.group.rotation.set(0, 0, 0); p.group.scale.setScalar(1); }
+    restoreShared();
+    for (const p of phones) { p.group.visible = false; p.phone.setExplode(0, t); }
     acc.group.visible = false;
     for (const s of segs) if (s.inst.group) s.inst.group.visible = false;
-    studio.update(t, { backdrop: true, grid: 0, beams: 0, dust: 1, motes: 1, env: 1, rim: 1, key: 1 });
+    studio.update(t, { backdrop: true, grid: 0, beams: 0, dust: 1, motes: 1, env: 1, rim: 1, key: 1, glow: 0.28, envRot: 0 });
 
     const si = Math.max(0, segs.findIndex((s) => t >= s.start && t < s.end));
     const s = segs[si];

@@ -10,10 +10,9 @@
 // Performance : les cartes lointaines utilisent une texture statique (dessinée une fois dans create) ;
 // seules les cartes proches (0 < distance < 6) reçoivent une texture vivante d'un petit pool.
 
-import { E, clamp, lerp, seg, win, pulse, rng, noise1, TAU, rgba, speedRamp, catmull } from '../core/anim.js';
+import { E, clamp, lerp, seg, win, rng, TAU, rgba, speedRamp, catmull } from '../core/anim.js';
 import { setFont, textWidth, drawText, radialGlow, sparks, shockRing } from '../core/draw.js';
 import { C, speedLines } from '../core/type.js';
-import { PHONE } from '../world/phone.js';
 import { drawScreenApp } from '../world/screens.js';
 import { smoother, typeLines, scrimLinear, makeSky, trail, glowTexture } from './03-roll-kit.js';
 
@@ -261,7 +260,7 @@ export default function create(ctx) {
   const baseXY = (lt) => [0.16 * Math.sin(lt * 1.7) + 0.05 * Math.sin(lt * 4.1), (V ? -0.05 : 0.08) + 0.1 * Math.sin(lt * 1.3 + 0.5)];
   // position du vaisseau relative à la caméra « de base »
   const REL_PASS = [V ? 0.4 : 0.75, V ? -0.9 : -0.55, 1.0];
-  const REL_LOCK = [V ? -0.02 : -0.1, V ? -0.98 : -0.5, V ? -1.3 : -1.62];
+  const REL_LOCK = [V ? -0.02 : -0.1, V ? -1.02 : -0.5, V ? -1.72 : -1.62];
   function shipRel(lt) {
     const p = E.outCubic(seg(lt, T_SHIP, 1.66));
     const w = smoother(seg(lt, 1.6, 2.4));
@@ -335,7 +334,7 @@ export default function create(ctx) {
     // plan sur l'épaule : la visée glisse vers l'avant du vaisseau
     const sp = shipPos(lt, _sp);
     const lk = smoother(seg(lt, 1.42, 1.85));
-    const tgt = [sp[0] * 0.6, sp[1] + 0.12, sp[2] - 2.6];
+    const tgt = V ? [sp[0] * 0.6, sp[1] + 0.02, sp[2] - 1.35] : [sp[0] * 0.6, sp[1] + 0.12, sp[2] - 2.6];
     c.target = [lerp(c.target[0], tgt[0], lk), lerp(c.target[1], tgt[1], lk), lerp(c.target[2], tgt[2], lk)];
     c.fov = lerp(c.fov, V ? 62 : 48, lk);
     if (lt < T_DIVE) return c;
@@ -462,7 +461,7 @@ export default function create(ctx) {
       const ex = E.outCubic(seg(lt, 2.48, 2.82));
       hero.phone.setExplode(ex, f.t);
       hero.group.updateMatrixWorld(true);
-      hero.screen.draw('counter', lt - 1.0, { to: 100, label: 'CHARGEMENT', dur: 1.2 });
+      hero.screen.draw('counter', lt - 1.0, { to: 100, label: 'CHARGEMENT', dur: 1.2, brightness: 0.88 });
       lTop.intensity = 7 * (1 - 0.8 * ex); lTop.position.set(_sp[0] + 0.5, _sp[1] + 1.1, _sp[2] + 0.6);
       lBoard.intensity = 1.1 * ex; lBoard.position.set(_sp[0] - 0.15, _sp[1] - 0.18, _sp[2] - 0.35);
     } else {
@@ -476,6 +475,14 @@ export default function create(ctx) {
     post.flashColor = [0.85, 1, 0.85];
     post.flash = 1 - E.outCubic(seg(lt, 0, 0.3));                 // sortie du flash de la traversée 1
     const cx = W / 2, cy = H / 2;
+    // raccord : la fin de roll est blanche saturée (portail + flash) → voile lumineux qui se retire en 0.12 s
+    const veil = 1 - E.outQuad(seg(lt, 0, 0.12));
+    if (veil > 0.003) {
+      const grd = fx.createRadialGradient(cx, cy, 0, cx, cy, Math.hypot(W, H) * 0.6);
+      grd.addColorStop(0, rgba('#ffffff', 0.95 * veil));
+      grd.addColorStop(1, rgba('#e8ffe8', 0.75 * veil));
+      fx.save(); fx.fillStyle = grd; fx.fillRect(0, 0, W, H); fx.restore();
+    }
 
     // lignes de vitesse : entrée, accélérations
     const sk = 0.9 * (1 - seg(lt, 0, 0.45)) + 0.45 * win(lt, 0.95, 1.15, 1.5, 1.8) + 0.25 * win(lt, 2.2, 2.3, 2.45, 2.6);
@@ -498,6 +505,15 @@ export default function create(ctx) {
       // réacteur : halo à l'arrière
       const tc = f.project([_sp[0], _sp[1], _sp[2] + 0.75]);
       if (tc[2] < 1) radialGlow(fx, tc[0], tc[1], 120 * u, C.neon, 0.35 * ta);
+    }
+    // plan sur l'épaule : le vaisseau avance AVEC la caméra → flou de zoom centré sur lui (il reste net)
+    const lockK = win(lt, 1.5, 1.75, 2.35, 2.5);
+    if (lockK > 0) {
+      const sc = f.project([_sp[0], _sp[1], _sp[2]]);
+      if (sc[2] < 1) post.zoomCenter = [clamp(sc[0] / W), clamp(1 - sc[1] / H)];
+      post.zoomBlur *= 1 - 0.55 * lockK;
+      post.blur[0] *= 1 - 0.8 * lockK;
+      post.blur[1] *= 1 - 0.8 * lockK;
     }
     // passage du vaisseau à côté de la caméra : flou latéral + choc
     const passK = win(lt, 1.36, 1.44, 1.48, 1.6);
@@ -555,32 +571,52 @@ export default function create(ctx) {
     const hudA = win(lt, 0.25, 0.45, 2.3, 2.47);
     if (hudA > 0.003) {
       const pct = Math.round(100 * E.inOutCubic(seg(lt, 0.3, 2.42)));
-      const hx = V ? S_.r : S_.r - 10 * u;
-      const hy = V ? S_.b - 40 * u : S_.b - 26 * u;
-      const bw = (V ? 330 : 300) * u;
       ui.save();
       ui.globalAlpha = hudA;
-      ui.textAlign = 'right'; ui.textBaseline = 'alphabetic';
-      setFont(ui, (V ? 84 : 72) * u, 800, -0.02);
-      ui.fillStyle = C.white;
-      ui.fillText(`${pct}%`, hx, hy - 34 * u);
-      ui.letterSpacing = `${(V ? 6 : 5) * u}px`;
-      ui.font = `600 ${(V ? 24 : 21) * u}px "Space Grotesk"`;
-      ui.fillStyle = pct >= 100 ? C.neon : C.muted;
-      ui.fillText(pct >= 100 ? 'PRÊT' : 'CHARGEMENT', hx, hy - (V ? 128 : 112) * u);
-      ui.letterSpacing = '0px';
-      ui.fillStyle = 'rgba(244,248,244,0.14)';
-      ui.fillRect(hx - bw, hy - 10 * u, bw, 6 * u);
-      ui.fillStyle = C.neon;
-      ui.shadowColor = rgba(C.neon, 0.8); ui.shadowBlur = 14 * u;
-      ui.fillRect(hx - bw, hy - 10 * u, bw * pct / 100, 6 * u);
+      ui.textBaseline = 'alphabetic';
+      if (V) {
+        // 9:16 : barre de progression pleine largeur sous la zone sûre du haut
+        const hy = S_.t + 62 * u, bw = S_.w;
+        ui.textAlign = 'right';
+        setFont(ui, 62 * u, 800, -0.02);
+        ui.fillStyle = C.white;
+        ui.fillText(`${pct}%`, S_.r, hy);
+        ui.textAlign = 'left';
+        ui.letterSpacing = `${6 * u}px`;
+        ui.font = `600 ${24 * u}px "Space Grotesk"`;
+        ui.fillStyle = pct >= 100 ? C.neon : C.muted;
+        ui.fillText(pct >= 100 ? 'PRÊT' : 'CHARGEMENT', S_.l, hy - 6 * u);
+        ui.letterSpacing = '0px';
+        ui.fillStyle = 'rgba(244,248,244,0.14)';
+        ui.fillRect(S_.l, hy + 22 * u, bw, 6 * u);
+        ui.fillStyle = C.neon;
+        ui.shadowColor = rgba(C.neon, 0.8); ui.shadowBlur = 14 * u;
+        ui.fillRect(S_.l, hy + 22 * u, bw * pct / 100, 6 * u);
+      } else {
+        const hx = S_.r - 10 * u, hy = S_.b - 26 * u, bw = 300 * u;
+        ui.textAlign = 'right';
+        setFont(ui, 72 * u, 800, -0.02);
+        ui.fillStyle = C.white;
+        ui.fillText(`${pct}%`, hx, hy - 34 * u);
+        ui.letterSpacing = `${5 * u}px`;
+        ui.font = `600 ${21 * u}px "Space Grotesk"`;
+        ui.fillStyle = pct >= 100 ? C.neon : C.muted;
+        ui.fillText(pct >= 100 ? 'PRÊT' : 'CHARGEMENT', hx, hy - 112 * u);
+        ui.letterSpacing = '0px';
+        ui.fillStyle = 'rgba(244,248,244,0.14)';
+        ui.fillRect(hx - bw, hy - 10 * u, bw, 6 * u);
+        ui.fillStyle = C.neon;
+        ui.shadowColor = rgba(C.neon, 0.8); ui.shadowBlur = 14 * u;
+        ui.fillRect(hx - bw, hy - 10 * u, bw * pct / 100, 6 * u);
+      }
       ui.shadowBlur = 0;
       ui.restore();
       // étapes qui glissent une par une
       STEPS.forEach((s, k) => {
         const st = lt - 0.45 - k * 0.12;
         const p = E.outExpo(seg(st, 0, 0.45));
-        const o = E.inCubic(seg(lt, 2.1 + k * 0.05, 2.35 + k * 0.05));
+        // 9:16 : les étapes laissent la place au vaisseau qui arrive en bas du cadre
+        const o = V ? E.inCubic(seg(lt, 1.3 + k * 0.05, 1.5 + k * 0.05)) : E.inCubic(seg(lt, 2.1 + k * 0.05, 2.35 + k * 0.05));
         const a = p * (1 - o) * hudA;
         if (a <= 0.003) return;
         const sz = (V ? 28 : 24) * u;

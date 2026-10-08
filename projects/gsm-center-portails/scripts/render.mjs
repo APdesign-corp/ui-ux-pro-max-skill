@@ -70,7 +70,7 @@ if (still) {
   const sdir = path.resolve(ROOT, opt('stills-dir', 'out/stills'));
   fs.mkdirSync(sdir, { recursive: true });
   for (const t of String(still).split(',').map(Number)) {
-    const file = path.join(sdir, `${format}-${t.toFixed(2)}s.png`);
+    const file = path.join(sdir, `${format}-${t.toFixed(3)}s.png`);
     fs.writeFileSync(file, await p.grab(t));
     console.log('→', path.relative(ROOT, file));
   }

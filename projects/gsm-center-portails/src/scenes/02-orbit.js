@@ -46,6 +46,60 @@ const T_TYPE = 2.58;                 // début de la frappe (temps local orbit)
 const FIND = { queries: ['nouveau smartphone', 'réparation écran', 'coque'], text: 'GSM Liège', cps: 52, delay: T_TYPE - T_FIND };
 const Q1 = 'nouveau smartphone';
 
+// Clavier AZERTY dessiné PAR-DESSUS l'app `find` dans la texture d'écran du héros (le client tape :
+// la touche frappée s'allume en vert néon avec son aperçu agrandi). g = contexte de l'écran (600×1340).
+const KB_ROWS = ['azertyuiop', 'qsdfghjklm', 'wxcvbn'];
+function drawKeyboard(g, t, k) {
+  if (k <= 0.003) return;
+  const W = 600, H = 1340, y0 = H - 470 + (1 - k) * 420;
+  const typed = Math.floor(t * FIND.cps);
+  const ch = t >= 0 && typed < Q1.length ? Q1[typed] : null;
+  const press = t >= 0 ? 1 - ((t * FIND.cps) % 1) : 0;
+  g.save();
+  g.fillStyle = 'rgba(10,18,13,0.96)';
+  g.fillRect(0, y0, W, H - y0);
+  g.fillStyle = 'rgba(57,255,20,0.35)';
+  g.fillRect(0, y0, W, 2);
+  // suggestions
+  g.font = '600 26px "Space Grotesk"'; g.textAlign = 'center'; g.textBaseline = 'middle';
+  ['smartphone', 'réparation', 'coque'].forEach((w, i) => {
+    g.fillStyle = i === 0 ? 'rgba(244,248,244,0.95)' : 'rgba(147,160,149,0.9)';
+    g.fillText(w, 100 + i * 200, y0 + 40);
+  });
+  const kw = 52, kh = 74, gap = 7;
+  let hit = null;
+  KB_ROWS.forEach((row, r) => {
+    const rw = row.length * kw + (row.length - 1) * gap;
+    const x0 = (W - rw) / 2, y = y0 + 84 + r * (kh + 14);
+    for (let i = 0; i < row.length; i++) {
+      const x = x0 + i * (kw + gap);
+      const on = ch && row[i] === ch;
+      g.fillStyle = on ? `rgba(57,255,20,${0.55 + 0.45 * press})` : 'rgba(255,255,255,0.13)';
+      g.beginPath(); g.roundRect(x, y, kw, kh, 10); g.fill();
+      g.fillStyle = on ? '#021a0c' : 'rgba(244,248,244,0.92)';
+      g.font = '500 34px "Space Grotesk"';
+      g.fillText(row[i], x + kw / 2, y + kh / 2 + 2);
+      if (on) hit = [x + kw / 2, y];
+    }
+  });
+  // barre d'espace
+  const sy = y0 + 84 + 3 * (kh + 14);
+  const sp = ch === ' ';
+  g.fillStyle = sp ? `rgba(57,255,20,${0.55 + 0.45 * press})` : 'rgba(255,255,255,0.13)';
+  g.beginPath(); g.roundRect(150, sy, 300, kh, 10); g.fill();
+  g.fillStyle = 'rgba(57,255,20,0.9)';
+  g.beginPath(); g.roundRect(470, sy, 100, kh, 10); g.fill();
+  g.fillStyle = '#021a0c'; g.font = '700 26px "Space Grotesk"'; g.fillText('OK', 520, sy + kh / 2 + 1);
+  // aperçu agrandi de la touche frappée
+  if (hit && press > 0.15) {
+    g.fillStyle = '#39ff14';
+    g.beginPath(); g.roundRect(hit[0] - 44, hit[1] - 112, 88, 104, 16); g.fill();
+    g.fillStyle = '#021a0c'; g.font = '600 56px "Space Grotesk"';
+    g.fillText(ch, hit[0], hit[1] - 58);
+  }
+  g.restore();
+}
+
 export default function create(ctx) {
   const { THREE, world, W, H, V, u, L } = ctx;
   const rig = makeRig(V);
@@ -139,7 +193,10 @@ export default function create(ctx) {
         const br = k === 0 ? 0.88 : s.L.dim ?? 0.68;
         if (tw < 0) P.screen.draw('off', 0);
         else if (tw < 0.36) P.screen.draw('wake', tw, { p: E.outCubic(tw / 0.36), brightness: br });
-        else if (k === 0 && T >= T_FIND) P.screen.draw('find', T - T_FIND, { ...FIND, brightness: br });
+        else if (k === 0 && T >= T_FIND) {
+          P.screen.draw('find', T - T_FIND, { ...FIND, brightness: 1 });
+          drawKeyboard(P.screen.g, T - T_TYPE, E.outExpo(seg(T, T_FIND, T_FIND + 0.25)));
+        }
         else if (s.L.app === 'find') P.screen.draw('find', w - s.L.wake - 0.36, { ...FIND, cps: 15, delay: 0.25, brightness: br });
         else P.screen.draw(s.L.app, w - s.L.wake - 0.36, { variant: s.L.variant || 0, brightness: br });
       }
@@ -222,7 +279,7 @@ export default function create(ctx) {
       }
 
       // ------------------------------------------------------------- typo (ui)
-      const outK = seg(T, 2.42, 2.6);
+      const outK = seg(T, 2.3, 2.46);
       const aT = 1 - outK;
       if (!V) {
         eyebrow(ui, '01 — CHOISIR', typo.x, typo.yEye, T - 0.95, f, { size: 36, alpha: aT });
@@ -249,7 +306,7 @@ export default function create(ctx) {
       }
 
       // histoire, étape 1 : barre de recherche géante, la requête se tape (lisible sans le son)
-      const pa = E.outExpo(seg(T, 2.48, 2.64)) * (1 - E.inCubic(seg(T, 2.9, 2.985)));
+      const pa = E.outExpo(seg(T, 2.47, 2.62)) * (1 - E.inCubic(seg(T, 2.9, 2.985)));
       if (pa > 0.003) {
         const fs = V ? 60 * u : 62 * u;
         const ph = fs * 1.85, pw = V ? S.w * 0.94 : Math.min(S.w * 0.5, 980 * u);

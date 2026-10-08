@@ -10,8 +10,8 @@
 //   1.20–2.30  plan produit : héros penché qui pivote, texte tapé, mot géant 3D, app search
 //   2.30–3.00  zoom accéléré (inExpo) dans l'écran, toucher, portal, débordement, flash 1.0
 
-import { E, clamp, lerp, seg, win, pulse, noise1, TAU, rgba } from '../core/anim.js';
-import { setFont, textWidth, drawText, radialGlow, sparks, shockRing, eyebrow } from '../core/draw.js';
+import { E, lerp, seg, win, pulse, TAU } from '../core/anim.js';
+import { textWidth, drawText, radialGlow, sparks, shockRing, eyebrow } from '../core/draw.js';
 import { C, speedLines } from '../core/type.js';
 import { PHONE } from '../world/phone.js';
 import { drawScreenApp } from '../world/screens.js';
@@ -28,10 +28,10 @@ export const cues = [
   { t: 1.0, type: 'whip', gain: 1.1, pan: 0.7 },
   { t: 1.2, type: 'impact', gain: 0.9 },
   { t: 1.2, type: 'hit', gain: 1 },
-  { t: 1.26, type: 'type', dur: 0.8, cps: 30, gain: 0.8 },
+  { t: 1.32, type: 'type', dur: 0.7, cps: 34, gain: 0.8 },
   { t: 1.3, type: 'whoosh', dur: 1.1, gain: 0.45, pan: -0.4 },
   { t: 1.8, type: 'swish', gain: 0.6 },
-  { t: 2.12, type: 'pop', gain: 0.8 },
+  { t: 2.06, type: 'pop', gain: 0.8 },
   { t: 2.25, type: 'riser', dur: 0.75, gain: 1 },
   { t: 2.5, type: 'click', gain: 0.9 },
   { t: 2.55, type: 'suck', dur: 0.45, gain: 1 },
@@ -90,7 +90,7 @@ export default function create(ctx) {
   const SPAN = 7.5, PH_V = 3.2;                          // les téléphones foncent aussi vers la caméra
   // éclats de lumière 3D (traînées fixes dans l'espace : la caméra les traverse en roulant)
   const shardCount = 90;
-  const shardGeo = new THREE.BoxGeometry(0.014, 0.014, 1);
+  const shardGeo = new THREE.BoxGeometry(0.01, 0.01, 1);
   const shardMat = new THREE.MeshBasicMaterial({ color: new THREE.Color('#ffffff') });
   const shards = new THREE.InstancedMesh(shardGeo, shardMat, shardCount);
   {
@@ -98,7 +98,7 @@ export default function create(ctx) {
     const m = new THREE.Matrix4(), q = new THREE.Quaternion(), p = new THREE.Vector3(), sc = new THREE.Vector3();
     const cols = [new THREE.Color(C.neon).multiplyScalar(1.5), new THREE.Color('#eaffea').multiplyScalar(1.5), new THREE.Color(C.teal).multiplyScalar(1.2)];
     for (let k = 0; k < shardCount; k++) {
-      const a = r() * TAU, rad = 1.5 + r() * 2.6;
+      const a = r() * TAU, rad = 2.1 + r() * 2.8;
       p.set(AX + Math.cos(a) * rad * (V ? 0.8 : 1.2), Math.sin(a) * rad * (V ? 1.3 : 0.9), -3 + r() * 14);
       sc.set(1, 1, 0.3 + r() * 1.4);
       m.compose(p, q, sc);
@@ -369,7 +369,7 @@ export default function create(ctx) {
       speedLines(fx, W, H, t, 0.62 * (1 - seg(lt, 0.75, 1.0)) + 0.25, { count: 120, speed: 1.8 });
       shockRing(fx, cx, cy, lt, f, { dur: 0.5, radius: 1100, width: 18 });
       sparks(fx, cx, cy, lt, f, { count: 70, life: 0.55, speed: 2200 });
-      post.rollBlur *= 1.15;
+      post.rollBlur *= 0.55;                     // flou de roulis présent mais téléphones lisibles
     }
     // whip pan : flou horizontal énorme + traînées
     const wk = Math.sin(Math.PI * seg(lt, T_WHIP - 0.02, T_HIT + 0.02));
@@ -415,11 +415,11 @@ export default function create(ctx) {
       const sa = 0.55 * win(lt, 1.22, 1.4, 2.4, 2.65);
       if (V) scrimLinear(ui, 0, H * 0.94, 0, H * 0.5, sa);
       else scrimLinear(ui, 0, 0, W * 0.62, 0, sa);
-      eyebrow(ui, '01 — CHOISIR', tx, by1 - size1 * 1.05, lt - 1.25, f, { size: V ? 30 : 26, alpha: 1 - oe });
+      eyebrow(ui, '01 — CHOISIR', tx, by1 - size1 * 1.05, lt - 1.32, f, { size: V ? 30 : 26, alpha: 1 - oe });
       typeLines(ui, [
         { str: 'Les derniers', x: tx, y: by1, size: size1, weight: 300, tracking: -0.01 },
         { str: 'smartphones.', x: tx, y: by2, size: size2, weight: 900, tracking: -0.02, highlight: 0 },
-      ], { t: lt - 1.26, cps: 30, out: oe, hlDelay: 0.04 });
+      ], { t: lt - 1.32, cps: 34, out: oe, hlDelay: 0.04 });
       // « Neufs & reconditionnés » (Poppins 300) avec trait néon
       const st = lt - 1.8;
       if (st > 0) {
