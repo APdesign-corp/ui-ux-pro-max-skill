@@ -60,7 +60,8 @@
      "speed": 0.95,
      "gain_db": 1.5,
      "pause": 0.08,
-     "takes_mul": 2
+     "takes_mul": 2,
+     "judge": "whisper"
     },
     {
      "id": "L3c",
@@ -68,7 +69,8 @@
      "tts": "VFX !",
      "speed": 0.95,
      "gain_db": 1.5,
-     "takes_mul": 2
+     "takes_mul": 2,
+     "judge": "whisper"
     }
    ]
   },
@@ -146,7 +148,8 @@
      "tts": "DM !",
      "speed": 0.9,
      "gain_db": 2.5,
-     "takes_mul": 2
+     "takes_mul": 2,
+     "judge": "whisper"
     }
    ]
   }

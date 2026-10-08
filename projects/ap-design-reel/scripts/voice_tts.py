@@ -292,6 +292,11 @@ def norm_words(s):
     s = ''.join(c for c in unicodedata.normalize('NFD', s) if not unicodedata.combining(c))
     s = re.sub(r"[^a-z0-9' ]+", ' ', s)
     s = re.sub(r"\bg s m\b", 'gsm', s)
+    # sigles : la transcription écrit souvent la forme parlée (« trois D », « D M », « A P »)
+    s = re.sub(r"\btrois d\b|\b3 d\b", '3d', s)
+    s = re.sub(r"\bv f x\b|\bvfx\b", 'vfx', s)
+    s = re.sub(r"\bd m\b", 'dm', s)
+    s = re.sub(r"\ba p\b", 'ap', s)
     return [w for w in s.split() if w]
 
 
@@ -409,7 +414,9 @@ def main():
             if len(takes) > 1:
                 med = float(np.median([t['dur'] for t in takes]))
                 for tk in takes:
-                    tk['score'] = (2 * tk['wer_p'] + tk['wer_w'] + 0.3 * abs(tk['dur'] - med) / med
+                    # mot isolé (judge=whisper) : Parakeet l'anglicise (« Troy's D »), seul Whisper juge
+                    asr = 2 * tk['wer_w'] if c.get('judge') == 'whisper' else 2 * tk['wer_p'] + tk['wer_w']
+                    tk['score'] = (asr + 0.3 * abs(tk['dur'] - med) / med
                                    - a.expr * min(12.0, tk.get('expr', 0.0)))  # intonation vivante
                 best = min(range(len(takes)), key=lambda i: takes[i]['score'])
             else:
