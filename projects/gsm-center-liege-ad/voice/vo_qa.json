@@ -1,0 +1,103 @@
+{
+ "voice": "tjiho3",
+ "gender_declared": "M",
+ "vo_end": 21.798,
+ "wer_mean": 0.076,
+ "wer_parakeet_mean": 0.0,
+ "chunks_wer_gt0": [
+  "L1",
+  "L4",
+  "L5"
+ ],
+ "f0_median_hz": 138.9,
+ "f0_p10_p90_hz": [
+  116.2,
+  164.9
+ ],
+ "f0_range_semitones": 6.07,
+ "syllables_per_s": 4.87,
+ "hf_energy_above_8k_pct": 5.03,
+ "native_sr": 44100,
+ "rows": [
+  {
+   "id": "L1",
+   "text": "À Liège, votre smartphone mérite mieux.",
+   "asr": "A l'iege, votre smartphone mérite mieux.",
+   "wer": 0.167,
+   "asr_parakeet": "A Liège, votre smartphone mérite mieux.",
+   "wer_parakeet": 0.0,
+   "f0_med": 130.6,
+   "peak": 0.749
+  },
+  {
+   "id": "L2",
+   "text": "Découvrez GSM Center.",
+   "asr": "Découvrez GSM Center.",
+   "wer": 0.0,
+   "asr_parakeet": "Découvrez GSM Center.",
+   "wer_parakeet": 0.0,
+   "f0_med": 137.3,
+   "peak": 0.89
+  },
+  {
+   "id": "L3",
+   "text": "Téléphonie, réparation… et expertise.",
+   "asr": "téléphonie, réparation et expertise.",
+   "wer": 0.0,
+   "asr_parakeet": "Téléphonie, réparation et expertise.",
+   "wer_parakeet": 0.0,
+   "f0_med": 139.1,
+   "peak": 0.89
+  },
+  {
+   "id": "L4",
+   "text": "Internet, multimédia, accessoires…",
+   "asr": "Internet Multimedia Accessoire",
+   "wer": 0.333,
+   "asr_parakeet": "Internet multimédia accessoires.",
+   "wer_parakeet": 0.0,
+   "f0_med": 141.4,
+   "peak": 0.943
+  },
+  {
+   "id": "L5",
+   "text": "Et pour vos transferts internationaux, Western Union et Ria.",
+   "asr": "et pour vos transferts internationaux, Wistern Union et RIA.",
+   "wer": 0.111,
+   "asr_parakeet": "et pour vos transferts internationaux Western Union et Ria.",
+   "wer_parakeet": 0.0,
+   "f0_med": 146.8,
+   "peak": 0.999
+  },
+  {
+   "id": "L6",
+   "text": "Tout ce dont vous avez besoin… au même endroit.",
+   "asr": "tout ce dont vous avez besoin, au même endroit.",
+   "wer": 0.0,
+   "asr_parakeet": "Tout ce dont vous avez besoin, au même endroit.",
+   "wer_parakeet": 0.0,
+   "f0_med": 137.9,
+   "peak": 0.999
+  },
+  {
+   "id": "L7a",
+   "text": "GSM Center Liège.",
+   "asr": "GSM Center liège.",
+   "wer": 0.0,
+   "asr_parakeet": "GSM Center Liège.",
+   "wer_parakeet": 0.0,
+   "f0_med": 135.2,
+   "peak": 1.0
+  },
+  {
+   "id": "L7b",
+   "text": "Votre technologie, notre expertise.",
+   "asr": "Votre technologie, notre expertise.",
+   "wer": 0.0,
+   "asr_parakeet": "Votre technologie, notre expertise.",
+   "wer_parakeet": 0.0,
+   "f0_med": 128.7,
+   "peak": 1.0
+  }
+ ]
+}

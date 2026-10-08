@@ -128,7 +128,8 @@ export default function createTransfer({ cfg, assets, W, H, u }) {
       }
 
       // ---- typographie WESTERN UNION | RIA
-      const out = E.inCubic(seg(lt, 2.3, 2.6));
+      // les noms restent lisibles ≥ 0.9 s après « Ria », puis sortent avec la plongée caméra
+      const out = E.inCubic(seg(f.t - f.mark('L5.Ria', f.clock.toGlobal(0.95)), 0.92, 1.18));
       const yT = isV ? H * 0.17 : H * 0.2;
       // voile sombre en haut de cadre : garantit la lisibilité au-dessus de la carte
       const scrimA = E.outCubic(seg(lt, 0.2, 0.6)) * (1 - out);
@@ -140,27 +141,30 @@ export default function createTransfer({ cfg, assets, W, H, u }) {
         ui.fillStyle = sg;
         ui.fillRect(0, 0, W, H * (isV ? 0.42 : 0.45));
       }
-      const icon = (name, x, y, s, t0) => {
-        const a = E.outCubic(seg(lt, t0, t0 + 0.3)) * (1 - out);
+      // noms affichés EXACTEMENT quand la voix les prononce
+      const dW = f.t - f.mark('L5.Western', f.clock.toGlobal(0.45));
+      const dRia = f.t - f.mark('L5.Ria', f.clock.toGlobal(0.95));
+      const icon = (name, x, y, s, d) => {
+        const a = E.outCubic(seg(d, 0, 0.3)) * (1 - out);
         if (a <= 0) return;
         fx.save();
         fx.globalCompositeOperation = 'lighter';
-        drawSvgGroup(fx, assets.icons.group(name), { x, y, s: s / 24, rot: 0, origin: [12, 12] }, { p: E.outCubic(seg(lt, t0, t0 + 0.4)), width: 3 * u, color: C.neon, alpha: a, glow: 1 });
+        drawSvgGroup(fx, assets.icons.group(name), { x, y, s: s / 24, rot: 0, origin: [12, 12] }, { p: E.outCubic(seg(d, 0, 0.4)), width: 3 * u, color: C.neon, alpha: a, glow: 1 });
         fx.restore();
       };
       if (isV) {
-        drawText(ui, wu, W / 2, yT, { size: tsize, weight: 700, tracking: 0.02, align: 'center', t: lt - 0.45, stagger: 0.03, dur: 0.45, color: C.white, out });
-        drawText(ui, ria, W / 2, yT + tsize * 1.25, { size: tsize * 1.1, weight: 700, tracking: 0.04, align: 'center', t: lt - 0.95, stagger: 0.05, dur: 0.45, color: C.neon, out });
-        icon('send', W / 2 - textWidth(ui, wu, tsize, 700, 0.02) / 2 - tsize * 0.8, yT - tsize * 0.35, tsize * 0.9, 0.5);
-        icon('globe', W / 2 + textWidth(ui, ria, tsize * 1.1, 700, 0.04) / 2 + tsize * 0.8, yT + tsize * 0.9, tsize * 0.9, 1.0);
+        drawText(ui, wu, W / 2, yT, { size: tsize, weight: 700, tracking: 0.02, align: 'center', t: dW + 0.03, stagger: 0.022, dur: 0.36, color: C.white, out });
+        drawText(ui, ria, W / 2, yT + tsize * 1.25, { size: tsize * 1.1, weight: 700, tracking: 0.04, align: 'center', t: dRia + 0.03, stagger: 0.04, dur: 0.32, color: C.neon, out });
+        icon('send', W / 2 - textWidth(ui, wu, tsize, 700, 0.02) / 2 - tsize * 0.8, yT - tsize * 0.35, tsize * 0.9, dW);
+        icon('globe', W / 2 + textWidth(ui, ria, tsize * 1.1, 700, 0.04) / 2 + tsize * 0.8, yT + tsize * 0.9, tsize * 0.9, dRia);
       } else {
         const gap = tsize * 1.4;
         const w1 = textWidth(ui, wu, tsize, 700, 0.02), w2 = textWidth(ui, ria, tsize, 700, 0.02);
         const x1 = W / 2 - (w1 + gap + w2) / 2;
-        drawText(ui, wu, x1, yT, { size: tsize, weight: 700, tracking: 0.02, align: 'left', t: lt - 0.45, stagger: 0.028, dur: 0.45, color: C.white, out });
-        drawText(ui, ria, x1 + w1 + gap, yT, { size: tsize, weight: 700, tracking: 0.02, align: 'left', t: lt - 0.95, stagger: 0.05, dur: 0.45, color: C.neon, out });
+        drawText(ui, wu, x1, yT, { size: tsize, weight: 700, tracking: 0.02, align: 'left', t: dW + 0.03, stagger: 0.022, dur: 0.36, color: C.white, out });
+        drawText(ui, ria, x1 + w1 + gap, yT, { size: tsize, weight: 700, tracking: 0.02, align: 'left', t: dRia + 0.03, stagger: 0.04, dur: 0.32, color: C.neon, out });
         // séparateur vertical lumineux
-        const sa = E.outExpo(seg(lt, 0.85, 1.15)) * (1 - out);
+        const sa = E.outExpo(seg(dRia, -0.15, 0.12)) * (1 - out);
         const sx = x1 + w1 + gap / 2;
         fx.save();
         fx.globalCompositeOperation = 'lighter';
@@ -169,12 +173,12 @@ export default function createTransfer({ cfg, assets, W, H, u }) {
         fx.fillRect(sx - 1.5 * u, yT - tsize * 0.35 - sh / 2, 3 * u, sh);
         radialGlow(fx, sx, yT - tsize * 0.35, tsize * 0.6, C.neon, 0.4 * sa);
         fx.restore();
-        icon('send', x1 - tsize * 0.85, yT - tsize * 0.36, tsize * 0.8, 0.5);
-        icon('globe', x1 + w1 + gap + w2 + tsize * 0.85, yT - tsize * 0.36, tsize * 0.8, 1.0);
+        icon('send', x1 - tsize * 0.85, yT - tsize * 0.36, tsize * 0.8, dW);
+        icon('globe', x1 + w1 + gap + w2 + tsize * 0.85, yT - tsize * 0.36, tsize * 0.8, dRia);
       }
       const ss = tsize * (isV ? 0.36 : 0.3);
       drawText(ui, T.transferSub, W / 2, yT + (isV ? tsize * 2.25 : tsize * 0.9), {
-        size: ss, weight: 500, tracking: 0.26, align: 'center', t: lt - 1.45, mode: 'track', trackFrom: 0.6, dur: 0.6, color: C.white, alpha: 0.9 * (1 - out),
+        size: ss, weight: 500, tracking: 0.26, align: 'center', t: dRia - 0.32, mode: 'track', trackFrom: 0.6, dur: 0.6, color: C.white, alpha: 0.9 * (1 - out),
       });
     },
   };

@@ -174,14 +174,17 @@ export default function createRepair({ cfg, assets, W, H, u }) {
       const x0 = isV ? W / 2 : W * 0.065;
       const yT = isV ? H * 0.2 : H * 0.84;
       const align = isV ? 'center' : 'left';
-      eyebrow(ui, T.stepRepair, x0, yT - tsize * 1.05, lt - 0.15, f, { align, alpha: 1 - out });
-      drawText(ui, T.repair, x0, yT, { size: tsize, weight: 700, tracking: -0.02, align, t: lt - 0.25, stagger: 0.032, dur: 0.5, color: C.white, out });
+      // synchronisé sur la voix : « Téléphonie, réparation… et expertise »
+      const dT = f.t - f.mark('L3.Téléphonie', f.clock.toGlobal(0.15));
+      const dR = f.t - f.mark('L3.réparation', f.clock.toGlobal(0.38));
+      eyebrow(ui, T.stepRepair, x0, yT - tsize * 1.05, dT, f, { align, alpha: 1 - out });
+      drawText(ui, T.repair, x0, yT, { size: tsize, weight: 700, tracking: -0.02, align, t: dR + 0.04, stagger: 0.028, dur: 0.42, color: C.white, out });
       fx.save();
       fx.globalCompositeOperation = 'lighter';
-      drawText(fx, T.repair, x0, yT, { size: tsize, weight: 700, tracking: -0.02, align, t: lt - 0.25, stagger: 0.032, dur: 0.5, color: C.white, out, alpha: 0.18 });
+      drawText(fx, T.repair, x0, yT, { size: tsize, weight: 700, tracking: -0.02, align, t: dR + 0.04, stagger: 0.028, dur: 0.42, color: C.white, out, alpha: 0.18 });
       fx.restore();
       const ss = tsize * 0.42;
-      drawText(ui, T.repairSub, x0, yT + ss * 1.45, { size: ss, weight: 600, tracking: 0.02, align, t: lt - 0.7, stagger: 0.03, dur: 0.45, color: C.neon, out });
+      drawText(ui, T.repairSub, x0, yT + ss * 1.45, { size: ss, weight: 600, tracking: 0.02, align, t: dR - 0.4, stagger: 0.03, dur: 0.45, color: C.neon, out });
     },
   };
 }

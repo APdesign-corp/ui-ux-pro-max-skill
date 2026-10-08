@@ -97,12 +97,8 @@ export async function boot(canvas) {
   // Secousses globales dérivées des cues (impacts, snaps, hits) : caméra + calques 2D
   const shakeCues = timeline.cues
     .filter((c) => ['impact', 'snap', 'hit', 'burst'].includes(c.type))
-    .map((c) => {
-      const s = clock.find((x) => x.id === c.scene);
-      const at = s.start + (c.at * (s.end - s.start)) / s.design;
-      const amp = { impact: 1, snap: 0.6, burst: 0.45, hit: 0.22 }[c.type] * (c.gain ?? 1);
-      return { at, amp };
-    });
+    .map((c) => ({ at: c.t, amp: { impact: 1, snap: 0.6, burst: 0.45, hit: 0.22 }[c.type] * (c.gain ?? 1) }));
+  const markers = timeline.markers || {};
   const shakeAt = (t) => {
     let a = 0;
     for (const c of shakeCues) a += c.amp * pulse(t, c.at, 0.01, 0.16);
@@ -150,6 +146,13 @@ export async function boot(canvas) {
         tmp.project(camera);
         return [(tmp.x * 0.5 + 0.5) * W, (-tmp.y * 0.5 + 0.5) * H, z, tmp.z < 1];
       },
+      // marqueurs de la voix off : instant global d'un mot ("L2.GSM") / même instant en temps local de la scène
+      mark(name, fallback = NaN) {
+        return name in markers ? markers[name] : fallback;
+      },
+      ml(name, fallbackLocal = NaN) {
+        return name in markers ? f.clock.toLocal(markers[name]) : fallbackLocal;
+      },
       dist(obj) {
         scene.updateMatrixWorld();
         return obj.getWorldPosition(tmp).distanceTo(camera.position);
@@ -161,6 +164,7 @@ export async function boot(canvas) {
       const last = i === clock.length - 1;
       if (t < s.start - s.pre || t >= s.end + s.post + (last ? 1 : 0)) continue;
       f.lt = s.toLocal(t);
+      f.clock = s;
       f.owner = t >= s.start && (t < s.end || last);
       instances[s.id].update(f);
     }
@@ -179,6 +183,7 @@ export async function boot(canvas) {
     duration: timeline.duration / cfg.timing.speed,
     fps: cfg.video.fps,
     renderFrame,
-    clock: clock.map(({ toLocal, ...s }) => s),
+    clock: clock.map(({ toLocal, toGlobal, ...s }) => s),
+    markers,
   };
 }

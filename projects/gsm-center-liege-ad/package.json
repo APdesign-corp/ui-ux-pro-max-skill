@@ -10,7 +10,9 @@
     "render:preview": "node scripts/render.mjs --width 1280 --height 720 --fps 30 --out out/preview-720p.mp4",
     "render:vertical": "node scripts/render.mjs --format 9x16 --width 2160 --height 3840 --out out/gsm-center-liege-9x16-4k.mp4",
     "still": "node scripts/render.mjs --still",
-    "audio": "python3 scripts/sound_design.py"
+    "audio": "python3 scripts/sound_design.py",
+    "voice": "python3 scripts/voice_tts.py --voice $npm_config_voice --models $npm_config_models --aligner $npm_config_aligner --out voice/build && cp voice/build/vo_layout.json voice/build/vo_dry.wav voice/",
+    "timeline": "python3 scripts/build_timeline.py"
   },
   "dependencies": {
     "@fontsource/space-grotesk": "5.2.10",

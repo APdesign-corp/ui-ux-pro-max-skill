@@ -75,10 +75,27 @@ export function rgba(hex, a = 1) {
   return `rgba(${r},${g},${b},${clamp(a)})`;
 }
 
-// Temps de scène : convertit un temps global en temps local "design" de chaque scène.
+// Horloge de scène : déformation temporelle linéaire par morceaux.
+// Chaque scène est écrite sur une durée de référence ("design") ; ses ancres
+// [tempsDesign, tempsGlobal] recalent les moments clés (explosion, scan, impact,
+// apparition d'un nom…) sur l'instant exact où la voix off prononce le mot.
+// Entre deux ancres, le mouvement est simplement accéléré ou ralenti.
+function piecewise(pts, x, from, to) {
+  const n = pts.length;
+  let i = 0;
+  while (i < n - 2 && x > pts[i + 1][from]) i++;
+  const a = pts[i], b = pts[i + 1];
+  const span = b[from] - a[from] || 1e-9;
+  return a[to] + ((x - a[from]) * (b[to] - a[to])) / span;
+}
+
 export function makeSceneClock(timeline) {
-  return timeline.scenes.map((s) => ({
-    ...s,
-    toLocal: (t) => ((t - s.start) * s.design) / (s.end - s.start),
-  }));
+  return timeline.scenes.map((s) => {
+    const pts = [[0, s.start], ...(s.anchors || []), [s.design, s.end]].sort((p, q) => p[0] - q[0]);
+    return {
+      ...s,
+      toLocal: (t) => piecewise(pts, t, 1, 0),
+      toGlobal: (l) => piecewise(pts, l, 0, 1),
+    };
+  });
 }

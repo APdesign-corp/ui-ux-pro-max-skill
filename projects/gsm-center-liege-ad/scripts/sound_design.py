@@ -149,6 +149,8 @@ def s_impact(d, tone='dark', **_):
     body = fft_filter(noise(d, 21), hi=900) * np.exp(-t / 0.18)
     crack = fft_filter(noise(d, 22), lo=1800) * np.exp(-t / 0.035)
     x = sub * 1.0 + norm(body) * 0.55 + norm(crack) * 0.35
+    if tone == 'soft':
+        x = sub * 0.8 + norm(body) * 0.3 + norm(crack) * 0.12
     if tone == 'bright':
         bell = sum(np.sin(2 * np.pi * f * t) * np.exp(-t / dd) for f, dd in [(880, 1.0), (1318.5, 0.8), (2093, 0.6), (3520, 0.35)])
         x = x * 0.7 + norm(bell) * 0.35 * np.minimum(1, t / 0.005)
@@ -272,13 +274,53 @@ def s_zips(d, **_):
     return out
 
 
+def s_sub(d, **_):
+    t = tt(d)
+    x = np.sin(2 * np.pi * 38 * t + 2 * np.sin(2 * np.pi * 0.5 * t)) * np.minimum(1, t / 0.25) * np.exp(-t / (d * 0.5))
+    return pan(x, 0)
+
+
+def s_digital(d, **_):
+    t = tt(d)
+    x = np.sign(np.sin(2 * np.pi * 880 * t)) * 0.3 + np.sin(2 * np.pi * 1760 * t) * 0.5
+    x = fft_filter(x, lo=500, hi=6000) * np.exp(-t / 0.09) * (1 + 0.6 * np.sin(2 * np.pi * 40 * t))
+    sub = np.sin(2 * np.pi * 70 * t) * np.exp(-t / 0.12) * 0.6
+    return pan(norm(x) * 0.7 + sub, 0.15)
+
+
+def s_click(d, **_):
+    t = tt(d)
+    c1 = fft_filter(noise(d, 301), lo=1800, hi=9000) * np.exp(-t / 0.006)
+    t2 = np.clip(t - 0.045, 0, None)
+    c2 = fft_filter(noise(d, 302), lo=1200, hi=7000) * np.exp(-t2 / 0.008) * (t > 0.045)
+    body = sum(np.sin(2 * np.pi * f * t) * np.exp(-t / dd) for f, dd in [(1890, 0.03), (3150, 0.02), (640, 0.05)])
+    return pan(np.tanh(norm(c1) * 0.9 + norm(c2) * 0.6 + norm(body) * 0.4), -0.1)
+
+
+def s_transmit(d, **_):
+    t = tt(d)
+    car = np.sin(2 * np.pi * (1200 + 900 * np.sin(2 * np.pi * 7 * t)) * t)
+    gate = (np.sin(2 * np.pi * 18 * t) > 0).astype(float)
+    sweep = sine_glide(400, 2600, d, k=-1.5) * 0.4
+    env = np.sin(np.pi * np.clip(t / d, 0, 1)) ** 0.8
+    x = fft_filter(car * gate * 0.5 + sweep, lo=300, hi=7000) * env
+    return pan(norm(x), np.linspace(-0.6, 0.7, len(t)))
+
+
+def s_pulse2(d, **_):
+    t = tt(d)
+    x = sine_glide(110, 52, d, k=10) * np.exp(-t / 0.3) + 0.35 * np.sin(2 * np.pi * 1318.5 * t) * np.exp(-t / 0.12)
+    return pan(np.tanh(x * 1.3), 0.1)
+
+
 SOUNDS = {
     'drone': s_drone, 'ticks': s_ticks, 'shimmer': s_shimmer, 'suck': s_suck, 'impact': s_impact,
     'hit': s_hit, 'whoosh': s_whoosh, 'swish': s_swish, 'blip': s_blip, 'glass': s_glass, 'riser': s_riser,
     'burst': s_burst, 'servo': s_servo, 'snap': s_snap, 'scan': s_scan, 'success': s_success, 'pop': s_pop,
-    'data': s_data, 'pulse': s_pulse, 'zips': s_zips,
+    'data': s_data, 'pulse': s_pulse, 'zips': s_zips, 'sub': s_sub, 'digital': s_digital, 'click': s_click,
+    'transmit': s_transmit, 'pulse2': s_pulse2,
 }
-WET = {'impact': 0.35, 'hit': 0.25, 'snap': 0.3, 'glass': 0.4, 'success': 0.45, 'shimmer': 0.3, 'blip': 0.2}
+WET = {'click': 0.15, 'pulse2': 0.25, 'impact': 0.35, 'hit': 0.25, 'snap': 0.3, 'glass': 0.4, 'success': 0.45, 'shimmer': 0.3, 'blip': 0.2}
 
 DESCR = {
     'drone': 'nappe grave qui monte dans le noir', 'ticks': 'clics digitaux (apparition des particules)',
@@ -288,22 +330,25 @@ DESCR = {
     'riser': 'riser (montée)', 'burst': 'éclat glitch (explosion des composants)', 'servo': 'servo / analyse',
     'snap': 'snap métallique (réassemblage)', 'scan': 'balayage scanner', 'success': 'validation (réparé)',
     'pop': 'pop (apparition produit)', 'data': 'flux de données (internet)', 'pulse': 'pulsation sub (carte)',
-    'zips': 'zips (arcs de transfert)',
+    'zips': 'zips (arcs de transfert)', 'sub': 'sub bass très léger', 'digital': 'pulse digital',
+    'click': 'clic mécanique', 'transmit': 'effet de transmission', 'pulse2': 'second pulse',
 }
 
 
-def music_bed(total, cfg, speed):
+def music_bed(total, mu, speed=1.0):
+    """Musique électronique minimale : pulsation 120 BPM qui monte, basse sidechainée,
+    hats, silence avant le reveal, nappe F → G (montée) → résolution La mineur add9."""
     out = np.zeros((n_(total), 2))
-    beat = 60.0 / cfg['bpm'] / speed
-    p0, p1 = cfg['pulseFrom'] / speed, cfg['pulseTo'] / speed
-    h0 = cfg['hatsFrom'] / speed
+    beat = 60.0 / mu['bpm'] / speed
+    p0, p1 = mu['pulseFrom'] / speed, mu['pulseTo'] / speed
+    h0 = mu['hatsFrom'] / speed
     kicks = []
     t = p0
     while t < p1 - 1e-6:
         kicks.append(t)
         t += beat
     for i, k in enumerate(kicks):
-        g = 0.32 + 0.3 * (k - p0) / max(1e-6, p1 - p0)
+        g = 0.3 + 0.32 * (k - p0) / max(1e-6, p1 - p0)
         kd = 0.35
         kick = sine_glide(130, 46, kd, k=14) * np.exp(-tt(kd) / 0.16)
         at = n_(k)
@@ -314,12 +359,12 @@ def music_bed(total, cfg, speed):
             at2 = n_(k + beat / 2)
             if at2 < len(out):
                 out[at2:at2 + len(hat)] += pan(norm(hat) * 0.12, 0.3 * (1 if i % 2 else -1))[: len(out) - at2]
-    # basse sidechainée (pompe sur les kicks)
     t_all = np.arange(len(out)) / SR
-    roots = [(p0, 6 / speed, 55.0), (6 / speed, 9 / speed, 43.65), (9 / speed, 12 / speed, 49.0), (12 / speed, p1, 41.2)]
+    roots = [(a / speed, f) for a, f in mu['roots']]
     bass = np.zeros(len(out))
-    for a, b, f in roots:
-        m = (t_all >= a) & (t_all < b)
+    for j, (a, f) in enumerate(roots):
+        b = roots[j + 1][0] if j + 1 < len(roots) else p1
+        m = (t_all >= a) & (t_all < min(b, p1))
         ph = 2 * np.pi * f * t_all[m]
         bass[m] = np.tanh(1.5 * (np.sin(ph) + 0.3 * np.sin(2 * ph)))
     duck = np.ones(len(out))
@@ -327,18 +372,136 @@ def music_bed(total, cfg, speed):
         a = n_(k)
         L = n_(beat)
         duck[a:a + L] = np.minimum(duck[a:a + L], 1 - 0.85 * np.exp(-np.arange(min(L, len(duck) - a)) / (SR * 0.09)))
-    bass = fft_filter(bass, hi=240) * duck * 0.22
-    out += pan(bass, 0)
-    # nappe finale (accord La mineur add9), après le reveal
-    pa = cfg['padFrom'] / speed
-    m = t_all >= pa
-    tp = t_all[m] - pa
-    pad = sum(np.sin(2 * np.pi * f * tp + i) for i, f in enumerate([220.0, 261.6, 329.6, 493.9, 659.3]))
-    env = np.minimum(1, tp / 1.2) * np.clip((total - t_all[m]) / 1.0, 0, 1)
-    pad = fft_filter(np.concatenate([np.zeros(np.count_nonzero(~m)), pad * env]), hi=2500) * 0.07
-    out[:, 0] += pad * 1.0
-    out[:, 1] += np.roll(pad, 240) * 1.0
+    fade_b = np.clip((p1 - t_all) / 0.25, 0, 1)
+    out += pan(fft_filter(bass, hi=240) * duck * 0.22 * fade_b, 0)
+    # silence avant le reveal (seuls les effets parlent), puis nappe
+    sil = mu['silenceFrom'] / speed
+    out[n_(sil):n_(mu['padFrom'] / speed)] *= np.linspace(1, 0, n_(mu['padFrom'] / speed) - n_(sil))[:, None] ** 2
+    pa, sw, rs = mu['padFrom'] / speed, mu['swellFrom'] / speed, mu['resolveAt'] / speed
+
+    def chord(freqs, a, b, amp, att=0.6, rel=0.8):
+        m = (t_all >= a) & (t_all < b + rel)
+        tp = t_all[m] - a
+        x = sum(np.sin(2 * np.pi * f * tp + i * 1.3) + 0.25 * np.sin(4 * np.pi * f * tp + i) for i, f in enumerate(freqs))
+        env = np.minimum(1, tp / att) * np.clip((b + rel - t_all[m]) / rel, 0, 1)
+        y = np.zeros(len(out))
+        y[m] = x * env * amp
+        return y
+
+    pad = chord([87.3, 174.6, 220.0, 261.6, 329.6], pa, sw, 0.05, att=0.4)                 # Fa maj7
+    pad += chord([98.0, 196.0, 246.9, 293.7, 392.0, 440.0], sw, rs, 0.06, att=0.5, rel=0.25)  # Sol (montée)
+    rising = np.clip((t_all - sw) / max(0.1, rs - sw), 0, 1) * ((t_all >= sw) & (t_all < rs))
+    pad *= 1 + 0.8 * rising
+    pad += chord([110.0, 220.0, 261.6, 329.6, 493.9, 659.3], rs, total - 0.9, 0.075, att=0.05, rel=0.9)  # La m add9 (résolution)
+    pad = fft_filter(pad, hi=3200)
+    out[:, 0] += pad
+    out[:, 1] += np.roll(pad, 240)
     return out
+
+
+# ------------------------------------------------------------------ voix off
+def read_wav_mono(path):
+    with wave.open(path) as w:
+        sr = w.getframerate()
+        x = np.frombuffer(w.readframes(w.getnframes()), dtype='<i2').astype(np.float64) / 32768
+        if w.getnchannels() == 2:
+            x = x.reshape(-1, 2).mean(1)
+    if sr != SR:
+        n = int(round(len(x) * SR / sr))
+        X = np.fft.rfft(x)
+        Y = np.zeros(n // 2 + 1, dtype=complex)
+        k = min(len(X), len(Y))
+        Y[:k] = X[:k]
+        x = np.fft.irfft(Y, n) * (n / len(x))
+    return x
+
+
+def eq_curve(f):
+    """EQ voix : coupe-bas, médiums allégés, présence, air (gains en dB)."""
+    lf = np.log2(np.maximum(f, 1.0))
+    bell = lambda fc, g, bw: g * np.exp(-0.5 * ((lf - np.log2(fc)) / bw) ** 2)
+    db = bell(140, 1.5, 0.45) + bell(300, -2.2, 0.5) + bell(3400, 2.8, 0.7) + bell(6800, -1.2, 0.35)
+    db += 1.8 / (1 + np.exp(-(lf - np.log2(10000)) * 4))           # air (shelf)
+    db += -24 * (1 / (1 + (np.maximum(f, 1) / 75) ** 4))            # passe-haut ~75 Hz
+    return 10 ** (db / 20)
+
+
+def deesser(x, lo=5200, hi=9500, max_red_db=6.0):
+    N, hop = 1024, 256
+    win = np.hanning(N)
+    out = np.zeros(len(x) + N)
+    xp = np.concatenate([x, np.zeros(N)])
+    f = np.fft.rfftfreq(N, 1 / SR)
+    band = (f >= lo) & (f <= hi)
+    for i in range(0, len(x), hop):
+        F = np.fft.rfft(xp[i:i + N] * win)
+        e_b = np.sum(np.abs(F[band]) ** 2)
+        e_t = np.sum(np.abs(F) ** 2) + 1e-12
+        ratio = e_b / e_t
+        red = np.clip((ratio - 0.18) / 0.3, 0, 1) * max_red_db
+        F[band] *= 10 ** (-red / 20)
+        out[i:i + N] += np.fft.irfft(F, N) * win
+    return out[:len(x)] / 1.5
+
+
+def compressor(x, thr_db=-20, ratio=3.0, att=0.005, rel=0.09, knee=6):
+    hop = int(0.001 * SR)
+    n = len(x) // hop + 1
+    rms = np.sqrt(np.array([np.mean(x[i * hop:(i + 1) * hop + hop * 4] ** 2) if i * hop < len(x) else 0 for i in range(n)]) + 1e-12)
+    lv = 20 * np.log10(rms + 1e-12)
+    over = lv - thr_db
+    gr = np.where(over <= -knee / 2, 0,
+                  np.where(over >= knee / 2, over * (1 - 1 / ratio), (1 - 1 / ratio) * (over + knee / 2) ** 2 / (2 * knee)))
+    g = np.zeros(n)
+    a_c, r_c = np.exp(-0.001 / att), np.exp(-0.001 / rel)
+    cur = 0.0
+    for i in range(n):
+        c = a_c if gr[i] > cur else r_c
+        cur = c * cur + (1 - c) * gr[i]
+        g[i] = cur
+    gain = 10 ** (-np.interp(np.arange(len(x)) / hop, np.arange(n), g) / 20)
+    return x * gain
+
+
+def process_vo(x):
+    """Chaîne studio : EQ, de-esser, compression légère, saturation douce, réverbe courte."""
+    X = np.fft.rfft(x)
+    x = np.fft.irfft(X * eq_curve(np.fft.rfftfreq(len(x), 1 / SR)), len(x))
+    x = deesser(x)
+    x = compressor(x, thr_db=-21, ratio=3.0)
+    x = norm(x, 0.7)
+    x = np.tanh(x * 1.15) / np.tanh(1.15)
+    st = pan(x, 0)
+    ir_d = 0.32                                                       # petite pièce traitée, pas une cathédrale
+    ir = np.stack([noise(ir_d, 501), noise(ir_d, 502)], 1) * np.exp(-tt(ir_d) / 0.06)[:, None]
+    ir = np.stack([fft_filter(ir[:, 0], lo=300, hi=6000), fft_filter(ir[:, 1], lo=300, hi=6000)], 1)
+    ir = ir / np.max(np.abs(ir)) * 0.05
+    wet = convolve_st(st, ir)[: len(st)]
+    return st + wet * 0.5
+
+
+def vo_envelope(vo_mono, att=0.03, rel=0.32):
+    hop = int(0.005 * SR)
+    n = len(vo_mono) // hop + 1
+    lv = np.array([np.sqrt(np.mean(vo_mono[i * hop:(i + 1) * hop] ** 2)) if i * hop < len(vo_mono) else 0 for i in range(n)])
+    gate = np.clip((20 * np.log10(lv + 1e-9) + 42) / 14, 0, 1)        # 1 = parole, 0 = silence
+    e = np.zeros(n)
+    a_c, r_c = np.exp(-0.005 / att), np.exp(-0.005 / rel)
+    cur = 0.0
+    for i in range(n):
+        c = a_c if gate[i] > cur else r_c
+        cur = c * cur + (1 - c) * gate[i]
+        e[i] = cur
+    return np.interp(np.arange(len(vo_mono)) / hop, np.arange(n), e)
+
+
+def write_st(path, x):
+    pcm = (np.clip(x, -1, 1) * 32767).astype('<i2')
+    with wave.open(path, 'wb') as w:
+        w.setnchannels(2)
+        w.setsampwidth(2)
+        w.setframerate(SR)
+        w.writeframes(pcm.tobytes())
 
 
 def main():
@@ -346,56 +509,83 @@ def main():
     ap.add_argument('--out', default=os.path.join(ROOT, 'out', 'gsm-center-liege-sound.wav'))
     ap.add_argument('--duration', type=float, default=None)
     ap.add_argument('--speed', type=float, default=1.0)
+    ap.add_argument('--no-vo', action='store_true')
+    ap.add_argument('--music-duck-db', type=float, default=6.0)
+    ap.add_argument('--sfx-duck-db', type=float, default=3.0)
     a = ap.parse_args()
     tl = json.load(open(os.path.join(ROOT, 'src', 'timeline.json')))
     speed = a.speed
-    total = (a.duration or tl['duration'] / speed) + 0.0
+    total = (a.duration or tl['duration'] / speed)
     scenes = {s['id']: s for s in tl['scenes']}
 
-    dry = np.zeros((n_(total) + SR * 4, 2))
+    def cue_time(c):
+        if 't' in c:
+            return c['t'] / speed
+        s = scenes[c['scene']]
+        return (s['start'] + c['at'] * (s['end'] - s['start']) / s['design']) / speed
+
+    N = n_(total)
+    dry = np.zeros((N + SR * 4, 2))
     wet = np.zeros_like(dry)
     sheet = []
     for c in tl['cues']:
-        s = scenes[c['scene']]
-        at = (s['start'] + c['at'] * (s['end'] - s['start']) / s['design']) / speed
+        at = cue_time(c)
         d = c.get('dur', 0.5) / speed
-        fn = SOUNDS[c['type']]
         kw = {}
         if 'pan' in c:
             kw['pan_'] = tuple(c['pan'])
         if 'tone' in c:
             kw['tone'] = c['tone']
-        snd = fn(d, **kw)
+        snd = SOUNDS[c['type']](d, **kw)
         snd = snd / (np.max(np.abs(snd)) or 1) * c.get('gain', 1.0)
         i = n_(at)
         dry[i:i + len(snd)] += snd[: len(dry) - i]
         wet[i:i + len(snd)] += snd[: len(dry) - i] * WET.get(c['type'], 0.12)
-        sheet.append((at, c['scene'], c['type'], c.get('gain', 1.0), DESCR.get(c['type'], '')))
+        sheet.append((at, c.get('scene', ''), c['type'], c.get('gain', 1.0), DESCR.get(c['type'], '')))
+    sfx = (dry + convolve_st(wet, reverb_ir())[: len(dry)])[:N]
+    music = music_bed(total, tl['music'], speed)[:N]
 
-    mix = dry + convolve_st(wet, reverb_ir())[: len(dry)]
-    mix[: n_(total)] += music_bed(total, tl['music'], speed)
-    mix = mix[: n_(total)]
-    # fade de sortie + limiteur doux + normalisation -1 dBFS
+    # ---- voix off (priorité 1)
+    vo = np.zeros((N, 2))
+    env = np.zeros(N)
+    vo_cfg = tl.get('vo')
+    if vo_cfg and not a.no_vo and os.path.exists(os.path.join(ROOT, vo_cfg['dry'])):
+        raw = read_wav_mono(os.path.join(ROOT, vo_cfg['dry']))[:N]
+        proc = process_vo(np.concatenate([raw, np.zeros(max(0, N - len(raw)))]))[:N]
+        vo[:len(proc)] = proc
+        env = vo_envelope(vo[:, 0])
+        write_st(os.path.join(ROOT, vo_cfg['file']), vo / max(1e-6, np.max(np.abs(vo))) * 0.9)
+
+    # ---- ducking : musique −6 dB, effets −3 dB sous la voix
+    mg = 10 ** (-a.music_duck_db * env / 20)
+    sg = 10 ** (-a.sfx_duck_db * env / 20)
+    VO_G, SFX_G, MUS_G = 1.0, 0.42, 0.34
+    vo_n = vo / max(1e-6, np.max(np.abs(vo))) * 0.9 if np.any(vo) else vo
+    sfx_n = norm(sfx) * SFX_G * sg[:, None]
+    mus_n = norm(music) * MUS_G * mg[:, None]
+    mix = vo_n * VO_G + sfx_n + mus_n
     fo = n_(0.6)
     mix[-fo:] *= np.linspace(1, 0, fo)[:, None]
-    mix = np.tanh(mix * 1.1)
+    mix = np.tanh(mix * 1.05) / np.tanh(1.05)
     mix = mix / np.max(np.abs(mix)) * (10 ** (-1 / 20))
 
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
-    pcm = (mix * 32767).astype('<i2')
-    with wave.open(a.out, 'wb') as w:
-        w.setnchannels(2)
-        w.setsampwidth(2)
-        w.setframerate(SR)
-        w.writeframes(pcm.tobytes())
+    write_st(a.out, mix)
+    stems = os.path.join(os.path.dirname(a.out), 'stems')
+    os.makedirs(stems, exist_ok=True)
+    for name, x in [('voix', vo_n), ('effets', sfx_n), ('musique', mus_n)]:
+        write_st(os.path.join(stems, f'{name}.wav'), x)
 
     sheet.sort()
-    md = ['# Cue sheet — GSM Center Liège', '', f'Durée : {total:.2f} s · tempo {tl["music"]["bpm"]} BPM · pulsation {tl["music"]["pulseFrom"]}–{tl["music"]["pulseTo"]} s', '',
-          '| Temps (s) | Scène | Son | Gain | Rôle |', '|---:|---|---|---:|---|']
-    md += [f'| {t:6.2f} | {sc} | {ty} | {g:.2f} | {de} |' for t, sc, ty, g, de in sheet]
+    md = ['# Cue sheet — GSM Center Liège', '',
+          f"Durée : {total:.2f} s · voix off : {vo_cfg['voice'] if vo_cfg else '—'} · tempo {tl['music']['bpm']} BPM · ducking musique −{a.music_duck_db:.0f} dB / effets −{a.sfx_duck_db:.0f} dB sous la voix", '',
+          '## Voix off (instants mesurés)', '', '| Temps (s) | Mot |', '|---:|---|']
+    md += [f'| {v:6.2f} | {k} |' for k, v in sorted(tl.get('markers', {}).items(), key=lambda kv: kv[1]) if not k.endswith(('.start', '.end'))]
+    md += ['', '## Effets sonores', '', '| Temps (s) | Son | Gain | Rôle |', '|---:|---|---:|---|']
+    md += [f'| {t:6.2f} | {ty} | {g:.2f} | {de} |' for t, sc, ty, g, de in sheet]
     with open(os.path.join(os.path.dirname(a.out), 'cue-sheet.md'), 'w') as fmd:
         fmd.write('\n'.join(md) + '\n')
-    print(f'♪ {os.path.relpath(a.out, ROOT)}  ({total:.2f} s, {len(sheet)} cues)')
+    print(f'♪ {os.path.relpath(a.out, ROOT)}  ({total:.2f} s, {len(sheet)} cues, voix={"oui" if np.any(vo) else "non"})')
 
 
 if __name__ == '__main__':

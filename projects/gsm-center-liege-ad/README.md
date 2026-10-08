@@ -24,6 +24,47 @@ inventée.**
 | 12–15 s | **Western Union / Ria** | Carte du monde en points (Natural Earth) révélée depuis Liège. Des arcs lumineux partent de Liège vers le monde entier. **WESTERN UNION \| RIA**, avec la légende « ENVOYEZ ET RECEVEZ DE L'ARGENT ». | révélation radiale (shader), arcs 3D, ondes d'arrivée, plongée caméra dans Liège | pulsation, zips, 2 hits, riser |
 | 15–20 s | **Final** | Retour au noir. Le téléphone, les accessoires et les 6 icônes du site convergent en vortex, implosion, impact. Formation de **GSM CENTER LIÈGE**, du slogan « Ton téléphone, *notre spécialité.* », de l'adresse **Rue St Léonard 203 — 4000 Liège**, du numéro **0484 65 60 61** dans une pastille de verre, et de **OUVERT 7J/7**. Impact vert final, puis 1,1 s d'image propre. | vortex de particules, onde de choc, flash cinématique, balayage lumineux, bloom | aspiration, **impact**, nappe, impact « bright » final |
 
+## Voix off — le montage est construit autour d'elle
+
+Priorité de montage : **voix → image → VFX → sound design → musique**.
+
+1. **Script** (`voice/script.json`) : le texte exact du client, avec la direction d'acteur. Elle
+   précise les pauses (« À Liège, … »), la courbe d'énergie (calme → dynamique → signature), le débit
+   de chaque phrase et la graphie phonétique des noms de marque : « GSM Cènnteur » et « Ouesteurn
+   Iounionne ». Ces graphies sont vérifiées par transcription automatique.
+2. **Synthèse** (`scripts/voice_tts.py`) : voix neuronale hors ligne (sherpa-onnx : Piper/VITS ou
+   Kokoro). Chaque phrase est générée d'un seul tenant pour garder une intonation naturelle, en
+   **plusieurs prises**, et la meilleure est retenue par deux juges automatiques (Parakeet TDT 0.6B v3
+   et Whisper). Les pauses de la direction d'acteur sont insérées dans les creux naturels de la phrase.
+3. **Alignement** : Parakeet donne l'instant exact de **chaque mot** (`voice/vo_layout.json`).
+4. **Montage** (`scripts/build_timeline.py` → `src/timeline.json`) : chaque scène est recalée par
+   ancres sur les mots. L'explosion du téléphone suit « réparation », le scan vert suit
+   « expertise ». « WESTERN UNION » et « RIA » s'affichent au moment exact où ils sont prononcés.
+   Chaque produit apparaît sur son mot, et le grand impact tombe sur « GSM Center Liège ». Les cues
+   sonores sont générés depuis les mêmes instants.
+5. **Mixage** (`scripts/sound_design.py`) :
+   - chaîne voix studio : passe-haut, EQ (chaleur 140 Hz, médiums allégés, présence 3,4 kHz, air),
+     de-esser, compression 3:1, saturation douce, réverbération courte de petite pièce ;
+   - ducking automatique : musique −6 dB et effets −3 dB sous la voix ;
+   - musique : pulsation 120 BPM qui monte, silence avant le reveal, puis nappe Fa → Sol → résolution
+     La mineur sur la signature ;
+   - normalisation à −14 LUFS / −1,5 dBTP à l'encodage. Les pistes séparées (`out/stems/`) et la cue
+     sheet (`out/cue-sheet.md`) sont fournies.
+
+```bash
+pip install sherpa-onnx numpy espeakng-loader phonemizer-fork
+# modèles : https://github.com/k2-fsa/sherpa-onnx/releases (tts-models / asr-models)
+python3 scripts/voice_tts.py --voice <voix> --models <dossier modèles> \
+  --aligner <...>/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8 --judge-whisper <...>/sherpa-onnx-whisper-small \
+  --takes 6 --out voice/build && cp voice/build/vo_layout.json voice/build/vo_dry.wav voice/
+python3 scripts/build_timeline.py      # remonte l'image autour de la voix
+npm run render                         # rendu 4K + mix final
+```
+
+Pour remplacer la voix IA par un comédien, enregistrez le même script, déposez le fichier dans
+`voice/vo_dry.wav` et produisez `vo_layout.json` avec l'aligneur (`voice_tts.py` contient
+`recognize()` et `align()`). Lancez ensuite `build_timeline.py` : tout le montage se recale.
+
 ## Direction artistique
 
 - **Couleurs (celles du site) :** fond `#040605`, vert néon `#39ff14` (signature), dégradé logo

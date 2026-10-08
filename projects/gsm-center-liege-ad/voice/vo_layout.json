@@ -1,0 +1,1247 @@
+{
+ "voice": "tjiho3",
+ "gender": "M",
+ "params": {
+  "voice": "tjiho3",
+  "models": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/models",
+  "out": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/final/tjiho3-1.34",
+  "script": "/home/user/ui-ux-pro-max-skill/projects/gsm-center-liege-ad/voice/script.json",
+  "aligner": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/models/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
+  "speed": 1.34,
+  "noise_scale": 0.667,
+  "noise_w": 0.8,
+  "respell": null,
+  "threads": 4,
+  "takes": 6,
+  "judge_whisper": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/models/sherpa-onnx-whisper-small",
+  "variants": "{\"Center\":[\"Sènnteur\",\"Cènnteur\"],\"Ria\":[\"Ri-a\",\"Ria\"]}"
+ },
+ "respell": {
+  "Center": "Cènnteur",
+  "Western": "Ouesteurn",
+  "Union": "Iounionne",
+  "Ria": "Ria"
+ },
+ "lines": [
+  {
+   "id": "L1",
+   "scene": "intro",
+   "tone": "calme, mystérieux, premium",
+   "start": 0.38,
+   "chunks": [
+    {
+     "id": "L1",
+     "text": "À Liège, votre smartphone mérite mieux.",
+     "tts": "À Liège, votre smartphone mérite mieux.",
+     "start": 0.38,
+     "end": 2.838,
+     "speech": [
+      0.392,
+      2.826
+     ],
+     "words": [
+      [
+       "À",
+       0.392
+      ],
+      [
+       "Liège",
+       0.5
+      ],
+      [
+       "votre",
+       1.44
+      ],
+      [
+       "smartphone",
+       1.68
+      ],
+      [
+       "mérite",
+       2.24
+      ],
+      [
+       "mieux",
+       2.72
+      ]
+     ],
+     "aligned_words": 6,
+     "asr_on_raw": "A Liège, votre smartphone mérite mieux.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "À Liège, votre smartphone mérite mieux.",
+       "sr": 44100,
+       "dur": 2.158,
+       "asr_p": "A Liège, votre smartphone mérite mieux.",
+       "wer_p": 0.0,
+       "asr_w": "A Liege, votre smartphone mérite mieux.",
+       "wer_w": 0.0,
+       "score": 0.005
+      },
+      {
+       "tts": "À Liège, votre smartphone mérite mieux.",
+       "sr": 44100,
+       "dur": 2.09,
+       "asr_p": "A Liège, votre smartphone mérite mieux.",
+       "wer_p": 0.0,
+       "asr_w": "A l'hiège, votre smartphone mérite mieux.",
+       "wer_w": 0.167,
+       "score": 0.181
+      },
+      {
+       "tts": "À Liège, votre smartphone mérite mieux.",
+       "sr": 44100,
+       "dur": 2.292,
+       "asr_p": "A liège, votre smartphone mérite mieux.",
+       "wer_p": 0.0,
+       "asr_w": "A Liege, votre smartphone mérite mieux.",
+       "wer_w": 0.0,
+       "score": 0.014
+      },
+      {
+       "tts": "À Liège, votre smartphone mérite mieux.",
+       "sr": 44100,
+       "dur": 2.262,
+       "asr_p": "A liège, votre smartphone mérite mieux.",
+       "wer_p": 0.0,
+       "asr_w": "Alliège, votre smartphone mérite mieux.",
+       "wer_w": 0.333,
+       "score": 0.343
+      },
+      {
+       "tts": "À Liège, votre smartphone mérite mieux.",
+       "sr": 44100,
+       "dur": 2.228,
+       "asr_p": "A Liège, votre smartphone mérite mieux.",
+       "wer_p": 0.0,
+       "asr_w": "A l'hiège, votre smartphone mérite mieux.",
+       "wer_w": 0.167,
+       "score": 0.171
+      },
+      {
+       "tts": "À Liège, votre smartphone mérite mieux.",
+       "sr": 44100,
+       "dur": 2.145,
+       "asr_p": "A liège, votre smartphone mérite mieux.",
+       "wer_p": 0.0,
+       "asr_w": "A l'iege, votre smartphone mérite mieux.",
+       "wer_w": 0.167,
+       "score": 0.173
+      }
+     ],
+     "chosen_take": 0
+    }
+   ],
+   "end": 2.838
+  },
+  {
+   "id": "L2",
+   "scene": "phones",
+   "tone": "confiance, précision",
+   "start": 3.438,
+   "chunks": [
+    {
+     "id": "L2",
+     "text": "Découvrez GSM Center.",
+     "tts": "Découvrez GSM Cènnteur.",
+     "start": 3.438,
+     "end": 5.225,
+     "speech": [
+      3.45,
+      5.213
+     ],
+     "words": [
+      [
+       "Découvrez",
+       3.45
+      ],
+      [
+       "GSM",
+       4.058
+      ],
+      [
+       "Center",
+       4.698
+      ]
+     ],
+     "aligned_words": 3,
+     "asr_on_raw": "Découvrez GSM Center.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Découvrez GSM Sènnteur.",
+       "sr": 44100,
+       "dur": 1.594,
+       "asr_p": "Découvrez GSM 7 heures.",
+       "wer_p": 0.667,
+       "asr_w": "Découvrez GSM Center.",
+       "wer_w": 0.0,
+       "score": 1.351
+      },
+      {
+       "tts": "Découvrez GSM Cènnteur.",
+       "sr": 44100,
+       "dur": 1.719,
+       "asr_p": "Découvrez GSM Center.",
+       "wer_p": 0.0,
+       "asr_w": "Découvrez GSM Center.",
+       "wer_w": 0.0,
+       "score": 0.005
+      },
+      {
+       "tts": "Découvrez GSM Sènnteur.",
+       "sr": 44100,
+       "dur": 1.694,
+       "asr_p": "Découvrez GSN Center.",
+       "wer_p": 0.333,
+       "asr_w": "Découvrez GSM Center.",
+       "wer_w": 0.0,
+       "score": 0.667
+      },
+      {
+       "tts": "Découvrez GSM Cènnteur.",
+       "sr": 44100,
+       "dur": 1.702,
+       "asr_p": "Découvrez GSM 7h.",
+       "wer_p": 0.333,
+       "asr_w": "Découvrez GSM 7h.",
+       "wer_w": 0.333,
+       "score": 1.002
+      },
+      {
+       "tts": "Découvrez GSM Sènnteur.",
+       "sr": 44100,
+       "dur": 1.66,
+       "asr_p": "Découvrez GSM 7h.",
+       "wer_p": 0.333,
+       "asr_w": "Découvrez GSM Center.",
+       "wer_w": 0.0,
+       "score": 0.672
+      },
+      {
+       "tts": "Découvrez GSM Cènnteur.",
+       "sr": 44100,
+       "dur": 1.687,
+       "asr_p": "Découvrez GSM Center.",
+       "wer_p": 0.0,
+       "asr_w": "Découvrez GSM Center.",
+       "wer_w": 0.0,
+       "score": 0.001
+      },
+      {
+       "tts": "Découvrez GSM Sènnteur.",
+       "sr": 44100,
+       "dur": 1.685,
+       "asr_p": "Découvrez GSM Center.",
+       "wer_p": 0.0,
+       "asr_w": "Découvrez GSM Center.",
+       "wer_w": 0.0,
+       "score": 0.001
+      },
+      {
+       "tts": "Découvrez GSM Cènnteur.",
+       "sr": 44100,
+       "dur": 1.625,
+       "asr_p": "Découvrez GSM Center.",
+       "wer_p": 0.0,
+       "asr_w": "Découvrez GSM Center.",
+       "wer_w": 0.0,
+       "score": 0.012
+      },
+      {
+       "tts": "Découvrez GSM Sènnteur.",
+       "sr": 44100,
+       "dur": 1.743,
+       "asr_p": "Découvrez GSM 7 heures.",
+       "wer_p": 0.667,
+       "asr_w": "Découvrez GSM Center.",
+       "wer_w": 0.0,
+       "score": 1.343
+      },
+      {
+       "tts": "Découvrez GSM Cènnteur.",
+       "sr": 44100,
+       "dur": 1.645,
+       "asr_p": "Découvrez GSM Center.",
+       "wer_p": 0.0,
+       "asr_w": "Découvrez GSM Center.",
+       "wer_w": 0.0,
+       "score": 0.008
+      },
+      {
+       "tts": "Découvrez GSM Sènnteur.",
+       "sr": 44100,
+       "dur": 1.709,
+       "asr_p": "Découvrez GSM 7 heures.",
+       "wer_p": 0.667,
+       "asr_w": "Découvrez GSM Sainteur.",
+       "wer_w": 0.333,
+       "score": 1.67
+      },
+      {
+       "tts": "Découvrez GSM Cènnteur.",
+       "sr": 44100,
+       "dur": 1.715,
+       "asr_p": "Découvrez GSN 7 heures.",
+       "wer_p": 1.0,
+       "asr_w": "Découvrez GSM Center.",
+       "wer_w": 0.0,
+       "score": 2.004
+      }
+     ],
+     "chosen_take": 5
+    }
+   ],
+   "end": 5.225
+  },
+  {
+   "id": "L3",
+   "scene": "repair",
+   "tone": "confiance, précision",
+   "start": 6.075,
+   "chunks": [
+    {
+     "id": "L3",
+     "text": "Téléphonie, réparation… et expertise.",
+     "tts": "Téléphonie, réparation… et expertise.",
+     "start": 6.075,
+     "end": 8.375,
+     "speech": [
+      6.087,
+      8.363
+     ],
+     "words": [
+      [
+       "Téléphonie",
+       6.087
+      ],
+      [
+       "réparation",
+       6.855
+      ],
+      [
+       "et",
+       7.715
+      ],
+      [
+       "expertise",
+       7.875
+      ]
+     ],
+     "aligned_words": 4,
+     "asr_on_raw": "Téléphonie, réparation et expertise.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Téléphonie, réparation… et expertise.",
+       "sr": 44100,
+       "dur": 1.948,
+       "asr_p": "Téléphonie. Réparation et expertise.",
+       "wer_p": 0.0,
+       "asr_w": "téléphonie, réparation et expertise.",
+       "wer_w": 0.0,
+       "score": 0.004
+      },
+      {
+       "tts": "Téléphonie, réparation… et expertise.",
+       "sr": 44100,
+       "dur": 1.883,
+       "asr_p": "Téléphonie Réparation Expertise.",
+       "wer_p": 0.25,
+       "asr_w": "téléphonie, réparation et expertise.",
+       "wer_w": 0.0,
+       "score": 0.506
+      },
+      {
+       "tts": "Téléphonie, réparation… et expertise.",
+       "sr": 44100,
+       "dur": 1.9,
+       "asr_p": "Téléphonie, réparation et expertise.",
+       "wer_p": 0.0,
+       "asr_w": "téléphonie, réparation et expertise.",
+       "wer_w": 0.0,
+       "score": 0.003
+      },
+      {
+       "tts": "Téléphonie, réparation… et expertise.",
+       "sr": 44100,
+       "dur": 1.839,
+       "asr_p": "Téléphonie, réparation et expertise.",
+       "wer_p": 0.0,
+       "asr_w": "téléphonie, réparation et expertise.",
+       "wer_w": 0.0,
+       "score": 0.013
+      },
+      {
+       "tts": "Téléphonie, réparation… et expertise.",
+       "sr": 44100,
+       "dur": 1.94,
+       "asr_p": "Téléphonie réparation expertise.",
+       "wer_p": 0.25,
+       "asr_w": "téléphonie, réparation et expertise.",
+       "wer_w": 0.0,
+       "score": 0.503
+      },
+      {
+       "tts": "Téléphonie, réparation… et expertise.",
+       "sr": 44100,
+       "dur": 1.966,
+       "asr_p": "Téléphonie, réparation et expertise.",
+       "wer_p": 0.0,
+       "asr_w": "téléphonie, réparation et expertise.",
+       "wer_w": 0.0,
+       "score": 0.007
+      }
+     ],
+     "chosen_take": 2
+    }
+   ],
+   "end": 8.375
+  },
+  {
+   "id": "L4",
+   "scene": "accessories",
+   "tone": "plus dynamique",
+   "start": 8.925,
+   "chunks": [
+    {
+     "id": "L4",
+     "text": "Internet, multimédia, accessoires…",
+     "tts": "Internet, multi-média, accessoires…",
+     "start": 8.925,
+     "end": 10.99,
+     "speech": [
+      8.937,
+      10.978
+     ],
+     "words": [
+      [
+       "Internet",
+       8.937
+      ],
+      [
+       "multimédia",
+       9.585
+      ],
+      [
+       "accessoires",
+       10.365
+      ]
+     ],
+     "aligned_words": 3,
+     "asr_on_raw": "Internet multimédia accessoires.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Internet, multimédia, accessoires…",
+       "sr": 44100,
+       "dur": 2.033,
+       "asr_p": "Internet Multimédia Accessoire.",
+       "wer_p": 0.333,
+       "asr_w": "Internet Multinédias Accessoires",
+       "wer_w": 0.333,
+       "score": 1.007
+      },
+      {
+       "tts": "Internet, multi-média, accessoires…",
+       "sr": 44100,
+       "dur": 1.986,
+       "asr_p": "Internet multimédia accessoire",
+       "wer_p": 0.333,
+       "asr_w": "Internet multimédia accessoire.",
+       "wer_w": 0.333,
+       "score": 1.0
+      },
+      {
+       "tts": "Internet, multimédia, accessoires…",
+       "sr": 44100,
+       "dur": 2.068,
+       "asr_p": "Internet multimédia accessoires",
+       "wer_p": 0.0,
+       "asr_w": "Internet Multimedia Accessoir",
+       "wer_w": 0.333,
+       "score": 0.345
+      },
+      {
+       "tts": "Internet, multi-média, accessoires…",
+       "sr": 44100,
+       "dur": 1.985,
+       "asr_p": "Internet Multimédia Accessoire",
+       "wer_p": 0.333,
+       "asr_w": "Internet Mutinédias Accessoires",
+       "wer_w": 0.333,
+       "score": 1.0
+      },
+      {
+       "tts": "Internet, multimédia, accessoires…",
+       "sr": 44100,
+       "dur": 2.036,
+       "asr_p": "Internet Multimédia Accessoire",
+       "wer_p": 0.333,
+       "asr_w": "Internet Multinédias Accessoires",
+       "wer_w": 0.333,
+       "score": 1.007
+      },
+      {
+       "tts": "Internet, multi-média, accessoires…",
+       "sr": 44100,
+       "dur": 2.071,
+       "asr_p": "Internet, multimédia, accessoire.",
+       "wer_p": 0.333,
+       "asr_w": "Internet, multimedia, accessoire.",
+       "wer_w": 0.333,
+       "score": 1.013
+      },
+      {
+       "tts": "Internet, multimédia, accessoires…",
+       "sr": 44100,
+       "dur": 1.88,
+       "asr_p": "Internet multimédia accessoire.",
+       "wer_p": 0.333,
+       "asr_w": "Internet Multimedia Accessoire",
+       "wer_w": 0.333,
+       "score": 1.016
+      },
+      {
+       "tts": "Internet, multi-média, accessoires…",
+       "sr": 44100,
+       "dur": 1.945,
+       "asr_p": "Internet multimédia accessoires.",
+       "wer_p": 0.0,
+       "asr_w": "Internet multimédia accessoire",
+       "wer_w": 0.333,
+       "score": 0.34
+      },
+      {
+       "tts": "Internet, multimédia, accessoires…",
+       "sr": 44100,
+       "dur": 1.989,
+       "asr_p": "Internet Multimédia Accessoire",
+       "wer_p": 0.333,
+       "asr_w": "Internet multimédia accessoire",
+       "wer_w": 0.333,
+       "score": 1.0
+      },
+      {
+       "tts": "Internet, multi-média, accessoires…",
+       "sr": 44100,
+       "dur": 2.054,
+       "asr_p": "Internet Multimédia Accessoire",
+       "wer_p": 0.333,
+       "asr_w": "Internet multi-média accessoire.",
+       "wer_w": 1.0,
+       "score": 1.677
+      },
+      {
+       "tts": "Internet, multimédia, accessoires…",
+       "sr": 44100,
+       "dur": 1.902,
+       "asr_p": "Internet Multimédia Accessoire",
+       "wer_p": 0.333,
+       "asr_w": "Internet Multinédias Accessoires",
+       "wer_w": 0.333,
+       "score": 1.013
+      },
+      {
+       "tts": "Internet, multi-média, accessoires…",
+       "sr": 44100,
+       "dur": 1.966,
+       "asr_p": "Internet Multimédia Accessoire.",
+       "wer_p": 0.333,
+       "asr_w": "Internet Multimedia Accessoir",
+       "wer_w": 0.333,
+       "score": 1.003
+      }
+     ],
+     "chosen_take": 7
+    }
+   ],
+   "end": 10.99
+  },
+  {
+   "id": "L5",
+   "scene": "transfer",
+   "tone": "plus énergique",
+   "start": 11.35,
+   "chunks": [
+    {
+     "id": "L5",
+     "text": "Et pour vos transferts internationaux, Western Union et Ria.",
+     "tts": "Et pour vos transferts internationaux, Ouesteurn Iounionne et Ri-a.",
+     "start": 11.35,
+     "end": 14.38,
+     "speech": [
+      11.362,
+      14.373
+     ],
+     "words": [
+      [
+       "Et",
+       11.362
+      ],
+      [
+       "pour",
+       11.402
+      ],
+      [
+       "vos",
+       11.55
+      ],
+      [
+       "transferts",
+       11.79
+      ],
+      [
+       "internationaux",
+       12.27
+      ],
+      [
+       "Western",
+       13.03
+      ],
+      [
+       "Union",
+       13.59
+      ],
+      [
+       "et",
+       14.04
+      ],
+      [
+       "Ria",
+       14.28
+      ]
+     ],
+     "aligned_words": 9,
+     "asr_on_raw": "et pour vos transferts internationaux Western Union et Ria.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Et pour vos transferts internationaux, Ouesteurn Iounionne et Ri-a.",
+       "sr": 44100,
+       "dur": 2.859,
+       "asr_p": "et pour vos transferts internationaux Western Union et Ria.",
+       "wer_p": 0.0,
+       "asr_w": "et pour vos transferts internationaux, Wistern, Union et Ria.",
+       "wer_w": 0.111,
+       "score": 0.118
+      },
+      {
+       "tts": "Et pour vos transferts internationaux, Ouesteurn Iounionne et Ria.",
+       "sr": 44100,
+       "dur": 2.776,
+       "asr_p": "Et pour vos transferts internationaux, Western Linon et Rien.",
+       "wer_p": 0.222,
+       "asr_w": "et pour votre transfert internationaux Western Union Area.",
+       "wer_w": 0.444,
+       "score": 0.891
+      },
+      {
+       "tts": "Et pour vos transferts internationaux : Ouesteurn Iounionne, et Ri-a.",
+       "sr": 44100,
+       "dur": 2.839,
+       "asr_p": "et pour vos transferts internationaux Western Union et Ria.",
+       "wer_p": 0.0,
+       "asr_w": "et pour retransfaire internationaux, Western Union et RIA.",
+       "wer_w": 0.222,
+       "score": 0.226
+      },
+      {
+       "tts": "Et pour vos transferts internationaux : Ouesteurn Iounionne, et Ria.",
+       "sr": 44100,
+       "dur": 2.703,
+       "asr_p": "et pour vos transferts internationaux Western Union et RIA.",
+       "wer_p": 0.0,
+       "asr_w": "et pour retransfaire international Western Indian Area.",
+       "wer_w": 0.667,
+       "score": 0.677
+      },
+      {
+       "tts": "Et pour vos transferts internationaux, Ouesteurn Iounionne et Ri-a.",
+       "sr": 44100,
+       "dur": 2.842,
+       "asr_p": "et pour vos transferts internationaux, Western Union Area.",
+       "wer_p": 0.222,
+       "asr_w": "et pour retransfaire internationaux, Western Union et RIA.",
+       "wer_w": 0.222,
+       "score": 0.671
+      },
+      {
+       "tts": "Et pour vos transferts internationaux, Ouesteurn Iounionne et Ria.",
+       "sr": 44100,
+       "dur": 2.777,
+       "asr_p": "et pour vos transferts internationaux Western Union Area.",
+       "wer_p": 0.222,
+       "asr_w": "et pour vos transferts internationaux Western Union Area.",
+       "wer_w": 0.222,
+       "score": 0.669
+      },
+      {
+       "tts": "Et pour vos transferts internationaux : Ouesteurn Iounionne, et Ri-a.",
+       "sr": 44100,
+       "dur": 2.676,
+       "asr_p": "et pour vos transferts internationaux Western Union et RIA.",
+       "wer_p": 0.0,
+       "asr_w": "et pour votre transfert international Westerd-Unown-Eria.",
+       "wer_w": 0.778,
+       "score": 0.791
+      },
+      {
+       "tts": "Et pour vos transferts internationaux : Ouesteurn Iounionne, et Ria.",
+       "sr": 44100,
+       "dur": 2.878,
+       "asr_p": "et pour vos transferts internationaux Western Union AI.",
+       "wer_p": 0.222,
+       "asr_w": "et pour retransfaire international, Western Union area.",
+       "wer_w": 0.556,
+       "score": 1.008
+      },
+      {
+       "tts": "Et pour vos transferts internationaux, Ouesteurn Iounionne et Ri-a.",
+       "sr": 44100,
+       "dur": 2.84,
+       "asr_p": "Et pour vos transferts internationaux, Western Union Area.",
+       "wer_p": 0.222,
+       "asr_w": "et pour retransfaire internationaux, Western Union et RIA.",
+       "wer_w": 0.222,
+       "score": 0.671
+      },
+      {
+       "tts": "Et pour vos transferts internationaux, Ouesteurn Iounionne et Ria.",
+       "sr": 44100,
+       "dur": 2.709,
+       "asr_p": "et pour vos transferts internationaux western Union Area.",
+       "wer_p": 0.222,
+       "asr_w": "et pour retransfaire internationaux Western Union Area.",
+       "wer_w": 0.444,
+       "score": 0.899
+      },
+      {
+       "tts": "Et pour vos transferts internationaux : Ouesteurn Iounionne, et Ri-a.",
+       "sr": 44100,
+       "dur": 2.665,
+       "asr_p": "et pour vos transferts internationaux Western Union et RIA.",
+       "wer_p": 0.0,
+       "asr_w": "et pour retransfaire internationaux Western Union et RIA.",
+       "wer_w": 0.222,
+       "score": 0.237
+      },
+      {
+       "tts": "Et pour vos transferts internationaux : Ouesteurn Iounionne, et Ria.",
+       "sr": 44100,
+       "dur": 2.822,
+       "asr_p": "et pour vos transferts internationaux Western Union AIA.",
+       "wer_p": 0.222,
+       "asr_w": "et pour vos transferts internationaux, Western Union et RIA.",
+       "wer_w": 0.0,
+       "score": 0.447
+      }
+     ],
+     "chosen_take": 0
+    }
+   ],
+   "end": 14.38
+  },
+  {
+   "id": "L6",
+   "scene": "final",
+   "tone": "montée émotionnelle",
+   "start": 15.18,
+   "chunks": [
+    {
+     "id": "L6",
+     "text": "Tout ce dont vous avez besoin… au même endroit.",
+     "tts": "Tout ce dont vous avez besoin. Au même endroit.",
+     "start": 15.18,
+     "end": 17.337,
+     "speech": [
+      15.192,
+      17.325
+     ],
+     "words": [
+      [
+       "Tout",
+       15.192
+      ],
+      [
+       "ce",
+       15.3
+      ],
+      [
+       "dont",
+       15.46
+      ],
+      [
+       "vous",
+       15.62
+      ],
+      [
+       "avez",
+       15.78
+      ],
+      [
+       "besoin",
+       16.02
+      ],
+      [
+       "au",
+       16.62
+      ],
+      [
+       "même",
+       16.78
+      ],
+      [
+       "endroit",
+       17.02
+      ]
+     ],
+     "aligned_words": 9,
+     "asr_on_raw": "Tout ce dont vous avez besoin, au même endroit.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Tout ce dont vous avez besoin… au même endroit.",
+       "sr": 44100,
+       "dur": 1.79,
+       "asr_p": "Tout ce dont vous avez besoin en même endroit.",
+       "wer_p": 0.111,
+       "asr_w": "Tout ce dont vous avez besoin en même endroit.",
+       "wer_w": 0.111,
+       "score": 0.341
+      },
+      {
+       "tts": "Tout ce dont vous avez besoin. Au même endroit.",
+       "sr": 44100,
+       "dur": 1.941,
+       "asr_p": "Tout ce dont vous avez besoin, au même endroit.",
+       "wer_p": 0.0,
+       "asr_w": "Tout ce dont vous avez besoin, au même endroit.",
+       "wer_w": 0.0,
+       "score": 0.018
+      },
+      {
+       "tts": "Tout ce dont vous avez besoin… au même endroit.",
+       "sr": 44100,
+       "dur": 1.712,
+       "asr_p": "Tout ce dont vous avez besoin au même endroit.",
+       "wer_p": 0.0,
+       "asr_w": "Tout ce dont vous avez besoin en même endroit.",
+       "wer_w": 0.111,
+       "score": 0.131
+      },
+      {
+       "tts": "Tout ce dont vous avez besoin. Au même endroit.",
+       "sr": 44100,
+       "dur": 2.168,
+       "asr_p": "Tout ce dont vous avez besoin, au même endroit.",
+       "wer_p": 0.0,
+       "asr_w": "Tout ce dont vous avez besoin, au même endroit.",
+       "wer_w": 0.0,
+       "score": 0.055
+      },
+      {
+       "tts": "Tout ce dont vous avez besoin… au même endroit.",
+       "sr": 44100,
+       "dur": 1.745,
+       "asr_p": "Tout ce dont vous avez besoin au même endroit.",
+       "wer_p": 0.0,
+       "asr_w": "Pousse ce dont vous avez besoin en même endroit.",
+       "wer_w": 0.222,
+       "score": 0.237
+      },
+      {
+       "tts": "Tout ce dont vous avez besoin. Au même endroit.",
+       "sr": 44100,
+       "dur": 2.215,
+       "asr_p": "Tout ce dont vous avez besoin, au même endroit.",
+       "wer_p": 0.0,
+       "asr_w": "Tout ce dont vous avez besoin, au même endroit.",
+       "wer_w": 0.0,
+       "score": 0.062
+      },
+      {
+       "tts": "Tout ce dont vous avez besoin… au même endroit.",
+       "sr": 44100,
+       "dur": 1.754,
+       "asr_p": "Tout ce dont vous avez besoin au même endroit.",
+       "wer_p": 0.0,
+       "asr_w": "Tout ce dont vous avez besoin en même endroit.",
+       "wer_w": 0.111,
+       "score": 0.124
+      },
+      {
+       "tts": "Tout ce dont vous avez besoin. Au même endroit.",
+       "sr": 44100,
+       "dur": 2.19,
+       "asr_p": "Tout ce dont vous avez besoin, au même endroit.",
+       "wer_p": 0.0,
+       "asr_w": "Tout ce temps vous avez besoin, au même endroit.",
+       "wer_w": 0.111,
+       "score": 0.169
+      },
+      {
+       "tts": "Tout ce dont vous avez besoin… au même endroit.",
+       "sr": 44100,
+       "dur": 1.751,
+       "asr_p": "Tout ce dont vous avez besoin au même endroit.",
+       "wer_p": 0.0,
+       "asr_w": "Tout ce dont vous avez besoin au même endroit.",
+       "wer_w": 0.0,
+       "score": 0.014
+      },
+      {
+       "tts": "Tout ce dont vous avez besoin. Au même endroit.",
+       "sr": 44100,
+       "dur": 1.877,
+       "asr_p": "Tout ce dont vous avez besoin, au même endroit.",
+       "wer_p": 0.0,
+       "asr_w": "tout ce dont vous avez besoin au même endroit.",
+       "wer_w": 0.0,
+       "score": 0.007
+      },
+      {
+       "tts": "Tout ce dont vous avez besoin… au même endroit.",
+       "sr": 44100,
+       "dur": 1.731,
+       "asr_p": "Tout ce dont vous avez besoin au même endroit.",
+       "wer_p": 0.0,
+       "asr_w": "Tout ce dont vous avez besoin au même endroit.",
+       "wer_w": 0.0,
+       "score": 0.017
+      },
+      {
+       "tts": "Tout ce dont vous avez besoin. Au même endroit.",
+       "sr": 44100,
+       "dur": 2.015,
+       "asr_p": "Tout ce dont vous avez besoin, au même endroit.",
+       "wer_p": 0.0,
+       "asr_w": "Tout ce dont vous avez besoin au même endroit.",
+       "wer_w": 0.0,
+       "score": 0.03
+      }
+     ],
+     "chosen_take": 9
+    }
+   ],
+   "end": 17.337
+  },
+  {
+   "id": "L7",
+   "scene": "final",
+   "tone": "très assurée, signature de marque",
+   "start": 17.787,
+   "chunks": [
+    {
+     "id": "L7a",
+     "text": "GSM Center Liège.",
+     "tts": "GSM Sènnteur Liège.",
+     "start": 17.787,
+     "end": 19.524,
+     "speech": [
+      17.787,
+      19.512
+     ],
+     "words": [
+      [
+       "GSM",
+       17.787
+      ],
+      [
+       "Center",
+       18.627
+      ],
+      [
+       "Liège",
+       19.107
+      ]
+     ],
+     "aligned_words": 3,
+     "asr_on_raw": "GSM Center Liège.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "GSM Sènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.651,
+       "asr_p": "J'ai les scènes 7 heures lièges.",
+       "wer_p": 2.0,
+       "asr_w": "J'ai laissé un sept-heure liège.",
+       "wer_w": 1.667,
+       "score": 5.677
+      },
+      {
+       "tts": "GSM Cènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.752,
+       "asr_p": "J'ai les cèdres cette heure vieille.",
+       "wer_p": 2.0,
+       "asr_w": "J'ai laissé me cette horliège.",
+       "wer_w": 1.667,
+       "score": 5.674
+      },
+      {
+       "tts": "GSM Sènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.765,
+       "asr_p": "G les Sem Center Viege.",
+       "wer_p": 1.333,
+       "asr_w": "GSM CenterLiege",
+       "wer_w": 0.667,
+       "score": 3.343
+      },
+      {
+       "tts": "GSM Cènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.715,
+       "asr_p": "GSM Center Liege.",
+       "wer_p": 0.0,
+       "asr_w": "JSM Center Lige",
+       "wer_w": 0.667,
+       "score": 0.667
+      },
+      {
+       "tts": "GSM Sènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.599,
+       "asr_p": "G les CM7.",
+       "wer_p": 1.0,
+       "asr_w": "J'ai laissé à me sentir de l'h",
+       "wer_w": 2.333,
+       "score": 4.353
+      },
+      {
+       "tts": "GSM Cènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.772,
+       "asr_p": "GDCM7-Liege.",
+       "wer_p": 0.667,
+       "asr_w": "J'ai laissé me cette horliège.",
+       "wer_w": 1.667,
+       "score": 3.011
+      },
+      {
+       "tts": "GSM Sènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.737,
+       "asr_p": "GSM Center Liège.",
+       "wer_p": 0.0,
+       "asr_w": "GSM Center liège.",
+       "wer_w": 0.0,
+       "score": 0.004
+      },
+      {
+       "tts": "GSM Cènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.609,
+       "asr_p": "GSM septh liége.",
+       "wer_p": 0.333,
+       "asr_w": "J'ai laissé me 7 heures du voyage.",
+       "wer_w": 2.333,
+       "score": 3.018
+      },
+      {
+       "tts": "GSM Sènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.578,
+       "asr_p": "GSM 7h liège.",
+       "wer_p": 0.333,
+       "asr_w": "GSM 7H Liège",
+       "wer_w": 0.333,
+       "score": 1.023
+      },
+      {
+       "tts": "GSM Cènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.77,
+       "asr_p": "GLSM Center Liège.",
+       "wer_p": 0.333,
+       "asr_w": "GNSM Center Liège",
+       "wer_w": 0.333,
+       "score": 1.01
+      },
+      {
+       "tts": "GSM Sènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.636,
+       "asr_p": "GSM Center Liège",
+       "wer_p": 0.0,
+       "asr_w": "GSM Center Liège",
+       "wer_w": 0.0,
+       "score": 0.013
+      },
+      {
+       "tts": "GSM Cènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.813,
+       "asr_p": "J'ai les scènes cette heure viage.",
+       "wer_p": 2.0,
+       "asr_w": "GDSM 7h00",
+       "wer_w": 1.0,
+       "score": 5.018
+      },
+      {
+       "tts": "GSM Sènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.665,
+       "asr_p": "J'ai les 77 heures liège.",
+       "wer_p": 1.333,
+       "asr_w": "GSM Center Vietj",
+       "wer_w": 0.333,
+       "score": 3.008
+      },
+      {
+       "tts": "GSM Cènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.791,
+       "asr_p": "GDCM 7 or Vieige.",
+       "wer_p": 1.333,
+       "asr_w": "GSM Sainte-Hurillège",
+       "wer_w": 0.667,
+       "score": 3.347
+      },
+      {
+       "tts": "GSM Sènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.777,
+       "asr_p": "J'ai laissé M sept heures liège.",
+       "wer_p": 1.667,
+       "asr_w": "J'ai laissé me s'intervié.",
+       "wer_w": 1.333,
+       "score": 4.678
+      },
+      {
+       "tts": "GSM Cènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.632,
+       "asr_p": "J'ai les m7 heures liége.",
+       "wer_p": 1.333,
+       "asr_w": "GLSM Center Lige",
+       "wer_w": 0.667,
+       "score": 3.347
+      },
+      {
+       "tts": "GSM Sènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.683,
+       "asr_p": "GSN Center Liège.",
+       "wer_p": 0.333,
+       "asr_w": "GSM CenterLiege",
+       "wer_w": 0.667,
+       "score": 1.338
+      },
+      {
+       "tts": "GSM Cènnteur Liège.",
+       "sr": 44100,
+       "dur": 1.708,
+       "asr_p": "GSM sept d'or liége.",
+       "wer_p": 0.667,
+       "asr_w": "JSM Sintervierge",
+       "wer_w": 1.0,
+       "score": 2.334
+      }
+     ],
+     "chosen_take": 6
+    },
+    {
+     "id": "L7b",
+     "text": "Votre technologie, notre expertise.",
+     "tts": "Votre technologie, notre expertise.",
+     "start": 19.884,
+     "end": 22.178,
+     "speech": [
+      19.896,
+      22.166
+     ],
+     "words": [
+      [
+       "Votre",
+       19.896
+      ],
+      [
+       "technologie",
+       20.244
+      ],
+      [
+       "notre",
+       21.224
+      ],
+      [
+       "expertise",
+       21.544
+      ]
+     ],
+     "aligned_words": 4,
+     "asr_on_raw": "Votre technologie, notre expertise.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Votre technologie, notre expertise.",
+       "sr": 44100,
+       "dur": 2.156,
+       "asr_p": "Votre technologie, notre expertise.",
+       "wer_p": 0.0,
+       "asr_w": "Votre technologie, notre expertise.",
+       "wer_w": 0.0,
+       "score": 0.003
+      },
+      {
+       "tts": "Votre technologie, notre expertise.",
+       "sr": 44100,
+       "dur": 2.114,
+       "asr_p": "Votre technologie, notre expertise.",
+       "wer_p": 0.0,
+       "asr_w": "Votre technologie, notre expertise.",
+       "wer_w": 0.0,
+       "score": 0.003
+      },
+      {
+       "tts": "Votre technologie, notre expertise.",
+       "sr": 44100,
+       "dur": 2.211,
+       "asr_p": "Votre technologie, notre expertise.",
+       "wer_p": 0.0,
+       "asr_w": "Votre technologie, notre expertise.",
+       "wer_w": 0.0,
+       "score": 0.011
+      },
+      {
+       "tts": "Votre technologie, notre expertise.",
+       "sr": 44100,
+       "dur": 2.105,
+       "asr_p": "Votre technologie, notre expertise.",
+       "wer_p": 0.0,
+       "asr_w": "Votre technologie, notre expertise.",
+       "wer_w": 0.0,
+       "score": 0.004
+      },
+      {
+       "tts": "Votre technologie, notre expertise.",
+       "sr": 44100,
+       "dur": 2.151,
+       "asr_p": "Votre technologie, notre expertise.",
+       "wer_p": 0.0,
+       "asr_w": "Votre technologie, notre expertise.",
+       "wer_w": 0.0,
+       "score": 0.003
+      },
+      {
+       "tts": "Votre technologie, notre expertise.",
+       "sr": 44100,
+       "dur": 2.103,
+       "asr_p": "Votre technologie, notre expertise.",
+       "wer_p": 0.0,
+       "asr_w": "Votre technologie, notre expertise.",
+       "wer_w": 0.0,
+       "score": 0.004
+      }
+     ],
+     "chosen_take": 1
+    }
+   ],
+   "end": 22.178
+  }
+ ],
+ "vo_end": 22.178
+}

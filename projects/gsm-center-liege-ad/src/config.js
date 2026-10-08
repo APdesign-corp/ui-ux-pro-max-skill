@@ -11,7 +11,8 @@ export const CONFIG = {
     nameSplit: 3,                // index de coupure blanc / vert
     city: 'LIÈGE',
     badgeLetter: 'G',
-    tagline: ['Ton téléphone, ', 'notre spécialité.'],   // 2e partie en vert (comme le site)
+    // signature de la voix off (texte client) — 2e partie en vert ; slogan du site : ['Ton téléphone, ', 'notre spécialité.']
+    tagline: ['Votre technologie, ', 'notre expertise.'],
     address: 'Rue St Léonard 203 — 4000 Liège',
     phone: '0484 65 60 61',
     open: 'OUVERT 7J/7',
@@ -23,17 +24,19 @@ export const CONFIG = {
     stepPhones: '01 — CHOISIR',
     phones: 'SMARTPHONES',
     phonesSub: 'NEUFS & RECONDITIONNÉS',
+    phonesPill: 'SMARTPHONES · NEUFS & RECONDITIONNÉS',
     stepRepair: '02 — RÉPARER',
     repair: 'RÉPARATION',
     repairSub: '& LIVRAISON',
     parts: ['ÉCRAN', 'BATTERIE', 'CONNECTEUR'],
     diagnostic: 'DIAGNOSTIC RAPIDE',
     stepGear: "03 — S'ÉQUIPER",
-    services: ['ACCESSOIRES', 'MULTIMÉDIA', 'INTERNET'],
+    services: ['INTERNET', 'MULTIMÉDIA', 'ACCESSOIRES'],   // ordre de la voix off
     gearSub: 'COQUES · CHARGEURS · ÉCOUTEURS',
     transfer: ['WESTERN UNION', 'RIA'],
     transferSub: "ENVOYEZ ET RECEVEZ DE L'ARGENT",
     cityLabel: 'LIÈGE',
+    together: ['Tout ce dont vous avez besoin…', 'AU MÊME ENDROIT.'],
   },
 
   colors: {

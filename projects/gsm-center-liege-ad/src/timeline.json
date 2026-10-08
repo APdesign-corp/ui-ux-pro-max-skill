@@ -1,67 +1,585 @@
 {
-  "_doc": "Timeline maître, partagée par le rendu (JS) et le sound design (Python). Les scènes sont écrites sur une durée de référence ('design'). Si vous changez 'start' ou 'end', le contenu de la scène s'étire ou se compresse, et ses cues sonores suivent. 'pre' et 'post' (en secondes) : marge pendant laquelle la scène continue de dessiner ses calques 2D, pour les transitions. Les cues sont en temps local de scène (référence design).",
-  "duration": 20,
-  "scenes": [
-    { "id": "intro",       "start": 0,  "end": 3,  "design": 3, "pre": 0,   "post": 0.05 },
-    { "id": "phones",      "start": 3,  "end": 6,  "design": 3, "pre": 0,   "post": 0.05 },
-    { "id": "repair",      "start": 6,  "end": 9,  "design": 3, "pre": 0,   "post": 0.05 },
-    { "id": "accessories", "start": 9,  "end": 12, "design": 3, "pre": 0,   "post": 0.05 },
-    { "id": "transfer",    "start": 12, "end": 15, "design": 3, "pre": 0,   "post": 0.05 },
-    { "id": "final",       "start": 15, "end": 20, "design": 5, "pre": 0,   "post": 0 }
-  ],
-  "music": { "bpm": 120, "pulseFrom": 3.0, "pulseTo": 15.0, "hatsFrom": 9.0, "padFrom": 16.0 },
-  "cues": [
-    { "scene": "intro", "at": 0.0,  "type": "drone",   "dur": 2.0,  "gain": 0.55 },
-    { "scene": "intro", "at": 0.15, "type": "ticks",   "dur": 1.1,  "gain": 0.35 },
-    { "scene": "intro", "at": 0.75, "type": "shimmer", "dur": 0.8,  "gain": 0.3 },
-    { "scene": "intro", "at": 1.45, "type": "suck",    "dur": 0.55, "gain": 0.6 },
-    { "scene": "intro", "at": 2.0,  "type": "impact",  "dur": 2.2,  "gain": 1.0 },
-    { "scene": "intro", "at": 2.08, "type": "shimmer", "dur": 0.6,  "gain": 0.35 },
-    { "scene": "intro", "at": 2.7,  "type": "whoosh",  "dur": 0.4,  "gain": 0.75, "pan": [-0.8, 0.8] },
-
-    { "scene": "phones", "at": 0.0,  "type": "hit",    "dur": 1.2,  "gain": 0.85 },
-    { "scene": "phones", "at": 0.45, "type": "blip",   "dur": 0.2,  "gain": 0.3 },
-    { "scene": "phones", "at": 1.0,  "type": "hit",    "dur": 1.0,  "gain": 0.6 },
-    { "scene": "phones", "at": 1.0,  "type": "glass",  "dur": 0.9,  "gain": 0.35 },
-    { "scene": "phones", "at": 1.55, "type": "swish",  "dur": 0.5,  "gain": 0.3, "pan": [0.5, -0.5] },
-    { "scene": "phones", "at": 2.45, "type": "riser",  "dur": 0.55, "gain": 0.45 },
-    { "scene": "phones", "at": 2.6,  "type": "whoosh", "dur": 0.4,  "gain": 0.7, "pan": [0, 0] },
-
-    { "scene": "repair", "at": 0.4,  "type": "burst",   "dur": 0.6,  "gain": 0.7 },
-    { "scene": "repair", "at": 0.8,  "type": "blip",    "dur": 0.15, "gain": 0.32 },
-    { "scene": "repair", "at": 0.9,  "type": "blip",    "dur": 0.15, "gain": 0.32 },
-    { "scene": "repair", "at": 1.0,  "type": "blip",    "dur": 0.15, "gain": 0.32 },
-    { "scene": "repair", "at": 0.85, "type": "servo",   "dur": 0.75, "gain": 0.25 },
-    { "scene": "repair", "at": 1.6,  "type": "suck",    "dur": 0.4,  "gain": 0.45 },
-    { "scene": "repair", "at": 2.0,  "type": "snap",    "dur": 0.9,  "gain": 0.9 },
-    { "scene": "repair", "at": 2.05, "type": "scan",    "dur": 0.5,  "gain": 0.35 },
-    { "scene": "repair", "at": 2.55, "type": "success", "dur": 1.0,  "gain": 0.45 },
-    { "scene": "repair", "at": 2.72, "type": "whoosh",  "dur": 0.35, "gain": 0.7, "pan": [-0.9, 0.9] },
-
-    { "scene": "accessories", "at": 0.0,  "type": "hit",   "dur": 0.9,  "gain": 0.6 },
-    { "scene": "accessories", "at": 0.3,  "type": "pop",   "dur": 0.2,  "gain": 0.4 },
-    { "scene": "accessories", "at": 0.4,  "type": "pop",   "dur": 0.2,  "gain": 0.35 },
-    { "scene": "accessories", "at": 0.5,  "type": "hit",   "dur": 0.9,  "gain": 0.75 },
-    { "scene": "accessories", "at": 1.0,  "type": "hit",   "dur": 0.9,  "gain": 0.75 },
-    { "scene": "accessories", "at": 1.5,  "type": "hit",   "dur": 0.9,  "gain": 0.8 },
-    { "scene": "accessories", "at": 1.5,  "type": "data",  "dur": 0.5,  "gain": 0.3 },
-    { "scene": "accessories", "at": 2.55, "type": "riser", "dur": 0.45, "gain": 0.4 },
-    { "scene": "accessories", "at": 2.65, "type": "whoosh","dur": 0.4,  "gain": 0.7, "pan": [0, 0] },
-
-    { "scene": "transfer", "at": 0.05, "type": "pulse",  "dur": 1.2,  "gain": 0.6 },
-    { "scene": "transfer", "at": 0.4,  "type": "zips",   "dur": 1.3,  "gain": 0.35 },
-    { "scene": "transfer", "at": 0.5,  "type": "hit",    "dur": 1.0,  "gain": 0.8 },
-    { "scene": "transfer", "at": 1.0,  "type": "hit",    "dur": 1.0,  "gain": 0.8 },
-    { "scene": "transfer", "at": 1.5,  "type": "blip",   "dur": 0.2,  "gain": 0.3 },
-    { "scene": "transfer", "at": 1.6,  "type": "riser",  "dur": 1.4,  "gain": 0.65 },
-    { "scene": "transfer", "at": 2.45, "type": "whoosh", "dur": 0.55, "gain": 0.8, "pan": [0, 0] },
-
-    { "scene": "final", "at": 0.0,  "type": "suck",    "dur": 0.9,  "gain": 0.8 },
-    { "scene": "final", "at": 1.0,  "type": "impact",  "dur": 3.0,  "gain": 1.0 },
-    { "scene": "final", "at": 1.05, "type": "shimmer", "dur": 0.9,  "gain": 0.35 },
-    { "scene": "final", "at": 2.3,  "type": "blip",    "dur": 0.2,  "gain": 0.25 },
-    { "scene": "final", "at": 2.6,  "type": "ticks",   "dur": 0.5,  "gain": 0.3 },
-    { "scene": "final", "at": 3.5,  "type": "impact",  "dur": 1.5,  "gain": 0.7, "tone": "bright" },
-    { "scene": "final", "at": 3.5,  "type": "glass",   "dur": 1.4,  "gain": 0.4 }
+ "_doc": "GÉNÉRÉ par scripts/build_timeline.py à partir de voice/vo_layout.json — ne pas éditer à la main. Les scènes sont recalées sur la voix off (ancres [temps design, temps global]) ; cues = sound design en temps absolu.",
+ "duration": 23.616,
+ "vo": {
+  "file": "voice/vo_master.wav",
+  "dry": "voice/vo_dry.wav",
+  "voice": "tjiho3",
+  "gender": "M"
+ },
+ "markers": {
+  "L1.À": 0.392,
+  "L1.Liège": 0.5,
+  "L1.votre": 1.44,
+  "L1.smartphone": 1.68,
+  "L1.mérite": 2.24,
+  "L1.mieux": 2.72,
+  "L1.start": 0.392,
+  "L1.end": 2.826,
+  "L2.Découvrez": 3.45,
+  "L2.GSM": 4.058,
+  "L2.Center": 4.698,
+  "L2.start": 3.45,
+  "L2.end": 5.213,
+  "L3.Téléphonie": 6.087,
+  "L3.réparation": 6.855,
+  "L3.et": 7.715,
+  "L3.expertise": 7.875,
+  "L3.start": 6.087,
+  "L3.end": 8.363,
+  "L4.Internet": 8.937,
+  "L4.multimédia": 9.585,
+  "L4.accessoires": 10.365,
+  "L4.start": 8.937,
+  "L4.end": 10.978,
+  "L5.Et": 11.362,
+  "L5.pour": 11.402,
+  "L5.vos": 11.55,
+  "L5.transferts": 11.79,
+  "L5.internationaux": 12.27,
+  "L5.Western": 13.03,
+  "L5.Union": 13.59,
+  "L5.et": 14.04,
+  "L5.Ria": 14.28,
+  "L5.start": 11.362,
+  "L5.end": 14.373,
+  "L6.Tout": 15.192,
+  "L6.ce": 15.3,
+  "L6.dont": 15.46,
+  "L6.vous": 15.62,
+  "L6.avez": 15.78,
+  "L6.besoin": 16.02,
+  "L6.au": 16.62,
+  "L6.même": 16.78,
+  "L6.endroit": 17.02,
+  "L6.start": 15.192,
+  "L6.end": 17.325,
+  "L7a.GSM": 17.787,
+  "L7a.Center": 18.627,
+  "L7a.Liège": 19.107,
+  "L7a.start": 17.787,
+  "L7a.end": 19.512,
+  "L7b.Votre": 19.896,
+  "L7b.technologie": 20.244,
+  "L7b.notre": 21.224,
+  "L7b.expertise": 21.544,
+  "L7b.start": 19.896,
+  "L7b.end": 22.166
+ },
+ "scenes": [
+  {
+   "id": "intro",
+   "start": 0,
+   "end": 3.21,
+   "design": 3,
+   "pre": 0,
+   "post": 0.05,
+   "anchors": [
+    [
+     0.6,
+     0.5
+    ],
+    [
+     1.0,
+     1.68
+    ],
+    [
+     2.0,
+     2.78
+    ],
+    [
+     2.72,
+     2.91
+    ]
+   ]
+  },
+  {
+   "id": "phones",
+   "start": 3.21,
+   "end": 5.867,
+   "design": 3,
+   "pre": 0,
+   "post": 0.05,
+   "anchors": [
+    [
+     0.9,
+     4.018
+    ],
+    [
+     1.0,
+     4.698
+    ],
+    [
+     2.55,
+     5.567
+    ]
+   ]
+  },
+  {
+   "id": "repair",
+   "start": 5.867,
+   "end": 8.737,
+   "design": 3,
+   "pre": 0,
+   "post": 0.05,
+   "anchors": [
+    [
+     0.15,
+     6.137
+    ],
+    [
+     0.38,
+     6.835
+    ],
+    [
+     2.0,
+     7.655
+    ],
+    [
+     2.05,
+     7.875
+    ],
+    [
+     2.72,
+     8.437
+    ]
+   ]
+  },
+  {
+   "id": "accessories",
+   "start": 8.737,
+   "end": 11.162,
+   "design": 3,
+   "pre": 0,
+   "post": 0.05,
+   "anchors": [
+    [
+     0.5,
+     8.937
+    ],
+    [
+     1.5,
+     10.365
+    ],
+    [
+     2.62,
+     10.802
+    ]
+   ]
+  },
+  {
+   "id": "transfer",
+   "start": 11.162,
+   "end": 15.173,
+   "design": 3,
+   "pre": 0,
+   "post": 0.05,
+   "anchors": [
+    [
+     0.42,
+     11.79
+    ],
+    [
+     2.45,
+     14.813
+    ]
+   ]
+  },
+  {
+   "id": "final",
+   "start": 15.173,
+   "end": 23.616,
+   "design": 5,
+   "pre": 0,
+   "post": 0,
+   "anchors": [
+    [
+     0.9,
+     17.687
+    ],
+    [
+     1.0,
+     17.787
+    ],
+    [
+     1.5,
+     19.107
+    ],
+    [
+     1.95,
+     19.896
+    ],
+    [
+     3.5,
+     22.266
+    ]
+   ]
+  }
+ ],
+ "music": {
+  "bpm": 120,
+  "pulseFrom": 3.21,
+  "pulseTo": 17.575,
+  "hatsFrom": 8.737,
+  "silenceFrom": 17.625,
+  "padFrom": 17.787,
+  "swellFrom": 19.896,
+  "resolveAt": 22.266,
+  "roots": [
+   [
+    3.21,
+    55.0
+   ],
+   [
+    5.867,
+    43.65
+   ],
+   [
+    8.737,
+    49.0
+   ],
+   [
+    11.162,
+    41.2
+   ],
+   [
+    15.173,
+    46.25
+   ]
   ]
+ },
+ "cues": [
+  {
+   "t": 0.0,
+   "type": "drone",
+   "dur": 2.72,
+   "gain": 0.5
+  },
+  {
+   "t": 0.15,
+   "type": "ticks",
+   "dur": 1.53,
+   "gain": 0.3
+  },
+  {
+   "t": 0.48,
+   "type": "sub",
+   "dur": 1.6,
+   "gain": 0.55
+  },
+  {
+   "t": 1.68,
+   "type": "digital",
+   "dur": 0.5,
+   "gain": 0.45
+  },
+  {
+   "t": 1.76,
+   "type": "shimmer",
+   "dur": 0.8,
+   "gain": 0.25
+  },
+  {
+   "t": 2.14,
+   "type": "suck",
+   "dur": 0.58,
+   "gain": 0.45
+  },
+  {
+   "t": 2.78,
+   "type": "impact",
+   "dur": 1.6,
+   "gain": 0.5,
+   "tone": "soft"
+  },
+  {
+   "t": 2.87,
+   "type": "whoosh",
+   "dur": 0.4,
+   "gain": 0.6,
+   "pan": [
+    -0.8,
+    0.8
+   ]
+  },
+  {
+   "t": 3.21,
+   "type": "hit",
+   "dur": 0.9,
+   "gain": 0.45
+  },
+  {
+   "t": 3.56,
+   "type": "glass",
+   "dur": 0.9,
+   "gain": 0.22
+  },
+  {
+   "t": 4.058,
+   "type": "digital",
+   "dur": 0.35,
+   "gain": 0.35
+  },
+  {
+   "t": 4.698,
+   "type": "impact",
+   "dur": 1.8,
+   "gain": 0.78
+  },
+  {
+   "t": 5.006,
+   "type": "swish",
+   "dur": 0.45,
+   "gain": 0.22,
+   "pan": [
+    0.5,
+    -0.5
+   ]
+  },
+  {
+   "t": 5.317,
+   "type": "riser",
+   "dur": 0.55,
+   "gain": 0.38
+  },
+  {
+   "t": 5.487,
+   "type": "whoosh",
+   "dur": 0.42,
+   "gain": 0.62,
+   "pan": [
+    0,
+    0
+   ]
+  },
+  {
+   "t": 6.087,
+   "type": "blip",
+   "dur": 0.18,
+   "gain": 0.25
+  },
+  {
+   "t": 6.855,
+   "type": "click",
+   "dur": 0.5,
+   "gain": 0.75
+  },
+  {
+   "t": 6.875,
+   "type": "burst",
+   "dur": 0.55,
+   "gain": 0.5
+  },
+  {
+   "t": 7.048,
+   "type": "blip",
+   "dur": 0.14,
+   "gain": 0.22
+  },
+  {
+   "t": 7.073,
+   "type": "servo",
+   "dur": 0.482,
+   "gain": 0.18
+  },
+  {
+   "t": 7.098,
+   "type": "blip",
+   "dur": 0.14,
+   "gain": 0.22
+  },
+  {
+   "t": 7.149,
+   "type": "blip",
+   "dur": 0.14,
+   "gain": 0.22
+  },
+  {
+   "t": 7.655,
+   "type": "snap",
+   "dur": 0.8,
+   "gain": 0.7
+  },
+  {
+   "t": 7.875,
+   "type": "scan",
+   "dur": 0.6,
+   "gain": 0.45
+  },
+  {
+   "t": 8.294,
+   "type": "success",
+   "dur": 0.9,
+   "gain": 0.35
+  },
+  {
+   "t": 8.417,
+   "type": "whoosh",
+   "dur": 0.36,
+   "gain": 0.6,
+   "pan": [
+    -0.9,
+    0.9
+   ]
+  },
+  {
+   "t": 8.737,
+   "type": "hit",
+   "dur": 0.8,
+   "gain": 0.42
+  },
+  {
+   "t": 8.937,
+   "type": "digital",
+   "dur": 0.45,
+   "gain": 0.5
+  },
+  {
+   "t": 8.987,
+   "type": "data",
+   "dur": 0.5,
+   "gain": 0.25
+  },
+  {
+   "t": 9.585,
+   "type": "hit",
+   "dur": 0.8,
+   "gain": 0.55
+  },
+  {
+   "t": 9.625,
+   "type": "pop",
+   "dur": 0.2,
+   "gain": 0.35
+  },
+  {
+   "t": 10.365,
+   "type": "hit",
+   "dur": 0.8,
+   "gain": 0.6
+  },
+  {
+   "t": 10.425,
+   "type": "pop",
+   "dur": 0.18,
+   "gain": 0.3
+  },
+  {
+   "t": 10.515,
+   "type": "pop",
+   "dur": 0.18,
+   "gain": 0.3
+  },
+  {
+   "t": 10.605,
+   "type": "pop",
+   "dur": 0.18,
+   "gain": 0.3
+  },
+  {
+   "t": 10.702,
+   "type": "riser",
+   "dur": 0.46,
+   "gain": 0.35
+  },
+  {
+   "t": 10.802,
+   "type": "whoosh",
+   "dur": 0.42,
+   "gain": 0.6,
+   "pan": [
+    0,
+    0
+   ]
+  },
+  {
+   "t": 11.202,
+   "type": "pulse",
+   "dur": 1.2,
+   "gain": 0.5
+  },
+  {
+   "t": 11.79,
+   "type": "transmit",
+   "dur": 1.44,
+   "gain": 0.45
+  },
+  {
+   "t": 11.89,
+   "type": "zips",
+   "dur": 1.4,
+   "gain": 0.28
+  },
+  {
+   "t": 13.03,
+   "type": "transmit",
+   "dur": 0.7,
+   "gain": 0.55
+  },
+  {
+   "t": 13.03,
+   "type": "hit",
+   "dur": 0.9,
+   "gain": 0.55
+  },
+  {
+   "t": 14.28,
+   "type": "pulse2",
+   "dur": 0.8,
+   "gain": 0.6
+  },
+  {
+   "t": 14.673,
+   "type": "whoosh",
+   "dur": 0.55,
+   "gain": 0.62,
+   "pan": [
+    0,
+    0
+   ]
+  },
+  {
+   "t": 15.142,
+   "type": "suck",
+   "dur": 1.228,
+   "gain": 0.3
+  },
+  {
+   "t": 16.52,
+   "type": "riser",
+   "dur": 1.267,
+   "gain": 0.6
+  },
+  {
+   "t": 17.787,
+   "type": "impact",
+   "dur": 3.2,
+   "gain": 1.0
+  },
+  {
+   "t": 17.837,
+   "type": "shimmer",
+   "dur": 0.9,
+   "gain": 0.28
+  },
+  {
+   "t": 20.89,
+   "type": "ticks",
+   "dur": 0.45,
+   "gain": 0.2
+  },
+  {
+   "t": 22.266,
+   "type": "impact",
+   "dur": 1.6,
+   "gain": 0.6,
+   "tone": "bright"
+  },
+  {
+   "t": 22.266,
+   "type": "glass",
+   "dur": 1.4,
+   "gain": 0.32
+  }
+ ]
 }

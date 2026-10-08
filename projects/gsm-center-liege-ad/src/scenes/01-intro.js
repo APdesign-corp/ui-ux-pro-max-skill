@@ -52,8 +52,9 @@ export default function createIntro({ cfg, assets, W, H, u }) {
   const probe = document.createElement('canvas').getContext('2d');
   const size = fitSize(probe, title, 700, -0.02, W * (isV ? 0.86 : 0.64), H * 0.2);
   const cx = W / 2, cy = H / 2;
-  const base = cy + size * 0.62;
-  const bx = cx, by = cy - size * 0.62, bside = size * 0.62;
+  // la pastille logo se forme au centre (le nom complet apparaît sur « GSM Center », scène 2)
+  const bx = cx, by = cy, bside = minWH * 0.15;
+  void size;
   const symScale = (0.4 * minWH) / 400;
 
   // Particules : affectation d'une cible sur les tracés du symbole
@@ -82,7 +83,6 @@ export default function createIntro({ cfg, assets, W, H, u }) {
   const NM = 180;
   const phonePts = phone.sample(NM);
   const badgePts = badge.sample(NM);
-  const tpts = textPoints(title, size, 700, -0.02, Math.max(4, Math.round(4.5 * u)), 'center');
 
   const center = (lt) => {
     const k = E.inOutCubic(seg(lt, 1.4, 2.0));
@@ -221,16 +221,16 @@ export default function createIntro({ cfg, assets, W, H, u }) {
 
       // --- IMPACT (2.0 s)
       const ti = lt - 2.0;
-      post.flash += 0.42 * pulse(lt, 2.0, 0.015, 0.09);
-      post.ca += 0.007 * pulse(lt, 2.0, 0.01, 0.22);
-      post.bloom += 0.5 * pulse(lt, 2.0, 0.01, 0.25);
-      if (ti >= 0 && ti < 0.7) post.shock = [bx / W, by / H, 0.04 + E.outExpo(ti / 0.7) * 0.7, (1 - ti / 0.7) * 1.2];
+      post.flash += 0.2 * pulse(lt, 2.0, 0.015, 0.08);
+      post.ca += 0.004 * pulse(lt, 2.0, 0.01, 0.2);
+      post.bloom += 0.35 * pulse(lt, 2.0, 0.01, 0.25);
+      if (ti >= 0 && ti < 0.7) post.shock = [bx / W, by / H, 0.04 + E.outExpo(ti / 0.7) * 0.55, (1 - ti / 0.7) * 0.6];
       fx.save();
       fx.globalCompositeOperation = 'lighter';
-      shockRing(fx, bx, by, ti, f, { radius: 1100, width: 16, dur: 0.75 });
+      shockRing(fx, bx, by, ti, f, { radius: 800, width: 10, dur: 0.7, alpha: 0.7 });
       shockRing(fx, bx, by, ti - 0.06, f, { radius: 700, width: 6, dur: 0.6, color: C.teal });
-      sparks(fx, bx, by, ti, f, { count: 90, seed: 9, speed: 2200, life: 0.8 });
-      flare(fx, bx, by, pulse(lt, 2.0, 0.02, 0.4) * cfg.vfx.flares, f, C.neon);
+      sparks(fx, bx, by, ti, f, { count: 50, seed: 9, speed: 1600, life: 0.7 });
+      flare(fx, bx, by, 0.75 * pulse(lt, 2.0, 0.02, 0.4) * cfg.vfx.flares, f, C.neon);
       fx.restore();
 
       // --- Pastille logo pleine
@@ -243,44 +243,14 @@ export default function createIntro({ cfg, assets, W, H, u }) {
         drawBadge(ui, bx, by, bside, cfg, seg(lt, 1.98, 2.08) * fade, pop);
       }
 
-      // --- Titre : particules → contour lumineux → remplissage caractère par caractère
-      if (lt > 1.98) {
-        const pa = (1 - seg(lt, 2.5, 2.8)) * fade;
-        if (pa > 0) {
-          fx.save();
-          fx.globalCompositeOperation = 'lighter';
-          fx.fillStyle = rgba('#dfffe0', pa);
-          const sz = 2.6 * u;
-          for (let j = 0; j < tpts.length; j++) {
-            const [ox, oy, nx] = tpts[j];
-            const h1 = Math.sin(j * 12.9898) * 43758.5453;
-            const hr = h1 - Math.floor(h1);
-            const st = 2.0 + nx * 0.14 + hr * 0.08;
-            const k = E.inOutCubic(seg(lt, st, st + 0.42));
-            if (k <= 0) continue;
-            const ang = hr * TAU;
-            const R = (0.15 + hr * 0.5) * W * 0.5;
-            const cxp = bx + Math.cos(ang) * R, cyp = by + Math.sin(ang) * R * 0.6;
-            const tx = cx + ox, ty = base + oy;
-            const x = (1 - k) * (1 - k) * bx + 2 * (1 - k) * k * cxp + k * k * tx;
-            const y = (1 - k) * (1 - k) * by + 2 * (1 - k) * k * cyp + k * k * ty;
-            fx.fillRect(x - sz / 2, y - sz / 2, sz, sz);
-          }
-          fx.restore();
-        }
-        const o = { size, weight: 700, tracking: -0.02, align: 'center' };
-        fx.save();
-        fx.globalCompositeOperation = 'lighter';
-        strokeTextProgress(fx, title, cx, base, o, E.outCubic(seg(lt, 2.12, 2.6)), C.neon, 2.6 * u, (1 - 0.6 * seg(lt, 2.6, 2.9)) * fade);
-        fx.restore();
-        const colorAt = (i) => (i < split ? C.white : C.neon);
-        const tt = lt - 2.3;
-        drawText(ui, title, cx, base, { ...o, t: tt, mode: 'fade', stagger: 0.035, dur: 0.3, colorAt, alpha: fade });
-        fx.save();
-        fx.globalCompositeOperation = 'lighter';
-        drawText(fx, title, cx, base, { ...o, t: tt, mode: 'fade', stagger: 0.035, dur: 0.3, colorAt, alpha: 0.35 * fade });
-        fx.restore();
-        textSweep(ui, title, cx, base, o, seg(lt, 2.55, 2.95), '#ffffff', 0.85 * fade);
+      // --- « À Liège » : signature discrète de la ville
+      const tl = lt - f.ml('L1.Liège', 0.6);
+      const la = seg(tl, 0, 0.5) * (1 - seg(lt, 1.6, 1.95)) * fade;
+      if (la > 0) {
+        drawText(ui, cfg.texts.cityLabel, cx, isV ? cy + minWH * 0.62 : H * 0.9, {
+          size: 30 * u, weight: 600, tracking: 0.9, align: 'center', t: tl, mode: 'track', trackFrom: 1.6, dur: 0.9,
+          color: C.white, alpha: la * 0.85,
+        });
       }
 
       for (const g of [fx, ui]) g.restore();

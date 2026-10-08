@@ -85,6 +85,7 @@ export default function createFinal({ cfg, assets, W, H, u }) {
           });
         }
         post.zoomBlur += E.inCubic(conv) * 0.1 * (lt < 1 ? 1 : 0);
+        if (lt < 0.97) post.uiBlur = 0; // la phrase reste nette pendant l'aspiration
         post.fade *= 1 - 0.55 * win(lt, 0.86, 0.92, 0.97, 1.0);
         post.flash += 0.55 * pulse(lt, 1.0, 0.012, 0.12) + 0.22 * pulse(lt, 3.5, 0.015, 0.1);
         post.flashColor = [0.75, 1, 0.75];
@@ -129,6 +130,30 @@ export default function createFinal({ cfg, assets, W, H, u }) {
         // point d'énergie central
         radialGlow(fx, cx, cy, (60 + 260 * E.inExpo(conv)) * u, C.neon, 0.25 + 0.75 * E.inExpo(conv));
         radialGlow(fx, cx, cy, 80 * u, '#ffffff', 0.6 * E.inExpo(conv));
+      }
+
+      // ---- « Tout ce dont vous avez besoin… au même endroit. » (aspiré par l'implosion)
+      if (lt < 0.97) {
+        const dA = f.t - f.mark('L6.Tout', f.clock.toGlobal(0.05));
+        const dB = f.t - f.mark('L6.au', f.clock.toGlobal(0.5));
+        const suck = E.inExpo(seg(lt, 0.78, 0.95));
+        const [ta, tb] = cfg.texts.together;
+        const sA = s * (isV ? 0.22 : 0.19), sB = s * (isV ? 0.5 : 0.46);
+        ui.save();
+        ui.translate(cx, cy);
+        ui.scale(1 - suck, 1 - suck);
+        ui.translate(-cx, -cy);
+        drawText(ui, ta, cx, cy - sB * 0.62, { size: sA, weight: 500, tracking: 0.02, align: 'center', t: dA, mode: 'fade', stagger: 0.012, dur: 0.35, color: '#c9d4cb', alpha: 1 - suck });
+        drawText(ui, tb, cx, cy + sB * 0.42, { size: sB, weight: 700, tracking: 0.0, align: 'center', t: dB, mode: 'rise', stagger: 0.03, dur: 0.4, color: C.white, alpha: 1 - suck });
+        textSweep(ui, tb, cx, cy + sB * 0.42, { size: sB, weight: 700, align: 'center' }, seg(dB, 0.35, 0.9), '#ffffff', 0.5 * (1 - suck));
+        ui.restore();
+        fx.save();
+        fx.globalCompositeOperation = 'lighter';
+        fx.translate(cx, cy);
+        fx.scale(1 - suck, 1 - suck);
+        fx.translate(-cx, -cy);
+        drawText(fx, tb, cx, cy + sB * 0.42, { size: sB, weight: 700, align: 'center', t: dB, mode: 'rise', stagger: 0.03, dur: 0.4, color: C.neon, alpha: 0.3 * (1 - suck) });
+        fx.restore();
       }
 
       // ---- impact principal (1.0 s)
@@ -201,13 +226,19 @@ export default function createFinal({ cfg, assets, W, H, u }) {
         // LIÈGE (resserrement du tracking)
         drawText(ui, B.city, cx, yCity, { size: s * 0.42, weight: 600, tracking: 0.55, align: 'center', t: lt - 1.5, mode: 'track', trackFrom: 1.6, dur: 0.6, color: C.white });
 
-        // slogan
-        const tagS = s * (isV ? 0.24 : 0.2);
+        // signature (dite par la voix) : « Votre technologie, notre expertise. »
+        const tagS = s * (isV ? 0.26 : 0.23);
         const t1 = B.tagline[0], tg2 = B.tagline[1];
-        const w1 = textWidth(ui, t1, tagS, 400, 0), w2 = textWidth(ui, tg2, tagS, 400, 0);
+        const w1 = textWidth(ui, t1, tagS, 500, 0), w2 = textWidth(ui, tg2, tagS, 600, 0);
+        const dV = f.t - f.mark('L7b.Votre', f.clock.toGlobal(1.95));
+        const dN = f.t - f.mark('L7b.notre', f.clock.toGlobal(2.08));
         const tx0 = cx - (w1 + w2) / 2;
-        drawText(ui, t1, tx0, yTag, { size: tagS, weight: 400, align: 'left', t: lt - 1.95, mode: 'fade', stagger: 0.008, dur: 0.35, color: '#c9d4cb' });
-        drawText(ui, tg2, tx0 + w1, yTag, { size: tagS, weight: 600, align: 'left', t: lt - 2.08, mode: 'fade', stagger: 0.012, dur: 0.35, color: C.neon });
+        drawText(ui, t1, tx0, yTag, { size: tagS, weight: 500, align: 'left', t: dV + 0.02, mode: 'fade', stagger: 0.014, dur: 0.3, color: '#dfe7e1' });
+        drawText(ui, tg2, tx0 + w1, yTag, { size: tagS, weight: 600, align: 'left', t: dN + 0.02, mode: 'fade', stagger: 0.016, dur: 0.3, color: C.neon });
+        fx.save();
+        fx.globalCompositeOperation = 'lighter';
+        drawText(fx, tg2, tx0 + w1, yTag, { size: tagS, weight: 600, align: 'left', t: dN + 0.02, mode: 'fade', stagger: 0.016, dur: 0.3, color: C.neon, alpha: 0.3 });
+        fx.restore();
 
         // séparateur lumineux
         const dv = E.outExpo(seg(lt, 2.1, 2.55));

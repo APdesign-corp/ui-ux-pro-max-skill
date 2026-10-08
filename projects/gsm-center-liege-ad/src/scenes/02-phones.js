@@ -1,17 +1,27 @@
 // 3–6 s — SMARTPHONES : arrivée en whip pan, trois smartphones premium en orbite,
 // reflets métalliques balayés, HUD + lignes SVG, rack focus, typographie en profondeur,
-// "SMARTPHONES" + pastille verre "NEUFS & RECONDITIONNÉS", push-in vers l'écran.
+// GSM CENTER construit par la lumière sur « Découvrez GSM Center », pastille
+// « SMARTPHONES · NEUFS & RECONDITIONNÉS », push-in vers l'écran.
 
 import * as THREE from 'three';
 import { E, seg, win, pulse, lerp, rng, TAU, rgba } from '../core/anim.js';
-import { drawText, fitSize, hudRing, flowCurve, flare, streak, glassPill, eyebrow, textWidth, setFont } from '../core/draw.js';
+import {
+  drawText, fitSize, hudRing, flowCurve, flare, streak, glassPill, textWidth, charLayout, textPoints, strokeTextProgress,
+  textSweep, shockRing,
+} from '../core/draw.js';
+import { drawBadge } from './01-intro.js';
 
 export default function createPhones({ cfg, assets, world, W, H, u }) {
   const C = cfg.colors;
   const T = cfg.texts;
   const isV = H > W;
   const probe = document.createElement('canvas').getContext('2d');
-  const tsize = fitSize(probe, T.phones, 700, -0.02, W * (isV ? 0.84 : 0.44), H * (isV ? 0.075 : 0.13));
+  const B = cfg.brand;
+  // lockup GSM CENTER (pastille + nom) composé sur le mot prononcé
+  const wsize = fitSize(probe, B.name, 700, -0.02, W * (isV ? 0.66 : 0.42), H * (isV ? 0.07 : 0.115));
+  const bside = wsize * 0.8, gap = wsize * 0.28;
+  const yW = isV ? H * 0.2 : H * 0.8;
+  const tpts = textPoints(B.name, wsize, 700, -0.02, Math.max(4, Math.round(4 * u)), 'left');
   const r = rng(77);
   const orb = Array.from({ length: Math.round(46 * cfg.vfx.particles) }, () => ({
     a: r() * TAU, w: 0.6 + r() * 1.4, rr: 0.9 + r() * 0.5, tilt: (r() - 0.5) * 0.6, sz: (1.5 + r() * 2.5) * u,
@@ -115,32 +125,82 @@ export default function createPhones({ cfg, assets, world, W, H, u }) {
         fx.restore();
       }
 
-      // ---------------- typographie
-      const out = E.inCubic(seg(lt, 2.4, 2.72));
-      const x0 = isV ? W / 2 : W * 0.065;
-      const yT = isV ? H * 0.2 : H * 0.84;
-      const align = isV ? 'center' : 'left';
-      eyebrow(ui, T.stepPhones, x0, yT - tsize * 1.05, lt - 0.25, f, { align, alpha: 1 - out });
-      drawText(ui, T.phones, x0, yT, { size: tsize, weight: 700, tracking: -0.02, align, t: lt - 0.35, stagger: 0.03, dur: 0.5, color: C.white, out });
-      fx.save();
-      fx.globalCompositeOperation = 'lighter';
-      drawText(fx, T.phones, x0, yT, { size: tsize, weight: 700, tracking: -0.02, align, t: lt - 0.35, stagger: 0.03, dur: 0.5, color: C.white, out, alpha: 0.18 });
-      fx.restore();
+      // ---------------- branding synchronisé sur la voix : « Découvrez GSM Center. »
+      // (temps réels relatifs aux mots, indépendants de la déformation de la scène)
+      const dG = f.t - f.mark('L2.GSM', f.clock.toGlobal(0.9));
+      const dC = f.t - f.mark('L2.Center', f.clock.toGlobal(1.0));
+      // le lockup reste lisible jusqu'au push-in dans l'écran (fin de scène)
+      const out = E.inCubic(seg(f.t, f.clock.end - 0.34, f.clock.end - 0.08));
+      const nm = B.name;
+      const L = charLayout(ui, nm, wsize, 700, -0.02);
+      const rowW = bside + gap + L.width;
+      const x0 = W / 2 - rowW / 2 + bside + gap;
+      const bx = W / 2 - rowW / 2 + bside / 2, by = yW - wsize * 0.35;
+      const xC = x0 + L.chars[B.nameSplit + 1].x;
+      const o = { size: wsize, weight: 700, tracking: -0.02, align: 'left' };
+      const alive = 1 - out;
+      if (dG > -0.05 && alive > 0) {
+        // pastille G
+        const pop = E.outBack(seg(dG, -0.04, 0.26), 2.2);
+        drawBadge(ui, bx, by, bside, cfg, seg(dG, -0.04, 0.06) * alive, pop);
+        // particules qui construisent les lettres (GSM puis CENTER)
+        const pa = 1 - seg(dC, 0.3, 0.6);
+        if (pa > 0) {
+          fx.save();
+          fx.globalCompositeOperation = 'lighter';
+          fx.fillStyle = rgba('#dfffe0', pa * alive);
+          const sz = 2.4 * u;
+          for (let j = 0; j < tpts.length; j++) {
+            const [ox, oy, nx] = tpts[j];
+            const center = ox >= L.chars[B.nameSplit + 1].x - wsize * 0.1;
+            const d = center ? dC : dG;
+            const h1 = Math.sin(j * 12.9898) * 43758.5453, hr = h1 - Math.floor(h1);
+            const k = E.inOutCubic(seg(d, -0.12 + hr * 0.1 + nx * 0.06, 0.2 + hr * 0.1 + nx * 0.06));
+            if (k <= 0) continue;
+            const ang = hr * TAU, R = (0.25 + hr * 0.5) * W * 0.4;
+            const sx0 = W / 2 + Math.cos(ang) * R, sy0 = H * 0.45 + Math.sin(ang) * R * 0.5;
+            const tx = x0 + ox, ty = yW + oy;
+            fx.fillRect(lerp(sx0, tx, k) - sz / 2, lerp(sy0, ty, k) - sz / 2, sz, sz);
+          }
+          fx.restore();
+        }
+        // contour lumineux puis remplissage
+        fx.save();
+        fx.globalCompositeOperation = 'lighter';
+        strokeTextProgress(fx, nm.slice(0, B.nameSplit), x0, yW, o, E.outCubic(seg(dG, 0, 0.3)), C.neon, 2.4 * u, (1 - 0.7 * seg(dC, 0.3, 0.6)) * alive);
+        strokeTextProgress(fx, nm.slice(B.nameSplit + 1), xC, yW, o, E.outCubic(seg(dC, -0.05, 0.25)), C.neon, 2.4 * u, (1 - 0.7 * seg(dC, 0.4, 0.7)) * alive);
+        fx.restore();
+        drawText(ui, nm.slice(0, B.nameSplit), x0, yW, { ...o, t: dG - 0.08, mode: 'fade', stagger: 0.05, dur: 0.22, color: C.white, alpha: alive });
+        drawText(ui, nm.slice(B.nameSplit + 1), xC, yW, { ...o, t: dC, mode: 'fade', stagger: 0.03, dur: 0.2, color: C.neon, alpha: alive });
+        fx.save();
+        fx.globalCompositeOperation = 'lighter';
+        drawText(fx, nm.slice(B.nameSplit + 1), xC, yW, { ...o, t: dC, mode: 'fade', stagger: 0.03, dur: 0.2, color: C.neon, alpha: 0.35 * alive });
+        // impact sous « Center »
+        shockRing(fx, W / 2, by, dC, f, { radius: 900, width: 6, dur: 0.6, flat: 0.22, alpha: 0.6 * alive });
+        flare(fx, xC + L.width * 0.2, by, 0.7 * pulse(dC, 0, 0.03, 0.3) * cfg.vfx.flares * alive, f, C.neon);
+        fx.restore();
+        textSweep(ui, nm, x0, yW, o, seg(dC, 0.3, 0.75), '#ffffff', 0.8 * alive);
+        post.flash += 0.2 * pulse(dC, 0, 0.012, 0.09);
+        post.ca += 0.003 * pulse(dC, 0, 0.01, 0.18);
+        post.bloom += 0.3 * pulse(dC, 0, 0.01, 0.25);
+      }
 
-      const ss = tsize * 0.3;
-      const sw = textWidth(ui, T.phonesSub, ss, 600, 0.18) + ss * 2.2;
+      // pastille de verre « SMARTPHONES · NEUFS & RECONDITIONNÉS »
+      const ss = wsize * 0.24;
+      const pillTxt = T.phonesPill;
+      const sw = textWidth(ui, pillTxt, ss, 600, 0.16) + ss * 2.4;
       const ph = ss * 2.3;
-      const grow = E.outExpo(seg(lt, 1.0, 1.4));
-      const px = isV ? W / 2 - (sw * grow) / 2 : x0;
-      const py = yT + tsize * 0.32;
-      const pal = (1 - out) * seg(lt, 0.98, 1.08);
-      glassPill(ui, px, py, Math.max(ph, sw * grow), ph, ph / 2, pal, f, { stroke: rgba(C.neon, 0.55), tint: 'rgba(57,255,20,0.06)' });
-      if (grow > 0.3) {
-        setFont(ui, ss, 600, 0.18);
-        drawText(ui, T.phonesSub, isV ? W / 2 : px + ss * 1.1, py + ph / 2 + ss * 0.36, {
-          size: ss, weight: 600, tracking: 0.18, align: isV ? 'center' : 'left', t: lt - 1.08, mode: 'track', trackFrom: 0.6, dur: 0.45,
-          color: C.neon, alpha: 1 - out,
-        });
+      const grow = E.outExpo(seg(dC, 0.42, 0.85));
+      const py = isV ? yW + wsize * 0.45 : yW + wsize * 0.38;
+      const pal = (1 - out) * seg(dC, 0.4, 0.5);
+      if (pal > 0) {
+        glassPill(ui, W / 2 - (sw * grow) / 2, py, Math.max(ph, sw * grow), ph, ph / 2, pal, f, { stroke: rgba(C.neon, 0.55), tint: 'rgba(57,255,20,0.06)' });
+        if (grow > 0.3) {
+          drawText(ui, pillTxt, W / 2, py + ph / 2 + ss * 0.36, {
+            size: ss, weight: 600, tracking: 0.16, align: 'center', t: dC - 0.5, mode: 'track', trackFrom: 0.5, dur: 0.45,
+            color: C.neon, alpha: 1 - out,
+          });
+        }
       }
     },
   };
