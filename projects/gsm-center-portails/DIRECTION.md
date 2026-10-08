@@ -15,6 +15,28 @@ monde. **Aucune transition ne ressemble à une autre.**
 
 ---
 
+## 0. HISTOIRE — PRIORITAIRE sur tout storyboard reçu dans un prompt (ajout du client)
+
+Vidéo moderne, soignée, percutante, avec **un exemple d'utilisateur qui vit un parcours complet
+dans les écrans des téléphones**, étape par étape, dans cet ordre, sans jamais perdre le rythme.
+**Chaque étape de l'histoire est un écran de téléphone dans lequel la caméra plonge.** Contenu
+générique : uniquement les services confirmés (FACTS.md) ou des libellés neutres, aucune statistique.
+
+| Étape | Où (segment) | Ce qu'on voit (apps de `world/screens.js`) |
+|---|---|---|
+| 1. Le client a un besoin (nouveau téléphone, réparation, accessoire) et le CHERCHE | **orbit** (fin) → **roll** | app **`find`** : `P.queries = ['nouveau smartphone', 'réparation écran', 'coque']` tapées puis effacées, puis `P.text = 'GSM Liège'` ; la barre de recherche se tape lettre par lettre (en GROS aussi sur `f.ui` avec `typewriter` pour la lisibilité : « nouveau smartphone… réparation écran… »). Au moins un écran d'orbit montre déjà `find`. |
+| 2. Il TROUVE la page de GSM Center Liège (le nom apparaît en GROS) | **roll** (7.0 → 8.0) → **interface** | `find` avec `P.resultsAt` : le 1er résultat est la carte « GSM CENTER Liège » ; `P.touch` tape la carte (point `FIND_HIT` exporté par screens.js) ; TRAVERSÉE 1 dans cet écran → on ressort DANS la page : **interface** démarre avec « GSM CENTER » géant (GSM blanc / CENTER vert) + « LIÈGE », comme l'en-tête de l'app **`store`**. |
+| 3. Il DÉCOUVRE les services : cartes qui glissent, pastilles qui apparaissent | **interface** (le tunnel = la page du magasin, ses cartes sont les services) puis **circuits / glass** (service RÉPARATION vécu de l'intérieur) puis **gear** (service ACCESSOIRES) | cartes du tunnel = services confirmés : Smartphones (Neufs & reconditionnés), Réparation (Écran, batterie, connecteur), Accessoires (Coques, chargeurs, écouteurs), Multimédia & Internet ; pastilles en cascade (Neufs, Reconditionnés, Réparation rapide, Livraison) ; apps `store`, `list`, `pills`, `repair`. Le plan sur l'épaule (téléphone-vaisseau) affiche l'app `store` avec la carte « Réparation » qui s'illumine juste avant la plongée dans la carte mère (on entre dans le service Réparation). |
+| 4. Il APPELLE ou demande l'ITINÉRAIRE : cercle de toucher avec onde sur un bouton, puis une ligne lumineuse trace le chemin jusqu'à la boutique | **gear** (fin, 20.8 → 22.0) | le téléphone posé au sol affiche d'abord `store` (`P.scroll` 0→1 jusqu'aux boutons) ou `map` avec `P.buttons` : boutons « Appeler » / « Itinéraire » ; `P.touch` tape « Itinéraire » (`STORE_BTN.route` ou `MAP_BTN.route`) ; puis app **`map`** avec `P.route` 0→1 : la LIGNE LUMINEUSE trace le chemin jusqu'au repère du magasin (`MAP_PIN`) ; la chute libre (traversée 4) plonge dans cette carte. |
+| 5. Il ARRIVE au magasin, Rue St Léonard 203, 4000 Liège | **city** | on ressort au-dessus de la ville de nuit : la MÊME ligne lumineuse continue en 3D dans les rues (ruban/tube vert néon qui avance) jusqu'au repère du magasin ; adresse affichée dans la ville. |
+| 6. Final : adresse + appel à l'action | **final** | comme décrit au §5 (GSM CENTER, Rue St Léonard 203 — 4000 Liège, « PASSE EN BOUTIQUE »). |
+
+Les agents de revue (directeurs artistiques) **vérifient que cette histoire est lisible et
+l'implémentent si un segment ne la respecte pas encore** (en gardant les mouvements de caméra,
+traversées et temps de raccord). Un spectateur qui regarde sans le son doit comprendre :
+« je cherche → je trouve GSM Center Liège → je vois ses services → je lance l'itinéraire → j'arrive
+Rue St Léonard 203 ».
+
 ## 1. Palette : EXACTEMENT celle de la première vidéo GSM Center (exigence du client)
 
 | Rôle | Couleur |
@@ -136,6 +158,12 @@ export default function create(ctx) {
     4 graphite, 5 vert. Dimensions : `PHONE = { W: .74, H: 1.56, D: .082 }` (unités monde).
     Écran : `screen.draw(app, tLocalApp, P)` à appeler à chaque image où le téléphone est visible.
     Apps : `off`, `wake` (P.p 0→1), `home`, `search` (P.text, P.cps, P.delay, P.gridAt),
+    **`find`** (histoire étapes 1-2 : P.queries, P.text, P.cps, P.delay, P.resultsAt → 1er résultat
+    « GSM CENTER Liège », point de toucher `FIND_HIT`), **`store`** (page du magasin, étapes 2-4 :
+    P.cardsAt, P.pillsAt, P.buttonsAt, P.scroll 0→1, boutons `STORE_BTN.call/route` valables à
+    scroll = 1), `map` (étape 4 : **P.route 0→1** = ligne lumineuse jusqu'au repère `MAP_PIN`,
+    tracé `MAP_ROUTE`, **P.buttons** = temps d'apparition du panneau Appeler / Itinéraire,
+    `MAP_BTN.route`),
     `list` (P.title), `counter` (P.to, P.suffix, P.label, P.dur), `pills`, `repair` (P.p),
     `portal` (P.p : lumière qui envahit l'écran), `map`. Options : `P.touch = {x, y, t}`
     (onde de toucher), `P.brightness`. `phone.setScreenMap(tex, intensité)` pour l'intensité.

@@ -91,6 +91,33 @@ function homeBar(g, w, h) {
   g.beginPath(); g.roundRect(w / 2 - 100, h - 26, 200, 8, 4); g.fill();
 }
 
+// Carte (app map) : repère du magasin et tracé d'itinéraire (fractions de l'écran)
+export const MAP_PIN = [0.55, 0.42];
+export const MAP_ROUTE = [[0.3, 0.86], [0.3, 0.74], [0.62, 0.66], [0.6, 0.55], [0.72, 0.5], [0.55, 0.42]];
+// Positions des boutons dans l'app store avec scroll = 1 (fractions de l'écran) et dans l'app map
+export const STORE_BTN = { call: [0.27, (1510 - 420) / 1340], route: [0.73, (1510 - 420) / 1340] };
+export const MAP_BTN = { call: [0.27, (1340 - 152) / 1340], route: [0.73, (1340 - 152) / 1340] };
+export const FIND_HIT = [0.5, 0.31]; // carte « GSM Center Liège » dans l'app find
+
+function appButton(g, x, y, bw, bh, label, primary, size = 32) {
+  g.save();
+  if (primary) {
+    const gr = g.createLinearGradient(x, y, x + bw, y + bh);
+    gr.addColorStop(0, C.neon2); gr.addColorStop(1, C.teal);
+    g.fillStyle = gr;
+    g.shadowColor = rgba(C.neon, 0.7); g.shadowBlur = 24;
+  } else {
+    g.fillStyle = 'rgba(255,255,255,0.12)';
+  }
+  g.beginPath(); g.roundRect(x, y, bw, bh, bh / 2); g.fill();
+  g.shadowBlur = 0;
+  if (!primary) { g.strokeStyle = 'rgba(255,255,255,0.35)'; g.lineWidth = 2; g.stroke(); }
+  g.font = UI(700, size); g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillStyle = primary ? C.ink : C.white;
+  g.fillText(label, x + bw / 2, y + bh / 2 + 1);
+  g.restore();
+}
+
 const LIST = [
   ['Smartphones', 'Neufs & reconditionnés'],
   ['Réparation', 'Écran, batterie, connecteur'],
@@ -318,12 +345,203 @@ function drawApp(g, w, h, app, t, P) {
       }
       g.strokeStyle = 'rgba(20,224,160,0.5)'; g.lineWidth = 34;
       g.beginPath(); g.moveTo(w * 0.1, -20); g.bezierCurveTo(w * 0.5, h * 0.3, w * 0.2, h * 0.6, w * 0.8, h + 20); g.stroke();
+      // ÉTAPE 4 de l'histoire : itinéraire. P.route 0→1 trace une ligne lumineuse depuis la position
+      // du client (point blanc, bas) jusqu'à la boutique (repère vert). Point d'arrivée = MAP_PIN.
+      const [px, py] = [w * MAP_PIN[0], h * MAP_PIN[1]];
+      if (P.route !== undefined) {
+        const pts = MAP_ROUTE.map(([a, b]) => [a * w, b * h]);
+        const rp = clamp(P.route);
+        // longueur cumulée
+        let total = 0; const segL = [];
+        for (let i = 1; i < pts.length; i++) { const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); segL.push(l); total += l; }
+        let left = total * rp;
+        g.save();
+        g.lineCap = 'round'; g.lineJoin = 'round';
+        g.beginPath(); g.moveTo(pts[0][0], pts[0][1]);
+        let head = pts[0];
+        for (let i = 1; i < pts.length && left > 0; i++) {
+          const k = Math.min(1, left / segL[i - 1]);
+          head = [lerp(pts[i - 1][0], pts[i][0], k), lerp(pts[i - 1][1], pts[i][1], k)];
+          g.lineTo(head[0], head[1]);
+          left -= segL[i - 1];
+        }
+        g.strokeStyle = rgba(C.neon, 0.35); g.lineWidth = 34; g.stroke();
+        g.strokeStyle = C.neon; g.shadowColor = C.neon; g.shadowBlur = 30; g.lineWidth = 12; g.stroke();
+        g.strokeStyle = '#eaffe4'; g.shadowBlur = 0; g.lineWidth = 4; g.stroke();
+        if (rp > 0 && rp < 1) {
+          const gl = g.createRadialGradient(head[0], head[1], 0, head[0], head[1], 70);
+          gl.addColorStop(0, 'rgba(255,255,255,0.95)'); gl.addColorStop(1, rgba(C.neon, 0));
+          g.fillStyle = gl; g.beginPath(); g.arc(head[0], head[1], 70, 0, TAU); g.fill();
+        }
+        // position du client
+        g.fillStyle = '#ffffff'; g.beginPath(); g.arc(pts[0][0], pts[0][1], 16, 0, TAU); g.fill();
+        g.strokeStyle = rgba('#ffffff', 0.5); g.lineWidth = 4; g.beginPath(); g.arc(pts[0][0], pts[0][1], 30, 0, TAU); g.stroke();
+        g.restore();
+      }
       const pk = 0.5 + 0.5 * Math.sin(t * 6);
       g.fillStyle = C.neon; g.shadowColor = C.neon; g.shadowBlur = 40;
-      g.beginPath(); g.arc(w * 0.55, h * 0.42, 22 + pk * 6, 0, TAU); g.fill();
+      g.beginPath(); g.arc(px, py, 22 + pk * 6, 0, TAU); g.fill();
       g.shadowBlur = 0;
       g.strokeStyle = rgba(C.neon, 1 - pk); g.lineWidth = 4;
-      g.beginPath(); g.arc(w * 0.55, h * 0.42, 40 + pk * 80, 0, TAU); g.stroke();
+      g.beginPath(); g.arc(px, py, 40 + pk * 80, 0, TAU); g.stroke();
+      if (P.label !== false && (P.route ?? 0) > 0.95) {
+        g.font = UI(700, 30); g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+        g.fillStyle = C.white; g.fillText('GSM Center Liège', px, py - 60);
+      }
+      // boutons « Appeler » / « Itinéraire » (P.buttons = temps local d'apparition)
+      if (P.buttons !== undefined) {
+        const k = E.outExpo(seg(t, P.buttons, P.buttons + 0.4));
+        if (k > 0) {
+          g.save();
+          g.translate(0, (1 - k) * 260);
+          g.fillStyle = 'rgba(6,18,10,0.92)';
+          g.beginPath(); g.roundRect(24, h - 330, w - 48, 270, 40); g.fill();
+          g.font = UI(700, 34); g.textAlign = 'left'; g.fillStyle = C.white;
+          g.fillText('GSM Center Liège', 60, h - 270);
+          g.font = UI(500, 24); g.fillStyle = C.muted;
+          g.fillText('Rue St Léonard 203, 4000 Liège', 60, h - 232);
+          appButton(g, 48, h - 200, (w - 120) / 2, 96, 'Appeler', false);
+          appButton(g, 72 + (w - 120) / 2, h - 200, (w - 120) / 2, 96, 'Itinéraire', true);
+          g.restore();
+        }
+      }
+      break;
+    }
+    case 'find': {
+      // ÉTAPES 1-2 de l'histoire : le client tape son besoin, les résultats glissent, le 1er = GSM Center Liège.
+      // P.queries = ['nouveau smartphone', 'réparation écran', …] (chaque requête est tapée, puis effacée),
+      // P.text = requête finale ; P.resultsAt = temps local d'apparition des résultats ; P.cps.
+      darkUI(g, w, h);
+      const cps = P.cps || 16;
+      const qs = [...(P.queries || []), P.text || 'magasin téléphone Liège'];
+      // chronologie : tape (len/cps) + pause 0.25 + efface (len/40) pour chaque requête intermédiaire
+      let tt = t - (P.delay ?? 0.1), shown = '', erasing = false;
+      for (let i = 0; i < qs.length; i++) {
+        const q = qs[i], dt = q.length / cps;
+        if (i === qs.length - 1 || tt < dt + 0.25) { shown = q.slice(0, clamp(Math.floor(tt * cps), 0, q.length)); break; }
+        tt -= dt + 0.25;
+        const de = q.length / 40;
+        if (tt < de) { shown = q.slice(0, Math.max(0, q.length - Math.floor(tt * 40))); erasing = true; break; }
+        tt -= de;
+      }
+      g.fillStyle = 'rgba(255,255,255,0.1)';
+      g.beginPath(); g.roundRect(36, 120, w - 72, 74, 37); g.fill();
+      g.strokeStyle = rgba(C.neon, 0.7); g.lineWidth = 2; g.stroke();
+      g.beginPath(); g.arc(84, 157, 15, 0, TAU); g.strokeStyle = C.muted; g.lineWidth = 4; g.stroke();
+      g.beginPath(); g.moveTo(95, 168); g.lineTo(106, 179); g.stroke();
+      g.font = UI(500, 32); g.textAlign = 'left'; g.textBaseline = 'middle';
+      g.fillStyle = C.white; g.fillText(shown, 124, 158);
+      const cw = g.measureText(shown).width;
+      if (erasing || Math.floor(t * 2.6) % 2 === 0 || t < (P.resultsAt ?? 99)) { g.fillStyle = C.neon; g.fillRect(128 + cw, 136, 4, 44); }
+      const ra = P.resultsAt ?? 99;
+      const RES = [
+        ['GSM Center Liège', 'Téléphonie mobile · Réparation · Accessoires', 'Rue St Léonard 203, 4000 Liège'],
+        ['Smartphones', 'Neufs & reconditionnés', ''],
+        ['Réparation', 'Écran, batterie, connecteur', ''],
+        ['Accessoires', 'Coques, chargeurs, écouteurs', ''],
+      ];
+      RES.forEach(([a, b, c], i) => {
+        const k = E.outExpo(seg(t, ra + i * 0.09, ra + i * 0.09 + 0.5));
+        if (k <= 0) return;
+        const y = 250 + i * (i === 0 ? 0 : 170) + (i > 0 ? 200 : 0);
+        const hh = i === 0 ? 330 : 150;
+        g.save();
+        g.translate((1 - k) * w, 0);
+        g.globalAlpha = k;
+        if (i === 0) {
+          const gr = g.createLinearGradient(30, y, w - 30, y + hh);
+          gr.addColorStop(0, '#0d6a32'); gr.addColorStop(1, '#04140a');
+          g.fillStyle = gr;
+        } else g.fillStyle = 'rgba(255,255,255,0.07)';
+        g.beginPath(); g.roundRect(30, y, w - 60, hh, 32); g.fill();
+        if (i === 0) {
+          g.strokeStyle = rgba(C.neon, 0.9); g.lineWidth = 3; g.stroke();
+          badge(g, 110, y + 90, 96, 1);
+          g.textBaseline = 'alphabetic';
+          g.font = DISP(800, 44); g.fillStyle = C.white; g.fillText('GSM ', 180, y + 88);
+          const gw = g.measureText('GSM ').width;
+          g.fillStyle = C.neon; g.fillText('CENTER', 180 + gw, y + 88);
+          g.font = UI(600, 26); g.fillStyle = C.white; g.fillText('Liège', 180, y + 126);
+          g.font = UI(500, 23); g.fillStyle = C.muted; g.fillText(b, 56, y + 210);
+          g.fillText(c, 56, y + 246);
+          appButton(g, 56, y + 266, 220, 50, 'Voir la page', true, 24);
+        } else {
+          g.textBaseline = 'alphabetic';
+          g.font = UI(700, 34); g.fillStyle = C.white; g.fillText(a, 60, y + 66);
+          g.font = UI(500, 24); g.fillStyle = C.muted; g.fillText(b, 60, y + 106);
+        }
+        g.restore();
+      });
+      break;
+    }
+    case 'store': {
+      // ÉTAPES 2-3-4 : la page de GSM Center Liège. Nom en très gros, services en cartes qui glissent,
+      // pastilles en cascade, boutons Appeler / Itinéraire. P.cardsAt, P.pillsAt, P.buttonsAt (temps locaux),
+      // P.scroll (0→1 fait défiler la page vers les boutons).
+      darkUI(g, w, h);
+      const sc = E.inOutCubic(clamp(P.scroll ?? 0)) * 420;
+      g.save();
+      g.translate(0, -sc);
+      // en-tête : logo + nom géant
+      const kh = E.outExpo(seg(t, 0, 0.5));
+      badge(g, w / 2, 230, 150 * E.outBack(clamp(kh), 2), clamp(kh * 2));
+      g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+      g.font = DISP(900, 104);
+      const gw = g.measureText('GSM').width;
+      g.globalAlpha = kh;
+      g.fillStyle = C.white; g.fillText('GSM', w / 2, 420);
+      g.fillStyle = C.neon; g.font = DISP(900, 86); g.fillText('CENTER', w / 2, 505);
+      g.font = DISP(300, 40); g.fillStyle = C.white; g.letterSpacing = '14px'; g.fillText('LIÈGE', w / 2 + 7, 565); g.letterSpacing = '0px';
+      g.globalAlpha = 1;
+      void gw;
+      // services : cartes qui glissent une à une (en alternance gauche/droite)
+      const SV = [['Smartphones', 'Neufs & reconditionnés'], ['Réparation', 'Écran, batterie, connecteur'], ['Accessoires', 'Coques, chargeurs, écouteurs'], ['Multimédia & Internet', 'Écouteurs, chargeurs, SIM']];
+      const ca = P.cardsAt ?? 0.5;
+      SV.forEach(([a, b], i) => {
+        const k = E.outExpo(seg(t, ca + i * 0.12, ca + i * 0.12 + 0.55));
+        if (k <= 0) return;
+        const y = 630 + i * 150;
+        g.save();
+        g.translate((1 - k) * (i % 2 ? -w : w), 0);
+        g.globalAlpha = k;
+        g.fillStyle = 'rgba(255,255,255,0.08)';
+        g.beginPath(); g.roundRect(30, y, w - 60, 128, 30); g.fill();
+        const gr = g.createLinearGradient(56, y + 24, 136, y + 104);
+        gr.addColorStop(0, C.neon2); gr.addColorStop(1, C.teal);
+        g.fillStyle = gr; g.beginPath(); g.roundRect(56, y + 24, 80, 80, 24); g.fill();
+        g.textAlign = 'left';
+        g.fillStyle = C.white; g.font = UI(700, 34); g.fillText(a, 160, y + 58);
+        g.fillStyle = C.muted; g.font = UI(500, 24); g.fillText(b, 160, y + 98);
+        g.restore();
+      });
+      // pastilles en cascade
+      const pa = P.pillsAt ?? 1.1;
+      ['Neufs', 'Reconditionnés', 'Réparation rapide', 'Livraison'].forEach((s, i) => {
+        const k = E.outBack(seg(t, pa + i * 0.08, pa + i * 0.08 + 0.35), 2.4);
+        if (k <= 0) return;
+        g.font = UI(600, 24);
+        const tw = g.measureText(s).width + 44;
+        const x = 30 + [0, 150, 0, 280][i] + (i >= 2 ? 0 : 0), y = 1240 + (i >= 2 ? 70 : 0);
+        g.save();
+        g.translate(x + tw / 2, y + 26); g.scale(k, k);
+        g.fillStyle = i % 2 ? rgba(C.teal, 0.25) : rgba(C.neon, 0.22);
+        g.strokeStyle = i % 2 ? C.teal : C.neon; g.lineWidth = 2;
+        g.beginPath(); g.roundRect(-tw / 2, -26, tw, 52, 26); g.fill(); g.stroke();
+        g.fillStyle = C.white; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(s, 0, 1);
+        g.restore();
+      });
+      // boutons d'action
+      const ba = P.buttonsAt ?? 1.6;
+      const kb = E.outExpo(seg(t, ba, ba + 0.45));
+      if (kb > 0) {
+        g.save(); g.globalAlpha = kb; g.translate(0, (1 - kb) * 120);
+        g.font = UI(500, 24); g.fillStyle = C.muted; g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+        g.fillText('Rue St Léonard 203, 4000 Liège', w / 2, 1430);
+        appButton(g, 40, 1460, (w - 100) / 2, 100, 'Appeler', false);
+        appButton(g, 60 + (w - 100) / 2, 1460, (w - 100) / 2, 100, 'Itinéraire', true);
+        g.restore();
+      }
+      g.restore();
       break;
     }
     default:
