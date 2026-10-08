@@ -1,4 +1,4 @@
-# Prime N'Joy — Reel motion design (MAQUETTE)
+# Prime N'Joy — Reel motion design (version définitive)
 
 Reel vertical 9:16 (1080×1920, 30 i/s, ~20,7 s) pour **Prime N'Joy** (Télécom • Énergie), construit
 uniquement à partir du logo et de l'affiche fournis (`assets/brand/`). Il utilise le même moteur que le
@@ -37,3 +37,14 @@ ajoute `wm=0` aux paramètres d'URL, ou mets `watermark.enabled: false` dans `sr
 python3 scripts/build_timeline.py && python3 scripts/sound_design.py
 node scripts/render.mjs --width 1080 --height 1920 --workers 3 --out out/prime-njoy-1080x1920.mp4
 ```
+
+## Version définitive (payée)
+
+- `src/config.js` : `watermark.enabled: false` (sans filigrane) et `vfx.liquid: true`.
+- Bulles de couleur liquides (`src/world/liquid.js`) :
+  - gouttes aux couleurs de la marque, avec bords ondulants et reflet brillant ;
+  - dessinées derrière la 3D et la typographie ;
+  - elles naissent au début de chaque scène, dérivent, puis éclatent en gouttelettes à la fin de la scène ;
+  - dans la scène signature, elles restent sur les bords pour laisser le logo et le texte parfaitement lisibles.
+- Voix : SIWIS (française native). « Prime N'Joy » est écrit « Praïmèndjoï » pour être dit d'un seul trait.
+- Rendu : `node scripts/render.mjs --width 1080 --height 1920 --workers 4 --out out/prime-njoy-final-1080x1920.mp4`.
