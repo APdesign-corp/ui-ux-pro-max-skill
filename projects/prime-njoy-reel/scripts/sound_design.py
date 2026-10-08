@@ -420,7 +420,7 @@ def eq_curve(f):
     """EQ voix : coupe-bas, médiums allégés, présence, air (gains en dB)."""
     lf = np.log2(np.maximum(f, 1.0))
     bell = lambda fc, g, bw: g * np.exp(-0.5 * ((lf - np.log2(fc)) / bw) ** 2)
-    db = bell(140, 1.5, 0.45) + bell(300, -2.2, 0.5) + bell(3400, 2.8, 0.7) + bell(6800, -1.2, 0.35)
+    db = bell(140, 0.5, 0.45) + bell(320, -3.0, 0.5) + bell(520, -1.5, 0.4) + bell(3400, 2.6, 0.7) + bell(6800, -1.2, 0.35)  # moins de « boîte »
     db += 1.8 / (1 + np.exp(-(lf - np.log2(10000)) * 4))           # air (shelf)
     db += -24 * (1 / (1 + (np.maximum(f, 1) / 75) ** 4))            # passe-haut ~75 Hz
     return 10 ** (db / 20)
@@ -464,7 +464,7 @@ def compressor(x, thr_db=-20, ratio=3.0, att=0.005, rel=0.09, knee=6):
 
 
 def process_vo(x, emphasis=()):
-    """Chaîne studio : EQ, de-esser, compression légère, accentuation des mots, saturation douce, réverbe courte."""
+    """Chaîne studio : EQ (bas-médiums allégés), de-esser, compression légère, accentuation, saturation douce — voix sèche."""
     X = np.fft.rfft(x)
     x = np.fft.irfft(X * eq_curve(np.fft.rfftfreq(len(x), 1 / SR)), len(x))
     x = deesser(x)
@@ -478,13 +478,8 @@ def process_vo(x, emphasis=()):
         x = x * 10 ** (g / 20)
     x = norm(x, 0.7)
     x = np.tanh(x * 1.15) / np.tanh(1.15)
-    st = pan(x, 0)
-    ir_d = 0.32                                                       # petite pièce traitée, pas une cathédrale
-    ir = np.stack([noise(ir_d, 501), noise(ir_d, 502)], 1) * np.exp(-tt(ir_d) / 0.06)[:, None]
-    ir = np.stack([fft_filter(ir[:, 0], lo=300, hi=6000), fft_filter(ir[:, 1], lo=300, hi=6000)], 1)
-    ir = ir / np.max(np.abs(ir)) * 0.05
-    wet = convolve_st(st, ir)[: len(st)]
-    return st + wet * 0.5
+    # voix SÈCHE, sans réverbération : proche et nette, comme une voix off studio (aucune résonance)
+    return pan(x, 0)
 
 
 def vo_envelope(vo_mono, att=0.03, rel=0.32):
