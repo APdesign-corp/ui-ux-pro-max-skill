@@ -1,6 +1,6 @@
 {
  "_doc": "GÉNÉRÉ par scripts/build_timeline.py à partir de voice/vo_layout.json — ne pas éditer à la main. Temps local des scènes = secondes ; synchronisation sur les mots via les markers ; cues = sound design en temps absolu.",
- "duration": 18.454,
+ "duration": 18.433,
  "vo": {
   "file": "voice/vo_master.wav",
   "dry": "voice/vo_dry.wav",
@@ -15,20 +15,20 @@
    },
    {
     "word": "L4.45",
-    "from": 9.545,
-    "to": 9.895,
+    "from": 9.524,
+    "to": 9.874,
     "db": 2.0
    },
    {
     "word": "L5.connexion",
-    "from": 11.0,
-    "to": 11.67,
+    "from": 10.979,
+    "to": 11.649,
     "db": 1.5
    },
    {
     "word": "L6.N'Joy",
-    "from": 13.447,
-    "to": 14.145,
+    "from": 13.426,
+    "to": 14.124,
     "db": 1.5
    }
   ]
@@ -64,74 +64,74 @@
   "L2.réuni": 5.335,
   "L2.start": 3.627,
   "L2.end": 5.668,
-  "L3a.La": 5.892,
-  "L3.La": 5.892,
-  "L3a.télé": 6.08,
-  "L3.télé": 6.08,
-  "L3a.start": 5.892,
-  "L3a.end": 6.492,
-  "L3b.Internet": 6.597,
-  "L3.Internet": 6.597,
-  "L3b.start": 6.597,
-  "L3b.end": 7.348,
-  "L3c.Le": 7.452,
-  "L3.Le": 7.452,
-  "L3c.GSM": 7.56,
-  "L3.GSM": 7.56,
-  "L3c.start": 7.452,
-  "L3c.end": 8.234,
-  "L3.start": 5.892,
-  "L3.end": 8.234,
-  "L4a.Le": 8.507,
-  "L4.Le": 8.507,
-  "L4a.tout": 8.547,
-  "L4.tout": 8.547,
-  "L4a.pour": 8.855,
-  "L4.pour": 8.855,
-  "L4a.45": 9.575,
-  "L4.45": 9.575,
-  "L4a.par": 9.895,
-  "L4.par": 9.895,
-  "L4a.mois": 10.055,
-  "L4.mois": 10.055,
-  "L4a.start": 8.507,
-  "L4a.end": 10.248,
-  "L4.start": 8.507,
-  "L4.end": 10.248,
-  "L5.Plus": 10.522,
-  "L5.qu'une": 10.71,
-  "L5.connexion": 11.03,
-  "L5.un": 11.67,
-  "L5.meilleur": 11.83,
-  "L5.quotidien": 12.15,
-  "L5.start": 10.522,
-  "L5.end": 12.645,
-  "L6a.Prime": 12.969,
-  "L6.Prime": 12.969,
-  "L6a.N'Joy": 13.477,
-  "L6.N'Joy": 13.477,
-  "L6a.start": 12.969,
-  "L6a.end": 14.095,
-  "L6b.Télécom": 14.219,
-  "L6.Télécom": 14.219,
-  "L6b.et": 14.807,
-  "L6.et": 14.807,
-  "L6b.énergie": 15.047,
-  "L6.énergie": 15.047,
-  "L6b.start": 14.219,
-  "L6b.end": 15.508,
-  "L6c.Ensemble": 15.632,
-  "L6.Ensemble": 15.632,
-  "L6c.allons": 16.3,
-  "L6.allons": 16.3,
-  "L6c.plus": 16.78,
-  "L6.plus": 16.78,
-  "L6c.loin": 16.94,
-  "L6.loin": 16.94,
-  "L6c.start": 15.632,
-  "L6c.end": 17.154,
-  "L6.start": 12.969,
-  "L6.end": 17.154
+  "L3a.La": 5.871,
+  "L3.La": 5.871,
+  "L3a.télé": 6.059,
+  "L3.télé": 6.059,
+  "L3a.start": 5.871,
+  "L3a.end": 6.471,
+  "L3b.Internet": 6.575,
+  "L3.Internet": 6.575,
+  "L3b.start": 6.575,
+  "L3b.end": 7.326,
+  "L3c.Le": 7.43,
+  "L3.Le": 7.43,
+  "L3c.GSM": 7.538,
+  "L3.GSM": 7.538,
+  "L3c.start": 7.43,
+  "L3c.end": 8.212,
+  "L3.start": 5.871,
+  "L3.end": 8.212,
+  "L4a.Le": 8.486,
+  "L4.Le": 8.486,
+  "L4a.tout": 8.526,
+  "L4.tout": 8.526,
+  "L4a.pour": 8.834,
+  "L4.pour": 8.834,
+  "L4a.45": 9.554,
+  "L4.45": 9.554,
+  "L4a.par": 9.874,
+  "L4.par": 9.874,
+  "L4a.mois": 10.034,
+  "L4.mois": 10.034,
+  "L4a.start": 8.486,
+  "L4a.end": 10.227,
+  "L4.start": 8.486,
+  "L4.end": 10.227,
+  "L5.Plus": 10.501,
+  "L5.qu'une": 10.689,
+  "L5.connexion": 11.009,
+  "L5.un": 11.649,
+  "L5.meilleur": 11.809,
+  "L5.quotidien": 12.129,
+  "L5.start": 10.501,
+  "L5.end": 12.624,
+  "L6a.Prime": 12.948,
+  "L6.Prime": 12.948,
+  "L6a.N'Joy": 13.456,
+  "L6.N'Joy": 13.456,
+  "L6a.start": 12.948,
+  "L6a.end": 14.074,
+  "L6b.Télécom": 14.198,
+  "L6.Télécom": 14.198,
+  "L6b.et": 14.786,
+  "L6.et": 14.786,
+  "L6b.énergie": 15.026,
+  "L6.énergie": 15.026,
+  "L6b.start": 14.198,
+  "L6b.end": 15.487,
+  "L6c.Ensemble": 15.611,
+  "L6.Ensemble": 15.611,
+  "L6c.allons": 16.279,
+  "L6.allons": 16.279,
+  "L6c.plus": 16.759,
+  "L6.plus": 16.759,
+  "L6c.loin": 16.919,
+  "L6.loin": 16.919,
+  "L6c.start": 15.611,
+  "L6c.end": 17.133,
+  "L6.start": 12.948,
+  "L6.end": 17.133
  },
  "scenes": [
   {
@@ -146,16 +146,16 @@
   {
    "id": "unite",
    "start": 3.507,
-   "end": 5.752,
-   "design": 2.245,
+   "end": 5.731,
+   "design": 2.224,
    "pre": 0,
    "post": 0.36,
    "anchors": []
   },
   {
    "id": "products",
-   "start": 5.752,
-   "end": 8.367,
+   "start": 5.731,
+   "end": 8.346,
    "design": 2.615,
    "pre": 0,
    "post": 0.36,
@@ -163,8 +163,8 @@
   },
   {
    "id": "offer",
-   "start": 8.367,
-   "end": 10.402,
+   "start": 8.346,
+   "end": 10.381,
    "design": 2.035,
    "pre": 0,
    "post": 0.36,
@@ -172,8 +172,8 @@
   },
   {
    "id": "promise",
-   "start": 10.402,
-   "end": 12.749,
+   "start": 10.381,
+   "end": 12.728,
    "design": 2.347,
    "pre": 0,
    "post": 0.36,
@@ -181,8 +181,8 @@
   },
   {
    "id": "brand",
-   "start": 12.749,
-   "end": 18.454,
+   "start": 12.728,
+   "end": 18.433,
    "design": 5.705,
    "pre": 0,
    "post": 0,
@@ -192,12 +192,12 @@
  "music": {
   "bpm": 118,
   "pulseFrom": 3.507,
-  "pulseTo": 12.699,
-  "hatsFrom": 5.752,
-  "silenceFrom": 12.729,
-  "padFrom": 12.969,
-  "swellFrom": 14.219,
-  "resolveAt": 17.304,
+  "pulseTo": 12.678,
+  "hatsFrom": 5.731,
+  "silenceFrom": 12.708,
+  "padFrom": 12.948,
+  "swellFrom": 14.198,
+  "resolveAt": 17.283,
   "roots": [
    [
     0,
@@ -208,19 +208,19 @@
     43.65
    ],
    [
-    5.752,
+    5.731,
     49.0
    ],
    [
-    8.367,
+    8.346,
     55.0
    ],
    [
-    10.402,
+    10.381,
     46.25
    ],
    [
-    12.749,
+    12.728,
     49.0
    ]
   ]
@@ -328,7 +328,7 @@
    "gain": 0.3
   },
   {
-   "t": 5.452,
+   "t": 5.431,
    "type": "whoosh",
    "dur": 0.55,
    "gain": 0.55,
@@ -344,31 +344,31 @@
    "gain": 0.8
   },
   {
-   "t": 6.08,
+   "t": 6.059,
    "type": "digital",
    "dur": 0.4,
    "gain": 0.45
   },
   {
-   "t": 6.23,
+   "t": 6.209,
    "type": "hit",
    "dur": 0.7,
    "gain": 0.4
   },
   {
-   "t": 6.597,
+   "t": 6.575,
    "type": "transmit",
    "dur": 0.9,
    "gain": 0.4
   },
   {
-   "t": 6.847,
+   "t": 6.825,
    "type": "click",
    "dur": 0.3,
    "gain": 0.45
   },
   {
-   "t": 7.46,
+   "t": 7.438,
    "type": "swish",
    "dur": 0.35,
    "gain": 0.4,
@@ -378,13 +378,13 @@
    ]
   },
   {
-   "t": 7.86,
+   "t": 7.838,
    "type": "click",
    "dur": 0.3,
    "gain": 0.4
   },
   {
-   "t": 8.047,
+   "t": 8.026,
    "type": "whoosh",
    "dur": 0.45,
    "gain": 0.6,
@@ -394,134 +394,134 @@
    ]
   },
   {
-   "t": 8.387,
+   "t": 8.366,
    "type": "swish",
    "dur": 0.4,
    "gain": 0.4
   },
   {
-   "t": 9.275,
+   "t": 9.254,
    "type": "ticks",
    "dur": 0.3,
    "gain": 0.35
   },
   {
-   "t": 9.575,
+   "t": 9.554,
    "type": "impact",
    "dur": 1.4,
    "gain": 0.85,
    "tone": "bright"
   },
   {
-   "t": 9.595,
+   "t": 9.574,
    "type": "burst",
    "dur": 0.5,
    "gain": 0.4
   },
   {
-   "t": 9.655,
+   "t": 9.634,
    "type": "snap",
    "dur": 0.5,
    "gain": 0.4
   },
   {
-   "t": 10.155,
+   "t": 10.134,
    "type": "pop",
    "dur": 0.2,
    "gain": 0.45
   },
   {
-   "t": 10.202,
+   "t": 10.181,
    "type": "burst",
    "dur": 0.5,
    "gain": 0.6
   },
   {
-   "t": 10.282,
+   "t": 10.261,
    "type": "hit",
    "dur": 0.8,
    "gain": 0.6
   },
   {
-   "t": 10.452,
+   "t": 10.431,
    "type": "shimmer",
    "dur": 0.8,
    "gain": 0.3
   },
   {
-   "t": 10.522,
+   "t": 10.501,
    "type": "blip",
    "dur": 0.14,
    "gain": 0.3
   },
   {
-   "t": 11.03,
+   "t": 11.009,
    "type": "blip",
    "dur": 0.14,
    "gain": 0.3
   },
   {
-   "t": 11.67,
+   "t": 11.649,
    "type": "blip",
    "dur": 0.14,
    "gain": 0.3
   },
   {
-   "t": 12.15,
+   "t": 12.129,
    "type": "blip",
    "dur": 0.14,
    "gain": 0.3
   },
   {
-   "t": 12.399,
+   "t": 12.378,
    "type": "zips",
    "dur": 0.8,
    "gain": 0.35
   },
   {
-   "t": 12.45,
+   "t": 12.429,
    "type": "success",
    "dur": 0.9,
    "gain": 0.35
   },
   {
-   "t": 12.769,
+   "t": 12.748,
    "type": "suck",
    "dur": 0.6,
    "gain": 0.35
   },
   {
-   "t": 12.969,
+   "t": 12.948,
    "type": "impact",
    "dur": 2.2,
    "gain": 0.85
   },
   {
-   "t": 13.527,
+   "t": 13.506,
    "type": "shimmer",
    "dur": 0.8,
    "gain": 0.35
   },
   {
-   "t": 14.219,
+   "t": 14.198,
    "type": "pop",
    "dur": 0.2,
    "gain": 0.45
   },
   {
-   "t": 15.047,
+   "t": 15.026,
    "type": "pulse2",
    "dur": 0.6,
    "gain": 0.45
   },
   {
-   "t": 15.632,
+   "t": 15.611,
    "type": "glass",
    "dur": 1.0,
    "gain": 0.3
   },
   {
-   "t": 17.304,
+   "t": 17.283,
    "type": "impact",
    "dur": 1.4,
    "gain": 0.5,

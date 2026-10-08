@@ -219,7 +219,7 @@
      "text": "Avec Prime N'Joy, tout est réuni.",
      "tts": "Avec Praïme Enne-djoï, tout est réuni.",
      "start": 3.615,
-     "end": 5.68,
+     "end": 5.659,
      "speech": [
       3.627,
       5.668
@@ -368,32 +368,32 @@
      "chosen_take": 7
     }
    ],
-   "end": 5.68
+   "end": 5.659
   },
   {
    "id": "L3",
    "scene": "products",
    "tone": "énumération rythmée",
-   "start": 5.88,
+   "start": 5.859,
    "chunks": [
     {
      "id": "L3a",
      "text": "La télé.",
      "tts": "La télé.",
-     "start": 5.88,
-     "end": 6.505,
+     "start": 5.859,
+     "end": 6.483,
      "speech": [
-      5.892,
-      6.492
+      5.871,
+      6.471
      ],
      "words": [
       [
        "La",
-       5.892
+       5.871
       ],
       [
        "télé",
-       6.08
+       6.059
       ]
      ],
      "aligned_words": 2,
@@ -462,16 +462,16 @@
      "id": "L3b",
      "text": "Internet.",
      "tts": "Internet.",
-     "start": 6.585,
-     "end": 7.36,
+     "start": 6.563,
+     "end": 7.338,
      "speech": [
-      6.597,
-      7.348
+      6.575,
+      7.326
      ],
      "words": [
       [
        "Internet",
-       6.597
+       6.575
       ]
      ],
      "aligned_words": 1,
@@ -540,20 +540,20 @@
      "id": "L3c",
      "text": "Le GSM.",
      "tts": "Le G.S.M.",
-     "start": 7.44,
-     "end": 8.245,
+     "start": 7.418,
+     "end": 8.224,
      "speech": [
-      7.452,
-      8.234
+      7.43,
+      8.212
      ],
      "words": [
       [
        "Le",
-       7.452
+       7.43
       ],
       [
        "GSM",
-       7.56
+       7.538
       ]
      ],
      "aligned_words": 2,
@@ -674,48 +674,48 @@
      "chosen_take": 9
     }
    ],
-   "end": 8.245
+   "end": 8.224
   },
   {
    "id": "L4",
    "scene": "offer",
    "tone": "offre, enthousiaste",
-   "start": 8.495,
+   "start": 8.474,
    "chunks": [
     {
      "id": "L4a",
      "text": "Le tout pour 45 € par mois.",
      "tts": "Le tout pour quarante-cinq euros par mois !",
-     "start": 8.495,
-     "end": 10.26,
+     "start": 8.474,
+     "end": 10.239,
      "speech": [
-      8.507,
-      10.248
+      8.486,
+      10.227
      ],
      "words": [
       [
        "Le",
-       8.507
+       8.486
       ],
       [
        "tout",
-       8.547
+       8.526
       ],
       [
        "pour",
-       8.855
+       8.834
       ],
       [
        "45",
-       9.575
+       9.554
       ],
       [
        "par",
-       9.895
+       9.874
       ],
       [
        "mois",
-       10.055
+       10.034
       ]
      ],
      "aligned_words": 6,
@@ -836,48 +836,48 @@
      "chosen_take": 3
     }
    ],
-   "end": 10.26
+   "end": 10.239
   },
   {
    "id": "L5",
    "scene": "promise",
    "tone": "promesse, posé",
-   "start": 10.51,
+   "start": 10.489,
    "chunks": [
     {
      "id": "L5",
      "text": "Plus qu'une connexion, un meilleur quotidien.",
      "tts": "Plus qu'une connexion, un meilleur quotidien.",
-     "start": 10.51,
-     "end": 12.657,
+     "start": 10.489,
+     "end": 12.636,
      "speech": [
-      10.522,
-      12.645
+      10.501,
+      12.624
      ],
      "words": [
       [
        "Plus",
-       10.522
+       10.501
       ],
       [
        "qu'une",
-       10.71
+       10.689
       ],
       [
        "connexion",
-       11.03
+       11.009
       ],
       [
        "un",
-       11.67
+       11.649
       ],
       [
        "meilleur",
-       11.83
+       11.809
       ],
       [
        "quotidien",
-       12.15
+       12.129
       ]
      ],
      "aligned_words": 6,
@@ -943,32 +943,32 @@
      "chosen_take": 3
     }
    ],
-   "end": 12.657
+   "end": 12.636
   },
   {
    "id": "L6",
    "scene": "brand",
    "tone": "signature",
-   "start": 12.957,
+   "start": 12.936,
    "chunks": [
     {
      "id": "L6a",
      "text": "Prime N'Joy.",
      "tts": "Praïme Enne-djoï.",
-     "start": 12.957,
-     "end": 14.107,
+     "start": 12.936,
+     "end": 14.086,
      "speech": [
-      12.969,
-      14.095
+      12.948,
+      14.074
      ],
      "words": [
       [
        "Prime",
-       12.969
+       12.948
       ],
       [
        "N'Joy",
-       13.477
+       13.456
       ]
      ],
      "aligned_words": 2,
@@ -1092,24 +1092,24 @@
      "id": "L6b",
      "text": "Télécom et énergie.",
      "tts": "Télécom et énergie.",
-     "start": 14.207,
-     "end": 15.52,
+     "start": 14.186,
+     "end": 15.499,
      "speech": [
-      14.219,
-      15.508
+      14.198,
+      15.487
      ],
      "words": [
       [
        "Télécom",
-       14.219
+       14.198
       ],
       [
        "et",
-       14.807
+       14.786
       ],
       [
        "énergie",
-       15.047
+       15.026
       ]
      ],
      "aligned_words": 3,
@@ -1178,28 +1178,28 @@
      "id": "L6c",
      "text": "Ensemble, allons plus loin.",
      "tts": "Ensemble, allons plus loin.",
-     "start": 15.62,
-     "end": 17.166,
+     "start": 15.599,
+     "end": 17.145,
      "speech": [
-      15.632,
-      17.154
+      15.611,
+      17.133
      ],
      "words": [
       [
        "Ensemble",
-       15.632
+       15.611
       ],
       [
        "allons",
-       16.3
+       16.279
       ],
       [
        "plus",
-       16.78
+       16.759
       ],
       [
        "loin",
-       16.94
+       16.919
       ]
      ],
      "aligned_words": 4,
@@ -1265,8 +1265,8 @@
      "chosen_take": 1
     }
    ],
-   "end": 17.166
+   "end": 17.145
   }
  ],
- "vo_end": 17.166
+ "vo_end": 17.145
 }
