@@ -53,6 +53,20 @@ python3 scripts/build_timeline.py
 python3 scripts/sound_design.py       # -> out/ap-design-reel-sound.wav + stems + cue-sheet
 ```
 
+### Voix au timbre de la référence client (kNN-VC)
+
+`scripts/voice_clone.py` convertit chaque segment TTS (`voice/tts_chunks/`) vers le timbre de la voix
+de référence (bande-son de la vidéo fournie), avec [kNN-VC](https://github.com/bshall/knn-vc)
+(WavLM-Large + HiFiGAN, à télécharger séparément). Le timing est conservé image par image : la synchro
+mots / animation ne change pas. Seules les trames de parole de la référence sont utilisées (pas la
+musique). `--alpha 0.75` garde 25 % de la diction source pour l'intelligibilité. Les aigus au-dessus
+de 7 kHz sont réinjectés, car le vocodeur sort à 16 kHz.
+
+```bash
+python scripts/voice_clone.py <knn-vc/> ref16k.wav voice/tts_chunks voice/chunks --topk 8 --alpha 0.75
+python3 scripts/voice_relayout.py && python3 scripts/build_timeline.py && python3 scripts/sound_design.py
+```
+
 ## Variables (`src/config.js`)
 
 | Variable | Rôle |
