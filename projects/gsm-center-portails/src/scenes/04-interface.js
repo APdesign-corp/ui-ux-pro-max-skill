@@ -11,8 +11,8 @@
 // seules les cartes proches (0 < distance < 6) reçoivent une texture vivante d'un petit pool.
 
 import { E, clamp, lerp, seg, win, rng, TAU, rgba, speedRamp, catmull } from '../core/anim.js';
-import { setFont, textWidth, drawText, radialGlow, sparks, shockRing } from '../core/draw.js';
-import { C, speedLines } from '../core/type.js';
+import { fitSize, setFont, textWidth, drawText, radialGlow, sparks, shockRing } from '../core/draw.js';
+import { C, speedLines, maskReveal, brandColorAt } from '../core/type.js';
 import { drawScreenApp } from '../world/screens.js';
 import { smoother, typeLines, scrimLinear, makeSky, trail, glowTexture } from './03-roll-kit.js';
 
@@ -63,7 +63,7 @@ export default function create(ctx) {
   const CARD_W = V ? 0.95 : 0.82;
   const ASPECT = 1340 / 600;
   const N = 54, SPACING = 0.82, Z_FIRST = Z0 - 4.5;
-  const APPS = ['list', 'counter', 'search', 'pills', 'repair', 'list', 'home', 'search', 'counter', 'pills'];
+  const APPS = ['store', 'list', 'counter', 'pills', 'repair', 'store', 'list', 'home', 'find', 'pills'];
   const WIDGETS = ['pill', 'dot', 'toggle', 'pill', 'counterW', 'dot', 'pill', 'glass'];
   const PILL_TXT = ['SMARTPHONES', 'RÉPARATION', 'ACCESSOIRES', 'MULTIMÉDIA', 'INTERNET', 'CARTES SIM'];
   const GLASS_TXT = ['Neufs & reconditionnés', 'Réparation rapide', 'Accessoires & multimédia'];
@@ -73,7 +73,7 @@ export default function create(ctx) {
   const POOL_W = 360, POOL_H = Math.round(360 * ASPECT);
   const appParams = (app, k) => ({
     title: ['Services', 'Boutique', 'Atelier'][k % 3], to: 100, label: k % 2 ? 'CHARGEMENT' : 'DIAGNOSTIC RAPIDE',
-    dur: 1.1, text: 'Choisis ton smartphone', cps: 18, delay: 0.1, gridAt: 0.55, variant: k % 3,
+    dur: 1.1, text: 'GSM Liège', cps: 18, delay: 0.1, gridAt: 0.55, resultsAt: 0.5, cardsAt: 0.3, pillsAt: 0.8, buttonsAt: 1.2, variant: k % 3,
   });
   // état « app » d'une carte en fonction de sa distance devant la caméra (les listes glissent quand on approche)
   const appTime = (a) => 0.1 + clamp(9.5 - a, 0, 9.5) * 0.26;
@@ -363,7 +363,7 @@ export default function create(ctx) {
   // ------------------------------------------------------------------ typographie
   const S_ = L.safe;
   const probe = document.createElement('canvas').getContext('2d');
-  let LINES, typeStart = 0.55, CPS = 22;
+  let LINES, typeStart = 1.05, CPS = 22;
   if (V) {
     const sB = Math.min(165 * u, (S_.w * 0.96 / textWidth(probe, 'endroit.', 100, 900, -0.02)) * 100);
     const sA = sB * 0.62;
@@ -395,6 +395,7 @@ export default function create(ctx) {
     const { lt, t, fx, ui, post, W, H } = f;
     const cam = f.camera;
     const studio = f.world.studio;
+    storeHeader(f);
     const inside = seg(lt, 2.66, 2.86);                        // dans la fente : reflets studio coupés (puces acier)
     studio.update(t, { backdrop: false, grid: 0, beams: 0, dust: 0, motes: 0, env: 1.1 - 0.95 * inside, envRot: lt * 1.6, rim: 0.4 * (1 - inside), key: 0.9 * (1 - 0.7 * inside), glow: 0 });
     sky.mesh.position.copy(cam.position);
@@ -461,7 +462,7 @@ export default function create(ctx) {
       const ex = E.outCubic(seg(lt, 2.48, 2.82));
       hero.phone.setExplode(ex, f.t);
       hero.group.updateMatrixWorld(true);
-      hero.screen.draw('counter', lt - 1.0, { to: 100, label: 'CHARGEMENT', dur: 1.2, brightness: 0.88 });
+      hero.screen.draw('store', lt - 1.0, { cardsAt: 0.1, pillsAt: 0.5, buttonsAt: 9, brightness: 0.9 });
       lTop.intensity = 7 * (1 - 0.8 * ex); lTop.position.set(_sp[0] + 0.5, _sp[1] + 1.1, _sp[2] + 0.6);
       lBoard.intensity = 1.1 * ex; lBoard.position.set(_sp[0] - 0.15, _sp[1] - 0.18, _sp[2] - 0.35);
     } else {
@@ -552,7 +553,7 @@ export default function create(ctx) {
       LINES.a.forEach((ln, k) => {
         drawText(ui, ln.str, LINES.x, ln.y, {
           size: LINES.sA, weight: 300, tracking: -0.01, align: 'center', color: C.white,
-          t: lt - 0.26 - k * 0.12, mode: 'rise', stagger: 0.022, dur: 0.5, out: outT,
+          t: lt - 0.95 - k * 0.12, mode: 'rise', stagger: 0.022, dur: 0.5, out: outT,
         });
       });
       // ligne grasse tapée, « endroit. » surligné néon
@@ -646,4 +647,25 @@ export default function create(ctx) {
   }
 
   return { group, camera, update };
+}
+
+
+// HISTOIRE étape 2 : on ressort DANS la page de GSM Center Liège : nom géant (GSM blanc / CENTER vert) + LIÈGE
+function storeHeader(f) {
+  const { lt, ui, W, u, L } = f;
+  const k = E.outExpo(seg(lt, 0.05, 0.45)), out = E.inCubic(seg(lt, 0.85, 1.05));
+  if (k <= 0 || out >= 1) return;
+  const S = L.safe, name = 'GSM CENTER';
+  const size = fitSize(ui, name, 900, -0.02, S.w * (L.V ? 0.98 : 0.78), (L.V ? 190 : 210) * u);
+  const y = L.V ? S.t + S.h * 0.3 : S.t + S.h * 0.46;
+  ui.save();
+  ui.globalAlpha = 1 - out;
+  ui.translate(W / 2, y); ui.scale(1 + 0.08 * (1 - k) + 0.25 * out, 1 + 0.08 * (1 - k) + 0.25 * out); ui.translate(-W / 2, -y);
+  ui.shadowColor = 'rgba(0,0,0,0.65)'; ui.shadowBlur = 40 * u;
+  maskReveal(ui, name, W / 2, y, { size, weight: 900, tracking: -0.02, p: k, colorAt: brandColorAt(name), edgeColor: C.neon });
+  ui.shadowBlur = 0;
+  setFont(ui, size * 0.24, 200, 0.6); ui.textAlign = 'center'; ui.fillStyle = C.white;
+  ui.globalAlpha = (1 - out) * clamp(seg(lt, 0.25, 0.5));
+  ui.fillText('LIÈGE', W / 2 + size * 0.07, y + size * 0.42);
+  ui.restore();
 }

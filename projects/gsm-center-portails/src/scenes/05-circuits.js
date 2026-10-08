@@ -741,8 +741,10 @@ export default function create(ctx) {
       post.flash = Math.max(post.flash, 0.22 * Math.exp(-Math.max(0, lt - 2.0) / 0.08) * (lt >= 2.0 ? 1 : 0));
       post.flash = Math.max(post.flash, 0.16 * win(lt, 2.5, 2.56, 2.6, 2.7));   // traversée de la nappe
       if (lt > 2.84) { post.flashColor = [0.75, 1, 0.8]; post.flash = Math.max(post.flash, 0.92 * E.inCubic(seg(lt, 2.84, 3.0))); }
-      post.bloom = 0.7 + 0.25 * surge;
-      post.vignette = 1.0;
+      post.bloom = 0.42 + 0.18 * surge;
+      post.exposure = 0.78;
+      post.fxGain = 0.85;
+      post.vignette = 1.1;
       post.grain = 0.05;
       // zoom d'accroche : flou de zoom ajouté (le flou auto ne voit pas la focale)
       const fovRate = (cam(Math.min(3, lt + 1 / 60)).fov - c.fov) * 60;

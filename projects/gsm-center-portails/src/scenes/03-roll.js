@@ -14,7 +14,7 @@ import { E, lerp, seg, win, pulse, TAU } from '../core/anim.js';
 import { textWidth, drawText, radialGlow, sparks, shockRing, eyebrow } from '../core/draw.js';
 import { C, speedLines } from '../core/type.js';
 import { PHONE } from '../world/phone.js';
-import { drawScreenApp } from '../world/screens.js';
+import { drawScreenApp, FIND_HIT } from '../world/screens.js';
 import {
   smoother, typeLines, scrimLinear, godRays, glowTexture, glowSprite, giantWord, whipStreaks, glowQuad, makeSky,
 } from './03-roll-kit.js';
@@ -275,8 +275,9 @@ export default function create(ctx) {
 
       // écran : app search qui tape « Choisis ton smartphone », toucher, puis portail qui envahit
       const at0 = lt - T_WHIP;
-      const touch = lt >= 2.5 ? { x: 0.27, y: 0.345, t: lt - 2.5 } : undefined;
-      hero.screen.draw('search', at0, { text: 'Choisis ton smartphone', cps: 24, delay: 0.12, gridAt: 0.75, touch });
+      // HISTOIRE étapes 1-2 : il tape « GSM Liège », le 1er résultat est GSM Center Liège, il le touche
+      const touch = lt >= 2.5 ? { x: FIND_HIT[0], y: FIND_HIT[1], t: lt - 2.5 } : undefined;
+      hero.screen.draw('find', at0, { text: 'GSM Liège', cps: 16, delay: 0.1, resultsAt: 0.8, touch });
       const pa = E.outCubic(seg(lt, 2.52, 2.7));
       if (pa > 0) {
         const g = hero.screen.g;
