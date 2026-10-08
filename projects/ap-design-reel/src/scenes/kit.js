@@ -39,16 +39,6 @@ export function slam(f, str, x, y, o) {
   };
   // traînée (motion blur) pendant l'arrivée
   if (p < 0.98) for (let k = 1; k <= 4; k++) draw(ui, a * 0.12 * (1 - p), sc * (1 + k * 0.08 * (1 - p)), o.color);
-  // split RGB à l'impact du mot
-  const rgb = (1 - p) * 0.9 + 0.5 * Math.max(0, 1 - Math.abs(t - (o.dur ?? 0.3)) / 0.08);
-  if (rgb > 0.02) {
-    const off = size * 0.06 * rgb;
-    fx.save();
-    fx.globalCompositeOperation = 'lighter';
-    fx.translate(-off, 0); draw(fx, a * 0.55 * rgb, sc, '#ff2a6d');
-    fx.translate(off * 2, 0); draw(fx, a * 0.55 * rgb, sc, '#2ad8ff');
-    fx.restore();
-  }
   draw(ui, a, sc, o.color);
   fx.save();
   fx.globalCompositeOperation = 'lighter';

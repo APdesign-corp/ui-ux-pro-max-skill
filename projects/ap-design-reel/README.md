@@ -27,8 +27,8 @@ Reel promotionnel vertical pour **AP Design** (motion design • 3D • VFX).
 
 ## Voix off
 
-La voix est féminine, en français, choisie pour se rapprocher de la voix de référence fournie par le client (hauteur ≈ 200 Hz). Elle passe sur
-**Supertonic 3** (voix 0, la plus proche de la référence en hauteur et en timbre).
+La voix est masculine, en français. Pour la rendre moins robotique et plus assurée, elle passe sur
+**Supertonic 3** (voix 7), un modèle plus expressif que Piper : F0 ≈ 115 Hz, ~10 demi-tons d'amplitude.
 
 1. `voice/script.json` contient le texte exact, les respirations et les accents :
    - accents sur « banal », « arrêtent », « scroll », « AP » et « DM » ;
@@ -51,20 +51,6 @@ La voix est féminine, en français, choisie pour se rapprocher de la voix de r�
 python3 scripts/voice_relayout.py     # (optionnel) après modification des gaps dans script.json
 python3 scripts/build_timeline.py
 python3 scripts/sound_design.py       # -> out/ap-design-reel-sound.wav + stems + cue-sheet
-```
-
-### Voix au timbre de la référence client (kNN-VC)
-
-`scripts/voice_clone.py` convertit chaque segment TTS (`voice/tts_chunks/`) vers le timbre de la voix
-de référence (bande-son de la vidéo fournie), avec [kNN-VC](https://github.com/bshall/knn-vc)
-(WavLM-Large + HiFiGAN, à télécharger séparément). Le timing est conservé image par image : la synchro
-mots / animation ne change pas. Seules les trames de parole de la référence sont utilisées (pas la
-musique). `--alpha 0.75` garde 25 % de la diction source pour l'intelligibilité. Les aigus au-dessus
-de 7 kHz sont réinjectés, car le vocodeur sort à 16 kHz.
-
-```bash
-python scripts/voice_clone.py <knn-vc/> ref16k.wav voice/tts_chunks voice/chunks --topk 8 --alpha 0.75
-python3 scripts/voice_relayout.py && python3 scripts/build_timeline.py && python3 scripts/sound_design.py
 ```
 
 ## Variables (`src/config.js`)

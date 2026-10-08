@@ -1,7 +1,7 @@
 {
  "_doc": "Script voix off EXACT du brief AP Design. Moteur Supertonic 3 (graphèmes) : 'respell' n'adapte que ce qui se lit mal (sigles). Plusieurs prises par phrase, la meilleure est choisie par 2 ASR ; les mots horodatés pilotent le montage.",
  "respell": {
-  "3D": "trois dé",
+  "3D": "trois-D",
   "VFX": "V.F.X.",
   "DM": "D.M.",
   "AP": "A.P."
@@ -34,8 +34,7 @@
      "speed": 1.0,
      "gain_db": 1.0,
      "breaks": [],
-     "takes_mul": 2,
-     "tts": "Alors, arrête le contenu banal !"
+     "takes_mul": 2
     }
    ]
   },
@@ -46,31 +45,21 @@
    "gap_before": 0.3,
    "chunks": [
     {
-     "id": "L3a",
-     "text": "Motion design.",
-     "tts": "Motion design !",
+     "id": "L3",
+     "text": "Motion design. 3D. VFX.",
      "speed": 0.95,
      "gain_db": 1.5,
-     "pause": 0.1
-    },
-    {
-     "id": "L3b",
-     "text": "3D.",
-     "tts": "3D !",
-     "speed": 0.95,
-     "gain_db": 1.5,
-     "pause": 0.08,
-     "takes_mul": 3,
-     "judge": "whisper"
-    },
-    {
-     "id": "L3c",
-     "text": "VFX.",
-     "tts": "VFX !",
-     "speed": 0.95,
-     "gain_db": 1.5,
-     "takes_mul": 2,
-     "judge": "whisper"
+     "breaks": [
+      {
+       "after": "design",
+       "sec": 0.12
+      },
+      {
+       "after": "3D",
+       "sec": 0.1
+      }
+     ],
+     "takes_mul": 2
     }
    ]
   },
@@ -86,8 +75,7 @@
      "speed": 1.0,
      "gain_db": 1.5,
      "breaks": [],
-     "takes_mul": 2,
-     "tts": "On transforme tes idées en images qui arrêtent le scroll !"
+     "takes_mul": 2
     }
    ]
   },
@@ -108,8 +96,7 @@
        "sec": 0.1
       }
      ],
-     "takes_mul": 3,
-     "tts": "Ça, c'est AP Design !"
+     "takes_mul": 3
     }
    ]
   },
@@ -120,36 +107,25 @@
    "gap_before": 0.4,
    "chunks": [
     {
-     "id": "L6a",
-     "text": "Abonne-toi pour ne rien rater,",
-     "tts": "Abonne-toi pour ne rien rater !",
+     "id": "L6",
+     "text": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… DM.",
      "speed": 1.0,
      "gain_db": 1.5,
-     "pause": 0.1
-    },
-    {
-     "id": "L6b",
-     "text": "et partage la vidéo.",
-     "tts": "Et partage la vidéo !",
-     "speed": 1.0,
-     "gain_db": 1.5,
-     "pause": 0.22
-    },
-    {
-     "id": "L6c",
-     "text": "Et pour collaborer…",
-     "speed": 0.95,
-     "gain_db": 1.5,
-     "pause": 0.16
-    },
-    {
-     "id": "L6d",
-     "text": "DM.",
-     "tts": "DM !",
-     "speed": 0.9,
-     "gain_db": 2.5,
-     "takes_mul": 2,
-     "judge": "whisper"
+     "breaks": [
+      {
+       "after": "prochaine",
+       "sec": 0.1
+      },
+      {
+       "after": "compte",
+       "sec": 0.12
+      },
+      {
+       "after": "collaborer",
+       "sec": 0.28
+      }
+     ],
+     "takes_mul": 2
     }
    ]
   }

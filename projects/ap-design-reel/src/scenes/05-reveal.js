@@ -73,23 +73,6 @@ export default function createReveal({ cfg, W, H }) {
       fx.save();
       fx.globalCompositeOperation = 'lighter';
       radialGlow(fx, lx, ly, W * 0.55, C.neon, 0.22 * seg(ta, 0, 0.3));
-      // rayons de lumière (god rays) qui tournent derrière le logo
-      const ra = (0.5 * pulse(ta, 0, 0.01, 1.2) + 0.12) * seg(ta, 0, 0.05);
-      for (let i = 0; i < 14; i++) {
-        const ang = (i / 14) * Math.PI * 2 + T * 0.25 + Math.sin(i * 3.1) * 0.2;
-        const len = W * (0.7 + 0.4 * Math.abs(Math.sin(i * 1.7 + T * 0.8)));
-        fx.save();
-        fx.translate(lx, ly);
-        fx.rotate(ang);
-        const g = fx.createLinearGradient(0, 0, len, 0);
-        g.addColorStop(0, `rgba(165,148,255,${0.35 * ra})`);
-        g.addColorStop(1, 'rgba(165,148,255,0)');
-        fx.fillStyle = g;
-        fx.beginPath();
-        fx.moveTo(0, 0); fx.lineTo(len, -len * 0.035); fx.lineTo(len, len * 0.035); fx.closePath();
-        fx.fill();
-        fx.restore();
-      }
       fx.restore();
       if (!f.owner) return;
       // « DESIGN » (resserrement du tracking sur le mot dit), signature

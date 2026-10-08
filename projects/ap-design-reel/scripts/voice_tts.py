@@ -40,8 +40,6 @@ VOICES = {
     'siwis':       ('vits', 'vits-piper-fr_FR-siwis-medium', 'fr_FR-siwis-medium.onnx', 0, 1.0, 'F'),
     'kokoro-siwis': ('kokoro', 'kokoro-multi-lang-v1_0', 'model.onnx', 30, 1.0, 'F'),
     # Supertonic 3 (MIT, flow matching, 31 langues) : voix 5-9 masculines, 0-4 féminines
-    'st-f0': ('supertonic', 'sherpa-onnx-supertonic-3-tts-int8-2026-05-11', '', 0, 1.0, 'F'),  # la plus proche de la réf. client
-    'st-f2': ('supertonic', 'sherpa-onnx-supertonic-3-tts-int8-2026-05-11', '', 2, 1.0, 'F'),
     'st-m5': ('supertonic', 'sherpa-onnx-supertonic-3-tts-int8-2026-05-11', '', 5, 1.0, 'M'),
     'st-m6': ('supertonic', 'sherpa-onnx-supertonic-3-tts-int8-2026-05-11', '', 6, 1.0, 'M'),
     'st-m7': ('supertonic', 'sherpa-onnx-supertonic-3-tts-int8-2026-05-11', '', 7, 1.0, 'M'),
@@ -294,11 +292,6 @@ def norm_words(s):
     s = ''.join(c for c in unicodedata.normalize('NFD', s) if not unicodedata.combining(c))
     s = re.sub(r"[^a-z0-9' ]+", ' ', s)
     s = re.sub(r"\bg s m\b", 'gsm', s)
-    # sigles : la transcription écrit souvent la forme parlée (« trois D », « D M », « A P »)
-    s = re.sub(r"\btrois d\b|\b3 d\b", '3d', s)
-    s = re.sub(r"\bv f x\b|\bvfx\b", 'vfx', s)
-    s = re.sub(r"\bd m\b", 'dm', s)
-    s = re.sub(r"\ba p\b", 'ap', s)
     return [w for w in s.split() if w]
 
 
@@ -336,16 +329,6 @@ def transcribe(rec, x):
     return st.result.text.strip()
 
 
-def expressiveness(x):
-    """Amplitude mélodique (demi-tons entre les centiles 10 et 90 de F0) : plus = moins monotone."""
-    from voice_qa import f0_track
-    f0 = f0_track(x[::3], SR // 3)
-    if len(f0) < 8:
-        return 0.0
-    lo, hi = np.percentile(f0, [10, 90])
-    return float(12 * np.log2(hi / lo))
-
-
 def apply_respell(text, respell):
     def rep(m):
         w = m.group(0)
@@ -365,7 +348,6 @@ def main():
     ap.add_argument('--noise-w', type=float, default=0.8)
     ap.add_argument('--respell', default=None, help='JSON {mot: graphie} prioritaire sur le script')
     ap.add_argument('--threads', type=int, default=2)
-    ap.add_argument('--expr', type=float, default=0.025, help="poids de l'expressivité (amplitude de F0) dans le choix des prises")
     ap.add_argument('--takes', type=int, default=1, help='prises par phrase (la meilleure est retenue)')
     ap.add_argument('--judge-whisper', default=None, help='dossier sherpa-onnx-whisper-* (2e juge ASR)')
     ap.add_argument('--variants', default=None, help='JSON {mot: [graphies]} essayées en alternance sur les prises')
@@ -411,15 +393,11 @@ def main():
                     tk['wer_p'] = wer(c['text'], tk['asr_p'])
                     tk['asr_w'] = transcribe(judge, x) if judge else None
                     tk['wer_w'] = wer(c['text'], tk['asr_w']) if judge else 0.0
-                    tk['expr'] = expressiveness(x)
                 takes.append(tk)
             if len(takes) > 1:
                 med = float(np.median([t['dur'] for t in takes]))
                 for tk in takes:
-                    # mot isolé (judge=whisper) : Parakeet l'anglicise (« Troy's D »), seul Whisper juge
-                    asr = 2 * tk['wer_w'] if c.get('judge') == 'whisper' else 2 * tk['wer_p'] + tk['wer_w']
-                    tk['score'] = (asr + 0.3 * abs(tk['dur'] - med) / med
-                                   - a.expr * min(12.0, tk.get('expr', 0.0)))  # intonation vivante
+                    tk['score'] = 2 * tk['wer_p'] + tk['wer_w'] + 0.3 * abs(tk['dur'] - med) / med
                 best = min(range(len(takes)), key=lambda i: takes[i]['score'])
             else:
                 best = 0

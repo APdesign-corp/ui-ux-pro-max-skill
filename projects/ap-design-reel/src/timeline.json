@@ -1,183 +1,150 @@
 {
  "_doc": "GÉNÉRÉ par scripts/build_timeline.py à partir de voice/vo_layout.json — ne pas éditer à la main. Temps local des scènes = secondes ; synchronisation sur les mots via les markers ; cues = sound design en temps absolu.",
- "duration": 19.438,
+ "duration": 15.691,
  "vo": {
   "file": "voice/vo_master.wav",
   "dry": "voice/vo_dry.wav",
-  "voice": "st-f0",
-  "gender": "F",
+  "voice": "st-m7",
+  "gender": "M",
   "emphasis": [
    {
     "word": "L2.banal",
-    "from": 3.482,
-    "to": 3.856,
+    "from": 2.777,
+    "to": 3.168,
     "db": 1.5
    },
    {
     "word": "L4.arrêtent",
-    "from": 9.082,
-    "to": 9.512,
+    "from": 7.237,
+    "to": 7.587,
     "db": 2.0
    },
    {
     "word": "L4.scroll",
-    "from": 9.642,
-    "to": 10.249,
+    "from": 7.637,
+    "to": 8.01,
     "db": 1.5
    },
    {
     "word": "L5.AP",
-    "from": 11.781,
-    "to": 12.051,
+    "from": 9.122,
+    "to": 9.552,
     "db": 1.5
    },
    {
     "word": "L6.DM",
-    "from": 17.459,
-    "to": 17.888,
+    "from": 13.436,
+    "to": 14.141,
     "db": 2.5
    }
   ]
  },
  "markers": {
   "L1.Tu": 0.152,
-  "L1.veux": 0.26,
-  "L1.vraiment": 0.5,
-  "L1.qu'on": 0.74,
-  "L1.remarque": 1.06,
-  "L1.tes": 1.46,
-  "L1.vidéos": 1.7,
+  "L1.veux": 0.192,
+  "L1.vraiment": 0.34,
+  "L1.qu'on": 0.58,
+  "L1.remarque": 0.82,
+  "L1.tes": 1.22,
+  "L1.vidéos": 1.38,
   "L1.start": 0.152,
-  "L1.end": 2.12,
-  "L2.Alors": 2.284,
-  "L2.arrête": 2.472,
-  "L2.le": 2.952,
-  "L2.contenu": 3.112,
-  "L2.banal": 3.512,
-  "L2.start": 2.284,
-  "L2.end": 3.806,
-  "L3a.Motion": 4.13,
-  "L3.Motion": 4.13,
-  "L3a.design": 4.558,
-  "L3.design": 4.558,
-  "L3a.start": 4.13,
-  "L3a.end": 4.995,
-  "L3b.3D": 5.227,
-  "L3.3D": 5.227,
-  "L3b.start": 5.119,
-  "L3b.end": 6.05,
-  "L3c.VFX": 6.582,
-  "L3.VFX": 6.582,
-  "L3c.start": 6.154,
-  "L3c.end": 6.94,
-  "L3.start": 4.13,
-  "L3.end": 6.94,
-  "L4.On": 7.164,
-  "L4.transforme": 7.272,
-  "L4.tes": 7.832,
-  "L4.idées": 8.072,
-  "L4.en": 8.392,
-  "L4.images": 8.632,
-  "L4.qui": 8.952,
-  "L4.arrêtent": 9.112,
-  "L4.le": 9.512,
-  "L4.scroll": 9.672,
-  "L4.start": 7.164,
-  "L4.end": 10.199,
-  "L5.Ça": 11.231,
-  "L5.c'est": 11.411,
-  "L5.AP": 11.811,
-  "L5.Design": 12.051,
-  "L5.start": 11.123,
-  "L5.end": 12.477,
-  "L6a.Abonne-toi": 12.901,
-  "L6.Abonne-toi": 12.901,
-  "L6a.pour": 13.489,
-  "L6.pour": 13.489,
-  "L6a.ne": 13.649,
-  "L6.ne": 13.649,
-  "L6a.rien": 13.809,
-  "L6.rien": 13.809,
-  "L6a.rater": 14.049,
-  "L6.rater": 14.049,
-  "L6a.start": 12.901,
-  "L6a.end": 14.458,
-  "L6b.et": 14.582,
-  "L6.et": 14.582,
-  "L6b.partage": 14.622,
-  "L6.partage": 14.622,
-  "L6b.la": 15.17,
-  "L6.la": 15.17,
-  "L6b.vidéo": 15.33,
-  "L6.vidéo": 15.33,
-  "L6b.start": 14.582,
-  "L6b.end": 15.588,
-  "L6c.Et": 15.832,
-  "L6.Et": 15.832,
-  "L6c.pour": 15.872,
-  "L6.pour#2": 15.872,
-  "L6c.collaborer": 16.18,
-  "L6.collaborer": 16.18,
-  "L6c.start": 15.832,
-  "L6c.end": 17.037,
-  "L6d.DM": 17.489,
-  "L6.DM": 17.489,
-  "L6d.start": 17.221,
-  "L6d.end": 17.838,
-  "L6.start": 12.901,
-  "L6.end": 17.838
+  "L1.end": 1.655,
+  "L2.Alors": 1.819,
+  "L2.arrête": 1.927,
+  "L2.le": 2.327,
+  "L2.contenu": 2.407,
+  "L2.banal": 2.807,
+  "L2.start": 1.819,
+  "L2.end": 3.118,
+  "L3.Motion": 3.442,
+  "L3.design": 3.71,
+  "L3.3D": 4.364,
+  "L3.VFX": 4.73,
+  "L3.start": 3.442,
+  "L3.end": 5.415,
+  "L4.On": 5.639,
+  "L4.transforme": 5.679,
+  "L4.tes": 6.147,
+  "L4.idées": 6.387,
+  "L4.en": 6.627,
+  "L4.images": 6.787,
+  "L4.qui": 7.107,
+  "L4.arrêtent": 7.267,
+  "L4.le": 7.587,
+  "L4.scroll": 7.667,
+  "L4.start": 5.639,
+  "L4.end": 7.96,
+  "L5.Ça": 8.884,
+  "L5.c'est": 8.924,
+  "L5.AP": 9.152,
+  "L5.Design": 9.552,
+  "L5.start": 8.884,
+  "L5.end": 9.874,
+  "L6.Tu": 10.298,
+  "L6.veux": 10.406,
+  "L6.la": 10.726,
+  "L6.prochaine": 10.886,
+  "L6.Suis": 11.386,
+  "L6.le": 11.786,
+  "L6.compte": 11.866,
+  "L6.Et": 12.306,
+  "L6.pour": 12.466,
+  "L6.collaborer": 12.626,
+  "L6.DM": 13.466,
+  "L6.start": 10.298,
+  "L6.end": 14.091
  },
  "scenes": [
   {
    "id": "hook",
    "start": 0,
-   "end": 2.204,
-   "design": 2.204,
+   "end": 1.739,
+   "design": 1.739,
    "pre": 0,
    "post": 0.04,
    "anchors": []
   },
   {
    "id": "showreel",
-   "start": 2.204,
-   "end": 4.01,
-   "design": 1.806,
+   "start": 1.739,
+   "end": 3.322,
+   "design": 1.583,
    "pre": 0,
    "post": 0.04,
    "anchors": []
   },
   {
    "id": "hero",
-   "start": 4.01,
-   "end": 5.167,
-   "design": 1.157,
+   "start": 3.322,
+   "end": 4.304,
+   "design": 0.982,
    "pre": 0,
    "post": 0.04,
    "anchors": []
   },
   {
    "id": "kinetic",
-   "start": 5.167,
-   "end": 10.703,
-   "design": 5.536,
+   "start": 4.304,
+   "end": 8.464,
+   "design": 4.16,
    "pre": 0,
    "post": 0.04,
    "anchors": []
   },
   {
    "id": "reveal",
-   "start": 10.703,
-   "end": 12.741,
-   "design": 2.038,
+   "start": 8.464,
+   "end": 10.138,
+   "design": 1.674,
    "pre": 0,
    "post": 0.04,
    "anchors": []
   },
   {
    "id": "cta",
-   "start": 12.741,
-   "end": 19.438,
-   "design": 6.697,
+   "start": 10.138,
+   "end": 15.691,
+   "design": 5.553,
    "pre": 0,
    "post": 0,
    "anchors": []
@@ -185,36 +152,36 @@
  ],
  "music": {
   "bpm": 120,
-  "pulseFrom": 2.204,
-  "pulseTo": 10.653,
-  "hatsFrom": 4.01,
-  "silenceFrom": 10.703,
-  "padFrom": 11.811,
-  "swellFrom": 12.741,
-  "resolveAt": 17.489,
+  "pulseFrom": 1.739,
+  "pulseTo": 8.414,
+  "hatsFrom": 3.322,
+  "silenceFrom": 8.464,
+  "padFrom": 9.152,
+  "swellFrom": 10.138,
+  "resolveAt": 13.466,
   "roots": [
    [
     0,
     41.2
    ],
    [
-    2.204,
+    1.739,
     43.65
    ],
    [
-    4.01,
+    3.322,
     41.2
    ],
    [
-    5.167,
+    4.304,
     49.0
    ],
    [
-    9.112,
+    7.267,
     36.71
    ],
    [
-    10.703,
+    8.464,
     41.2
    ]
   ]
@@ -243,31 +210,31 @@
    ]
   },
   {
-   "t": 1.68,
-   "type": "hit",
-   "dur": 0.8,
-   "gain": 0.55
-  },
-  {
-   "t": 1.784,
+   "t": 1.319,
    "type": "riser",
    "dur": 0.42,
    "gain": 0.45
   },
   {
-   "t": 1.904,
+   "t": 1.36,
+   "type": "hit",
+   "dur": 0.8,
+   "gain": 0.55
+  },
+  {
+   "t": 1.439,
    "type": "suck",
    "dur": 0.3,
    "gain": 0.35
   },
   {
-   "t": 2.204,
+   "t": 1.739,
    "type": "hit",
    "dur": 0.45,
    "gain": 0.55
   },
   {
-   "t": 2.565,
+   "t": 2.056,
    "type": "swish",
    "dur": 0.45,
    "gain": 0.4,
@@ -277,13 +244,13 @@
    ]
   },
   {
-   "t": 2.926,
+   "t": 2.372,
    "type": "digital",
    "dur": 0.45,
    "gain": 0.4
   },
   {
-   "t": 3.288,
+   "t": 2.689,
    "type": "whoosh",
    "dur": 0.45,
    "gain": 0.5,
@@ -293,25 +260,19 @@
    ]
   },
   {
-   "t": 3.512,
+   "t": 2.807,
    "type": "digital",
    "dur": 0.4,
    "gain": 0.5
   },
   {
-   "t": 3.532,
+   "t": 2.827,
    "type": "snap",
    "dur": 0.5,
    "gain": 0.45
   },
   {
-   "t": 3.649,
-   "type": "click",
-   "dur": 0.45,
-   "gain": 0.55
-  },
-  {
-   "t": 3.65,
+   "t": 2.962,
    "type": "whoosh",
    "dur": 0.4,
    "gain": 0.6,
@@ -321,123 +282,129 @@
    ]
   },
   {
-   "t": 4.01,
+   "t": 3.005,
+   "type": "click",
+   "dur": 0.45,
+   "gain": 0.55
+  },
+  {
+   "t": 3.322,
    "type": "impact",
    "dur": 1.4,
    "gain": 0.65,
    "tone": "soft"
   },
   {
-   "t": 4.15,
+   "t": 3.462,
    "type": "shimmer",
    "dur": 0.9,
    "gain": 0.3
   },
   {
-   "t": 4.558,
+   "t": 3.71,
    "type": "glass",
    "dur": 0.8,
    "gain": 0.3
   },
   {
-   "t": 5.227,
+   "t": 4.364,
    "type": "hit",
    "dur": 0.8,
    "gain": 0.7
   },
   {
-   "t": 5.257,
+   "t": 4.394,
    "type": "servo",
    "dur": 0.3,
    "gain": 0.2
   },
   {
-   "t": 6.582,
+   "t": 4.73,
    "type": "burst",
    "dur": 0.6,
    "gain": 0.65
   },
   {
-   "t": 6.582,
+   "t": 4.73,
    "type": "impact",
    "dur": 1.0,
    "gain": 0.55,
    "tone": "bright"
   },
   {
-   "t": 7.114,
+   "t": 5.589,
    "type": "zips",
-   "dur": 1.898,
+   "dur": 1.578,
    "gain": 0.35
   },
   {
-   "t": 7.164,
+   "t": 5.639,
    "type": "riser",
-   "dur": 1.948,
+   "dur": 1.628,
    "gain": 0.5
   },
   {
-   "t": 9.112,
+   "t": 7.267,
    "type": "snap",
    "dur": 0.8,
    "gain": 0.95
   },
   {
-   "t": 9.112,
+   "t": 7.267,
    "type": "impact",
    "dur": 1.2,
    "gain": 0.85
   },
   {
-   "t": 9.672,
+   "t": 7.667,
    "type": "hit",
    "dur": 0.9,
    "gain": 0.7
   },
   {
-   "t": 9.702,
+   "t": 7.697,
    "type": "pulse2",
    "dur": 0.6,
    "gain": 0.4
   },
   {
-   "t": 10.653,
+   "t": 8.414,
    "type": "suck",
    "dur": 0.4,
    "gain": 0.3
   },
   {
-   "t": 11.261,
+   "t": 8.602,
    "type": "riser",
    "dur": 0.55,
    "gain": 0.55
   },
   {
-   "t": 11.811,
+   "t": 9.152,
    "type": "impact",
    "dur": 3.0,
    "gain": 1.0
   },
   {
-   "t": 11.811,
+   "t": 9.152,
    "type": "sub",
    "dur": 1.8,
    "gain": 0.7
   },
   {
-   "t": 11.851,
+   "t": 9.192,
    "type": "shimmer",
    "dur": 1.0,
    "gain": 0.32
   },
   {
-   "t": 12.051,
+   "t": 9.552,
    "type": "glass",
    "dur": 1.0,
    "gain": 0.3
   },
   {
-   "t": 12.441,
+   "t": 9.838,
    "type": "whoosh",
    "dur": 0.36,
    "gain": 0.5,
@@ -447,56 +414,56 @@
    ]
   },
   {
-   "t": 12.901,
+   "t": 11.386,
    "type": "pop",
    "dur": 0.2,
    "gain": 0.55
   },
   {
-   "t": 14.049,
+   "t": 11.866,
    "type": "blip",
    "dur": 0.18,
    "gain": 0.35
   },
   {
-   "t": 16.18,
+   "t": 12.626,
    "type": "ticks",
-   "dur": 1.209,
+   "dur": 0.74,
    "gain": 0.25
   },
   {
-   "t": 17.189,
+   "t": 13.166,
    "type": "riser",
    "dur": 0.3,
    "gain": 0.4
   },
   {
-   "t": 17.489,
+   "t": 13.466,
    "type": "impact",
    "dur": 1.6,
    "gain": 0.75,
    "tone": "bright"
   },
   {
-   "t": 17.489,
+   "t": 13.466,
    "type": "click",
    "dur": 0.4,
    "gain": 0.6
   },
   {
-   "t": 17.769,
+   "t": 13.746,
    "type": "success",
    "dur": 0.9,
    "gain": 0.42
   },
   {
-   "t": 17.789,
+   "t": 13.766,
    "type": "pop",
    "dur": 0.2,
    "gain": 0.4
   },
   {
-   "t": 19.118,
+   "t": 15.371,
    "type": "suck",
    "dur": 0.3,
    "gain": 0.35
