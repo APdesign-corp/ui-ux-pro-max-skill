@@ -9,7 +9,7 @@ export default function createHook({ cfg, W, H }) {
   const C = cfg.colors;
   const Lp = layout(W, H);
   const probe = document.createElement('canvas').getContext('2d');
-  const capS = 104 * Lp.u;
+  const capS = 86 * Lp.u;
   void probe;
 
   return {

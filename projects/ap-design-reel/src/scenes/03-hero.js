@@ -38,6 +38,7 @@ export default function createHero({ cfg, world }) {
       back.position.set(-0.02, 0.98, lerp(-4, -1.3, a1));
       back.scale.setScalar(lerp(1.4, 1, a1));
       back.material.opacity = a1 * 0.95;
+      back.material.color.setScalar(0.62); // net, sans brûler dans le bloom
       backLine.position.set(-0.02, 0.98, 0);
       backLine.position.z = back.position.z - 0.02;
       backLine.scale.copy(back.scale);

@@ -4,17 +4,18 @@
  "params": {
   "voice": "st-m7",
   "models": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/models",
-  "out": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/ap/final",
+  "out": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/ap/v5-m7",
   "script": "/home/user/ui-ux-pro-max-skill/projects/ap-design-reel/voice/script.json",
   "aligner": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/models/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
-  "speed": 1.05,
+  "speed": 1.0,
   "noise_scale": 0.667,
   "noise_w": 0.8,
   "respell": null,
-  "threads": 3,
+  "threads": 4,
+  "expr": 0.01,
   "takes": 6,
   "judge_whisper": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/models/sherpa-onnx-whisper-small",
-  "variants": "{\"3D\":[\"trois dé\",\"trois-D\"],\"VFX\":[\"vé èf ix\",\"V F X\"],\"AP\":[\"A-P\",\"à-pé\",\"A P\"],\"DM\":[\"dé-ème\",\"D M\"]}"
+  "variants": "{\"3D\":[\"trois-D\",\"trois D\",\"3 D\"],\"VFX\":[\"V F X\",\"vé èf ix\"],\"AP\":[\"A-P\",\"ah pé\",\"à-pé\"],\"DM\":[\"D M\",\"dé-ème\"]}"
  },
  "respell": {
   "3D": "trois-D",
@@ -34,10 +35,10 @@
      "text": "Tu veux vraiment qu'on remarque tes vidéos ?",
      "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
      "start": 0.14,
-     "end": 1.667,
+     "end": 1.69,
      "speech": [
       0.152,
-      1.655
+      1.678
      ],
      "words": [
       [
@@ -54,7 +55,7 @@
       ],
       [
        "qu'on",
-       0.58
+       0.5
       ],
       [
        "remarque",
@@ -62,7 +63,7 @@
       ],
       [
        "tes",
-       1.22
+       1.14
       ],
       [
        "vidéos",
@@ -76,105 +77,111 @@
       {
        "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
        "sr": 44100,
-       "dur": 1.489,
+       "dur": 1.55,
        "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
        "wer_p": 0.0,
        "asr_w": "Tu veux vraiment qu'on remarque tes vidéos?",
        "wer_w": 0.0,
-       "score": 0.007
+       "expr": 7.445,
+       "score": -0.064
       },
       {
        "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
        "sr": 44100,
-       "dur": 1.532,
+       "dur": 1.766,
+       "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
+       "wer_p": 0.0,
+       "asr_w": "Tu veux vraiment qu'on remarque tes vidéos?",
+       "wer_w": 0.0,
+       "expr": 5.863,
+       "score": -0.029
+      },
+      {
+       "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
+       "sr": 44100,
+       "dur": 1.409,
        "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
        "wer_p": 0.0,
        "asr_w": "Tu veux vraiment qu'on remarque tes vidéos ?",
        "wer_w": 0.0,
-       "score": 0.001
+       "expr": 3.29,
+       "score": 0.004
       },
       {
        "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
        "sr": 44100,
-       "dur": 1.37,
-       "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
-       "wer_p": 0.0,
-       "asr_w": "Tu veux vraiment qu'on remarque tes vidéos?",
-       "wer_w": 0.0,
-       "score": 0.031
-      },
-      {
-       "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
-       "sr": 44100,
-       "dur": 1.527,
-       "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
-       "wer_p": 0.0,
-       "asr_w": "Tu veux vraiment qu'on remarque tes vidéos?",
-       "wer_w": 0.0,
-       "score": 0.0
-      },
-      {
-       "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
-       "sr": 44100,
-       "dur": 1.671,
-       "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
-       "wer_p": 0.0,
-       "asr_w": "Tu veux vraiment qu'on remarque tes vidéos?",
-       "wer_w": 0.0,
-       "score": 0.029
-      },
-      {
-       "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
-       "sr": 44100,
-       "dur": 1.523,
+       "dur": 1.665,
        "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
        "wer_p": 0.0,
        "asr_w": "Tu veux vraiment qu'on remarque tes vidéos ?",
        "wer_w": 0.0,
-       "score": 0.0
+       "expr": 4.807,
+       "score": -0.037
+      },
+      {
+       "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
+       "sr": 44100,
+       "dur": 1.517,
+       "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
+       "wer_p": 0.0,
+       "asr_w": "Tu veux vraiment qu'on remarque tes vidéos?",
+       "wer_w": 0.0,
+       "expr": 5.398,
+       "score": -0.037
+      },
+      {
+       "tts": "Tu veux vraiment qu'on remarque tes vidéos ?",
+       "sr": 44100,
+       "dur": 1.824,
+       "asr_p": "Tu veux vraiment qu'on remarque tes vidéos?",
+       "wer_p": 0.0,
+       "asr_w": "Tu veux vraiment qu'on remarque tes vidéos?",
+       "wer_w": 0.0,
+       "expr": 6.355,
+       "score": -0.023
       }
      ],
-     "chosen_take": 3
+     "chosen_take": 0
     }
    ],
-   "end": 1.667
+   "end": 1.69
   },
   {
    "id": "L2",
    "scene": "showreel",
    "tone": "tranchant",
-   "start": 1.807,
+   "start": 1.83,
    "chunks": [
     {
      "id": "L2",
      "text": "Alors arrête le contenu banal.",
      "tts": "Alors arrête le contenu banal.",
-     "start": 1.807,
-     "end": 3.13,
+     "start": 1.83,
+     "end": 3.274,
      "speech": [
-      1.819,
-      3.118
+      1.842,
+      3.262
      ],
      "words": [
       [
        "Alors",
-       1.819
+       1.842
       ],
       [
        "arrête",
-       1.927
+       1.95
       ],
       [
        "le",
-       2.327
+       2.35
       ],
       [
        "contenu",
-       2.407
+       2.51
       ],
       [
        "banal",
-       2.807
+       2.91
       ]
      ],
      "aligned_words": 5,
@@ -184,349 +191,609 @@
       {
        "tts": "Alors arrête le contenu banal.",
        "sr": 44100,
-       "dur": 1.371,
+       "dur": 1.521,
        "asr_p": "Alors arrête le contenu banal.",
        "wer_p": 0.0,
-       "asr_w": "Alors arrête le contenu banal.",
-       "wer_w": 0.0,
-       "score": 0.008
+       "asr_w": "Alors arrête le cantu banal.",
+       "wer_w": 0.2,
+       "expr": 4.13,
+       "score": 0.194
       },
       {
        "tts": "Alors arrête le contenu banal.",
        "sr": 44100,
-       "dur": 1.315,
+       "dur": 1.474,
        "asr_p": "Alors arrête le contenu banal.",
        "wer_p": 0.0,
        "asr_w": "Alors arrête le contenu banal.",
        "wer_w": 0.0,
-       "score": 0.004
+       "expr": 3.027,
+       "score": -0.005
       },
       {
        "tts": "Alors arrête le contenu banal.",
        "sr": 44100,
-       "dur": 1.355,
+       "dur": 1.303,
        "asr_p": "Alors arrête le contenu banal.",
        "wer_p": 0.0,
+       "asr_w": "Alors arrête le contubanal.",
+       "wer_w": 0.4,
+       "expr": 8.143,
+       "score": 0.331
+      },
+      {
+       "tts": "Alors arrête le contenu banal.",
+       "sr": 44100,
+       "dur": 1.363,
+       "asr_p": "Alors arrête le contenal.",
+       "wer_p": 0.4,
        "asr_w": "Alors arrête le compte Hubanal.",
        "wer_w": 0.4,
-       "score": 0.405
+       "expr": 5.242,
+       "score": 1.148
       },
       {
        "tts": "Alors arrête le contenu banal.",
        "sr": 44100,
-       "dur": 1.345,
-       "asr_p": "Alors arrête le contenu banal.",
-       "wer_p": 0.0,
-       "asr_w": "Alors arrête le contenu banal.",
-       "wer_w": 0.0,
-       "score": 0.002
-      },
-      {
-       "tts": "Alors arrête le contenu banal.",
-       "sr": 44100,
-       "dur": 1.281,
-       "asr_p": "Alors arrête le contenu banal.",
-       "wer_p": 0.0,
-       "asr_w": "Alors arrête le contenu banal.",
-       "wer_w": 0.0,
-       "score": 0.012
-      },
-      {
-       "tts": "Alors arrête le contenu banal.",
-       "sr": 44100,
-       "dur": 1.288,
-       "asr_p": "Alors arrête le contenu banal.",
-       "wer_p": 0.0,
-       "asr_w": "Alors arrête le contenu banal.",
-       "wer_w": 0.0,
-       "score": 0.01
-      },
-      {
-       "tts": "Alors arrête le contenu banal.",
-       "sr": 44100,
-       "dur": 1.218,
+       "dur": 1.339,
        "asr_p": "Alors arrête le contenu banal.",
        "wer_p": 0.0,
        "asr_w": "Alors arrête le compte tube banal.",
        "wer_w": 0.4,
-       "score": 0.426
+       "expr": 4.974,
+       "score": 0.355
       },
       {
        "tts": "Alors arrête le contenu banal.",
        "sr": 44100,
-       "dur": 1.241,
-       "asr_p": "Alors arrête le contenu banal.",
-       "wer_p": 0.0,
-       "asr_w": "Alors arrête le compte Hubanal.",
-       "wer_w": 0.4,
-       "score": 0.421
-      },
-      {
-       "tts": "Alors arrête le contenu banal.",
-       "sr": 44100,
-       "dur": 1.324,
-       "asr_p": "Alors arrête le contenu banal.",
-       "wer_p": 0.0,
-       "asr_w": "Alors arrête le contenu banal.",
-       "wer_w": 0.0,
-       "score": 0.002
-      },
-      {
-       "tts": "Alors arrête le contenu banal.",
-       "sr": 44100,
-       "dur": 1.347,
+       "dur": 1.247,
        "asr_p": "Alors arrête le contenu banal.",
        "wer_p": 0.0,
        "asr_w": "Alors arrête le compte ubanal.",
        "wer_w": 0.4,
-       "score": 0.403
+       "expr": 8.937,
+       "score": 0.336
       },
       {
        "tts": "Alors arrête le contenu banal.",
        "sr": 44100,
-       "dur": 1.366,
+       "dur": 1.356,
        "asr_p": "Alors arrête le contenu banal.",
        "wer_p": 0.0,
-       "asr_w": "Alors arrête le contenu banal.",
-       "wer_w": 0.0,
-       "score": 0.007
+       "asr_w": "Alors arrête le contu banal.",
+       "wer_w": 0.2,
+       "expr": 6.433,
+       "score": 0.137
       },
       {
        "tts": "Alors arrête le contenu banal.",
        "sr": 44100,
-       "dur": 1.482,
+       "dur": 1.349,
+       "asr_p": "Alors arrête le contenu banal.",
+       "wer_p": 0.0,
+       "asr_w": "Alors arrête le compte banal.",
+       "wer_w": 0.2,
+       "expr": 3.981,
+       "score": 0.163
+      },
+      {
+       "tts": "Alors arrête le contenu banal.",
+       "sr": 44100,
+       "dur": 1.317,
+       "asr_p": "Alors arrête le contenu banal.",
+       "wer_p": 0.0,
+       "asr_w": "Alors arrête le compte ubanal.",
+       "wer_w": 0.4,
+       "expr": 5.048,
+       "score": 0.359
+      },
+      {
+       "tts": "Alors arrête le contenu banal.",
+       "sr": 44100,
+       "dur": 1.444,
        "asr_p": "Alors arrête le contenu banal.",
        "wer_p": 0.0,
        "asr_w": "Alors arrête le contenu banal.",
        "wer_w": 0.0,
-       "score": 0.033
+       "expr": 3.841,
+       "score": -0.02
+      },
+      {
+       "tts": "Alors arrête le contenu banal.",
+       "sr": 44100,
+       "dur": 1.38,
+       "asr_p": "Alors arrête le contenu banal.",
+       "wer_p": 0.0,
+       "asr_w": "Alors arrête le compte banal.",
+       "wer_w": 0.2,
+       "expr": 7.965,
+       "score": 0.125
+      },
+      {
+       "tts": "Alors arrête le contenu banal.",
+       "sr": 44100,
+       "dur": 1.426,
+       "asr_p": "Alors arrête le contenu banal.",
+       "wer_p": 0.0,
+       "asr_w": "Alors arrête le compte ubanal.",
+       "wer_w": 0.4,
+       "expr": 5.104,
+       "score": 0.364
       }
      ],
-     "chosen_take": 8
+     "chosen_take": 9
     }
    ],
-   "end": 3.13
+   "end": 3.274
   },
   {
    "id": "L3",
    "scene": "hero",
    "tone": "précis",
-   "start": 3.43,
+   "start": 3.574,
    "chunks": [
     {
-     "id": "L3",
-     "text": "Motion design. 3D. VFX.",
-     "tts": "Motion design. trois dé. vé èf ix.",
-     "start": 3.43,
-     "end": 5.427,
+     "id": "L3a",
+     "text": "Motion design.",
+     "tts": "Motion design.",
+     "start": 3.574,
+     "end": 4.432,
      "speech": [
-      3.442,
-      5.415
+      3.586,
+      4.42
      ],
      "words": [
       [
        "Motion",
-       3.442
+       3.586
       ],
       [
        "design",
-       3.71
-      ],
-      [
-       "3D",
-       4.364
-      ],
-      [
-       "VFX",
-       4.73
+       4.014
       ]
      ],
-     "aligned_words": 3,
-     "asr_on_raw": "Motion design 3D VVFX.",
+     "aligned_words": 2,
+     "asr_on_raw": "Motion design.",
      "native_sr": 44100,
      "takes": [
       {
-       "tts": "Motion design. trois dé. vé èf ix.",
+       "tts": "Motion design.",
        "sr": 44100,
-       "dur": 1.777,
-       "asr_p": "Motion design 3D VVFX.",
-       "wer_p": 0.25,
-       "asr_w": "Motion Design 3D VVFX",
-       "wer_w": 0.25,
-       "score": 0.751
+       "dur": 0.677,
+       "asr_p": "Motion design.",
+       "wer_p": 0.0,
+       "asr_w": "Motion Design",
+       "wer_w": 0.0,
+       "expr": 5.513,
+       "score": 0.009
       },
       {
-       "tts": "Motion design. trois-D. vé èf ix.",
+       "tts": "Motion design.",
        "sr": 44100,
-       "dur": 1.797,
-       "asr_p": "Motion design choice D V FX",
-       "wer_p": 1.0,
-       "asr_w": "Motion Design Trois D Vaffix.",
-       "wer_w": 0.75,
-       "score": 2.752
+       "dur": 0.902,
+       "asr_p": "Motion design",
+       "wer_p": 0.0,
+       "asr_w": "Motion Design",
+       "wer_w": 0.0,
+       "expr": 4.708,
+       "score": -0.033
       },
       {
-       "tts": "Motion design. trois dé. V F X.",
+       "tts": "Motion design.",
        "sr": 44100,
-       "dur": 1.844,
-       "asr_p": "Motion Design Troy's DVFX",
-       "wer_p": 0.5,
-       "asr_w": "Motion Design Troyes DVFX",
-       "wer_w": 0.5,
-       "score": 1.51
+       "dur": 0.872,
+       "asr_p": "Motion design.",
+       "wer_p": 0.0,
+       "asr_w": "Motion Design",
+       "wer_w": 0.0,
+       "expr": 1.969,
+       "score": -0.016
       },
       {
-       "tts": "Motion design. trois-D. V F X.",
+       "tts": "Motion design.",
        "sr": 44100,
-       "dur": 1.954,
-       "asr_p": "Motion Design Troy's DVFX.",
-       "wer_p": 0.5,
-       "asr_w": "Motion Design Troyes DVFX",
-       "wer_w": 0.5,
-       "score": 1.529
+       "dur": 0.867,
+       "asr_p": "Motion design.",
+       "wer_p": 0.0,
+       "asr_w": "Motion Design",
+       "wer_w": 0.0,
+       "expr": 3.172,
+       "score": -0.03
       },
       {
-       "tts": "Motion design. trois dé. vé èf ix.",
+       "tts": "Motion design.",
        "sr": 44100,
-       "dur": 1.613,
-       "asr_p": "Motion design 3D DVF.",
-       "wer_p": 0.25,
-       "asr_w": "Motion Design Troide de VFX.",
-       "wer_w": 0.5,
-       "score": 1.029
+       "dur": 0.793,
+       "asr_p": "Motion design",
+       "wer_p": 0.0,
+       "asr_w": "Motion Design",
+       "wer_w": 0.0,
+       "expr": 3.371,
+       "score": -0.01
       },
       {
-       "tts": "Motion design. trois-D. vé èf ix.",
+       "tts": "Motion design.",
        "sr": 44100,
-       "dur": 1.732,
-       "asr_p": "Motion design choice DV Affix",
-       "wer_p": 0.75,
-       "asr_w": "Motion Design Troys D Vaffix.",
-       "wer_w": 0.75,
-       "score": 2.259
-      },
-      {
-       "tts": "Motion design. trois dé. V F X.",
-       "sr": 44100,
-       "dur": 1.76,
-       "asr_p": "Motion design toys Davy FX",
-       "wer_p": 0.75,
-       "asr_w": "Motion Design Toys Davy FX",
-       "wer_w": 0.75,
-       "score": 2.254
-      },
-      {
-       "tts": "Motion design. trois-D. V F X.",
-       "sr": 44100,
-       "dur": 1.931,
-       "asr_p": "Motion Design Troy's DVFX.",
-       "wer_p": 0.5,
-       "asr_w": "Motion Design Troys DVFX",
-       "wer_w": 0.5,
-       "score": 1.525
-      },
-      {
-       "tts": "Motion design. trois dé. vé èf ix.",
-       "sr": 44100,
-       "dur": 1.751,
-       "asr_p": "Motion design trois D V Fix.",
-       "wer_p": 1.0,
-       "asr_w": "Motion Design Toy Dave AFX",
-       "wer_w": 0.75,
-       "score": 2.756
-      },
-      {
-       "tts": "Motion design. trois-D. vé èf ix.",
-       "sr": 44100,
-       "dur": 1.661,
-       "asr_p": "Motion design choice Diva Fix",
-       "wer_p": 0.75,
-       "asr_w": "Motion Design Toys D Vaffix.",
-       "wer_w": 0.75,
-       "score": 2.271
-      },
-      {
-       "tts": "Motion design. trois dé. V F X.",
-       "sr": 44100,
-       "dur": 1.857,
-       "asr_p": "Motion Design Toys DVFX",
-       "wer_p": 0.5,
-       "asr_w": "Motion Design Troys Day VFX.",
-       "wer_w": 0.5,
-       "score": 1.512
-      },
-      {
-       "tts": "Motion design. trois-D. V F X.",
-       "sr": 44100,
-       "dur": 1.791,
-       "asr_p": "Motion design troys DVFX",
-       "wer_p": 0.5,
-       "asr_w": "Motion Design Troys DVFX",
-       "wer_w": 0.5,
-       "score": 1.501
+       "dur": 0.858,
+       "asr_p": "Motion design.",
+       "wer_p": 0.0,
+       "asr_w": "Motion Design",
+       "wer_w": 0.0,
+       "expr": 5.021,
+       "score": -0.049
       }
      ],
-     "chosen_take": 0
+     "chosen_take": 5
+    },
+    {
+     "id": "L3b",
+     "text": "3D.",
+     "tts": "3 D.",
+     "start": 4.552,
+     "end": 5.189,
+     "speech": [
+      4.564,
+      5.177
+     ],
+     "words": [
+      [
+       "3D",
+       4.672
+      ]
+     ],
+     "aligned_words": 1,
+     "asr_on_raw": "3D",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "trois-D.",
+       "sr": 44100,
+       "dur": 0.702,
+       "asr_p": "Troy's D",
+       "wer_p": 2.0,
+       "asr_w": "Trois D.",
+       "wer_w": 0.0,
+       "expr": 5.628,
+       "score": -0.037
+      },
+      {
+       "tts": "trois D.",
+       "sr": 44100,
+       "dur": 0.656,
+       "asr_p": "Troy's D",
+       "wer_p": 2.0,
+       "asr_w": "Trois D.",
+       "wer_w": 0.0,
+       "expr": 3.293,
+       "score": -0.032
+      },
+      {
+       "tts": "3 D.",
+       "sr": 44100,
+       "dur": 0.662,
+       "asr_p": "3D",
+       "wer_p": 0.0,
+       "asr_w": "3D",
+       "wer_w": 0.0,
+       "expr": 4.843,
+       "score": -0.047
+      },
+      {
+       "tts": "trois-D.",
+       "sr": 44100,
+       "dur": 0.638,
+       "asr_p": "Troy's D",
+       "wer_p": 2.0,
+       "asr_w": "Trois D",
+       "wer_w": 0.0,
+       "expr": 3.756,
+       "score": -0.028
+      },
+      {
+       "tts": "trois D.",
+       "sr": 44100,
+       "dur": 0.636,
+       "asr_p": "Troy's D.",
+       "wer_p": 2.0,
+       "asr_w": "Trois D",
+       "wer_w": 0.0,
+       "expr": 5.479,
+       "score": -0.044
+      },
+      {
+       "tts": "3 D.",
+       "sr": 44100,
+       "dur": 0.786,
+       "asr_p": "Three D.",
+       "wer_p": 2.0,
+       "asr_w": "3D",
+       "wer_w": 0.0,
+       "expr": 11.156,
+       "score": -0.054
+      },
+      {
+       "tts": "trois-D.",
+       "sr": 44100,
+       "dur": 0.704,
+       "asr_p": "Troy's D",
+       "wer_p": 2.0,
+       "asr_w": "Troyes D.",
+       "wer_w": 2.0,
+       "expr": 3.604,
+       "score": 3.985
+      },
+      {
+       "tts": "trois D.",
+       "sr": 44100,
+       "dur": 0.867,
+       "asr_p": "Troy's D.",
+       "wer_p": 2.0,
+       "asr_w": "Trois D",
+       "wer_w": 0.0,
+       "expr": 1.909,
+       "score": 0.075
+      },
+      {
+       "tts": "3 D.",
+       "sr": 44100,
+       "dur": 0.623,
+       "asr_p": "Three D.",
+       "wer_p": 2.0,
+       "asr_w": "3D",
+       "wer_w": 0.0,
+       "expr": 3.381,
+       "score": -0.017
+      },
+      {
+       "tts": "trois-D.",
+       "sr": 44100,
+       "dur": 0.777,
+       "asr_p": "Troy's D.",
+       "wer_p": 2.0,
+       "asr_w": "Trois D",
+       "wer_w": 0.0,
+       "expr": 4.289,
+       "score": 0.011
+      },
+      {
+       "tts": "trois D.",
+       "sr": 44100,
+       "dur": 0.651,
+       "asr_p": "Troy's D",
+       "wer_p": 2.0,
+       "asr_w": "Trois D.",
+       "wer_w": 0.0,
+       "expr": 3.866,
+       "score": -0.035
+      },
+      {
+       "tts": "3 D.",
+       "sr": 44100,
+       "dur": 0.637,
+       "asr_p": "3D",
+       "wer_p": 0.0,
+       "asr_w": "3D",
+       "wer_w": 0.0,
+       "expr": 7.064,
+       "score": -0.061
+      }
+     ],
+     "chosen_take": 11
+    },
+    {
+     "id": "L3c",
+     "text": "VFX.",
+     "tts": "V F X.",
+     "start": 5.289,
+     "end": 6.053,
+     "speech": [
+      5.301,
+      6.041
+     ],
+     "words": [
+      [
+       "VFX",
+       5.809
+      ]
+     ],
+     "aligned_words": 1,
+     "asr_on_raw": "V at X.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "V F X.",
+       "sr": 44100,
+       "dur": 0.73,
+       "asr_p": "VX.",
+       "wer_p": 1.0,
+       "asr_w": "VX",
+       "wer_w": 1.0,
+       "expr": 5.199,
+       "score": 1.962
+      },
+      {
+       "tts": "vé èf ix.",
+       "sr": 44100,
+       "dur": 0.852,
+       "asr_p": "VfX.",
+       "wer_p": 0.0,
+       "asr_w": "VFX.",
+       "wer_w": 0.0,
+       "expr": 2.062,
+       "score": 0.013
+      },
+      {
+       "tts": "V F X.",
+       "sr": 44100,
+       "dur": 0.747,
+       "asr_p": "V X",
+       "wer_p": 2.0,
+       "asr_w": "VX",
+       "wer_w": 1.0,
+       "expr": 3.211,
+       "score": 1.975
+      },
+      {
+       "tts": "vé èf ix.",
+       "sr": 44100,
+       "dur": 0.809,
+       "asr_p": "VfX.",
+       "wer_p": 0.0,
+       "asr_w": "VFX",
+       "wer_w": 0.0,
+       "expr": 3.58,
+       "score": -0.018
+      },
+      {
+       "tts": "V F X.",
+       "sr": 44100,
+       "dur": 0.715,
+       "asr_p": "VX",
+       "wer_p": 1.0,
+       "asr_w": "VX",
+       "wer_w": 1.0,
+       "expr": 4.902,
+       "score": 1.97
+      },
+      {
+       "tts": "vé èf ix.",
+       "sr": 44100,
+       "dur": 0.885,
+       "asr_p": "VfX.",
+       "wer_p": 0.0,
+       "asr_w": "VFX",
+       "wer_w": 0.0,
+       "expr": 2.042,
+       "score": 0.027
+      },
+      {
+       "tts": "V F X.",
+       "sr": 44100,
+       "dur": 0.764,
+       "asr_p": "V at X.",
+       "wer_p": 3.0,
+       "asr_w": "VFX",
+       "wer_w": 0.0,
+       "expr": 2.617,
+       "score": -0.026
+      },
+      {
+       "tts": "vé èf ix.",
+       "sr": 44100,
+       "dur": 0.71,
+       "asr_p": "The Fix.",
+       "wer_p": 2.0,
+       "asr_w": "VFX",
+       "wer_w": 0.0,
+       "expr": 3.203,
+       "score": -0.011
+      },
+      {
+       "tts": "V F X.",
+       "sr": 44100,
+       "dur": 0.765,
+       "asr_p": "VX",
+       "wer_p": 1.0,
+       "asr_w": "VX",
+       "wer_w": 1.0,
+       "expr": 3.814,
+       "score": 1.962
+      },
+      {
+       "tts": "vé èf ix.",
+       "sr": 44100,
+       "dur": 0.731,
+       "asr_p": "VfX.",
+       "wer_p": 0.0,
+       "asr_w": "VFX.",
+       "wer_w": 0.0,
+       "expr": 2.013,
+       "score": -0.007
+      },
+      {
+       "tts": "V F X.",
+       "sr": 44100,
+       "dur": 0.833,
+       "asr_p": "VMX.",
+       "wer_p": 1.0,
+       "asr_w": "VFX",
+       "wer_w": 0.0,
+       "expr": 2.227,
+       "score": 0.005
+      },
+      {
+       "tts": "vé èf ix.",
+       "sr": 44100,
+       "dur": 0.834,
+       "asr_p": "The fix.",
+       "wer_p": 2.0,
+       "asr_w": "VFX",
+       "wer_w": 0.0,
+       "expr": 3.673,
+       "score": -0.009
+      }
+     ],
+     "chosen_take": 6
     }
    ],
-   "end": 5.427
+   "end": 6.053
   },
   {
    "id": "L4",
    "scene": "scroll",
    "tone": "cœur du message, énergique",
-   "start": 5.627,
+   "start": 6.253,
    "chunks": [
     {
      "id": "L4",
      "text": "On transforme tes idées en images qui arrêtent le scroll.",
      "tts": "On transforme tes idées en images qui arrêtent le scroll.",
-     "start": 5.627,
-     "end": 7.972,
+     "start": 6.253,
+     "end": 9.01,
      "speech": [
-      5.639,
-      7.96
+      6.265,
+      8.998
      ],
      "words": [
       [
        "On",
-       5.639
+       6.265
       ],
       [
        "transforme",
-       5.679
+       6.305
       ],
       [
        "tes",
-       6.147
+       6.853
       ],
       [
        "idées",
-       6.387
+       7.093
       ],
       [
        "en",
-       6.627
+       7.413
       ],
       [
        "images",
-       6.787
+       7.653
       ],
       [
        "qui",
-       7.107
+       7.893
       ],
       [
        "arrêtent",
-       7.267
+       8.053
       ],
       [
        "le",
-       7.587
+       8.453
       ],
       [
        "scroll",
-       7.667
+       8.533
       ]
      ],
      "aligned_words": 10,
@@ -536,545 +803,908 @@
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll.",
        "sr": 44100,
-       "dur": 2.275,
+       "dur": 2.739,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "score": 0.013
+       "expr": 8.253,
+       "score": -0.082
       },
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll.",
        "sr": 44100,
-       "dur": 2.417,
+       "dur": 2.75,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "score": 0.005
+       "expr": 5.206,
+       "score": -0.051
       },
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll.",
        "sr": 44100,
-       "dur": 2.327,
+       "dur": 2.775,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "score": 0.006
+       "expr": 3.962,
+       "score": -0.036
       },
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll.",
        "sr": 44100,
-       "dur": 2.345,
+       "dur": 2.617,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "score": 0.004
+       "expr": 5.973,
+       "score": -0.046
       },
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll.",
        "sr": 44100,
-       "dur": 2.412,
+       "dur": 2.717,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "score": 0.005
+       "expr": 4.542,
+       "score": -0.042
       },
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll.",
        "sr": 44100,
-       "dur": 2.405,
+       "dur": 2.757,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "score": 0.004
+       "expr": 8.609,
+       "score": -0.085
       },
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll.",
        "sr": 44100,
-       "dur": 2.443,
+       "dur": 2.734,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "score": 0.009
+       "expr": 6.451,
+       "score": -0.063
       },
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll.",
        "sr": 44100,
-       "dur": 2.429,
+       "dur": 2.852,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "score": 0.007
+       "expr": 5.016,
+       "score": -0.038
       },
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll.",
        "sr": 44100,
-       "dur": 2.531,
+       "dur": 2.722,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "score": 0.02
+       "expr": 5.306,
+       "score": -0.051
       },
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll.",
        "sr": 44100,
-       "dur": 2.326,
+       "dur": 2.868,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "score": 0.006
+       "expr": 5.847,
+       "score": -0.045
       },
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll.",
        "sr": 44100,
-       "dur": 2.321,
+       "dur": 2.755,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "score": 0.007
+       "expr": 4.319,
+       "score": -0.042
       },
       {
        "tts": "On transforme tes idées en images qui arrêtent le scroll.",
        "sr": 44100,
-       "dur": 2.286,
+       "dur": 2.652,
        "asr_p": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_p": 0.0,
        "asr_w": "On transforme tes idées en images qui arrêtent le scroll.",
        "wer_w": 0.0,
-       "score": 0.011
+       "expr": 7.093,
+       "score": -0.061
       }
      ],
-     "chosen_take": 3
+     "chosen_take": 5
     }
    ],
-   "end": 7.972
+   "end": 9.01
   },
   {
    "id": "L5",
    "scene": "reveal",
    "tone": "plus posé, signature",
-   "start": 8.872,
+   "start": 9.91,
    "chunks": [
     {
      "id": "L5",
      "text": "Ça, c'est AP Design.",
-     "tts": "Ça, c'est A-P Design.",
-     "start": 8.872,
-     "end": 9.886,
+     "tts": "Ça, c'est ah pé Design.",
+     "start": 9.91,
+     "end": 11.15,
      "speech": [
-      8.884,
-      9.874
+      9.922,
+      11.138
      ],
      "words": [
       [
        "Ça",
-       8.884
+       9.922
       ],
       [
        "c'est",
-       8.924
+       9.962
       ],
       [
        "AP",
-       9.152
+       10.19
       ],
       [
        "Design",
-       9.552
+       10.67
       ]
      ],
      "aligned_words": 4,
-     "asr_on_raw": "Ça c'est AP Design.",
+     "asr_on_raw": "Ça c'est AP design.",
      "native_sr": 44100,
      "takes": [
       {
        "tts": "Ça, c'est A-P Design.",
        "sr": 44100,
-       "dur": 1.028,
-       "asr_p": "Sassé appet design.",
+       "dur": 1.069,
+       "asr_p": "Sa c'a pay design.",
        "wer_p": 0.75,
-       "asr_w": "Ça c'est appétit design.",
-       "wer_w": 0.25,
-       "score": 1.753
+       "asr_w": "S'assez à pays design.",
+       "wer_w": 0.75,
+       "expr": 6.386,
+       "score": 2.194
+      },
+      {
+       "tts": "Ça, c'est ah pé Design.",
+       "sr": 44100,
+       "dur": 1.24,
+       "asr_p": "Ça c'est AP design.",
+       "wer_p": 0.0,
+       "asr_w": "Ça c'est AP Design.",
+       "wer_w": 0.0,
+       "expr": 9.031,
+       "score": -0.052
       },
       {
        "tts": "Ça, c'est à-pé Design.",
        "sr": 44100,
-       "dur": 0.939,
-       "asr_p": "Ça c'est P design.",
-       "wer_p": 0.25,
-       "asr_w": "Ça c'est pas des ingréd",
-       "wer_w": 0.75,
-       "score": 1.274
-      },
-      {
-       "tts": "Ça, c'est A P Design.",
-       "sr": 44100,
-       "dur": 1.025,
-       "asr_p": "Ça c'est un P design.",
-       "wer_p": 0.5,
-       "asr_w": "Ça c'est ta \"Pizzaing",
+       "dur": 1.058,
+       "asr_p": "Sassign.",
+       "wer_p": 1.0,
+       "asr_w": "Ça c'est un peu design.",
        "wer_w": 0.5,
-       "score": 1.502
+       "expr": 1.669,
+       "score": 2.494
       },
       {
        "tts": "Ça, c'est A-P Design.",
        "sr": 44100,
-       "dur": 0.952,
-       "asr_p": "That's Ape Design.",
+       "dur": 1.113,
+       "asr_p": "Ça c'était P design.",
+       "wer_p": 0.5,
+       "asr_w": "Ça c'est tapé design.",
+       "wer_w": 0.25,
+       "expr": 2.787,
+       "score": 1.226
+      },
+      {
+       "tts": "Ça, c'est ah pé Design.",
+       "sr": 44100,
+       "dur": 1.118,
+       "asr_p": "Ça c'est Ape Design.",
+       "wer_p": 0.25,
+       "asr_w": "ça c'est un peu design",
+       "wer_w": 0.5,
+       "expr": 2.945,
+       "score": 0.976
+      },
+      {
+       "tts": "Ça, c'est à-pé Design.",
+       "sr": 44100,
+       "dur": 1.014,
+       "asr_p": "Sapp design.",
+       "wer_p": 0.75,
+       "asr_w": "Ça c'est pas désir.",
+       "wer_w": 0.5,
+       "expr": 3.142,
+       "score": 1.992
+      },
+      {
+       "tts": "Ça, c'est A-P Design.",
+       "sr": 44100,
+       "dur": 1.085,
+       "asr_p": "Sa c'a pay design.",
+       "wer_p": 0.75,
+       "asr_w": "Ça c'est un peu design.",
+       "wer_w": 0.5,
+       "expr": 3.793,
+       "score": 1.966
+      },
+      {
+       "tts": "Ça, c'est ah pé Design.",
+       "sr": 44100,
+       "dur": 1.17,
+       "asr_p": "Ça c'est un design.",
+       "wer_p": 0.25,
+       "asr_w": "Ça c'est à peu design.",
+       "wer_w": 0.5,
+       "expr": 5.902,
+       "score": 0.96
+      },
+      {
+       "tts": "Ça, c'est à-pé Design.",
+       "sr": 44100,
+       "dur": 1.171,
+       "asr_p": "Ça c'est à P design.",
+       "wer_p": 0.0,
+       "asr_w": "Ça c'est la paix de design.",
+       "wer_w": 0.75,
+       "expr": 11.474,
+       "score": 0.655
+      },
+      {
+       "tts": "Ça, c'est A-P Design.",
+       "sr": 44100,
+       "dur": 1.281,
+       "asr_p": "Sa c'a pay design.",
+       "wer_p": 0.75,
+       "asr_w": "Ça c'est API Design.",
+       "wer_w": 0.25,
+       "expr": 3.565,
+       "score": 1.764
+      },
+      {
+       "tts": "Ça, c'est ah pé Design.",
+       "sr": 44100,
+       "dur": 0.969,
+       "asr_p": "Ça c'est à P design.",
+       "wer_p": 0.0,
+       "asr_w": "Ça s'étape design.",
+       "wer_w": 0.5,
+       "expr": 6.022,
+       "score": 0.475
+      },
+      {
+       "tts": "Ça, c'est à-pé Design.",
+       "sr": 44100,
+       "dur": 0.955,
+       "asr_p": "Ça c'est à P design.",
+       "wer_p": 0.0,
+       "asr_w": "Ça c'est tapé design.",
+       "wer_w": 0.25,
+       "expr": 6.605,
+       "score": 0.223
+      },
+      {
+       "tts": "Ça, c'est A-P Design.",
+       "sr": 44100,
+       "dur": 0.992,
+       "asr_p": "So pay design.",
        "wer_p": 0.75,
        "asr_w": "Ça c'est un pays design.",
        "wer_w": 0.5,
-       "score": 2.02
+       "expr": 2.804,
+       "score": 2.001
+      },
+      {
+       "tts": "Ça, c'est ah pé Design.",
+       "sr": 44100,
+       "dur": 1.056,
+       "asr_p": "Sa c'est up a design.",
+       "wer_p": 0.75,
+       "asr_w": "Ça c'est un peu design.",
+       "wer_w": 0.5,
+       "expr": 3.811,
+       "score": 1.974
       },
       {
        "tts": "Ça, c'est à-pé Design.",
        "sr": 44100,
-       "dur": 1.057,
-       "asr_p": "Sussap",
-       "wer_p": 1.0,
-       "asr_w": "Ça c'est à peu de temps.",
-       "wer_w": 1.0,
-       "score": 3.011
-      },
-      {
-       "tts": "Ça, c'est A P Design.",
-       "sr": 44100,
-       "dur": 0.994,
-       "asr_p": "That's a P design.",
+       "dur": 1.124,
+       "asr_p": "Said design.",
        "wer_p": 0.75,
-       "asr_w": "Ça c'est un petit design.",
-       "wer_w": 0.5,
-       "score": 2.007
-      },
-      {
-       "tts": "Ça, c'est A-P Design.",
-       "sr": 44100,
-       "dur": 1.216,
-       "asr_p": "Ça c'est tapé design.",
-       "wer_p": 0.25,
-       "asr_w": "Ça c'est tapé design.",
+       "asr_w": "Ça c'est appétite design.",
        "wer_w": 0.25,
-       "score": 0.808
-      },
-      {
-       "tts": "Ça, c'est à-pé Design.",
-       "sr": 44100,
-       "dur": 0.971,
-       "asr_p": "Sass a design.",
-       "wer_p": 0.75,
-       "asr_w": "C'est le design.",
-       "wer_w": 0.5,
-       "score": 2.014
-      },
-      {
-       "tts": "Ça, c'est A P Design.",
-       "sr": 44100,
-       "dur": 1.084,
-       "asr_p": "Ça c'est tapé des hein.",
-       "wer_p": 0.75,
-       "asr_w": "Ça, c'est à pied de zain",
-       "wer_w": 1.0,
-       "score": 2.519
+       "expr": 2.669,
+       "score": 1.73
       },
       {
        "tts": "Ça, c'est A-P Design.",
        "sr": 44100,
-       "dur": 1.005,
-       "asr_p": "Sassap Design.",
+       "dur": 1.14,
+       "asr_p": "Sas a pay design.",
        "wer_p": 0.75,
-       "asr_w": "Ça c'est à peu désigne.",
-       "wer_w": 0.75,
-       "score": 2.254
-      },
-      {
-       "tts": "Ça, c'est à-pé Design.",
-       "sr": 44100,
-       "dur": 1.028,
-       "asr_p": "Saspet design.",
-       "wer_p": 0.75,
-       "asr_w": "Ça c'est des designs.",
+       "asr_w": "Ça c'est un peu design.",
        "wer_w": 0.5,
-       "score": 2.003
+       "expr": 3.238,
+       "score": 1.979
       },
       {
-       "tts": "Ça, c'est A P Design.",
+       "tts": "Ça, c'est ah pé Design.",
        "sr": 44100,
-       "dur": 0.889,
-       "asr_p": "Spe design.",
-       "wer_p": 0.75,
-       "asr_w": "C'est un petit design.",
-       "wer_w": 0.75,
-       "score": 2.288
-      },
-      {
-       "tts": "Ça, c'est A-P Design.",
-       "sr": 44100,
-       "dur": 1.014,
-       "asr_p": "Ça c'est AP Design.",
-       "wer_p": 0.0,
-       "asr_w": "Ça c'est appétissant.",
-       "wer_w": 0.5,
-       "score": 0.502
-      },
-      {
-       "tts": "Ça, c'est à-pé Design.",
-       "sr": 44100,
-       "dur": 1.046,
+       "dur": 1.145,
        "asr_p": "Sa c'a pay design.",
        "wer_p": 0.75,
-       "asr_w": "Ça c'est App Design.",
-       "wer_w": 0.25,
-       "score": 1.758
-      },
-      {
-       "tts": "Ça, c'est A P Design.",
-       "sr": 44100,
-       "dur": 0.993,
-       "asr_p": "S'ap.",
-       "wer_p": 1.0,
-       "asr_w": "S'assez tapis design.",
-       "wer_w": 0.75,
-       "score": 2.758
-      },
-      {
-       "tts": "Ça, c'est A-P Design.",
-       "sr": 44100,
-       "dur": 1.181,
-       "asr_p": "Ça c'est tapé design.",
-       "wer_p": 0.25,
-       "asr_w": "Ça c'est tapé design.",
-       "wer_w": 0.25,
-       "score": 0.798
+       "asr_w": "Ça c'est un peu design.",
+       "wer_w": 0.5,
+       "expr": 1.89,
+       "score": 1.994
       },
       {
        "tts": "Ça, c'est à-pé Design.",
        "sr": 44100,
-       "dur": 0.845,
-       "asr_p": "Ça c'est à design.",
-       "wer_p": 0.25,
-       "asr_w": "Ça c'est apaisant.",
+       "dur": 0.987,
+       "asr_p": "Sassap a design.",
+       "wer_p": 0.75,
+       "asr_w": "Ça c'est à peu design.",
        "wer_w": 0.5,
-       "score": 1.051
-      },
-      {
-       "tts": "Ça, c'est A P Design.",
-       "sr": 44100,
-       "dur": 1.065,
-       "asr_p": "Ça c'est un Pizzy.",
-       "wer_p": 0.5,
-       "asr_w": "Sasseta Pizza In",
-       "wer_w": 1.0,
-       "score": 2.013
+       "expr": 5.408,
+       "score": 1.977
       }
      ],
-     "chosen_take": 12
+     "chosen_take": 1
     }
    ],
-   "end": 9.886
+   "end": 11.15
   },
   {
    "id": "L6",
    "scene": "cta",
    "tone": "complice, énergique",
-   "start": 10.286,
+   "start": 11.55,
    "chunks": [
     {
-     "id": "L6",
-     "text": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… DM.",
-     "tts": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… dé-ème.",
-     "start": 10.286,
-     "end": 14.103,
+     "id": "L6a",
+     "text": "Tu veux la prochaine ?",
+     "tts": "Tu veux la prochaine ?",
+     "start": 11.55,
+     "end": 12.467,
      "speech": [
-      10.298,
-      14.091
+      11.562,
+      12.455
      ],
      "words": [
       [
        "Tu",
-       10.298
+       11.562
       ],
       [
        "veux",
-       10.406
+       11.602
       ],
       [
        "la",
-       10.726
+       11.83
       ],
       [
        "prochaine",
-       10.886
-      ],
-      [
-       "Suis",
-       11.386
-      ],
-      [
-       "le",
-       11.786
-      ],
-      [
-       "compte",
-       11.866
-      ],
-      [
-       "Et",
-       12.306
-      ],
-      [
-       "pour",
-       12.466
-      ],
-      [
-       "collaborer",
-       12.626
-      ],
-      [
-       "DM",
-       13.466
+       11.99
       ]
      ],
-     "aligned_words": 11,
-     "asr_on_raw": "Tu veux la prochaine suit le compte et pour collaborer, DM",
+     "aligned_words": 4,
+     "asr_on_raw": "Tu veux la prochaine?",
      "native_sr": 44100,
      "takes": [
       {
-       "tts": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… dé-ème.",
+       "tts": "Tu veux la prochaine ?",
        "sr": 44100,
-       "dur": 3.317,
-       "asr_p": "Tu veux la prochaine suit le compte et pour collaborer, DM",
-       "wer_p": 0.091,
-       "asr_w": "Tu veux, la prochaine suit le compte et pour collaborer, DM.",
-       "wer_w": 0.091,
-       "score": 0.274
+       "dur": 0.897,
+       "asr_p": "Tu veux la prochaine?",
+       "wer_p": 0.0,
+       "asr_w": "Tu veux la prochaine ?",
+       "wer_w": 0.0,
+       "expr": 5.74,
+       "score": -0.054
       },
       {
-       "tts": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… D M.",
+       "tts": "Tu veux la prochaine ?",
        "sr": 44100,
-       "dur": 3.143,
-       "asr_p": "Tu veux la prochaine sur le compte et pour collaborer, Demess.",
-       "wer_p": 0.182,
-       "asr_w": "Tu veux la prochaine sur le compte et pour collaborer, des mœs.",
-       "wer_w": 0.364,
-       "score": 0.742
+       "dur": 1.06,
+       "asr_p": "Tu veux la prochaine?",
+       "wer_p": 0.0,
+       "asr_w": "Tu veux la prochaine ?",
+       "wer_w": 0.0,
+       "expr": 4.718,
+       "score": 0.003
       },
       {
-       "tts": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… dé-ème.",
+       "tts": "Tu veux la prochaine ?",
        "sr": 44100,
-       "dur": 3.285,
-       "asr_p": "Tu veux la prochaine sur le compte et pour collaborer, DM.",
-       "wer_p": 0.091,
-       "asr_w": "Tu veux la prochaine su-le-compte et pour collaborer, DM.",
-       "wer_w": 0.091,
-       "score": 0.275
+       "dur": 0.894,
+       "asr_p": "Tu veux la prochaine?",
+       "wer_p": 0.0,
+       "asr_w": "Tu veux la prochaine ?",
+       "wer_w": 0.0,
+       "expr": 6.747,
+       "score": -0.063
       },
       {
-       "tts": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… D M.",
+       "tts": "Tu veux la prochaine ?",
        "sr": 44100,
-       "dur": 3.191,
-       "asr_p": "Tu veux la prochaine suit le compte et pour collaborer des mettons",
-       "wer_p": 0.273,
-       "asr_w": "Tu veux la prochaine, suis le compte et pour collaborer, démet-se.",
-       "wer_w": 0.182,
-       "score": 0.738
+       "dur": 0.917,
+       "asr_p": "Tu veux la prochaine?",
+       "wer_p": 0.0,
+       "asr_w": "Tu veux la prochaine ?",
+       "wer_w": 0.0,
+       "expr": 12.264,
+       "score": -0.117
       },
       {
-       "tts": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… dé-ème.",
+       "tts": "Tu veux la prochaine ?",
        "sr": 44100,
-       "dur": 3.396,
-       "asr_p": "Tu veux la prochaine sur le compte. Et pour collaborer, DM",
-       "wer_p": 0.091,
-       "asr_w": "Tu veux la prochaine sur le compte. Et pour collaborer, DM",
-       "wer_w": 0.091,
-       "score": 0.281
+       "dur": 0.85,
+       "asr_p": "Tu veux la prochaine?",
+       "wer_p": 0.0,
+       "asr_w": "Tu veux la prochaine ?",
+       "wer_w": 0.0,
+       "expr": 8.387,
+       "score": -0.065
       },
       {
-       "tts": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… D M.",
+       "tts": "Tu veux la prochaine ?",
        "sr": 44100,
-       "dur": 3.271,
-       "asr_p": "Tu veux la prochaine sur le compte et pour collaborer, DMS.",
-       "wer_p": 0.182,
-       "asr_w": "Tu veux la prochaine sur le compte et pour collaborer, démesse.",
-       "wer_w": 0.182,
-       "score": 0.549
-      },
-      {
-       "tts": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… dé-ème.",
-       "sr": 44100,
-       "dur": 3.259,
-       "asr_p": "Tu veux la prochaine suit le compte et pour collaborer, DM.",
-       "wer_p": 0.091,
-       "asr_w": "Tu veux la prochaine, sui le compte et pour collaborer, DM.",
-       "wer_w": 0.091,
-       "score": 0.277
-      },
-      {
-       "tts": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… D M.",
-       "sr": 44100,
-       "dur": 3.382,
-       "asr_p": "Tu veux la prochaine, suis le compte, et pour collaborer, DMS.",
-       "wer_p": 0.091,
-       "asr_w": "Tu veux la prochaine, suis le compte et pour collaborer des meses.",
-       "wer_w": 0.182,
-       "score": 0.371
-      },
-      {
-       "tts": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… dé-ème.",
-       "sr": 44100,
-       "dur": 3.293,
-       "asr_p": "Tu veux la prochaine suit le compte et pour collaborer, DM",
-       "wer_p": 0.091,
-       "asr_w": "Tu veux la prochaine, suie le compte et pour collaborer, DM.",
-       "wer_w": 0.091,
-       "score": 0.274
-      },
-      {
-       "tts": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… D M.",
-       "sr": 44100,
-       "dur": 3.504,
-       "asr_p": "Tu veux la prochaine suit le compte, et pour collaborer, Demus.",
-       "wer_p": 0.182,
-       "asr_w": "Tu veux la prochaine sur le compte et pour collaborer, démesse.",
-       "wer_w": 0.182,
-       "score": 0.564
-      },
-      {
-       "tts": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… dé-ème.",
-       "sr": 44100,
-       "dur": 3.547,
-       "asr_p": "Tu veux la prochaine suit le compte, et pour collaborer, euh... d'em.",
-       "wer_p": 0.273,
-       "asr_w": "Tu veux la prochaine, suis le compte, et pour collaborer, d'aime.",
-       "wer_w": 0.091,
-       "score": 0.658
-      },
-      {
-       "tts": "Tu veux la prochaine ? Suis le compte. Et pour collaborer… D M.",
-       "sr": 44100,
-       "dur": 3.326,
-       "asr_p": "Tu veux la prochaine sur le compte et et pour collaborer, DMS.",
-       "wer_p": 0.273,
-       "asr_w": "Tu veux la prochaine, suites le compte et pour collaborer, dms.",
-       "wer_w": 0.182,
-       "score": 0.729
+       "dur": 0.981,
+       "asr_p": "Tu veux la prochaine?",
+       "wer_p": 0.0,
+       "asr_w": "Tu veux la prochaine ?",
+       "wer_w": 0.0,
+       "expr": 13.48,
+       "score": -0.095
       }
      ],
-     "chosen_take": 0
+     "chosen_take": 3
+    },
+    {
+     "id": "L6b",
+     "text": "Suis le compte.",
+     "tts": "Suis le compte.",
+     "start": 12.587,
+     "end": 13.285,
+     "speech": [
+      12.599,
+      13.273
+     ],
+     "words": [
+      [
+       "Suis",
+       12.599
+      ],
+      [
+       "le",
+       12.787
+      ],
+      [
+       "compte",
+       12.947
+      ]
+     ],
+     "aligned_words": 3,
+     "asr_on_raw": "Suis le compte.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Suis le compte.",
+       "sr": 44100,
+       "dur": 0.785,
+       "asr_p": "Si le compte.",
+       "wer_p": 0.333,
+       "asr_w": "Suis le compte.",
+       "wer_w": 0.0,
+       "expr": 3.572,
+       "score": 0.648
+      },
+      {
+       "tts": "Suis le compte.",
+       "sr": 44100,
+       "dur": 0.745,
+       "asr_p": "Si le compte.",
+       "wer_p": 0.333,
+       "asr_w": "Suis-le compte.",
+       "wer_w": 0.0,
+       "expr": 3.887,
+       "score": 0.629
+      },
+      {
+       "tts": "Suis le compte.",
+       "sr": 44100,
+       "dur": 0.848,
+       "asr_p": "Suis le compte.",
+       "wer_p": 0.0,
+       "asr_w": "Suis le compte.",
+       "wer_w": 0.0,
+       "expr": 2.793,
+       "score": 0.015
+      },
+      {
+       "tts": "Suis le compte.",
+       "sr": 44100,
+       "dur": 0.698,
+       "asr_p": "Suis le compte.",
+       "wer_p": 0.0,
+       "asr_w": "Suis le compte.",
+       "wer_w": 0.0,
+       "expr": 7.779,
+       "score": -0.06
+      },
+      {
+       "tts": "Suis le compte.",
+       "sr": 44100,
+       "dur": 0.74,
+       "asr_p": "Si le compte.",
+       "wer_p": 0.333,
+       "asr_w": "Suis le compte.",
+       "wer_w": 0.0,
+       "expr": 4.621,
+       "score": 0.621
+      },
+      {
+       "tts": "Suis le compte.",
+       "sr": 44100,
+       "dur": 0.748,
+       "asr_p": "Suis le compte.",
+       "wer_p": 0.0,
+       "asr_w": "Suis-le compte.",
+       "wer_w": 0.0,
+       "expr": 4.604,
+       "score": -0.044
+      },
+      {
+       "tts": "Suis le compte.",
+       "sr": 44100,
+       "dur": 0.765,
+       "asr_p": "Suis le compte.",
+       "wer_p": 0.0,
+       "asr_w": "Suis le compte.",
+       "wer_w": 0.0,
+       "expr": 3.951,
+       "score": -0.03
+      },
+      {
+       "tts": "Suis le compte.",
+       "sr": 44100,
+       "dur": 0.74,
+       "asr_p": "Tu le compte.",
+       "wer_p": 0.333,
+       "asr_w": "Suis-le compte.",
+       "wer_w": 0.0,
+       "expr": 5.309,
+       "score": 0.615
+      },
+      {
+       "tts": "Suis le compte.",
+       "sr": 44100,
+       "dur": 0.702,
+       "asr_p": "Tu le compte.",
+       "wer_p": 0.333,
+       "asr_w": "Suis le compte.",
+       "wer_w": 0.0,
+       "expr": 3.528,
+       "score": 0.648
+      },
+      {
+       "tts": "Suis le compte.",
+       "sr": 44100,
+       "dur": 0.72,
+       "asr_p": "S le compte.",
+       "wer_p": 0.333,
+       "asr_w": "Suis le compte.",
+       "wer_w": 0.0,
+       "expr": 2.952,
+       "score": 0.646
+      },
+      {
+       "tts": "Suis le compte.",
+       "sr": 44100,
+       "dur": 0.776,
+       "asr_p": "Suis le compte.",
+       "wer_p": 0.0,
+       "asr_w": "Suis le compte.",
+       "wer_w": 0.0,
+       "expr": 3.014,
+       "score": -0.017
+      },
+      {
+       "tts": "Suis le compte.",
+       "sr": 44100,
+       "dur": 0.661,
+       "asr_p": "Suis le compte.",
+       "wer_p": 0.0,
+       "asr_w": "Suis le compte.",
+       "wer_w": 0.0,
+       "expr": 3.676,
+       "score": -0.004
+      }
+     ],
+     "chosen_take": 3
+    },
+    {
+     "id": "L6c",
+     "text": "Et pour collaborer…",
+     "tts": "Et pour collaborer…",
+     "start": 13.505,
+     "end": 14.668,
+     "speech": [
+      13.517,
+      14.656
+     ],
+     "words": [
+      [
+       "Et",
+       13.517
+      ],
+      [
+       "pour",
+       13.557
+      ],
+      [
+       "collaborer",
+       13.785
+      ]
+     ],
+     "aligned_words": 3,
+     "asr_on_raw": "Et pour collaborer",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Et pour collaborer…",
+       "sr": 44100,
+       "dur": 1.144,
+       "asr_p": "Et pour collaborer",
+       "wer_p": 0.0,
+       "asr_w": "et pour collaborer.",
+       "wer_w": 0.0,
+       "expr": 4.145,
+       "score": -0.031
+      },
+      {
+       "tts": "Et pour collaborer…",
+       "sr": 44100,
+       "dur": 1.163,
+       "asr_p": "Et pour collaborer",
+       "wer_p": 0.0,
+       "asr_w": "et pour collaborer.",
+       "wer_w": 0.0,
+       "expr": 7.09,
+       "score": -0.055
+      },
+      {
+       "tts": "Et pour collaborer…",
+       "sr": 44100,
+       "dur": 1.148,
+       "asr_p": "Et pour collaborer.",
+       "wer_p": 0.0,
+       "asr_w": "et pour collaborer.",
+       "wer_w": 0.0,
+       "expr": 4.591,
+       "score": -0.034
+      },
+      {
+       "tts": "Et pour collaborer…",
+       "sr": 44100,
+       "dur": 1.059,
+       "asr_p": "Et pour collaborer.",
+       "wer_p": 0.0,
+       "asr_w": "et pour collaborer.",
+       "wer_w": 0.0,
+       "expr": 3.34,
+       "score": -0.021
+      },
+      {
+       "tts": "Et pour collaborer…",
+       "sr": 44100,
+       "dur": 0.986,
+       "asr_p": "Et pour collaborer.",
+       "wer_p": 0.0,
+       "asr_w": "et pour collaborer.",
+       "wer_w": 0.0,
+       "expr": 3.094,
+       "score": 0.001
+      },
+      {
+       "tts": "Et pour collaborer…",
+       "sr": 44100,
+       "dur": 1.068,
+       "asr_p": "Et pour collaborer.",
+       "wer_p": 0.0,
+       "asr_w": "et pour collaborer.",
+       "wer_w": 0.0,
+       "expr": 4.418,
+       "score": -0.034
+      }
+     ],
+     "chosen_take": 1
+    },
+    {
+     "id": "L6d",
+     "text": "DM.",
+     "tts": "D M.",
+     "start": 14.828,
+     "end": 15.444,
+     "speech": [
+      14.84,
+      15.432
+     ],
+     "words": [
+      [
+       "DM",
+       14.84
+      ]
+     ],
+     "aligned_words": 1,
+     "asr_on_raw": "DM",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "D M.",
+       "sr": 44100,
+       "dur": 0.701,
+       "asr_p": "DM",
+       "wer_p": 0.0,
+       "asr_w": "DM",
+       "wer_w": 0.0,
+       "expr": 4.129,
+       "score": -0.038
+      },
+      {
+       "tts": "dé-ème.",
+       "sr": 44100,
+       "dur": 0.566,
+       "asr_p": "D. M.",
+       "wer_p": 2.0,
+       "asr_w": "Damn.",
+       "wer_w": 1.0,
+       "expr": 4.675,
+       "score": 2.008
+      },
+      {
+       "tts": "D M.",
+       "sr": 44100,
+       "dur": 0.615,
+       "asr_p": "DM",
+       "wer_p": 0.0,
+       "asr_w": "DM",
+       "wer_w": 0.0,
+       "expr": 11.251,
+       "score": -0.079
+      },
+      {
+       "tts": "dé-ème.",
+       "sr": 44100,
+       "dur": 0.522,
+       "asr_p": "DM",
+       "wer_p": 0.0,
+       "asr_w": "DM",
+       "wer_w": 0.0,
+       "expr": 9.476,
+       "score": -0.021
+      },
+      {
+       "tts": "D M.",
+       "sr": 44100,
+       "dur": 0.736,
+       "asr_p": "DM",
+       "wer_p": 0.0,
+       "asr_w": "DM",
+       "wer_w": 0.0,
+       "expr": 4.805,
+       "score": -0.029
+      },
+      {
+       "tts": "dé-ème.",
+       "sr": 44100,
+       "dur": 0.792,
+       "asr_p": "DM",
+       "wer_p": 0.0,
+       "asr_w": "Damn.",
+       "wer_w": 1.0,
+       "expr": 3.049,
+       "score": 2.013
+      },
+      {
+       "tts": "D M.",
+       "sr": 44100,
+       "dur": 0.577,
+       "asr_p": "D.",
+       "wer_p": 1.0,
+       "asr_w": "DM",
+       "wer_w": 0.0,
+       "expr": 4.932,
+       "score": 0.0
+      },
+      {
+       "tts": "dé-ème.",
+       "sr": 44100,
+       "dur": 0.835,
+       "asr_p": "DM",
+       "wer_p": 0.0,
+       "asr_w": "DM",
+       "wer_w": 0.0,
+       "expr": 4.331,
+       "score": 0.018
+      },
+      {
+       "tts": "D M.",
+       "sr": 44100,
+       "dur": 0.7,
+       "asr_p": "DM",
+       "wer_p": 0.0,
+       "asr_w": "DM",
+       "wer_w": 0.0,
+       "expr": 4.21,
+       "score": -0.039
+      },
+      {
+       "tts": "dé-ème.",
+       "sr": 44100,
+       "dur": 0.684,
+       "asr_p": "DM",
+       "wer_p": 0.0,
+       "asr_w": "DM",
+       "wer_w": 0.0,
+       "expr": 2.242,
+       "score": -0.019
+      },
+      {
+       "tts": "D M.",
+       "sr": 44100,
+       "dur": 0.627,
+       "asr_p": "D. M.",
+       "wer_p": 2.0,
+       "asr_w": "DM",
+       "wer_w": 0.0,
+       "expr": 5.896,
+       "score": -0.031
+      },
+      {
+       "tts": "dé-ème.",
+       "sr": 44100,
+       "dur": 0.758,
+       "asr_p": "DM",
+       "wer_p": 0.0,
+       "asr_w": "D'aime.",
+       "wer_w": 1.0,
+       "expr": 3.027,
+       "score": 1.998
+      }
+     ],
+     "chosen_take": 2
     }
    ],
-   "end": 14.103
+   "end": 15.444
   }
  ],
- "vo_end": 14.103
+ "vo_end": 15.444
 }
