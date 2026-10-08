@@ -1,0 +1,1428 @@
+{
+ "voice": "st-f2",
+ "gender": "F",
+ "params": {
+  "voice": "st-f2",
+  "models": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/models",
+  "out": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/pnj/vo-f2",
+  "script": "/home/user/ui-ux-pro-max-skill/projects/prime-njoy-reel/voice/script.json",
+  "aligner": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/models/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
+  "speed": 1.0,
+  "noise_scale": 0.667,
+  "noise_w": 0.8,
+  "respell": null,
+  "threads": 3,
+  "expr": 0.015,
+  "takes": 6,
+  "judge_whisper": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/models/sherpa-onnx-whisper-small",
+  "variants": "{\"Prime\":[\"Praïme\",\"Prime\"],\"N'Joy\":[\"Ène-djoï\",\"n'djoï\",\"Enjoy\"],\"GSM\":[\"gé-èss-èm\",\"G S M\"]}"
+ },
+ "respell": {
+  "GSM": "gé-èss-èm"
+ },
+ "lines": [
+  {
+   "id": "L1",
+   "scene": "hook",
+   "tone": "accroche, interpellation",
+   "start": 0.15,
+   "chunks": [
+    {
+     "id": "L1a",
+     "text": "Internet, télé, mobile…",
+     "tts": "Internet, télé, mobile...",
+     "start": 0.15,
+     "end": 1.731,
+     "speech": [
+      0.161,
+      1.715
+     ],
+     "words": [
+      [
+       "Internet",
+       0.186
+      ],
+      [
+       "télé",
+       0.829
+      ],
+      [
+       "mobile",
+       1.257
+      ]
+     ],
+     "aligned_words": 3,
+     "asr_on_raw": "Internet Télé Mobile",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Internet, télé, mobile...",
+       "sr": 44100,
+       "dur": 2.099,
+       "asr_p": "Internet, télémobile",
+       "wer_p": 0.667,
+       "asr_w": "Internet Telemobile",
+       "wer_w": 0.667,
+       "expr": 5.857,
+       "score": 1.94
+      },
+      {
+       "tts": "Internet, télé, mobile...",
+       "sr": 44100,
+       "dur": 1.909,
+       "asr_p": "Internet, telemobile",
+       "wer_p": 0.667,
+       "asr_w": "Internet Telemobile",
+       "wer_w": 0.667,
+       "expr": 4.872,
+       "score": 1.929
+      },
+      {
+       "tts": "Internet, télé, mobile...",
+       "sr": 44100,
+       "dur": 1.765,
+       "asr_p": "Internet Télé Mobile",
+       "wer_p": 0.0,
+       "asr_w": "Internet télé mobile",
+       "wer_w": 0.0,
+       "expr": 9.027,
+       "score": -0.111
+      },
+      {
+       "tts": "Internet, télé, mobile...",
+       "sr": 44100,
+       "dur": 2.223,
+       "asr_p": "Internet Télémobile",
+       "wer_p": 0.667,
+       "asr_w": "Internet télémobile",
+       "wer_w": 0.667,
+       "expr": 6.384,
+       "score": 1.951
+      },
+      {
+       "tts": "Internet, télé, mobile...",
+       "sr": 44100,
+       "dur": 1.723,
+       "asr_p": "Internet telemobile",
+       "wer_p": 0.667,
+       "asr_w": "Internet telemobile",
+       "wer_w": 0.667,
+       "expr": 10.238,
+       "score": 1.878
+      },
+      {
+       "tts": "Internet, télé, mobile...",
+       "sr": 44100,
+       "dur": 1.935,
+       "asr_p": "Internet, tél, mobile",
+       "wer_p": 0.333,
+       "asr_w": "Internet TeleMobile",
+       "wer_w": 0.667,
+       "expr": 6.749,
+       "score": 1.234
+      }
+     ],
+     "chosen_take": 2
+    },
+    {
+     "id": "L1b",
+     "text": "Vous payez encore trop cher ?",
+     "tts": "Vou pé-yé encore trop chère ?",
+     "start": 1.811,
+     "end": 3.472,
+     "speech": [
+      1.822,
+      3.454
+     ],
+     "words": [
+      [
+       "Vous",
+       1.822
+      ],
+      [
+       "payez",
+       2.061
+      ],
+      [
+       "encore",
+       2.49
+      ],
+      [
+       "trop",
+       2.775
+      ],
+      [
+       "cher",
+       2.99
+      ]
+     ],
+     "aligned_words": 5,
+     "asr_on_raw": "Vous payez encore trop cher.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Vou pé-yé encore trop chère ?",
+       "sr": 44100,
+       "dur": 2.184,
+       "asr_p": "Vous payez encore trop cher.",
+       "wer_p": 0.0,
+       "asr_w": "Vous payez encore trop cher.",
+       "wer_w": 0.0,
+       "expr": 8.844,
+       "score": -0.035
+      },
+      {
+       "tts": "Vou pé-yé encore trop chère ?",
+       "sr": 44100,
+       "dur": 1.772,
+       "asr_p": "Vous payez encore trop cher?",
+       "wer_p": 0.0,
+       "asr_w": "Vous payez encore trop cher.",
+       "wer_w": 0.0,
+       "expr": 5.035,
+       "score": -0.037
+      },
+      {
+       "tts": "Vou pé-yé encore trop chère ?",
+       "sr": 44100,
+       "dur": 1.852,
+       "asr_p": "Vous payez encore trop cher.",
+       "wer_p": 0.0,
+       "asr_w": "Vous payez encore trop cher.",
+       "wer_w": 0.0,
+       "expr": 6.65,
+       "score": -0.066
+      },
+      {
+       "tts": "Vou pé-yé encore trop chère ?",
+       "sr": 44100,
+       "dur": 1.872,
+       "asr_p": "Vous payez encore trop cher?",
+       "wer_p": 0.0,
+       "asr_w": "Vous payez encore trop cher.",
+       "wer_w": 0.0,
+       "expr": 5.332,
+       "score": -0.05
+      },
+      {
+       "tts": "Vou pé-yé encore trop chère ?",
+       "sr": 44100,
+       "dur": 1.771,
+       "asr_p": "Vous payez encore trop cher?",
+       "wer_p": 0.0,
+       "asr_w": "Vous payez encore trop cher.",
+       "wer_w": 0.0,
+       "expr": 6.141,
+       "score": -0.048
+      }
+     ],
+     "chosen_take": 2
+    }
+   ],
+   "end": 3.472
+  },
+  {
+   "id": "L2",
+   "scene": "unite",
+   "tone": "solution, chaleureux",
+   "start": 3.692,
+   "chunks": [
+    {
+     "id": "L2",
+     "text": "Avec Prime N'Joy, tout est réuni.",
+     "tts": "Avec Prime Ène-djoï, tout est réuni.",
+     "start": 3.692,
+     "end": 5.759,
+     "speech": [
+      3.703,
+      5.746
+     ],
+     "words": [
+      [
+       "Avec",
+       3.703
+      ],
+      [
+       "Prime",
+       4.013
+      ],
+      [
+       "N'Joy",
+       4.656
+      ],
+      [
+       "tout",
+       5.085
+      ],
+      [
+       "est",
+       5.228
+      ],
+      [
+       "réuni",
+       5.371
+      ]
+     ],
+     "aligned_words": 6,
+     "asr_on_raw": "Avec Prime and Joy tout est réuni.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Avec Praïme Ène-djoï, tout est réuni.",
+       "sr": 44100,
+       "dur": 2.371,
+       "asr_p": "Avec Prey Manjoy tout est réunie.",
+       "wer_p": 0.5,
+       "asr_w": "Avec Préhémen, joye, tout est réuni.",
+       "wer_w": 0.333,
+       "expr": 7.825,
+       "score": 1.219
+      },
+      {
+       "tts": "Avec Prime Ène-djoï, tout est réuni.",
+       "sr": 44100,
+       "dur": 2.311,
+       "asr_p": "Avec Prime and Joy tout est réuni.",
+       "wer_p": 0.333,
+       "asr_w": "Avec Prime Enjoy, tout est réuni.",
+       "wer_w": 0.0,
+       "expr": 10.419,
+       "score": 0.515
+      },
+      {
+       "tts": "Avec Praïme n'djoï, tout est réuni.",
+       "sr": 44100,
+       "dur": 2.615,
+       "asr_p": "Avec Praimin joi totus reuni.",
+       "wer_p": 0.667,
+       "asr_w": "Avec prêts, vous avez apprécié le fait de vous donner le réunis",
+       "wer_w": 1.833,
+       "expr": 9.447,
+       "score": 3.059
+      },
+      {
+       "tts": "Avec Prime n'djoï, tout est réuni.",
+       "sr": 44100,
+       "dur": 2.155,
+       "asr_p": "Avec Prime and Joy Tutis Reuni.",
+       "wer_p": 0.5,
+       "asr_w": "Avec prime en joie tout à sa réunion.",
+       "wer_w": 0.833,
+       "expr": 11.792,
+       "score": 1.681
+      },
+      {
+       "tts": "Avec Praïme Enjoy, tout est réuni.",
+       "sr": 44100,
+       "dur": 2.463,
+       "asr_p": "Avec Prayim en Joy Tudis Reuni",
+       "wer_p": 0.667,
+       "asr_w": "Avec preuillez-vous et à la fin de votre réunion.",
+       "wer_w": 1.5,
+       "expr": 6.662,
+       "score": 2.748
+      },
+      {
+       "tts": "Avec Prime Enjoy, tout est réuni.",
+       "sr": 44100,
+       "dur": 2.377,
+       "asr_p": "Avek prime enjoy Tutest Reuni",
+       "wer_p": 0.5,
+       "asr_w": "Avec Prime Enjoy Tutistriuni.",
+       "wer_w": 0.5,
+       "expr": 8.513,
+       "score": 1.376
+      },
+      {
+       "tts": "Avec Praïme Ène-djoï, tout est réuni.",
+       "sr": 44100,
+       "dur": 2.43,
+       "asr_p": "Avec Prime and Joy, tout est réunie.",
+       "wer_p": 0.5,
+       "asr_w": "Avec Préhime, enjoy, toute réunie !",
+       "wer_w": 0.667,
+       "expr": 8.026,
+       "score": 1.557
+      },
+      {
+       "tts": "Avec Prime Ène-djoï, tout est réuni.",
+       "sr": 44100,
+       "dur": 2.209,
+       "asr_p": "Avec Prime and Joy tout est réuni.",
+       "wer_p": 0.333,
+       "asr_w": "Avec Prime Enjoy, toutes réunies!",
+       "wer_w": 0.5,
+       "expr": 9.666,
+       "score": 1.039
+      },
+      {
+       "tts": "Avec Praïme n'djoï, tout est réuni.",
+       "sr": 44100,
+       "dur": 2.043,
+       "asr_p": "Avec Priim en Joy Totis Reuni.",
+       "wer_p": 0.667,
+       "asr_w": "Avec Prayim, enjoy totes réunies.",
+       "wer_w": 0.667,
+       "expr": 9.626,
+       "score": 1.894
+      },
+      {
+       "tts": "Avec Prime n'djoï, tout est réuni.",
+       "sr": 44100,
+       "dur": 2.274,
+       "asr_p": "Avec Prime en Joy Tut is reuni.",
+       "wer_p": 0.667,
+       "asr_w": "Avec Prime Enjoy Tutist Reuni.",
+       "wer_w": 0.333,
+       "expr": 9.569,
+       "score": 1.532
+      },
+      {
+       "tts": "Avec Praïme Enjoy, tout est réuni.",
+       "sr": 44100,
+       "dur": 2.322,
+       "asr_p": "Avek prayum enjoy totus reuni.",
+       "wer_p": 0.667,
+       "asr_w": "Avet'prayé menjoi totis reyouni",
+       "wer_w": 1.0,
+       "expr": 6.803,
+       "score": 2.234
+      },
+      {
+       "tts": "Avec Prime Enjoy, tout est réuni.",
+       "sr": 44100,
+       "dur": 2.458,
+       "asr_p": "Avec Prime Enjoy Totist Reuni",
+       "wer_p": 0.333,
+       "asr_w": "Avec Prime Enjoy Toutes Réunis.",
+       "wer_w": 0.5,
+       "expr": 8.314,
+       "score": 1.056
+      }
+     ],
+     "chosen_take": 1
+    }
+   ],
+   "end": 5.759
+  },
+  {
+   "id": "L3",
+   "scene": "products",
+   "tone": "énumération rythmée",
+   "start": 5.959,
+   "chunks": [
+    {
+     "id": "L3a",
+     "text": "La télé.",
+     "tts": "La télé.",
+     "start": 5.959,
+     "end": 6.79,
+     "speech": [
+      5.97,
+      6.777
+     ],
+     "words": [
+      [
+       "La",
+       5.97
+      ],
+      [
+       "télé",
+       6.28
+      ]
+     ],
+     "aligned_words": 2,
+     "asr_on_raw": "La tele",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "La télé.",
+       "sr": 44100,
+       "dur": 1.015,
+       "asr_p": "La tele",
+       "wer_p": 0.0,
+       "asr_w": "La télé",
+       "wer_w": 0.0,
+       "expr": 5.643,
+       "score": -0.071
+      },
+      {
+       "tts": "La télé.",
+       "sr": 44100,
+       "dur": 1.049,
+       "asr_p": "La tele",
+       "wer_p": 0.0,
+       "asr_w": "La télé",
+       "wer_w": 0.0,
+       "expr": 5.895,
+       "score": -0.064
+      },
+      {
+       "tts": "La télé.",
+       "sr": 44100,
+       "dur": 0.874,
+       "asr_p": "La tele",
+       "wer_p": 0.0,
+       "asr_w": "La télé",
+       "wer_w": 0.0,
+       "expr": 5.127,
+       "score": -0.047
+      },
+      {
+       "tts": "La télé.",
+       "sr": 44100,
+       "dur": 1.113,
+       "asr_p": "La tele",
+       "wer_p": 0.0,
+       "asr_w": "La télé",
+       "wer_w": 0.0,
+       "expr": 5.36,
+       "score": -0.037
+      },
+      {
+       "tts": "La télé.",
+       "sr": 44100,
+       "dur": 0.928,
+       "asr_p": "La tele",
+       "wer_p": 0.0,
+       "asr_w": "La télé",
+       "wer_w": 0.0,
+       "expr": 6.868,
+       "score": -0.09
+      },
+      {
+       "tts": "La télé.",
+       "sr": 44100,
+       "dur": 0.878,
+       "asr_p": "La télé",
+       "wer_p": 0.0,
+       "asr_w": "La télé",
+       "wer_w": 0.0,
+       "expr": 5.884,
+       "score": -0.059
+      }
+     ],
+     "chosen_take": 4
+    },
+    {
+     "id": "L3b",
+     "text": "Internet.",
+     "tts": "Internet.",
+     "start": 6.87,
+     "end": 7.761,
+     "speech": [
+      6.881,
+      7.749
+     ],
+     "words": [
+      [
+       "Internet",
+       6.906
+      ]
+     ],
+     "aligned_words": 1,
+     "asr_on_raw": "Internet",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Internet.",
+       "sr": 44100,
+       "dur": 0.902,
+       "asr_p": "Internet",
+       "wer_p": 0.0,
+       "asr_w": "Internet",
+       "wer_w": 0.0,
+       "expr": 10.425,
+       "score": -0.142
+      },
+      {
+       "tts": "Internet.",
+       "sr": 44100,
+       "dur": 0.813,
+       "asr_p": "Internet",
+       "wer_p": 0.0,
+       "asr_w": "Internet",
+       "wer_w": 0.0,
+       "expr": 10.965,
+       "score": -0.121
+      },
+      {
+       "tts": "Internet.",
+       "sr": 44100,
+       "dur": 0.996,
+       "asr_p": "Internet",
+       "wer_p": 0.0,
+       "asr_w": "Internet",
+       "wer_w": 0.0,
+       "expr": 10.76,
+       "score": -0.147
+      },
+      {
+       "tts": "Internet.",
+       "sr": 44100,
+       "dur": 0.778,
+       "asr_p": "Internet",
+       "wer_p": 0.0,
+       "asr_w": "Internet",
+       "wer_w": 0.0,
+       "expr": 10.835,
+       "score": -0.109
+      },
+      {
+       "tts": "Internet.",
+       "sr": 44100,
+       "dur": 1.185,
+       "asr_p": "Internet",
+       "wer_p": 0.0,
+       "asr_w": "Internet",
+       "wer_w": 0.0,
+       "expr": 8.983,
+       "score": -0.06
+      },
+      {
+       "tts": "Internet.",
+       "sr": 44100,
+       "dur": 1.036,
+       "asr_p": "Internet",
+       "wer_p": 0.0,
+       "asr_w": "Internet",
+       "wer_w": 0.0,
+       "expr": 8.844,
+       "score": -0.105
+      }
+     ],
+     "chosen_take": 2
+    },
+    {
+     "id": "L3c",
+     "text": "Le GSM.",
+     "tts": "Le gé-èss-èm.",
+     "start": 7.841,
+     "end": 9.003,
+     "speech": [
+      7.852,
+      8.99
+     ],
+     "words": [
+      [
+       "Le",
+       7.852
+      ],
+      [
+       "GSM",
+       8.091
+      ]
+     ],
+     "aligned_words": 2,
+     "asr_on_raw": "Le GSM.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Le gé-èss-èm.",
+       "sr": 44100,
+       "dur": 1.196,
+       "asr_p": "Le GSM.",
+       "wer_p": 0.0,
+       "asr_w": "Le GSM",
+       "wer_w": 0.0,
+       "expr": 9.93,
+       "score": -0.136
+      },
+      {
+       "tts": "Le G S M.",
+       "sr": 44100,
+       "dur": 0.878,
+       "asr_p": "Leg S M",
+       "wer_p": 1.5,
+       "asr_w": "Le GSM",
+       "wer_w": 0.0,
+       "expr": 7.379,
+       "score": -0.04
+      },
+      {
+       "tts": "Le gé-èss-èm.",
+       "sr": 44100,
+       "dur": 1.266,
+       "asr_p": "Le GS1.",
+       "wer_p": 0.5,
+       "asr_w": "Le GSM",
+       "wer_w": 0.0,
+       "expr": 8.987,
+       "score": -0.104
+      },
+      {
+       "tts": "Le G S M.",
+       "sr": 44100,
+       "dur": 1.395,
+       "asr_p": "Legs M",
+       "wer_p": 1.0,
+       "asr_w": "Le GSM",
+       "wer_w": 0.0,
+       "expr": 7.885,
+       "score": -0.054
+      },
+      {
+       "tts": "Le gé-èss-èm.",
+       "sr": 44100,
+       "dur": 1.132,
+       "asr_p": "Le GS.",
+       "wer_p": 0.5,
+       "asr_w": "Le GSM",
+       "wer_w": 0.0,
+       "expr": 7.492,
+       "score": -0.108
+      },
+      {
+       "tts": "Le G S M.",
+       "sr": 44100,
+       "dur": 0.913,
+       "asr_p": "Leg S M",
+       "wer_p": 1.5,
+       "asr_w": "Le GSM",
+       "wer_w": 0.0,
+       "expr": 9.885,
+       "score": -0.087
+      },
+      {
+       "tts": "Le gé-èss-èm.",
+       "sr": 44100,
+       "dur": 1.128,
+       "asr_p": "Le GSI.",
+       "wer_p": 0.5,
+       "asr_w": "Le GSM",
+       "wer_w": 0.0,
+       "expr": 7.552,
+       "score": -0.108
+      },
+      {
+       "tts": "Le G S M.",
+       "sr": 44100,
+       "dur": 1.063,
+       "asr_p": "Leg S M",
+       "wer_p": 1.5,
+       "asr_w": "Le GSM",
+       "wer_w": 0.0,
+       "expr": 7.885,
+       "score": -0.096
+      },
+      {
+       "tts": "Le gé-èss-èm.",
+       "sr": 44100,
+       "dur": 1.233,
+       "asr_p": "Le GSM.",
+       "wer_p": 0.0,
+       "asr_w": "Le GSM",
+       "wer_w": 0.0,
+       "expr": 8.889,
+       "score": -0.111
+      },
+      {
+       "tts": "Le G S M.",
+       "sr": 44100,
+       "dur": 1.012,
+       "asr_p": "Leg S M",
+       "wer_p": 1.5,
+       "asr_w": "Le GSM",
+       "wer_w": 0.0,
+       "expr": 9.331,
+       "score": -0.105
+      },
+      {
+       "tts": "Le gé-èss-èm.",
+       "sr": 44100,
+       "dur": 1.299,
+       "asr_p": "Le GSM.",
+       "wer_p": 0.0,
+       "asr_w": "Le GSM",
+       "wer_w": 0.0,
+       "expr": 11.999,
+       "score": -0.14
+      },
+      {
+       "tts": "Le G S M.",
+       "sr": 44100,
+       "dur": 1.164,
+       "asr_p": "Leg S M",
+       "wer_p": 1.5,
+       "asr_w": "Legis M",
+       "wer_w": 1.0,
+       "expr": 6.93,
+       "score": 1.9
+      }
+     ],
+     "chosen_take": 10
+    }
+   ],
+   "end": 9.003
+  },
+  {
+   "id": "L4",
+   "scene": "offer",
+   "tone": "offre, enthousiaste",
+   "start": 9.253,
+   "chunks": [
+    {
+     "id": "L4a",
+     "text": "Le tout pour 45 € par mois.",
+     "tts": "Le tout pour quarante-cinq euros par mois !",
+     "start": 9.253,
+     "end": 11.457,
+     "speech": [
+      9.264,
+      11.441
+     ],
+     "words": [
+      [
+       "Le",
+       9.264
+      ],
+      [
+       "tout",
+       9.504
+      ],
+      [
+       "pour",
+       9.86
+      ],
+      [
+       "45",
+       10.574
+      ],
+      [
+       "par",
+       10.932
+      ],
+      [
+       "mois",
+       11.146
+      ]
+     ],
+     "aligned_words": 6,
+     "asr_on_raw": "Le tout pour 45 euros par mois.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Le tout pour quarante-cinq euros par mois !",
+       "sr": 44100,
+       "dur": 2.39,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 8.314,
+       "score": 0.424
+      },
+      {
+       "tts": "Le tout pour quarante-cinq euros par mois !",
+       "sr": 44100,
+       "dur": 2.395,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 8.015,
+       "score": 0.427
+      },
+      {
+       "tts": "Le tout pour quarante-cinq euros par mois !",
+       "sr": 44100,
+       "dur": 2.439,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 9.191,
+       "score": 0.409
+      },
+      {
+       "tts": "Le tout pour quarante-cinq euros par mois !",
+       "sr": 44100,
+       "dur": 2.288,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 9.006,
+       "score": 0.43
+      },
+      {
+       "tts": "Le tout pour quarante-cinq euros par mois !",
+       "sr": 44100,
+       "dur": 2.466,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 8.793,
+       "score": 0.414
+      },
+      {
+       "tts": "Le tout pour quarante-cinq euros par mois !",
+       "sr": 44100,
+       "dur": 2.402,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 9.558,
+       "score": 0.41
+      },
+      {
+       "tts": "Le tout pour quarante-cinq euros par mois !",
+       "sr": 44100,
+       "dur": 2.461,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 10.052,
+       "score": 0.401
+      },
+      {
+       "tts": "Le tout pour quarante-cinq euros par mois !",
+       "sr": 44100,
+       "dur": 2.385,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 10.022,
+       "score": 0.408
+      },
+      {
+       "tts": "Le tout pour quarante-cinq euros par mois !",
+       "sr": 44100,
+       "dur": 2.544,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 9.922,
+       "score": 0.412
+      },
+      {
+       "tts": "Le tout pour quarante-cinq euros par mois !",
+       "sr": 44100,
+       "dur": 2.59,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 7.606,
+       "score": 0.441
+      },
+      {
+       "tts": "Le tout pour quarante-cinq euros par mois !",
+       "sr": 44100,
+       "dur": 2.609,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 9.196,
+       "score": 0.427
+      },
+      {
+       "tts": "Le tout pour quarante-cinq euros par mois !",
+       "sr": 44100,
+       "dur": 2.639,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 9.665,
+       "score": 0.426
+      }
+     ],
+     "chosen_take": 6
+    }
+   ],
+   "end": 11.457
+  },
+  {
+   "id": "L5",
+   "scene": "promise",
+   "tone": "promesse, posé",
+   "start": 11.707,
+   "chunks": [
+    {
+     "id": "L5",
+     "text": "Plus qu'une connexion, un meilleur quotidien.",
+     "tts": "Plus qu'une connexion, un meilleur quotidien.",
+     "start": 11.707,
+     "end": 14.023,
+     "speech": [
+      11.718,
+      14.006
+     ],
+     "words": [
+      [
+       "Plus",
+       11.718
+      ],
+      [
+       "qu'une",
+       11.957
+      ],
+      [
+       "connexion",
+       12.243
+      ],
+      [
+       "un",
+       12.814
+      ],
+      [
+       "meilleur",
+       12.957
+      ],
+      [
+       "quotidien",
+       13.314
+      ]
+     ],
+     "aligned_words": 6,
+     "asr_on_raw": "Plus qu'une connexion, un meilleur quotidien.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Plus qu'une connexion, un meilleur quotidien.",
+       "sr": 44100,
+       "dur": 2.587,
+       "asr_p": "Plus qu'une connexion, un meilleur quotidien.",
+       "wer_p": 0.0,
+       "asr_w": "plus qu'une connexion, un meilleur quotidien.",
+       "wer_w": 0.0,
+       "expr": 6.175,
+       "score": -0.092
+      },
+      {
+       "tts": "Plus qu'une connexion, un meilleur quotidien.",
+       "sr": 44100,
+       "dur": 2.466,
+       "asr_p": "Plus qu'une connexion d'un meilleur quotidien.",
+       "wer_p": 0.167,
+       "asr_w": "plus qu'une connexion d'un meilleur quotidien.",
+       "wer_w": 0.167,
+       "expr": 11.533,
+       "score": 0.341
+      },
+      {
+       "tts": "Plus qu'une connexion, un meilleur quotidien.",
+       "sr": 44100,
+       "dur": 2.478,
+       "asr_p": "Puisqu'une connexion à un meilleur quotidien.",
+       "wer_p": 0.5,
+       "asr_w": "plus qu'une connexion à meilleur quotidien.",
+       "wer_w": 0.167,
+       "expr": 8.605,
+       "score": 1.05
+      },
+      {
+       "tts": "Plus qu'une connexion, un meilleur quotidien.",
+       "sr": 44100,
+       "dur": 2.634,
+       "asr_p": "Plus qu'une connexion un meilleur quotidien.",
+       "wer_p": 0.0,
+       "asr_w": "plus qu'une connexion d'un meilleur quotidien.",
+       "wer_w": 0.167,
+       "expr": 9.229,
+       "score": 0.034
+      },
+      {
+       "tts": "Plus qu'une connexion, un meilleur quotidien.",
+       "sr": 44100,
+       "dur": 2.577,
+       "asr_p": "Plus qu'une connexion à un meilleur quotidien.",
+       "wer_p": 0.167,
+       "asr_w": "plus qu'une connexion à un meilleur quotidien.",
+       "wer_w": 0.167,
+       "expr": 7.781,
+       "score": 0.384
+      },
+      {
+       "tts": "Plus qu'une connexion, un meilleur quotidien.",
+       "sr": 44100,
+       "dur": 2.714,
+       "asr_p": "Plus qu'une connexion, un meilleur quotidien.",
+       "wer_p": 0.0,
+       "asr_w": "plus qu'une connexion à meilleur quotidien.",
+       "wer_w": 0.167,
+       "expr": 10.324,
+       "score": 0.027
+      }
+     ],
+     "chosen_take": 0
+    }
+   ],
+   "end": 14.023
+  },
+  {
+   "id": "L6",
+   "scene": "brand",
+   "tone": "signature",
+   "start": 14.323,
+   "chunks": [
+    {
+     "id": "L6a",
+     "text": "Prime N'Joy.",
+     "tts": "Prime Ène-djoï.",
+     "start": 14.323,
+     "end": 15.819,
+     "speech": [
+      14.334,
+      15.815
+     ],
+     "words": [
+      [
+       "Prime",
+       14.334
+      ],
+      [
+       "N'Joy",
+       14.787
+      ]
+     ],
+     "aligned_words": 2,
+     "asr_on_raw": "Prime Anajoy",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Praïme Ène-djoï.",
+       "sr": 44100,
+       "dur": 1.575,
+       "asr_p": "Braina Enejoy",
+       "wer_p": 1.0,
+       "asr_w": "Prêt à mes énergies.",
+       "wer_w": 2.0,
+       "expr": 8.863,
+       "score": 3.912
+      },
+      {
+       "tts": "Prime Ène-djoï.",
+       "sr": 44100,
+       "dur": 1.671,
+       "asr_p": "Prime Anajoy",
+       "wer_p": 0.5,
+       "asr_w": "Prime and enjoy!",
+       "wer_w": 0.5,
+       "expr": 10.65,
+       "score": 1.406
+      },
+      {
+       "tts": "Praïme n'djoï.",
+       "sr": 44100,
+       "dur": 1.276,
+       "asr_p": "Brahim and Enjoy",
+       "wer_p": 1.0,
+       "asr_w": "Prayemen enjoy!",
+       "wer_w": 0.5,
+       "expr": 8.677,
+       "score": 2.39
+      },
+      {
+       "tts": "Prime n'djoï.",
+       "sr": 44100,
+       "dur": 1.659,
+       "asr_p": "Prime and Joy",
+       "wer_p": 1.0,
+       "asr_w": "Prime Enjoy",
+       "wer_w": 0.0,
+       "expr": 11.068,
+       "score": 1.897
+      },
+      {
+       "tts": "Praïme Enjoy.",
+       "sr": 44100,
+       "dur": 1.26,
+       "asr_p": "Prayem enjoy.",
+       "wer_p": 0.5,
+       "asr_w": "Prêt-Eme en joie.",
+       "wer_w": 2.0,
+       "expr": 5.335,
+       "score": 2.944
+      },
+      {
+       "tts": "Prime Enjoy.",
+       "sr": 44100,
+       "dur": 1.163,
+       "asr_p": "Prime and Joy",
+       "wer_p": 1.0,
+       "asr_w": "Prime et joy.",
+       "wer_w": 1.0,
+       "expr": 3.691,
+       "score": 2.99
+      },
+      {
+       "tts": "Praïme Ène-djoï.",
+       "sr": 44100,
+       "dur": 1.488,
+       "asr_p": "Pray manage.",
+       "wer_p": 1.0,
+       "asr_w": "Prime-Managers",
+       "wer_w": 0.5,
+       "expr": 4.709,
+       "score": 2.455
+      },
+      {
+       "tts": "Prime Ène-djoï.",
+       "sr": 44100,
+       "dur": 1.464,
+       "asr_p": "Prime Ana Joy",
+       "wer_p": 1.0,
+       "asr_w": "Prime et J'ai la joie !",
+       "wer_w": 2.0,
+       "expr": 11.616,
+       "score": 3.846
+      },
+      {
+       "tts": "Praïme n'djoï.",
+       "sr": 44100,
+       "dur": 1.495,
+       "asr_p": "Brahim and Joy",
+       "wer_p": 1.5,
+       "asr_w": "Prayim en joy!",
+       "wer_w": 1.5,
+       "expr": 9.741,
+       "score": 4.381
+      },
+      {
+       "tts": "Prime n'djoï.",
+       "sr": 44100,
+       "dur": 1.145,
+       "asr_p": "Prime and Joy",
+       "wer_p": 1.0,
+       "asr_w": "Prime et joy.",
+       "wer_w": 1.0,
+       "expr": 10.383,
+       "score": 2.893
+      },
+      {
+       "tts": "Praïme Enjoy.",
+       "sr": 44100,
+       "dur": 1.061,
+       "asr_p": "Prey and enjoy.",
+       "wer_p": 1.0,
+       "asr_w": "Préhime et joie !",
+       "wer_w": 1.5,
+       "expr": 7.2,
+       "score": 3.46
+      },
+      {
+       "tts": "Prime Enjoy.",
+       "sr": 44100,
+       "dur": 1.121,
+       "asr_p": "Prime and Joy",
+       "wer_p": 1.0,
+       "asr_w": "Prime et joie.",
+       "wer_w": 1.0,
+       "expr": 6.461,
+       "score": 2.958
+      }
+     ],
+     "chosen_take": 1
+    },
+    {
+     "id": "L6b",
+     "text": "Télécom et énergie.",
+     "tts": "Télécom et énergie.",
+     "start": 15.918,
+     "end": 17.32,
+     "speech": [
+      15.93,
+      17.306
+     ],
+     "words": [
+      [
+       "Télécom",
+       15.93
+      ],
+      [
+       "et",
+       16.598
+      ],
+      [
+       "énergie",
+       16.812
+      ]
+     ],
+     "aligned_words": 3,
+     "asr_on_raw": "Télécom et energie.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Télécom et énergie.",
+       "sr": 44100,
+       "dur": 1.49,
+       "asr_p": "Téléts omet energy.",
+       "wer_p": 1.0,
+       "asr_w": "Télé, ce mettez une énergie.",
+       "wer_w": 1.333,
+       "expr": 11.155,
+       "score": 3.175
+      },
+      {
+       "tts": "Télécom et énergie.",
+       "sr": 44100,
+       "dur": 1.565,
+       "asr_p": "Télécom et energie.",
+       "wer_p": 0.0,
+       "asr_w": "Télécombe est énergie.",
+       "wer_w": 0.667,
+       "expr": 8.646,
+       "score": 0.543
+      },
+      {
+       "tts": "Télécom et énergie.",
+       "sr": 44100,
+       "dur": 1.428,
+       "asr_p": "Télégyomet Energie.",
+       "wer_p": 0.667,
+       "asr_w": "Télé, sommetée, énergie.",
+       "wer_w": 0.667,
+       "expr": 10.254,
+       "score": 1.867
+      },
+      {
+       "tts": "Télécom et énergie.",
+       "sr": 44100,
+       "dur": 1.506,
+       "asr_p": "Téliczom et energie.",
+       "wer_p": 0.333,
+       "asr_w": "Télé somnette énergie.",
+       "wer_w": 0.667,
+       "expr": 12.435,
+       "score": 1.159
+      },
+      {
+       "tts": "Télécom et énergie.",
+       "sr": 44100,
+       "dur": 1.8,
+       "asr_p": "Té légy som a te energié.",
+       "wer_p": 1.667,
+       "asr_w": "Télézone et l'énergie.",
+       "wer_w": 0.667,
+       "expr": 11.097,
+       "score": 3.885
+      },
+      {
+       "tts": "Télécom et énergie.",
+       "sr": 44100,
+       "dur": 1.768,
+       "asr_p": "Télizzometén energie.",
+       "wer_p": 0.667,
+       "asr_w": "Télésome et énergie",
+       "wer_w": 0.333,
+       "expr": 12.057,
+       "score": 1.532
+      }
+     ],
+     "chosen_take": 1
+    },
+    {
+     "id": "L6c",
+     "text": "Ensemble, allons plus loin.",
+     "tts": "Ensemble, allons plus loin.",
+     "start": 17.42,
+     "end": 19.42,
+     "speech": [
+      17.431,
+      19.405
+     ],
+     "words": [
+      [
+       "Ensemble",
+       17.431
+      ],
+      [
+       "allons",
+       18.17
+      ],
+      [
+       "plus",
+       18.67
+      ],
+      [
+       "loin",
+       18.884
+      ]
+     ],
+     "aligned_words": 4,
+     "asr_on_raw": "Ensemble, allons plus loin.",
+     "native_sr": 44100,
+     "takes": [
+      {
+       "tts": "Ensemble, allons plus loin.",
+       "sr": 44100,
+       "dur": 1.977,
+       "asr_p": "Ensemble Alons plus Loin.",
+       "wer_p": 0.25,
+       "asr_w": "Ensemble Allons + Loin",
+       "wer_w": 0.25,
+       "expr": 6.599,
+       "score": 0.655
+      },
+      {
+       "tts": "Ensemble, allons plus loin.",
+       "sr": 44100,
+       "dur": 2.235,
+       "asr_p": "Ensemble, allons plus loin.",
+       "wer_p": 0.0,
+       "asr_w": "Ensemble Allons + Loin",
+       "wer_w": 0.25,
+       "expr": 6.957,
+       "score": 0.19
+      },
+      {
+       "tts": "Ensemble, allons plus loin.",
+       "sr": 44100,
+       "dur": 1.907,
+       "asr_p": "Ensemble Alons Plus Loin.",
+       "wer_p": 0.25,
+       "asr_w": "Ensemble Allons Plus Loin",
+       "wer_w": 0.0,
+       "expr": 7.16,
+       "score": 0.399
+      },
+      {
+       "tts": "Ensemble, allons plus loin.",
+       "sr": 44100,
+       "dur": 1.931,
+       "asr_p": "Ensemble Alons Plus Loin.",
+       "wer_p": 0.25,
+       "asr_w": "Ensemble Allons + Loin",
+       "wer_w": 0.25,
+       "expr": 8.705,
+       "score": 0.622
+      },
+      {
+       "tts": "Ensemble, allons plus loin.",
+       "sr": 44100,
+       "dur": 1.966,
+       "asr_p": "Ensemble Elons plus Loin.",
+       "wer_p": 0.25,
+       "asr_w": "Ensemble Allons plus Loin.",
+       "wer_w": 0.0,
+       "expr": 8.748,
+       "score": 0.371
+      },
+      {
+       "tts": "Ensemble, allons plus loin.",
+       "sr": 44100,
+       "dur": 1.824,
+       "asr_p": "Ensemble Alons plus Loin.",
+       "wer_p": 0.25,
+       "asr_w": "Ensemble Allons + Loin",
+       "wer_w": 0.25,
+       "expr": 9.945,
+       "score": 0.62
+      }
+     ],
+     "chosen_take": 1
+    }
+   ],
+   "end": 19.42
+  }
+ ],
+ "vo_end": 19.42
+}

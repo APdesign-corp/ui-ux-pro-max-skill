@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" fill="none" stroke="#39ff14" stroke-width="2" stroke-linecap="round">
+  <!-- Anneau HUD : chaque arc tourne à sa propre vitesse autour du sujet. -->
+  <path id="hud-1" d="M581.6 37.1 A470 470 0 0 1 860 802.1"/>
+  <path id="hud-2" d="M660.7 941.7 A470 470 0 0 1 58.3 660.7"/>
+  <path id="hud-3" d="M58.3 339.3 A470 470 0 0 1 339.3 58.3"/>
+  <path id="hud-4" d="M893.9 569.5 A400 400 0 0 1 430.5 893.9"/>
+  <path id="hud-5" d="M106.1 430.5 A400 400 0 0 1 569.5 106.1"/>
+  <circle id="hud-dash" cx="500" cy="500" r="432"/>
+</svg>

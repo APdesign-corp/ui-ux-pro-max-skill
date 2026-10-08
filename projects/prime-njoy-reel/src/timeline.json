@@ -1,0 +1,531 @@
+{
+ "_doc": "GÉNÉRÉ par scripts/build_timeline.py à partir de voice/vo_layout.json — ne pas éditer à la main. Temps local des scènes = secondes ; synchronisation sur les mots via les markers ; cues = sound design en temps absolu.",
+ "duration": 20.705,
+ "vo": {
+  "file": "voice/vo_master.wav",
+  "dry": "voice/vo_dry.wav",
+  "voice": "st-f2",
+  "gender": "F",
+  "emphasis": [
+   {
+    "word": "L1.cher",
+    "from": 2.96,
+    "to": 3.504,
+    "db": 1.5
+   },
+   {
+    "word": "L4.45",
+    "from": 10.544,
+    "to": 10.932,
+    "db": 2.0
+   },
+   {
+    "word": "L5.connexion",
+    "from": 12.213,
+    "to": 12.814,
+    "db": 1.5
+   },
+   {
+    "word": "L6.N'Joy",
+    "from": 14.757,
+    "to": 15.865,
+    "db": 1.5
+   }
+  ]
+ },
+ "markers": {
+  "L1a.Internet": 0.186,
+  "L1.Internet": 0.186,
+  "L1a.télé": 0.829,
+  "L1.télé": 0.829,
+  "L1a.mobile": 1.257,
+  "L1.mobile": 1.257,
+  "L1a.start": 0.161,
+  "L1a.end": 1.715,
+  "L1b.Vous": 1.822,
+  "L1.Vous": 1.822,
+  "L1b.payez": 2.061,
+  "L1.payez": 2.061,
+  "L1b.encore": 2.49,
+  "L1.encore": 2.49,
+  "L1b.trop": 2.775,
+  "L1.trop": 2.775,
+  "L1b.cher": 2.99,
+  "L1.cher": 2.99,
+  "L1b.start": 1.822,
+  "L1b.end": 3.454,
+  "L1.start": 0.161,
+  "L1.end": 3.454,
+  "L2.Avec": 3.703,
+  "L2.Prime": 4.013,
+  "L2.N'Joy": 4.656,
+  "L2.tout": 5.085,
+  "L2.est": 5.228,
+  "L2.réuni": 5.371,
+  "L2.start": 3.703,
+  "L2.end": 5.746,
+  "L3a.La": 5.97,
+  "L3.La": 5.97,
+  "L3a.télé": 6.28,
+  "L3.télé": 6.28,
+  "L3a.start": 5.97,
+  "L3a.end": 6.777,
+  "L3b.Internet": 6.906,
+  "L3.Internet": 6.906,
+  "L3b.start": 6.881,
+  "L3b.end": 7.749,
+  "L3c.Le": 7.852,
+  "L3.Le": 7.852,
+  "L3c.GSM": 8.091,
+  "L3.GSM": 8.091,
+  "L3c.start": 7.852,
+  "L3c.end": 8.99,
+  "L3.start": 5.97,
+  "L3.end": 8.99,
+  "L4a.Le": 9.264,
+  "L4.Le": 9.264,
+  "L4a.tout": 9.504,
+  "L4.tout": 9.504,
+  "L4a.pour": 9.86,
+  "L4.pour": 9.86,
+  "L4a.45": 10.574,
+  "L4.45": 10.574,
+  "L4a.par": 10.932,
+  "L4.par": 10.932,
+  "L4a.mois": 11.146,
+  "L4.mois": 11.146,
+  "L4a.start": 9.264,
+  "L4a.end": 11.441,
+  "L4.start": 9.264,
+  "L4.end": 11.441,
+  "L5.Plus": 11.718,
+  "L5.qu'une": 11.957,
+  "L5.connexion": 12.243,
+  "L5.un": 12.814,
+  "L5.meilleur": 12.957,
+  "L5.quotidien": 13.314,
+  "L5.start": 11.718,
+  "L5.end": 14.006,
+  "L6a.Prime": 14.334,
+  "L6.Prime": 14.334,
+  "L6a.N'Joy": 14.787,
+  "L6.N'Joy": 14.787,
+  "L6a.start": 14.334,
+  "L6a.end": 15.815,
+  "L6b.Télécom": 15.93,
+  "L6.Télécom": 15.93,
+  "L6b.et": 16.598,
+  "L6.et": 16.598,
+  "L6b.énergie": 16.812,
+  "L6.énergie": 16.812,
+  "L6b.start": 15.93,
+  "L6b.end": 17.306,
+  "L6c.Ensemble": 17.431,
+  "L6.Ensemble": 17.431,
+  "L6c.allons": 18.17,
+  "L6.allons": 18.17,
+  "L6c.plus": 18.67,
+  "L6.plus": 18.67,
+  "L6c.loin": 18.884,
+  "L6.loin": 18.884,
+  "L6c.start": 17.431,
+  "L6c.end": 19.405,
+  "L6.start": 14.334,
+  "L6.end": 19.405
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "start": 0,
+   "end": 3.583,
+   "design": 3.583,
+   "pre": 0,
+   "post": 0.36,
+   "anchors": []
+  },
+  {
+   "id": "unite",
+   "start": 3.583,
+   "end": 5.83,
+   "design": 2.247,
+   "pre": 0,
+   "post": 0.36,
+   "anchors": []
+  },
+  {
+   "id": "products",
+   "start": 5.83,
+   "end": 9.124,
+   "design": 3.294,
+   "pre": 0,
+   "post": 0.36,
+   "anchors": []
+  },
+  {
+   "id": "offer",
+   "start": 9.124,
+   "end": 11.598,
+   "design": 2.474,
+   "pre": 0,
+   "post": 0.36,
+   "anchors": []
+  },
+  {
+   "id": "promise",
+   "start": 11.598,
+   "end": 14.114,
+   "design": 2.516,
+   "pre": 0,
+   "post": 0.36,
+   "anchors": []
+  },
+  {
+   "id": "brand",
+   "start": 14.114,
+   "end": 20.705,
+   "design": 6.591,
+   "pre": 0,
+   "post": 0,
+   "anchors": []
+  }
+ ],
+ "music": {
+  "bpm": 118,
+  "pulseFrom": 3.583,
+  "pulseTo": 14.064,
+  "hatsFrom": 5.83,
+  "silenceFrom": 14.094,
+  "padFrom": 14.334,
+  "swellFrom": 15.93,
+  "resolveAt": 19.555,
+  "roots": [
+   [
+    0,
+    49.0
+   ],
+   [
+    3.583,
+    43.65
+   ],
+   [
+    5.83,
+    49.0
+   ],
+   [
+    9.124,
+    55.0
+   ],
+   [
+    11.598,
+    46.25
+   ],
+   [
+    14.114,
+    49.0
+   ]
+  ]
+ },
+ "cues": [
+  {
+   "t": 0.0,
+   "type": "impact",
+   "dur": 1.0,
+   "gain": 0.55,
+   "tone": "soft"
+  },
+  {
+   "t": 0.186,
+   "type": "pop",
+   "dur": 0.2,
+   "gain": 0.5
+  },
+  {
+   "t": 0.216,
+   "type": "blip",
+   "dur": 0.12,
+   "gain": 0.25
+  },
+  {
+   "t": 0.829,
+   "type": "pop",
+   "dur": 0.2,
+   "gain": 0.5
+  },
+  {
+   "t": 0.859,
+   "type": "blip",
+   "dur": 0.12,
+   "gain": 0.25
+  },
+  {
+   "t": 1.257,
+   "type": "pop",
+   "dur": 0.2,
+   "gain": 0.5
+  },
+  {
+   "t": 1.287,
+   "type": "blip",
+   "dur": 0.12,
+   "gain": 0.25
+  },
+  {
+   "t": 2.64,
+   "type": "riser",
+   "dur": 0.35,
+   "gain": 0.4
+  },
+  {
+   "t": 2.99,
+   "type": "hit",
+   "dur": 0.9,
+   "gain": 0.75
+  },
+  {
+   "t": 3.19,
+   "type": "glass",
+   "dur": 0.8,
+   "gain": 0.45
+  },
+  {
+   "t": 3.223,
+   "type": "swish",
+   "dur": 0.4,
+   "gain": 0.45,
+   "pan": [
+    -0.5,
+    0.5
+   ]
+  },
+  {
+   "t": 3.583,
+   "type": "sub",
+   "dur": 1.2,
+   "gain": 0.5
+  },
+  {
+   "t": 3.633,
+   "type": "suck",
+   "dur": 0.43,
+   "gain": 0.35
+  },
+  {
+   "t": 4.013,
+   "type": "shimmer",
+   "dur": 0.8,
+   "gain": 0.35
+  },
+  {
+   "t": 4.656,
+   "type": "pop",
+   "dur": 0.2,
+   "gain": 0.45
+  },
+  {
+   "t": 5.071,
+   "type": "zips",
+   "dur": 0.8,
+   "gain": 0.3
+  },
+  {
+   "t": 5.491,
+   "type": "impact",
+   "dur": 1.6,
+   "gain": 0.8
+  },
+  {
+   "t": 5.53,
+   "type": "whoosh",
+   "dur": 0.55,
+   "gain": 0.55,
+   "pan": [
+    0,
+    0
+   ]
+  },
+  {
+   "t": 6.28,
+   "type": "digital",
+   "dur": 0.4,
+   "gain": 0.45
+  },
+  {
+   "t": 6.43,
+   "type": "hit",
+   "dur": 0.7,
+   "gain": 0.4
+  },
+  {
+   "t": 6.906,
+   "type": "transmit",
+   "dur": 0.9,
+   "gain": 0.4
+  },
+  {
+   "t": 7.156,
+   "type": "click",
+   "dur": 0.3,
+   "gain": 0.45
+  },
+  {
+   "t": 7.991,
+   "type": "swish",
+   "dur": 0.35,
+   "gain": 0.4,
+   "pan": [
+    0.8,
+    -0.2
+   ]
+  },
+  {
+   "t": 8.391,
+   "type": "click",
+   "dur": 0.3,
+   "gain": 0.4
+  },
+  {
+   "t": 8.804,
+   "type": "whoosh",
+   "dur": 0.45,
+   "gain": 0.6,
+   "pan": [
+    -0.8,
+    0.8
+   ]
+  },
+  {
+   "t": 9.144,
+   "type": "swish",
+   "dur": 0.4,
+   "gain": 0.4
+  },
+  {
+   "t": 10.274,
+   "type": "ticks",
+   "dur": 0.3,
+   "gain": 0.35
+  },
+  {
+   "t": 10.574,
+   "type": "impact",
+   "dur": 1.4,
+   "gain": 0.85,
+   "tone": "bright"
+  },
+  {
+   "t": 10.594,
+   "type": "burst",
+   "dur": 0.5,
+   "gain": 0.4
+  },
+  {
+   "t": 10.654,
+   "type": "snap",
+   "dur": 0.5,
+   "gain": 0.4
+  },
+  {
+   "t": 11.246,
+   "type": "pop",
+   "dur": 0.2,
+   "gain": 0.45
+  },
+  {
+   "t": 11.398,
+   "type": "burst",
+   "dur": 0.5,
+   "gain": 0.6
+  },
+  {
+   "t": 11.478,
+   "type": "hit",
+   "dur": 0.8,
+   "gain": 0.6
+  },
+  {
+   "t": 11.648,
+   "type": "shimmer",
+   "dur": 0.8,
+   "gain": 0.3
+  },
+  {
+   "t": 11.718,
+   "type": "blip",
+   "dur": 0.14,
+   "gain": 0.3
+  },
+  {
+   "t": 12.243,
+   "type": "blip",
+   "dur": 0.14,
+   "gain": 0.3
+  },
+  {
+   "t": 12.814,
+   "type": "blip",
+   "dur": 0.14,
+   "gain": 0.3
+  },
+  {
+   "t": 13.314,
+   "type": "blip",
+   "dur": 0.14,
+   "gain": 0.3
+  },
+  {
+   "t": 13.614,
+   "type": "success",
+   "dur": 0.9,
+   "gain": 0.35
+  },
+  {
+   "t": 13.764,
+   "type": "zips",
+   "dur": 0.8,
+   "gain": 0.35
+  },
+  {
+   "t": 14.134,
+   "type": "suck",
+   "dur": 0.6,
+   "gain": 0.35
+  },
+  {
+   "t": 14.334,
+   "type": "impact",
+   "dur": 2.2,
+   "gain": 0.85
+  },
+  {
+   "t": 14.837,
+   "type": "shimmer",
+   "dur": 0.8,
+   "gain": 0.35
+  },
+  {
+   "t": 15.93,
+   "type": "pop",
+   "dur": 0.2,
+   "gain": 0.45
+  },
+  {
+   "t": 16.812,
+   "type": "pulse2",
+   "dur": 0.6,
+   "gain": 0.45
+  },
+  {
+   "t": 17.431,
+   "type": "glass",
+   "dur": 1.0,
+   "gain": 0.3
+  },
+  {
+   "t": 19.555,
+   "type": "impact",
+   "dur": 1.4,
+   "gain": 0.5,
+   "tone": "bright"
+  }
+ ]
+}
