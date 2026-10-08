@@ -79,6 +79,28 @@ export async function boot(canvas) {
   const instances = {};
   for (const s of clock) instances[s.id] = SCENES[s.id]({ cfg, assets, world, engine, W, H, u });
 
+  // ---- VFX globaux synchronisés sur le sound design : punch (aberration, mini-flash, zoom) sur chaque
+  // impact/hit/pop, flou de mouvement sur chaque whoosh/swish
+  const hitCues = timeline.cues.filter((c) => ['impact', 'hit', 'snap', 'burst', 'pop', 'click'].includes(c.type));
+  const whooshCues = timeline.cues.filter((c) => ['whoosh', 'swish'].includes(c.type));
+  function globalFX(t, post) {
+    const k = cfg.vfx.intensity;
+    for (const c of hitCues) {
+      const g = (c.gain ?? 1) * ({ impact: 1, snap: 0.9, hit: 0.75, burst: 0.7, pop: 0.45, click: 0.35 }[c.type]);
+      const p = pulse(t, c.t, 0.006, 0.14);
+      if (p <= 0.001) continue;
+      post.ca += 0.007 * g * p * k;
+      post.flash += 0.05 * g * p * k;
+      post.zoomBlur += 0.04 * g * p * k;
+    }
+    for (const c of whooshCues) {
+      const p = Math.sin(Math.PI * Math.min(1, Math.max(0, (t - c.t) / (c.dur ?? 0.4))));
+      if (p <= 0) continue;
+      const dir = c.pan ? Math.sign(c.pan[1] - c.pan[0]) || 1 : 1;
+      post.blur[0] += dir * 0.014 * (c.gain ?? 0.5) * p * cfg.vfx.motionBlur;
+    }
+  }
+
   // Secousses globales dérivées des cues (impacts, snaps, hits) : caméra + calques 2D
   const shakeCues = timeline.cues
     .filter((c) => ['impact', 'snap', 'hit', 'burst'].includes(c.type))
@@ -166,6 +188,7 @@ export async function boot(canvas) {
       const o = acc[k] || studio[k] || (k === 'hero' ? hero.group : null);
       if (o && o.isObject3D) o.visible = false;
     }
+    if (!DEBUG_HIDE.includes('gfx')) globalFX(t, post);
     // fond : plan au loin, cadré exactement sur le champ de la caméra
     const dz = 250, hh = 2 * dz * Math.tan((camera.fov * Math.PI) / 360);
     bgMesh.position.set(0, 0, -dz); bgMesh.scale.set(hh * camera.aspect, hh, 1);

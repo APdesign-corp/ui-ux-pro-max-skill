@@ -4,7 +4,7 @@
 
 import { pulse, TAU } from '../core/anim.js';
 import { ringDots, drawRing, iconBadge, brandAt } from '../world/brand.js';
-import { night, dotWipe, iris } from './trans.js';
+import { nightDynamic, beatAt, dotWipe, iris } from './trans.js';
 import { sparks, shockRing, radialGlow } from '../core/draw.js';
 import { layout, captions, E, seg, lerp, setFont, textWidth } from './kit.js';
 
@@ -28,7 +28,7 @@ export default function createUnite({ cfg, W, H }) {
       const R = W * 0.3 * (1 + zoom * 14);
 
       if (f.owner) {
-        night(bg, W, H, T);
+        nightDynamic(bg, W, H, T, beatAt(T));
         f.camera([0, 0, 8], [0, 0, 0], 30);
         f.world.studio.update(T, { backdrop: false, beams: 0, grid: 0, dust: 0, motes: 0, env: 1 });
         post.bloom = 0.6; post.vignette = 0.7;

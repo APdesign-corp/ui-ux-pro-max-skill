@@ -4,7 +4,7 @@
 
 import { pulse, TAU, rng } from '../core/anim.js';
 import { brandGradient, brandAt } from '../world/brand.js';
-import { aurora, gradientSwipe, lightning } from './trans.js';
+import { dynamicBg, beatAt, gradientSwipe, lightning } from './trans.js';
 import { layout, captions, E, seg, lerp, setFont, textWidth } from './kit.js';
 
 export default function createOffer({ cfg, W, H }) {
@@ -24,7 +24,7 @@ export default function createOffer({ cfg, W, H }) {
       const mOld = st + 0.3; // l'ancien prix est là dès l'arrivée de la carte, barré à l'écrasement du 45 €
       const cx = W * 0.5, cy = H * 0.47;
       if (f.owner) {
-        aurora(bg, W, H, T, 1.2);
+        dynamicBg(bg, W, H, T, { k: 1.15, beat: beatAt(T), cy: 0.47 });
         f.camera([0, 0, 8], [0, 0, 0], 30);
         f.world.studio.update(T, { backdrop: false, beams: 0, grid: 0, dust: 0, motes: 0, env: 1 });
         post.bloom = 0.12; post.vignette = 0.15; post.flashColor = [1, 1, 1];

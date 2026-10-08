@@ -1,8 +1,6 @@
 {
  "_doc": "Voix off Prime N'Joy (maquette). 'text' = texte exact affiché (sous-titres), 'tts' = graphie dite.",
- "respell": {
-  "GSM": "gé-èss-èm"
- },
+ "respell": {},
  "emphasis": [
   {
    "word": "L1.cher",
@@ -39,11 +37,10 @@
     {
      "id": "L1b",
      "text": "Vous payez encore trop cher ?",
-     "speed": 0.95,
+     "speed": 1.0,
      "gain_db": 1.5,
-     "tts": "Vou pé-yé encore trop chère ?",
-     "takes_mul": 1,
-     "judge": "whisper"
+     "tts": "Vous payez encore trop cher ?",
+     "takes_mul": 1
     }
    ]
   },
@@ -56,9 +53,10 @@
     {
      "id": "L2",
      "text": "Avec Prime N'Joy, tout est réuni.",
-     "speed": 0.97,
+     "speed": 1.0,
      "gain_db": 1.5,
-     "takes_mul": 2
+     "takes_mul": 2,
+     "tts": "Avec Praïme Enne-djoï, tout est réuni."
     }
    ]
   },
@@ -71,25 +69,25 @@
     {
      "id": "L3a",
      "text": "La télé.",
-     "speed": 0.95,
+     "speed": 1.0,
      "gain_db": 1.5,
      "pause": 0.08
     },
     {
      "id": "L3b",
      "text": "Internet.",
-     "speed": 0.95,
+     "speed": 1.0,
      "gain_db": 1.5,
      "pause": 0.08
     },
     {
      "id": "L3c",
      "text": "Le GSM.",
-     "speed": 0.92,
+     "speed": 1.0,
      "gain_db": 1.5,
      "takes_mul": 2,
-     "judge": "whisper",
-     "pause": 0
+     "pause": 0,
+     "tts": "Le G.S.M."
     }
    ]
   },
@@ -118,7 +116,7 @@
     {
      "id": "L5",
      "text": "Plus qu'une connexion, un meilleur quotidien.",
-     "speed": 0.95,
+     "speed": 1.0,
      "gain_db": 1.5
     }
    ]
@@ -132,22 +130,23 @@
     {
      "id": "L6a",
      "text": "Prime N'Joy.",
-     "speed": 0.92,
+     "speed": 1.0,
      "gain_db": 2,
      "pause": 0.1,
-     "takes_mul": 2
+     "takes_mul": 2,
+     "tts": "Praïme Enne-djoï."
     },
     {
      "id": "L6b",
      "text": "Télécom et énergie.",
-     "speed": 0.95,
+     "speed": 1.0,
      "gain_db": 1.5,
      "pause": 0.1
     },
     {
      "id": "L6c",
      "text": "Ensemble, allons plus loin.",
-     "speed": 0.92,
+     "speed": 1.0,
      "gain_db": 1.5,
      "pause": 0
     }

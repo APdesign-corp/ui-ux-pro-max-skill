@@ -4,7 +4,7 @@
 
 import { pulse } from '../core/anim.js';
 import { brandGradient } from '../world/brand.js';
-import { aurora, dotScatter } from './trans.js';
+import { dynamicBg, beatAt, dotScatter } from './trans.js';
 import { layout, E, seg, lerp, fitSize, setFont, textWidth } from './kit.js';
 
 export default function createPromise({ cfg, W, H }) {
@@ -31,7 +31,7 @@ export default function createPromise({ cfg, W, H }) {
       const { props, hero, studio } = f.world;
       const out = seg(T, end - 0.32, end);
       if (!f.owner) return;
-      aurora(bg, W, H, T, 1);
+      dynamicBg(bg, W, H, T, { k: 0.9, beat: beatAt(T) * 0.6, cy: 0.35 });
       const p = lt / (end - st);
       f.camera([lerp(0.6, -0.4, p), lerp(-0.2, 0.1, p), 5.4], [0, -0.9, 0], 32, 0.04);
       studio.update(T, { backdrop: false, beams: 0, grid: 0, dust: 0, motes: 0, env: 1.25, envRot: T * 0.15, key: 1.3, rim: 0.6 });

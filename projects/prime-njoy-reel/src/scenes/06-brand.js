@@ -4,7 +4,7 @@
 
 import { pulse, TAU } from '../core/anim.js';
 import { ringDots, drawRing, iconBadge, brandGradient } from '../world/brand.js';
-import { aurora } from './trans.js';
+import { dynamicBg, beatAt } from './trans.js';
 import { sparks } from '../core/draw.js';
 import { layout, E, seg, lerp, fitSize, setFont, textWidth } from './kit.js';
 
@@ -25,7 +25,7 @@ export default function createBrand({ cfg, W, H }) {
       const st = f.clock.start, end = f.clock.end;
       const lt = T - st;
       if (!f.owner) return;
-      aurora(bg, W, H, T, 0.5, { base: '#ffffff' });
+      dynamicBg(bg, W, H, T, { k: 0.6, beat: beatAt(T) * 0.5, cy: 0.33 });
       f.camera([0, 0, 8], [0, 0, 0], 30);
       f.world.studio.update(T, { backdrop: false, beams: 0, grid: 0, dust: 0, motes: 0, env: 1 });
       post.bloom = 0.08; post.vignette = 0.08;

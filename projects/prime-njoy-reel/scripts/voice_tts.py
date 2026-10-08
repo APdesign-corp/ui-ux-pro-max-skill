@@ -32,6 +32,7 @@ VOICES = {
     'tom':         ('vits', 'vits-piper-fr_FR-tom-medium', 'fr_FR-tom-medium.onnx', 0, 1.0, 'M'),
     'miro':        ('vits', 'vits-piper-fr_FR-miro-high', 'fr_FR-miro-high.onnx', 0, 1.22, 'M'),
     'upmc-pierre': ('vits', 'vits-piper-fr_FR-upmc-medium', 'fr_FR-upmc-medium.onnx', 1, 1.0, 'M'),
+    'upmc-jessica': ('vits', 'vits-piper-fr_FR-upmc-medium', 'fr_FR-upmc-medium.onnx', 0, 1.0, 'F'),
     'tjiho1':      ('vits', 'vits-piper-fr_FR-tjiho-model1', 'fr_FR-tjiho-model1.onnx', 0, 1.0, 'M'),
     'tjiho2':      ('vits', 'vits-piper-fr_FR-tjiho-model2', 'fr_FR-tjiho-model2.onnx', 0, 1.0, 'M'),
     'tjiho3':      ('vits', 'vits-piper-fr_FR-tjiho-model3', 'fr_FR-tjiho-model3.onnx', 0, 1.0, 'M'),

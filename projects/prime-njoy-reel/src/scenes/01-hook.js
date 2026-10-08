@@ -4,7 +4,7 @@
 
 import { pulse, TAU } from '../core/anim.js';
 import { iconBadge, brandAt } from '../world/brand.js';
-import { aurora, dotWipe } from './trans.js';
+import { dynamicBg, beatAt, dotWipe } from './trans.js';
 import { layout, captions, E, seg, lerp, setFont, textWidth } from './kit.js';
 
 export default function createHook({ cfg, W, H }) {
@@ -19,7 +19,7 @@ export default function createHook({ cfg, W, H }) {
       const T = f.t;
       const end = f.clock.end;
       if (f.owner) {
-        aurora(bg, W, H, T);
+        dynamicBg(bg, W, H, T, { k: 1, beat: beatAt(T) * 0.6, cy: 0.5 });
         f.camera([0, 0, 8], [0, 0, 0], 30);
         f.world.studio.update(T, { backdrop: false, beams: 0, grid: 0, dust: 0, motes: 0, env: 1 });
         post.bloom = 0.12; post.vignette = 0.18; post.ca = 0.0006;

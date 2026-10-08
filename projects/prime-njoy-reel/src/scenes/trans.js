@@ -118,3 +118,89 @@ export function dotScatter(g, W, H, p, seed = 3, n = 260) {
     g.beginPath(); g.arc(x, y, (4 + r() * 10) * (W / 1080) * (1 - p * 0.5), 0, TAU); g.fill();
   }
 }
+
+/**
+ * Arrière-plan DYNAMIQUE clair : halos de marque qui dérivent, rubans fluides en dégradé (comme la vague
+ * de l'affiche), trame de points halftone qui ondule depuis le centre et pulse sur le tempo, reflet balayant.
+ * o = { k: intensité, beat: 0..1, cy: centre de l'onde (0..1) }
+ */
+export function dynamicBg(g, W, H, t, o = {}) {
+  const k = o.k ?? 1, beat = o.beat ?? 0, u = W / 1080;
+  const base = g.createLinearGradient(0, 0, 0, H);
+  base.addColorStop(0, '#fbfbff'); base.addColorStop(1, '#eef0fb');
+  g.fillStyle = base; g.fillRect(0, 0, W, H);
+  // halos de couleur en mouvement
+  const blobs = [[0.2, 0.18, 0.02, 0.75, 0.9], [0.85, 0.3, 0.62, 0.7, 1.2], [0.75, 0.85, 1.0, 0.8, 0.8], [0.15, 0.75, 0.35, 0.7, 1.05]];
+  for (const [bx, by, p, r, sp] of blobs) {
+    const x = W * (bx + 0.14 * Math.sin(t * 0.55 * sp + p * 9)), y = H * (by + 0.08 * Math.cos(t * 0.45 * sp + p * 5));
+    const R = W * r * (1 + 0.06 * beat);
+    const gr = g.createRadialGradient(x, y, 0, x, y, R);
+    gr.addColorStop(0, brandAt(p, 0.34 * k)); gr.addColorStop(1, brandAt(p, 0));
+    g.fillStyle = gr; g.fillRect(x - R, y - R, R * 2, R * 2);
+  }
+  // rubans fluides
+  for (let i = 0; i < 4; i++) {
+    const y0 = H * (0.2 + i * 0.22), amp = H * (0.05 + 0.02 * i), ph = t * (0.6 + i * 0.15) + i * 1.7;
+    g.beginPath();
+    g.moveTo(-W * 0.1, y0 + Math.sin(ph) * amp);
+    g.bezierCurveTo(W * 0.3, y0 - amp * 1.6 + Math.sin(ph * 1.3) * amp, W * 0.7, y0 + amp * 1.6 + Math.cos(ph) * amp, W * 1.1, y0 + Math.sin(ph + 1.5) * amp);
+    g.lineTo(W * 1.1, y0 + Math.sin(ph + 1.5) * amp + 60 * u * (1 + i * 0.4));
+    g.bezierCurveTo(W * 0.7, y0 + amp * 1.6 + Math.cos(ph) * amp + 60 * u, W * 0.3, y0 - amp * 1.6 + Math.sin(ph * 1.3) * amp + 60 * u, -W * 0.1, y0 + Math.sin(ph) * amp + 50 * u);
+    g.closePath();
+    g.fillStyle = brandGradient(g, 0, 0, W, 0, 0);
+    g.globalAlpha = (0.07 + 0.03 * i) * k;
+    g.fill();
+    g.globalAlpha = 1;
+  }
+  // trame de points qui ondule (onde concentrique + pulsation tempo)
+  const step = 44 * u, cx = W / 2, cy = H * (o.cy ?? 0.45);
+  for (let y = step / 2; y < H; y += step) {
+    for (let x = step / 2 + ((Math.round(y / step) % 2) * step) / 2; x < W; x += step) {
+      const d = Math.hypot(x - cx, y - cy) / W;
+      const w = 0.5 + 0.5 * Math.sin(d * 14 - t * 3.2);
+      const r = step * (0.06 + 0.16 * w * w + 0.08 * beat);
+      g.fillStyle = brandAt(x / W, (0.1 + 0.16 * w) * k);
+      g.beginPath(); g.arc(x, y, r, 0, TAU); g.fill();
+    }
+  }
+  // reflet lumineux qui balaie
+  const sw = ((t * 0.42) % 1.6) - 0.3;
+  const sx = W * sw * 1.4;
+  const lg = g.createLinearGradient(sx - W * 0.25, 0, sx + W * 0.25, H * 0.3);
+  lg.addColorStop(0, 'rgba(255,255,255,0)'); lg.addColorStop(0.5, `rgba(255,255,255,${0.45 * k})`); lg.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = lg; g.fillRect(0, 0, W, H);
+}
+
+/** Fond bleu nuit DYNAMIQUE : rayons lumineux tournants, halos, trame de points en spirale. */
+export function nightDynamic(g, W, H, t, beat = 0) {
+  night(g, W, H, t);
+  const cx = W / 2, cy = H * 0.47, u = W / 1080;
+  g.save(); g.globalCompositeOperation = 'lighter';
+  for (let i = 0; i < 12; i++) {
+    const a = (i / 12) * TAU + t * 0.18;
+    g.save(); g.translate(cx, cy); g.rotate(a);
+    const L = H * 0.9;
+    const gr = g.createLinearGradient(0, 0, L, 0);
+    gr.addColorStop(0, brandAt(i / 12, 0.18 + 0.1 * beat)); gr.addColorStop(1, brandAt(i / 12, 0));
+    g.fillStyle = gr;
+    g.beginPath(); g.moveTo(0, 0); g.lineTo(L, -L * 0.06); g.lineTo(L, L * 0.06); g.closePath(); g.fill();
+    g.restore();
+  }
+  const step = 52 * u;
+  for (let y = step / 2; y < H; y += step) {
+    for (let x = step / 2; x < W; x += step) {
+      const d = Math.hypot(x - cx, y - cy) / W, ang = Math.atan2(y - cy, x - cx);
+      const w = 0.5 + 0.5 * Math.sin(d * 16 - t * 4 + ang * 2);
+      g.fillStyle = brandAt(x / W, 0.12 * w + 0.05 * beat);
+      g.beginPath(); g.arc(x, y, step * (0.05 + 0.12 * w), 0, TAU); g.fill();
+    }
+  }
+  g.restore();
+}
+
+/** Pulsation sur le tempo (0..1) à partir du temps global. */
+export function beatAt(t, bpm = 118, from = 0) {
+  if (t < from) return 0;
+  const p = ((t - from) * bpm / 60) % 1;
+  return Math.exp(-p * 7);
+}

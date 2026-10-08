@@ -5,7 +5,7 @@
 import * as THREE from 'three';
 import { pulse, TAU } from '../core/anim.js';
 import { iconBadge, brandAt, brandGradient } from '../world/brand.js';
-import { aurora, gradientSwipe } from './trans.js';
+import { dynamicBg, beatAt, gradientSwipe } from './trans.js';
 import { layout, E, seg, lerp, setFont, textWidth } from './kit.js';
 
 export default function createProducts({ cfg, W, H }) {
@@ -46,7 +46,7 @@ export default function createProducts({ cfg, W, H }) {
       const mTV = f.mark('L3a.télé', st + 0.25), mNet = f.mark('L3b.Internet', mTV + 0.6), mGsm = f.mark('L3c.GSM', mNet + 0.7);
 
       if (f.owner) {
-        aurora(bg, W, H, T, 1, { k: 0.8 });
+        dynamicBg(bg, W, H, T, { k: 0.85, beat: beatAt(T) * 0.5, cy: 0.3 });
         // sol / plateau blanc avec reflet doux
         const fl = bg.createLinearGradient(0, H * 0.62, 0, H);
         fl.addColorStop(0, 'rgba(255,255,255,0)'); fl.addColorStop(0.15, 'rgba(255,255,255,0.95)'); fl.addColorStop(1, 'rgba(232,236,248,1)');
