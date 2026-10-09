@@ -32,6 +32,9 @@ RÈGLES :
   origin claude/install-ui-ux-pro-max-skill-ukguaa (si « index.lock » : attends 5 s et réessaie ; si le push est refusé,
   git pull --rebase -q puis push). Termine les messages de commit par :
   Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+- REPRISE : une tentative précédente a été interrompue par la limite d'usage. Des fichiers de ton périmètre peuvent déjà
+  exister et être bien avancés (assets/menu/*, src/world/food*.js, src/core/obinks.js…) : lis-les, garde ce qui est bon,
+  termine et vérifie — ne repars pas de zéro.
 - Termine par le rapport demandé.`
 
 const REPORT = {
