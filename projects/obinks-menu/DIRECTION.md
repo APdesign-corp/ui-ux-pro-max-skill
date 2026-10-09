@@ -1,6 +1,6 @@
 # O'BINKS — « Taste the difference » : bible de réalisation
 
-Publicité motion design **57 s, 60 i/s**, du menu complet du fast-food **O'BINKS**. Deux formats
+Publicité motion design **48 s (version courte demandée : 40-50 s), 60 i/s**, du menu complet du fast-food **O'BINKS**. Deux formats
 issus du même code : **9:16** (Instagram / TikTok, format prioritaire du client pour les réseaux)
 et **16:9**. Niveau attendu : pub de chaîne de fast-food premium, **appétissante**, rythme nerveux,
 facturable 300-500 €. Le client a fourni 9 captures de son menu (`assets/source/menu-1..9.png`) :
@@ -40,16 +40,16 @@ Constantes : `import { C } from '../core/type.js'` (`C.neon` = rouge néon, `C.y
 ## 2. Structure et temps (s) — `src/timeline.json`
 | # | id | début → fin | Contenu exact (FACTS.md) |
 |---|---|---|---|
-| 1 | intro | 0 → 3.5 | Logo O'BINKS en IMPACT (peinture rouge qui éclabousse, onde, flash), « TASTE THE DIFFERENCE » |
-| 2 | crousty | 3.5 → 8.5 | CROUSTY BINKS **10,00€ BOISSON COMPRISE !** · vue éclatée Riz / Crème fraîche / Aigre douce / Tenders · suppléments SAUCE PIQUANTE 0,50€ · SAUCE CRÈME 0,50€ · TENDERS 1€ · canette Coca cherry (boisson) |
-| 3 | tacos | 8.5 → 13.5 | TACOS · NUGGETS / TENDERS / CORDON BLEU / POULET MARINÉ TANDOORI · **TACOS L 8,00€ · TACOS XL 11,00€ (choix entre 2 viandes)** · SAUCE FROMAGÈRE · CHOISIS TA SAUCE · vue éclatée galette / viande / frites / fromage / sauce |
-| 4 | burgers | 13.5 → 24.5 | SANDWICH & HAMBURGER : 8 recettes, prix SEUL / MENU (voir FACTS §3), chaque recette avec mini vue éclatée, sandwich ET hamburger |
-| 5 | kapsalone | 24.5 → 28.5 | KAPSALONE **10€** « Viande et sauce au choix » · couches frites / cheddar / viande / tomate / oignon rouge / salade / sauce · 5 viandes avec leurs sous-titres |
-| 6 | hotdog | 28.5 → 31.5 | HOT DOG **5€** SAVEUR & CROUSTY · 5 ingrédients (ketchup moutarde miel, saucisse de poulet, oignon crispy, persil en décoration, cornichon) · vue éclatée |
-| 7 | texmex | 31.5 → 38 | TEX-MEX : 8 produits et prix exacts (FACTS §6) |
-| 8 | desserts | 38 → 45.5 | TIRAMISU 4,50€ (4 parfums) · MILKSHAKE 5,00€ (7 parfums) · CRÊPES 5,50€ · GAUFRES 5,50€ (4 parfums chacun) · suppléments fraise / coulis / boule de glace 0,50€ |
-| 9 | drinks | 45.5 → 51 | MOJITOS 5,00€ (Fraise, Violette, Original, Pastèque, Bubble gum) · CANETTES 2,00€ (Coca-Cola cherry, Oasis tropical, Lipton pêche) · SAUCES 0,80€ (10 sauces) |
-| 10 | end | 51 → 57 | (ajout client) la **vraie façade** (`assets/source/facade.png`, à découper/détourer : enseigne O'BINKS FAST FOOD, bandeau TASTE THE DIFFERENCE) + **Rue St Nicolas 460, 4000 Liège** + **0472 65 40 43** + « À EMPORTER · LIVRAISON » + note **4,8 ★ (61 avis Google)** · **LIVRAISON PARTOUT** · « On te livre directement chez toi ! » · « Indique ta commande détaillée et ton adresse complète » (petit écran de téléphone où la commande se tape) · **OUVERT 12h – 22h TOUS LES JOURS** · logo + TASTE THE DIFFERENCE · la toute dernière image = la première (boucle) |
+| 1 | intro | 0 → 3 | Logo O'BINKS en IMPACT (peinture rouge qui éclabousse, onde, flash), « TASTE THE DIFFERENCE » |
+| 2 | crousty | 3 → 7 | CROUSTY BINKS **10,00€ BOISSON COMPRISE !** · vue éclatée Riz / Crème fraîche / Aigre douce / Tenders · suppléments SAUCE PIQUANTE 0,50€ · SAUCE CRÈME 0,50€ · TENDERS 1€ · canette Coca cherry (boisson) |
+| 3 | tacos | 7 → 11 | TACOS · NUGGETS / TENDERS / CORDON BLEU / POULET MARINÉ TANDOORI · **TACOS L 8,00€ · TACOS XL 11,00€ (choix entre 2 viandes)** · SAUCE FROMAGÈRE · CHOISIS TA SAUCE · vue éclatée galette / viande / frites / fromage / sauce |
+| 4 | burgers | 11 → 19 | SANDWICH & HAMBURGER : 8 recettes, prix SEUL / MENU (voir FACTS §3), chaque recette avec mini vue éclatée, sandwich ET hamburger |
+| 5 | kapsalone | 19 → 22.5 | KAPSALONE **10€** « Viande et sauce au choix » · couches frites / cheddar / viande / tomate / oignon rouge / salade / sauce · 5 viandes avec leurs sous-titres |
+| 6 | hotdog | 22.5 → 25 | HOT DOG **5€** SAVEUR & CROUSTY · 5 ingrédients (ketchup moutarde miel, saucisse de poulet, oignon crispy, persil en décoration, cornichon) · vue éclatée |
+| 7 | texmex | 25 → 30 | TEX-MEX : 8 produits et prix exacts (FACTS §6) |
+| 8 | desserts | 30 → 35.5 | TIRAMISU 4,50€ (4 parfums) · MILKSHAKE 5,00€ (7 parfums) · CRÊPES 5,50€ · GAUFRES 5,50€ (4 parfums chacun) · suppléments fraise / coulis / boule de glace 0,50€ |
+| 9 | drinks | 35.5 → 40 | MOJITOS 5,00€ (Fraise, Violette, Original, Pastèque, Bubble gum) · CANETTES 2,00€ (Coca-Cola cherry, Oasis tropical, Lipton pêche) · SAUCES 0,80€ (10 sauces) |
+| 10 | end | 40 → 48 | (ajout client) la **vraie façade** (`assets/source/facade.png`, à découper/détourer : enseigne O'BINKS FAST FOOD, bandeau TASTE THE DIFFERENCE) + **Rue St Nicolas 460, 4000 Liège** + **0472 65 40 43** + « À EMPORTER · LIVRAISON » + note **4,8 ★ (61 avis Google)** · **LIVRAISON PARTOUT** · « On te livre directement chez toi ! » · « Indique ta commande détaillée et ton adresse complète » (petit écran de téléphone où la commande se tape) · **OUVERT 12h – 22h TOUS LES JOURS** · logo + TASTE THE DIFFERENCE · la toute dernière image = la première (boucle) |
 
 ## 3. Architecture technique (contrat — fichiers partagés en lecture seule)
 Même moteur que le projet GSM Center (`src/main.js`, `src/engine/*`, `src/core/*`). Un segment =
@@ -89,7 +89,7 @@ Champs : `gain`, `pan`, `dur`, `cps`.
 ### Raccords (frontières)
 Chaque segment finit par sa transition et le suivant démarre dans son prolongement (flash, fumée,
 peinture, couleur pleine…). Les deux images de part et d'autre d'une frontière doivent se
-raccorder visuellement (vérifie-les). Image 0 = image 56,983 (boucle) : fond noir + logo minuscule
+raccorder visuellement (vérifie-les). Image 0 = image 47,983 (boucle) : fond noir + logo minuscule
 qui va exploser, ou noir pur — l'agent intro et l'agent fin s'accordent sur : **noir #0a0a0b + petite
 lueur rouge au centre (`seedPoint(f.fx, W, H, 1)`)**.
 
