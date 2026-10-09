@@ -60,13 +60,13 @@ export const cues = [
 ];
 
 // ------------------------------------------------------------------ dessin 2D local
-function setFont(g, family, size, weight = 400) {
+export function setFont(g, family, size, weight = 400) {
   g.font = `${weight} ${size}px "${family}"`;
   g.letterSpacing = '0px';
 }
 
 /** Étiquette colorée « brush » des viandes (comme sur le menu). (x, y) = centre. */
-function meatTag(g, x, y, text, color, size, p, seed, rot = -0.04) {
+export function meatTag(g, x, y, text, color, size, p, seed, rot = -0.04) {
   if (p <= 0) return;
   const lines = text.split('\n');
   g.save();
@@ -92,7 +92,7 @@ function meatTag(g, x, y, text, color, size, p, seed, rot = -0.04) {
 }
 
 /** Étiquette d'ingrédient accrochée à la couche : point jaune, filet, texte (Oswald). */
-function ingLabel(g, x, y, text, side, a, size, u, accent, S) {
+export function ingLabel(g, x, y, text, side, a, size, u, accent, S) {
   if (a <= 0.01) return;
   g.save();
   g.globalAlpha *= a;
@@ -125,7 +125,7 @@ function ingLabel(g, x, y, text, side, a, size, u, accent, S) {
 }
 
 /** Ligne de texte multicolore (sous-titre des viandes). parts = [[texte, couleur], …]. */
-function richLine(g, parts, x, y, size, a, maxW) {
+export function richLine(g, parts, x, y, size, a, maxW) {
   if (a <= 0.01) return;
   g.save();
   setFont(g, 'Oswald', size, 600);

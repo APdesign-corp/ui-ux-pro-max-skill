@@ -62,6 +62,7 @@ async function loadFonts(cfg) {
 async function loadMenuAssets() {
   let manifest = {};
   try { manifest = await (await fetch('assets/menu/manifest.json')).json(); } catch { return {}; }
+  manifest.facade = { file: '../source/facade.png' }; // photo de la façade (fin)
   const out = {};
   await Promise.all(Object.entries(manifest).map(async ([id, m]) => {
     const img = new Image();
@@ -133,8 +134,9 @@ export async function boot(canvas) {
     const ctx = { cfg, engine, scene, THREE, world, W, H, V, u, L, fps, seg: s };
     const inst = mod.default(ctx);
     if (inst.group) { scene.add(inst.group); inst.group.visible = false; }
-    const cues = (mod.cues || []).map((c) => ({ ...c, t: c.t + s.start, seg: s.id }));
-    return { ...s, dur: s.end - s.start, inst, cues };
+    const k = s.design ? s.design / (s.end - s.start) : 1; // compression temporelle (scène conçue pour s.design secondes)
+    const cues = (mod.cues || []).map((c) => ({ ...c, t: c.t / k + s.start, seg: s.id }));
+    return { ...s, k, dur: s.design || s.end - s.start, inst, cues };
   });
   const allCues = segs.flatMap((s) => s.cues).sort((a, b) => a.t - b.t);
   const duration = timeline.duration;
@@ -193,7 +195,7 @@ export async function boot(canvas) {
 
     const si = Math.max(0, segs.findIndex((s) => t >= s.start && t < s.end));
     const s = segs[si];
-    const lt = t - s.start;
+    const lt = (t - s.start) * s.k;
 
     // ---------- caméra + flou de mouvement automatique
     const sh = shakeAt(t);

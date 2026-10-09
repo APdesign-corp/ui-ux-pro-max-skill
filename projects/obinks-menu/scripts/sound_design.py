@@ -511,7 +511,7 @@ def write_st(path, x):
         w.writeframes(pcm.tobytes())
 
 
-def music_portails(total, bpm=120):
+def music_portails(total, bpm=120, plan=None):
     """Trailer tech 120 BPM : intro (drone), drop à 2 s, montée, breakdown 14-15.5 s, section dense 18-22 s,
     ampleur 22-26 s, impact 26 s puis nappe résolue, extinction 29.5-30 s (boucle)."""
     N = n_(total)
@@ -555,6 +555,9 @@ def music_portails(total, bpm=120):
     # sections : (début, fin, kick, hats, bass, intensité)
     roots = [55.0, 55.0, 43.65, 49.0]  # La, La, Fa, Sol (A1, F1, G1)
     sections = [(2.0, 14.0, True, True, True), (15.5, 18.0, True, True, True), (18.0, 22.0, True, True, True), (22.0, 25.5, True, False, True)]
+    PL = dict(pad_end=26.0, brk=14.0, fin=26.0)
+    if plan:
+        sections = plan['sections']; PL.update(plan)
     for (a, b, K, Hh, B) in sections:
         nb = int(round((b - a) / beat))
         for i in range(nb):
@@ -574,22 +577,22 @@ def music_portails(total, bpm=120):
                     add(hat(i + 199), at + beat * 0.75, 0.18, -0.3)
     # nappes
     chords = {55.0: [220, 261.6, 329.6], 43.65: [174.6, 220, 261.6], 49.0: [196, 246.9, 293.7]}
-    for k in range(12):
+    for k in range(64):
         at = 2.0 + k * 2.0
-        if at >= 26:
+        if at >= PL['pad_end']:
             break
         r = roots[k % 4]
         add(pan(pad(chords[r], 2.2, 900 if at < 14 else 1600), 0), at, 0.10)
     # intro : drone qui monte
     add(s_drone(2.0), 0.0, 0.5)
     # breakdown 14-15.5 : sous-grave + pad filtré
-    add(pan(pad([110, 164.8, 220], 1.8, 600), 0), 14.0, 0.18)
+    add(pan(pad([110, 164.8, 220], 1.8, 600), 0), PL['brk'], 0.18)
     # final : nappe résolue La mineur add9 + petit motif doux
-    add(pan(pad([220, 246.9, 261.6, 329.6, 440], 3.6, 2200), 0), 26.0, 0.16)
+    add(pan(pad([220, 246.9, 261.6, 329.6, 440], 3.6 if not plan else total - PL['fin'], 2200), 0), PL['fin'], 0.16)
     for j, f in enumerate([659.3, 523.3, 493.9, 440.0]):
         d = 0.9
         x = np.sin(2 * np.pi * f * tt(d)) * np.exp(-tt(d) * 3.5)
-        add(x, 26.6 + j * 0.5, 0.12, 0.2 * (j % 2 * 2 - 1))
+        add(x, PL['fin'] + 0.6 + j * 0.5, 0.12, 0.2 * (j % 2 * 2 - 1))
     # extinction finale (raccord boucle)
     fo = n_(0.5)
     out[-fo:] *= np.linspace(1, 0, fo)[:, None] ** 2
@@ -649,7 +652,9 @@ def main():
         wet[i:i + len(snd)] += snd[: len(dry) - i] * g * WET.get(c['type'], 0.15)
         sheet.append((at, c.get('seg', ''), c['type'], g))
     sfx = (dry + convolve_st(wet, reverb_ir(1.2))[: len(dry)])[:N]
-    music = music_portails(total)
+    # O'BINKS (48 s) : groove 3 → 18.6 s, souffle (fumée), groove 19 → 44.9 s, logo 45.2 s
+    plan = dict(sections=[(3.0, 18.5, True, True, True), (19.0, 40.0, True, True, True), (40.0, 44.9, True, False, True)], pad_end=44.0, brk=18.5, fin=45.2) if total > 35 else None
+    music = music_portails(total, plan=plan)
     mix = norm(sfx) * 0.55 + norm(music) * 0.42
     mix = np.tanh(mix * 1.1) / np.tanh(1.1)
     mix = mix / (np.max(np.abs(mix)) or 1) * (10 ** (-1 / 20))
