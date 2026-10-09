@@ -9,5 +9,6 @@
 | 4. Contrôle qualité indépendant (prix, textes, zones sûres, boucle) | ⏳ |
 | 5. Rendus 1080p 60 i/s : 9:16 puis 16:9, livraison | ⏳ |
 
-Reprise : relancer le workflow avec `resumeFromRunId` (les agents terminés sont en cache), ou
+Workflow lancé : run `wf_4a49b1ec-3b8`, script `scripts/workflow-obinks.js`.
+Reprise : relancer le workflow (scriptPath = scripts/workflow-obinks.js) avec `resumeFromRunId: wf_4a49b1ec-3b8` (les agents terminés sont en cache), ou
 reprendre à l'étape marquée ⏳ la plus haute.
