@@ -10,8 +10,8 @@
 //  2.20  les couches redescendent → 2.50 IMPACT (réassemblage), retour à la photo,
 //        prix énorme 10,00€ + BOISSON COMPRISE !
 //  2.75  la canette Coca-Cola cherry tombe → 3.00 « clac » + pschitt (fizz)
-//  3.50  SUPPLÉMENTS en cascade : SAUCE PIQUANTE 0,50€ (3.50) · SAUCE CRÈME 0,50€ (3.75) ·
-//        TENDERS 1€ (4.00)
+//  3.10  SUPPLÉMENTS en cascade : SAUCE PIQUANTE 0,50€ (3.25) · SAUCE CRÈME 0,50€ (3.50) ·
+//        TENDERS 1€ (3.75)
 //  4.60  WHIP PAN vers la droite (flou de filé) → fond sombre au raccord avec les Tacos (5.0)
 //  Textes et prix : FACTS.md §1 uniquement.
 // ============================================================================
@@ -22,7 +22,7 @@ import { kit } from '../world/food-kit.js';
 
 const T_SCAN0 = 0.88, T_SCAN1 = 1.1;
 const T_DROP0 = 0.22, T_LAND = 0.5, T_X0 = 1.0, T_X1 = 1.5, T_C0 = 2.2, T_HIT = 2.5;
-const T_CAN0 = 2.72, T_CAN = 3.0, T_SUP = [3.5, 3.75, 4.0], T_WHIP = 4.6;
+const T_CAN0 = 2.72, T_CAN = 3.0, T_SUP = [3.25, 3.5, 3.75], T_WHIP = 4.6;
 const LABEL_T = [1.25, 1.375, 1.5, 1.625];
 
 export const cues = [
@@ -42,7 +42,7 @@ export const cues = [
   { t: T_CAN0 + 0.02, type: 'whoosh', dur: 0.24, gain: 0.5, pan: -0.5 },
   { t: T_CAN, type: 'drop', gain: 0.75, pan: -0.5 },
   { t: T_CAN + 0.03, type: 'fizz', dur: 0.9, gain: 0.8, pan: -0.5 },
-  { t: 3.4, type: 'swish', gain: 0.6 },
+  { t: 3.12, type: 'swish', gain: 0.6 },
   ...T_SUP.map((t, i) => ({ t, type: 'pop', gain: 0.75, pan: 0.5 })),
   { t: T_WHIP, type: 'whoosh', dur: 0.38, gain: 0.9 },
   { t: T_WHIP + 0.05, type: 'whip', gain: 0.8 },
@@ -458,7 +458,7 @@ export default function create(ctx) {
       }
 
       // ---------------- titre CROUSTY BINKS (au pinceau) — en 9:16, laisse la place aux suppléments
-      const titleOut = V ? E.inCubic(seg(t, 3.32, 3.5)) : 0;
+      const titleOut = V ? E.inCubic(seg(t, 3.04, 3.2)) : 0;
       const titleP = seg(t, T_LAND, T_LAND + 0.38);
       if (titleP > 0 && titleOut < 1) {
         ui.save();
@@ -524,7 +524,7 @@ export default function create(ctx) {
       }
 
       // ---------------- suppléments en cascade
-      const supIn = seg(t, 3.38, 3.56);
+      const supIn = seg(t, 3.1, 3.28);
       if (supIn > 0) {
         const B = lay.sup;
         ui.save();

@@ -250,8 +250,8 @@ export default function create(ctx) {
 
       // ---------------- post
       const hk = t >= T_HIT ? 1 : 0;
-      post.flash = Math.max(post.flash, pulse(t, T_HIT, 0.012, 0.075) * 0.45 * hk);
-      post.flashColor = [1, 0.8, 0.74];
+      post.flash = Math.max(post.flash, pulse(t, T_HIT, 0.012, 0.045) * 0.5 * hk);
+      post.flashColor = [1, 0.5, 0.42];
       if (t >= T_HIT && t < T_HIT + 0.6) {
         const q = seg(t, T_HIT, T_HIT + 0.6);
         post.shock = [cx / W, 1 - cy / H, E.outCubic(q) * 1.5, 1.4 * (1 - q)];
