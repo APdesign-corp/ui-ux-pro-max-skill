@@ -1,0 +1,17 @@
+{
+  "duration": 57,
+  "fps": 60,
+  "bpm": 120,
+  "segments": [
+    { "id": "intro",     "start": 0,    "end": 3.5,  "title": "Logo O'BINKS en impact + TASTE THE DIFFERENCE" },
+    { "id": "crousty",   "start": 3.5,  "end": 8.5,  "title": "Crousty Binks 10,00€ boisson comprise, vue éclatée riz/crème/aigre-douce/tenders, suppléments" },
+    { "id": "tacos",     "start": 8.5,  "end": 13.5, "title": "Tacos : 4 viandes, L 8,00€ / XL 11,00€ (2 viandes), vue éclatée, sauce fromagère + choix de sauces" },
+    { "id": "burgers",   "start": 13.5, "end": 24.5, "title": "Sandwichs et hamburgers : 8 recettes seul/menu, vues éclatées" },
+    { "id": "kapsalone", "start": 24.5, "end": 28.5, "title": "Kapsalone 10€ : couches éclatées, 5 viandes au choix" },
+    { "id": "hotdog",    "start": 28.5, "end": 31.5, "title": "Hot dog 5€ : vue éclatée + 5 ingrédients" },
+    { "id": "texmex",    "start": 31.5, "end": 38,   "title": "Tex-Mex : 8 produits et prix" },
+    { "id": "desserts",  "start": 38,   "end": 45.5, "title": "Desserts : tiramisu, milkshakes, crêpes, gaufres, suppléments" },
+    { "id": "drinks",    "start": 45.5, "end": 51,   "title": "Mojitos 5,00€, canettes 2,00€, sauces 0,80€" },
+    { "id": "end",       "start": 51,   "end": 57,   "title": "LIVRAISON PARTOUT + ouvert 12h–22h tous les jours + logo" }
+  ]
+}
