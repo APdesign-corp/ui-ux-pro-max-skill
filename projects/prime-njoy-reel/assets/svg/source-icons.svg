@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#39ff14" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Icônes reprises à l'identique du site GSM Center Liège (objet IC, bento "Nos services"). -->
+  <g id="phone"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></g>
+  <g id="repair"><path d="M14.7 6.3a4 4 0 0 0-5 5L3 18l3 3 6.7-6.7a4 4 0 0 0 5-5l-2.5 2.5-2.4-.6-.6-2.4z"/></g>
+  <g id="internet"><path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r=".8"/></g>
+  <g id="multimedia"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="7" rx="1.5"/><rect x="17" y="14" width="4" height="7" rx="1.5"/></g>
+  <g id="send"><path d="M3 11l18-8-8 18-2-8z"/></g>
+  <g id="globe"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c3 3 3 16 0 19M12 2.5c-3 3-3 16 0 19"/></g>
+</svg>
