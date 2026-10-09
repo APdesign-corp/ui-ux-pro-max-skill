@@ -150,6 +150,31 @@ function buildTextures() {
     const h = heightField(S, (u, v) => pfbm(u, v, 12, 4, 13) * 0.7 + pfbm(u, v, 48, 2, 14) * 0.3 - (w(u, v) < 0.08 ? 0.12 : 0));
     T.crustN = normalTex(h, S, 3.2);
   }
+  // --- brioche dorée « craquelée » (comme les photos du menu) : cellules bombées brillantes,
+  //     fines craquelures plus claires, pores, marbrure de dorure
+  {
+    const S = 768;
+    const w = worley(6, 15), wp = worley(40, 16);
+    const warp = (u, v) => [u + (pfbm(u, v, 3, 3, 17) - 0.5) * 0.09, v + (pfbm(u, v, 3, 3, 18) - 0.5) * 0.09];
+    const edge = (u, v) => { const [a, b] = warp(u, v); const f1 = w(a, b); return w.f2 - f1; };
+    const crackW = (u, v) => 0.008 + 0.022 * pfbm(u, v, 6, 2, 19) ** 2;
+    T.bun = pixTex(S, (u, v) => {
+      const e = edge(u, v), cw = crackW(u, v);
+      const line = smooth(clamp(1 - e / cw));
+      const m = pfbm(u, v, 6, 5, 20), f = pfbm(u, v, 48, 2, 21);
+      let k = 0.83 + 0.2 * m - 0.06 * f;
+      k *= 0.9 + 0.1 * smooth(clamp(e / 0.16)); // bords de cellules un peu plus foncés
+      if (wp(u, v) < 0.07) k *= 0.86;            // pores
+      let c = [k, k * 0.95, k * 0.88];
+      c = mixc(c, [1.0, 0.95, 0.82], line * 0.4);
+      return c.map(c255);
+    });
+    const h = heightField(S, (u, v) => {
+      const e = edge(u, v);
+      return smooth(clamp(e / 0.12)) * 0.22 - smooth(clamp(1 - e / crackW(u, v))) * 0.1 + pfbm(u, v, 24, 3, 22) * 0.2 + pfbm(u, v, 6, 3, 23) * 0.25 - (wp(u, v) < 0.07 ? 0.08 : 0);
+    });
+    T.bunN = normalTex(h, S, 4.5);
+  }
   // --- mie (face coupée grillée) : alvéoles
   {
     const S = 512;
@@ -309,9 +334,9 @@ function buildTextures() {
     }), S, 4);
     T.stripes = pixTex(256, (u, v) => {
       const n = pfbm(u, v, 4, 3, 95);
-      const m = line(u * 1 + v * 0.35 + n * 0.05, 1 / 4, 0.022 + 0.02 * pfbm(u, v, 8, 2, 97)) * (0.6 + 0.4 * pfbm(u, v, 3, 2, 98));
-      const k = 0.9 + 0.1 * pfbm(u, v, 10, 3, 96);
-      return mixc([k, k, k], [0.2, 0.08, 0.03], m * 0.92).map(c255);
+      const m = line(u * 1 + v * 0.35 + n * 0.08, 1 / 2, 0.03 + 0.04 * pfbm(u, v, 8, 2, 97)) * smooth(clamp(pfbm(u, v, 3, 2, 98) * 1.8 - 0.25));
+      const k = 0.88 + 0.12 * pfbm(u, v, 10, 3, 96);
+      return mixc([k, k * 0.98, k * 0.95], [0.34, 0.14, 0.05], m * 0.8).map(c255);
     });
   }
   // --- alu froissé (barquette)
@@ -376,7 +401,8 @@ export function kit() {
   const n = (s) => new THREE.Vector2(s, s);
   const M = {};
   // Pains : croûte brillante dorée (dorure à l'œuf) + velours (sheen) ; mie grillée
-  M.crust = P({ vertexColors: true, map: T.crust, normalMap: T.crustN, normalScale: n(0.7), roughness: 0.46, clearcoat: 0.42, clearcoatRoughness: 0.32, sheen: 0.35, sheenColor: new THREE.Color('#e0a060'), sheenRoughness: 0.5 });
+  M.crust = P({ vertexColors: true, map: T.bun, normalMap: T.bunN, normalScale: n(0.42), roughness: 0.4, clearcoat: 0.7, clearcoatRoughness: 0.16, sheen: 0.18, sheenColor: new THREE.Color('#ff9a40'), sheenRoughness: 0.45 });
+  M.crustPlain = P({ vertexColors: true, map: T.crust, normalMap: T.crustN, normalScale: n(0.6), roughness: 0.42, clearcoat: 0.55, clearcoatRoughness: 0.22, sheen: 0.2, sheenColor: new THREE.Color('#ff9a40'), sheenRoughness: 0.5 });
   M.bunSoft = P({ vertexColors: true, map: T.crust, normalMap: T.crustN, normalScale: n(0.4), roughness: 0.5, clearcoat: 0.3, clearcoatRoughness: 0.4, sheen: 0.4, sheenColor: new THREE.Color('#e8b070'), sheenRoughness: 0.55 });
   M.crumb = P({ vertexColors: true, map: T.crumb, normalMap: T.crumbN, normalScale: n(0.9), roughness: 0.85, sheen: 0.25, sheenColor: new THREE.Color('#e8c890'), sheenRoughness: 0.7 });
   M.sesame = P({ color: '#e9d3a0', roughness: 0.4, clearcoat: 0.35 });
@@ -385,7 +411,7 @@ export function kit() {
   M.bread = P({ vertexColors: true, map: T.bread, normalMap: T.breadN, normalScale: n(1.25), roughness: 0.62, clearcoat: 0.18, clearcoatRoughness: 0.5, sheen: 0.4, sheenColor: new THREE.Color('#ffb34d'), sheenRoughness: 0.6 });
   M.breadGlazed = P({ vertexColors: true, map: T.bread, normalMap: T.breadN, normalScale: n(1.0), color: '#ffc890', roughness: 0.4, clearcoat: 0.9, clearcoatRoughness: 0.12 });
   M.chicken = P({ vertexColors: true, map: T.spice, normalMap: T.breadN, normalScale: n(0.7), roughness: 0.4, clearcoat: 0.6, clearcoatRoughness: 0.22 });
-  M.sausage = P({ color: '#b8603a', map: T.stripes, normalMap: T.softN, normalScale: n(0.4), roughness: 0.3, clearcoat: 0.85, clearcoatRoughness: 0.12, sheen: 0.4, sheenColor: new THREE.Color('#ff9a6a') });
+  M.sausage = P({ color: '#a4462a', map: T.stripes, normalMap: T.softN, normalScale: n(0.4), roughness: 0.3, clearcoat: 0.85, clearcoatRoughness: 0.12, sheen: 0.4, sheenColor: new THREE.Color('#ff9a6a') });
   // Fromages (SSS simulé par émissif chaud + sheen)
   M.cheddar = P({ vertexColors: true, color: '#f7b100', map: T.soft, normalMap: T.softN, normalScale: n(0.25), roughness: 0.3, clearcoat: 0.8, clearcoatRoughness: 0.12, sheen: 0.3, sheenColor: new THREE.Color('#ffc000'), emissive: new THREE.Color('#ff9000'), emissiveIntensity: 0.06 });
   M.raclette = P({ vertexColors: true, color: '#eec35a', map: T.soft, normalMap: T.softN, normalScale: n(0.3), roughness: 0.22, clearcoat: 1, clearcoatRoughness: 0.08, sheen: 0.25, sheenColor: new THREE.Color('#ffe08a'), emissive: new THREE.Color('#e09a10'), emissiveIntensity: 0.05 });
@@ -400,17 +426,17 @@ export function kit() {
   M.crispyOnion = P({ vertexColors: true, map: T.bread, normalMap: T.breadN, normalScale: n(1), roughness: 0.5, clearcoat: 0.3 });
   M.parsley = P({ vertexColors: true, roughness: 0.45, clearcoat: 0.4, side: THREE.DoubleSide });
   M.walnut = P({ color: '#8a5530', map: T.soft, normalMap: T.cakeN, normalScale: n(1.5), roughness: 0.6, clearcoat: 0.2 });
-  M.rice = P({ map: T.rice, normalMap: T.riceN, normalScale: n(1.3), color: '#d4ccbc', roughness: 0.6, sheen: 0.2, sheenColor: new THREE.Color('#ffffff'), clearcoat: 0.15 });
-  M.riceGrain = P({ color: '#ddd6c8', roughness: 0.45, clearcoat: 0.45, clearcoatRoughness: 0.2 });
-  M.tortilla = P({ vertexColors: true, map: T.grillX, normalMap: T.grillXN, normalScale: n(0.8), roughness: 0.55, clearcoat: 0.25, clearcoatRoughness: 0.4, sheen: 0.6, sheenColor: new THREE.Color('#ffcf8a'), sheenRoughness: 0.5 });
+  M.rice = P({ map: T.rice, normalMap: T.riceN, normalScale: n(1.4), color: '#b9b09e', roughness: 0.62, sheen: 0.12, sheenColor: new THREE.Color('#fff4e0'), clearcoat: 0.12 });
+  M.riceGrain = P({ color: '#cfc7b6', roughness: 0.45, clearcoat: 0.4, clearcoatRoughness: 0.2 });
+  M.tortilla = P({ vertexColors: true, map: T.grillX, normalMap: T.grillXN, normalScale: n(0.9), roughness: 0.5, clearcoat: 0.3, clearcoatRoughness: 0.35, sheen: 0.3, sheenColor: new THREE.Color('#ffc070'), sheenRoughness: 0.5 });
   M.tortillaIn = P({ vertexColors: true, color: '#c8b49a', map: T.soft, normalMap: T.softN, normalScale: n(0.5), roughness: 0.75, sheen: 0.2, sheenColor: new THREE.Color('#e8c890') });
   // Contenants
   M.foil = P({ color: '#e4e7ea', map: T.foil, metalness: 1, roughness: 0.32, normalMap: T.foilN, normalScale: n(0.55) });
   M.boxBlack = P({ color: '#0e0e10', roughness: 0.3, clearcoat: 0.9, clearcoatRoughness: 0.12, metalness: 0 });
   // verre : uniquement les reflets (mélange additif sur albédo noir) + un voile très léger
-  M.glass = P({ color: '#000000', roughness: 0.05, metalness: 0, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, clearcoat: 1, clearcoatRoughness: 0.04, envMapIntensity: 1.4, specularIntensity: 1, ior: 1.5 });
+  M.glass = P({ color: '#000000', roughness: 0.05, metalness: 0, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, clearcoat: 1, clearcoatRoughness: 0.04, envMapIntensity: 0.9, specularIntensity: 0.8, ior: 1.5 });
   M.glassTint = new THREE.MeshBasicMaterial({ color: '#c8d0d8', transparent: true, opacity: 0.045, depthWrite: false });
-  M.cupPlastic = P({ color: '#000000', roughness: 0.14, metalness: 0, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, clearcoat: 1, clearcoatRoughness: 0.1, envMapIntensity: 1.3 });
+  M.cupPlastic = P({ color: '#000000', roughness: 0.14, metalness: 0, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, clearcoat: 1, clearcoatRoughness: 0.1, envMapIntensity: 0.8, specularIntensity: 0.7 });
   // Desserts
   M.cream = P({ vertexColors: true, color: '#d9d2c6', map: T.soft, normalMap: T.softN, normalScale: n(0.4), roughness: 0.5, sheen: 0.35, sheenColor: new THREE.Color('#ffffff'), sheenRoughness: 0.45, clearcoat: 0.2, clearcoatRoughness: 0.35 });
   M.cake = P({ vertexColors: true, map: T.cake, normalMap: T.cakeN, normalScale: n(1.1), roughness: 0.75, sheen: 0.3, sheenColor: new THREE.Color('#d9a066') });
@@ -456,7 +482,7 @@ export function creamyMat(key, color, o = {}) {
   if (K.shakes.has(key)) return K.shakes.get(key);
   const m = new THREE.MeshPhysicalMaterial({
     color, vertexColors: !!o.vertexColors, map: o.speck ? K.T.pepper : K.T.soft, normalMap: K.T.softN, normalScale: new THREE.Vector2(0.4, 0.4),
-    roughness: o.rough ?? 0.42, sheen: 0.7, sheenColor: new THREE.Color(o.sheenColor || '#ffffff'), sheenRoughness: 0.45,
+    roughness: o.rough ?? 0.42, sheen: 0.3, sheenColor: new THREE.Color(o.sheenColor || '#ffffff'), sheenRoughness: 0.5,
     clearcoat: o.clearcoat ?? 0.3, clearcoatRoughness: 0.3,
   });
   K.shakes.set(key, m);
@@ -507,6 +533,10 @@ export function polarMesh({ R, segs = 64, rows, color = null, tile = 0.5 }) {
   rad[segs] = rad[0];
   let Rm = 0; for (let i = 0; i < segs; i++) Rm += rad[i]; Rm /= segs;
   let vacc = 0, py = null, pk = null;
+  // 'a' : projection azimutale équidistante (longueur d'arc depuis le centre, par colonne) —
+  // aucune traînée de texture sur les flancs bombés (dômes de pain, bords de steak).
+  const arc = new Float32Array(nC);
+  let prevA = false;
   for (let j = 0; j < nR; j++) {
     const row = rows[j];
     for (let i = 0; i < nC; i++) {
@@ -521,11 +551,18 @@ export function polarMesh({ R, segs = 64, rows, color = null, tile = 0.5 }) {
     const y0 = pos[(j * nC) * 3 + 1];
     if (py !== null) vacc += Math.hypot((row.k - pk) * Rm + (row.d || 0) * 0, y0 - py);
     py = y0; pk = row.k;
+    const isA = row.uv === 'a';
     for (let i = 0; i < nC; i++) {
       const o = (j * nC + i) * 3, q = (j * nC + i) * 2;
-      if (row.uv === 's') { uvs[q] = (i / segs) * (TAU * Rm) / tile; uvs[q + 1] = vacc / tile; }
+      if (isA) {
+        if (!prevA) arc[i] = Math.hypot(pos[o], pos[o + 2]);
+        else { const p0 = ((j - 1) * nC + i) * 3; arc[i] += Math.hypot(pos[o] - pos[p0], pos[o + 1] - pos[p0 + 1], pos[o + 2] - pos[p0 + 2]); }
+        const d = Math.hypot(pos[o], pos[o + 2]) || 1;
+        uvs[q] = (pos[o] / d) * arc[i] / tile + 0.5; uvs[q + 1] = (pos[o + 2] / d) * arc[i] / tile + 0.5;
+      } else if (row.uv === 's') { uvs[q] = (i / segs) * (TAU * Rm) / tile; uvs[q + 1] = vacc / tile; }
       else { uvs[q] = pos[o] / tile + 0.5; uvs[q + 1] = pos[o + 2] / tile + 0.5; }
     }
+    prevA = isA;
   }
   const byPart = new Map();
   for (let j = 0; j < nR - 1; j++) {
@@ -568,13 +605,13 @@ export function polarMesh({ R, segs = 64, rows, color = null, tile = 0.5 }) {
  * Galette pleine (« slab ») : dessus top(x,z), dessous bot(x,z), flanc arrondi (bulge = bombé
  * absolu du flanc). parts : [dessus, flanc, dessous] → groupes matériaux.
  */
-export function slab({ R, segs = 64, rings = 10, top, bot, sideRows = 4, bulge = 0, color = null, tile = 0.5, parts = [0, 1, 2], sideUV = 'p' }) {
+export function slab({ R, segs = 64, rings = 10, top, bot, sideRows = 4, bulge = 0, color = null, tile = 0.5, parts = [0, 1, 2], sideUV = 'p', topUV = 'p', botUV = 'p' }) {
   const rows = [];
   const T = typeof top === 'function' ? top : () => top;
   const B = typeof bot === 'function' ? bot : () => bot;
   for (let k = 0; k <= rings; k++) {
     const s = Math.sin((Math.PI / 2) * (k / rings));
-    rows.push({ k: s, y: (x, z, kk, a) => T(x, z, kk, a), uv: 'p', part: parts[0], band: k === rings ? parts[1] : parts[0] });
+    rows.push({ k: s, y: (x, z, kk, a) => T(x, z, kk, a), uv: topUV, part: parts[0], band: k === rings ? parts[1] : parts[0] });
   }
   for (let m = 1; m < sideRows; m++) {
     const t = m / sideRows;
@@ -589,7 +626,7 @@ export function slab({ R, segs = 64, rings = 10, top, bot, sideRows = 4, bulge =
   }
   for (let k = rings; k >= 0; k--) {
     const s = Math.sin((Math.PI / 2) * (k / rings));
-    rows.push({ k: s, y: (x, z, kk, a) => B(x, z, kk, a), uv: 'p', part: parts[2], band: parts[2] });
+    rows.push({ k: s, y: (x, z, kk, a) => B(x, z, kk, a), uv: botUV, part: parts[2], band: parts[2] });
   }
   return polarMesh({ R, segs, rows, color, tile });
 }
