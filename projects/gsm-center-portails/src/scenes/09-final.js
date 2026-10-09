@@ -106,7 +106,13 @@ export default function create(ctx) {
         ui.textAlign = 'center';
         ui.globalAlpha = ka * (1 - fold);
         setFont(ui, aS, 800, -0.01); ui.fillStyle = C.white; ui.fillText(addr1, W / 2, y + (1 - ka) * 30 * u);
-        setFont(ui, aS * 0.8, 400, 0.06); ui.fillStyle = C.neon; ui.fillText(addr2, W / 2, y + aS * 1.05);
+        setFont(ui, aS * 0.8, 400, 0.06); ui.fillStyle = C.neon;
+        const ow = textWidth(ui, addr2 + '   ', aS * 0.8, 400, 0.06), ow2 = textWidth(ui, 'OUVERT 7J/7', aS * 0.8, 800, 0.06);
+        ui.textAlign = 'left';
+        ui.fillText(addr2, W / 2 - (ow + ow2) / 2, y + aS * 1.05);
+        setFont(ui, aS * 0.8, 800, 0.06); ui.fillStyle = C.white;
+        ui.fillText('OUVERT 7J/7', W / 2 - (ow + ow2) / 2 + ow, y + aS * 1.05);
+        ui.textAlign = 'center';
         y += aS * 2.0;
         ui.globalAlpha = ks * (1 - fold);
         drawSlogan(ui, W / 2, y + sS * 0.6, sS, 'center');
@@ -125,9 +131,17 @@ export default function create(ctx) {
         ui.globalAlpha = kw * (1 - fold);
         drawTransfer(ui, S.l, S.b - 62 * u, 38 * u, 'left', u);
         ui.globalAlpha = ka * (1 - fold);
+        // voile sombre doux derrière la colonne droite (lisibilité sur le reflet du sol)
+        const sg = ui.createRadialGradient(S.r - 170 * u, yl + 60 * u, 0, S.r - 170 * u, yl + 60 * u, 330 * u);
+        sg.addColorStop(0, 'rgba(2,4,3,0.72)'); sg.addColorStop(1, 'rgba(2,4,3,0)');
+        ui.fillStyle = sg; ui.fillRect(S.r - 520 * u, yl - 280 * u, 560 * u, 640 * u);
         ui.textAlign = 'right';
         setFont(ui, aS * 1.15, 800, -0.01); ui.fillStyle = C.white; ui.fillText(addr1, S.r, yl);
         setFont(ui, aS * 0.95, 400, 0.06); ui.fillStyle = C.neon; ui.fillText(addr2, S.r, yl + aS * 1.35);
+        ui.globalAlpha = kw * (1 - fold);
+        setFont(ui, aS * 0.95, 800, 0.08); ui.fillStyle = C.white; ui.fillText('OUVERT 7J/7', S.r, yl + aS * 2.75);
+        setFont(ui, aS * 0.6, 500, 0.04); ui.fillStyle = 'rgba(244,248,244,0.85)';
+        ui.fillText('Lun–Ven 9h–19h · Sam 10h–19h · Dim 11h–19h', S.r, yl + aS * 3.55);
         const cw = textWidth(ui, 'PASSE EN BOUTIQUE', 34 * u, 800, 0.08) + 110 * u;
         drawCTA(ui, S.r - cw / 2, S.b - 70 * u, 34 * u, kc * sc, lt, u);
       }
