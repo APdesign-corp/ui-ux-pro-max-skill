@@ -59,6 +59,7 @@ async function loadFonts(cfg) {
 }
 
 // Photos du menu découpées (assets/menu/manifest.json : { id: { file, w, h, ... } }) → images + textures
+import { realizeFood } from './scenes/_kit.js';
 async function loadMenuAssets() {
   let manifest = {};
   try { manifest = await (await fetch('assets/menu/manifest.json')).json(); } catch { return {}; }
@@ -229,6 +230,8 @@ export async function boot(canvas) {
     };
     if (s.inst.group) s.inst.group.visible = true;
     s.inst.update(f);
+    // nourriture réelle : photos du menu à la place du produit 3D (vue éclatée en tranches)
+    if (s.inst.real) { const R = s.inst.real(f).filter(Boolean); for (const r of R) realizeFood(f, r.holder, r.food, r.im, r.opts); for (const r of R) r.holder.visible = false; }
 
     // ---------- effets globaux synchronisés sur les cues
     const gl = glitchAt(t);

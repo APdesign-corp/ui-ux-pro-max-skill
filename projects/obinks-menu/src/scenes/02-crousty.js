@@ -239,6 +239,7 @@ export default function create(ctx) {
       o.material = m;
     });
   }
+  let realAt = null, frozenAt = null; // photo réelle : même cadrage que la photo du menu
   const holder = new THREE.Group();
   holder.add(food.group);
   group.add(holder);
@@ -327,6 +328,7 @@ export default function create(ctx) {
 
   return {
     group,
+    real: () => [{ holder, food, im: I.crousty, opts: { at: realAt } }],
     camera(lt) {
       return camFrom(poseAt(lt), whipAt(lt));
     },
@@ -368,6 +370,19 @@ export default function create(ctx) {
       const pw = boxW * 1.08 * lay.photoW;
       const ph = im ? (pw * im.h) / im.w : pw * 0.8;
       const pcx = (pl[0] + pr[0]) / 2, pcy = pc[1] + ph * 0.04;
+      if (t < T_SCAN0 || t >= T_HIT) realAt = [pcx, pcy, pw];
+      else { // vue éclatée : la caméra plonge → photo au cadrage de T_SCAN0 (calcul pur, ordre d'images libre)
+        if (!frozenAt) {
+          const c = camFrom(poseAt(T_SCAN0 - 0.01), whipAt(T_SCAN0 - 0.01));
+          const pc0 = new THREE.PerspectiveCamera(c.fov || 35, W / H, 0.05, 300);
+          pc0.position.set(...c.pos); pc0.lookAt(...c.target); pc0.updateMatrixWorld(true);
+          const pj = (q) => { const v3 = new THREE.Vector3(...q).project(pc0); return [(v3.x * 0.5 + 0.5) * W, (-v3.y * 0.5 + 0.5) * H]; };
+          const a0 = pj(REF.l), b0 = pj(REF.r), c0 = pj(REF.c);
+          const w0 = Math.hypot(b0[0] - a0[0], b0[1] - a0[1]) * 1.08 * lay.photoW;
+          frozenAt = [(a0[0] + b0[0]) / 2, c0[1] + (im ? (w0 * im.h) / im.w : w0 * 0.8) * 0.04, w0];
+        }
+        realAt = frozenAt;
+      }
       // photo → 3D : un trait de scan néon balaie la boîte de gauche à droite (la photo est coupée
       // derrière lui, la 3D apparaît) ; 3D → photo : coupe franche sur l'impact du réassemblage
       let photoA = t < T_SCAN1 || t >= T_HIT ? 1 : 0;

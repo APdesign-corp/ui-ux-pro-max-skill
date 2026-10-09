@@ -67,6 +67,7 @@ export default function create(ctx) {
 
   return {
     group,
+    real: () => foods.map((F) => ({ holder, food: F.food, im: ctx.world.images.kapsalone })),
     camera: r.camOf,
     update(f) {
       const { lt, t, ui, fx } = f;

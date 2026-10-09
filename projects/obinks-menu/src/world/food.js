@@ -148,7 +148,8 @@ function finalize(kind, recipe, defs, { gap = 0.16, spin = 0.25, tilt = 0.05, bo
   for (const l of layers) l.obj.matrixAutoUpdate = true;
 
   function setExplode(p = 0, t = 0, opts = {}) {
-    const S = opts.spread ?? 1, st = clamp(opts.stagger ?? 0, 0, 0.9), W = opts.wobble ?? 1, SP = opts.spin ?? 1;
+    const S = (opts.spread ?? 1) * 0.4, // écartement réduit : les étiquettes restent autour de la photo réelle
+      st = clamp(opts.stagger ?? 0, 0, 0.9), W = opts.wobble ?? 1, SP = opts.spin ?? 1;
     const anchor = opts.anchor ?? 'center';
     const center = anchor === 'bottom' ? 0 : anchor === 'top' ? off(n - 1, S) : off(n - 1, S) / 2;
     p = clamp(p);
@@ -176,7 +177,7 @@ function finalize(kind, recipe, defs, { gap = 0.16, spin = 0.25, tilt = 0.05, bo
   setExplode(0, 0);
   const height = all.max.y - Math.min(0, all.min.y);
   return {
-    kind, recipe, group, layers: layers.map((l) => ({ name: l.name, label: l.label, minor: l.minor, obj: l.obj })),
+    kind, recipe, group, layers: layers.map((l) => ({ name: l.name, label: l.label, minor: l.minor, obj: l.obj, base: l.base, bottom: l.bottom, top: l.top })),
     setExplode, anchors, anchorsL, height, width: all.max.x - all.min.x, depth: all.max.z - all.min.z, gap,
     explodedHeight: (S = 1) => height + off(n - 1, S),
   };

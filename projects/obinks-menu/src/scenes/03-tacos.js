@@ -300,6 +300,7 @@ export default function create(ctx) {
 
   return {
     group,
+    real: () => foods.map((F, i) => ({ holder, food: F.food, im: I[MEATS[i].id] })),
     camera: camOf,
     update(f) {
       const lt = f.lt, t = f.t, ui = f.ui, fx = f.fx;

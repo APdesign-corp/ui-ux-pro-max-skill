@@ -54,6 +54,7 @@ export default function create(ctx) {
 
   return {
     group,
+    real: () => [{ holder, food, im: I.hotdog }],
     camera: r.camOf,
     update(f) {
       const { lt, t, ui, fx } = f;

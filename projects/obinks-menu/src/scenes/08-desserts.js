@@ -86,6 +86,7 @@ export default function create(ctx) {
 
   return {
     group,
+    real: () => [...tira.map((F) => ({ holder: F.holder, food: F.food, im: I.tiramisu, opts: { fit: 6 } })), ...shake.map((F, i) => ({ holder: F.holder, food: F.food, im: I['milkshake_' + SHAKE[i][0]], opts: { fit: 1.5 } }))],
     camera: r.camOf,
     update(f) {
       const { lt, t, ui, fx } = f;

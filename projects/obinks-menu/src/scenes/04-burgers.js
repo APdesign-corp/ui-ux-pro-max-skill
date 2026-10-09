@@ -210,6 +210,7 @@ export default function create(ctx) {
 
   return {
     group,
+    real: () => stations.map((st) => ({ holder: st.holder, food: st.food, im: I[st.r.kind + '_' + st.r.id] })),
     camera: camOf,
     update(f) {
       const lt = f.lt, t = f.t, ui = f.ui, fx = f.fx;

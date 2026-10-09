@@ -235,3 +235,57 @@ export function ambience(f, ctx, { dx = 0, seed = 0 } = {}) {
   post.flashColor = [1, 0.62, 0.52];
   post.vignette = Math.max(post.vignette || 0, 1.15);
 }
+
+// ---------------------------------------------------------------------------------------------
+//  NOURRITURE RÉELLE : le produit 3D sert de « squelette » invisible ; on dessine à sa place la
+//  VRAIE photo du menu, découpée en tranches horizontales qui suivent exactement les couches 3D
+//  (vue éclatée réelle : les étiquettes restent alignées). slice:false → photo entière.
+//  Appelé par main.js après update(), sur le calque de fond (sous les titres/étiquettes).
+// ---------------------------------------------------------------------------------------------
+let _v = null;
+export function realizeFood(f, holder, food, im, { slice = false, fit = 1.0, at = null } = {}) {
+  if (!holder || !holder.visible || !food.group.visible || !im) return;
+  const img = im.img || im, iw = im.w || img.naturalWidth, ih = im.h || img.naturalHeight;
+  if (!iw || !ih) return;
+  _v = _v || new f.THREE.Vector3();
+  holder.updateMatrixWorld(true);
+  // calque net, SOUS ce qui est déjà dessiné (titres, étiquettes) mais au-dessus de la 3D
+  const g = f.ui;
+  const L = food.layers.filter((l) => l.base).slice().sort((a, b) => a.bottom - b.bottom);
+  const ymax = Math.max(...L.map((l) => l.top)), ymin = Math.min(0, ...L.map((l) => l.bottom));
+  const P = (x, y, z) => { _v.set(x, y, z); food.group.localToWorld(_v); return f.project([_v.x, _v.y, _v.z]); };
+  const [bx, by] = P(0, ymin, 0), [tx, ty] = P(0, ymax, 0);
+  const ppu = Math.hypot(tx - bx, ty - by) / (ymax - ymin);
+  const W0 = at ? at[2] : (food.width || ymax - ymin) * ppu * fit, H0 = (W0 * ih) / iw;
+  const cx = at ? at[0] : (bx + tx) / 2, cy = at ? at[1] : (by + ty) / 2;
+  const k = H0 / (ymax - ymin); // px par unité locale, à l'échelle de la photo
+  const dys = L.map((l) => l.obj.position.y - l.base.y);
+  const ex = Math.max(...dys.map(Math.abs));
+  g.save();
+  g.globalCompositeOperation = 'destination-over';
+  g.imageSmoothingEnabled = true; g.imageSmoothingQuality = 'high';
+  if (!slice || ex < 0.004) { // photo entière (défaut)
+    const z = 1 + 0.5 * Math.min(0.25, ex); // la photo « respire » pendant la vue éclatée
+    g.shadowColor = 'rgba(0,0,0,0.6)'; g.shadowBlur = 24; g.shadowOffsetY = 12;
+    g.drawImage(img, cx - (W0 * z) / 2, cy - (H0 * z) / 2, W0 * z, H0 * z);
+  } else {
+    L.forEach((l, i) => {
+      const lo = i === 0 ? ymin : l.bottom, hi = i === L.length - 1 ? ymax : L[i + 1].bottom;
+      if (hi <= lo) return;
+      const r0 = (1 - (hi - ymin) / (ymax - ymin)) * ih, r1 = (1 - (lo - ymin) / (ymax - ymin)) * ih;
+      const dh = ((r1 - r0) * H0) / ih;
+      const yc = cy + ((r0 + r1) / 2 - ih / 2) * (H0 / ih) - dys[i] * k;
+      g.save();
+      g.translate(cx + (l.obj.position.x - l.base.x) * k, yc); g.rotate(-(l.obj.rotation.z || 0) * 0.6);
+      g.shadowColor = 'rgba(0,0,0,0.55)'; g.shadowBlur = 16; g.shadowOffsetY = 10;
+      g.drawImage(img, 0, r0, iw, Math.max(1, r1 - r0), -W0 / 2, -dh / 2, W0, dh + 0.8);
+      g.restore();
+    });
+  }
+  // ombre de contact (dessinée en dernier = tout en dessous)
+  g.translate(cx, cy + H0 / 2 - dys[0] * k); g.scale(1, 0.16);
+  const sh = g.createRadialGradient(0, 0, 0, 0, 0, W0 * 0.55);
+  sh.addColorStop(0, 'rgba(0,0,0,0.7)'); sh.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = sh; g.fillRect(-W0 * 0.6, -W0 * 0.6, W0 * 1.2, W0 * 1.2);
+  g.restore();
+}
