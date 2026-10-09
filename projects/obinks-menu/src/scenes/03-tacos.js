@@ -263,11 +263,11 @@ export default function create(ctx) {
 
   // ---- mise en page (fractions d'écran) par phase
   const LY = V ? {
-    A: { p: [0.5, 0.535], s: fit(0.78, 0.3, false) },
+    A: { p: [0.5, 0.555], s: fit(0.78, 0.3, false) },
     B: { p: [0.5, 0.365], s: fit(0.7, 0.4, true) },
     C: { p: [0.5, 0.315], s: fit(0.8, 0.3, false) },
-    title: { x: W / 2, y: H * 0.205, size: 290 * u },
-    sub: { x: W / 2, y1: H * 0.265, y2: H * 0.293, size: 44 * u, maxW: S.w },
+    title: { x: W / 2, y: H * 0.238, size: 270 * u },
+    sub: { x: W / 2, y1: H * 0.292, y2: H * 0.32, size: 44 * u, maxW: S.w },
     grid: MEATS.map((_, i) => ({ x: S.l + S.w * (0.125 + 0.25 * i), y: H * 0.705, h: H * 0.12, tagY: H * 0.615, tagSize: 34 * u })),
     L: { x: W / 2, y: H * 0.525, size: 150 * u },
     XL: { x: W / 2, y: H * 0.68, size: 150 * u },
@@ -371,7 +371,7 @@ export default function create(ctx) {
         ui.globalAlpha = 1 - titleOut;
         ui.translate(T0.x, T0.y);
         ui.scale(1 + titleOut * 0.4, 1 + titleOut * 0.4);
-        brushTitle(ui, 'TACOS', 0, 0, { size: T0.size, font: 'Bangers', p: seg(lt, 0.04, 0.3), glow: 0.7, tracking: 0.02, maxWidth: V ? S.w * 0.92 : W * 0.56 });
+        brushTitle(ui, 'TACOS', 0, 0, { size: T0.size, font: 'Bangers', p: seg(lt, 0.04, 0.3), glow: 0.7, tracking: 0.02, maxWidth: V ? S.w * 0.84 : W * 0.5 });
         ui.restore();
         const sa = clamp(seg(lt, 0.42, 0.6) * 1.2) * (1 - titleOut);
         const sb = clamp(seg(lt, 0.5, 0.68) * 1.2) * (1 - titleOut);
@@ -436,7 +436,7 @@ export default function create(ctx) {
         smoke(ui, W, H, t, { area: [pot.x - pot.h * 0.6, pot.y - pot.h * 1.0, pot.h * 1.2, pot.h * 0.5], size: pot.h * 0.8, count: 6, alpha: 0.3 * seg(lt, 4.1, 4.4), seed: 19, rise: 1.4 });
         cheeseCurtain(ui, W, H, q, t, u, LY.drip);
         const T1 = LY.sauceT;
-        brushTitle(ui, 'SAUCE FROMAGÈRE', T1.x, T1.y, { size: T1.size, p: seg(lt, T_DRIP + 0.1, T_DRIP + 0.38), maxWidth: V ? S.w : W * 0.44, colorAt: (i) => (i < 6 ? P.white : P.yellow), glow: 0.4 });
+        brushTitle(ui, 'SAUCE FROMAGÈRE', T1.x, T1.y, { size: T1.size, p: seg(lt, T_DRIP + 0.1, T_DRIP + 0.38), maxWidth: V ? S.w * 0.88 : W * 0.42, colorAt: (i) => (i < 6 ? P.white : P.yellow), glow: 0.4 });
         // CHOISIS TA SAUCE
         const cq = seg(lt, T_CHOOSE, T_CHOOSE + 0.3);
         if (cq > 0) {

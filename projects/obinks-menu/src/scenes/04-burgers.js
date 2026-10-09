@@ -180,7 +180,7 @@ export default function create(ctx) {
   // ---- mise en page 2D (pixels) — relative au produit au repos
   const LY = V ? {
     eyebrow: { x: W / 2, y: H * 0.152, size: 33 * u },
-    name: { x: W / 2, y: H * 0.222, size: 118 * u, maxW: S.w * 0.96 },
+    name: { x: W / 2, y: H * 0.222, size: 118 * u, maxW: S.w * 0.86 },
     seul: { x: W * 0.285, y: H * 0.695, size: 118 * u },
     menu: { x: W * 0.715, y: H * 0.695, size: 118 * u },
     label: 32 * u,
@@ -236,9 +236,9 @@ export default function create(ctx) {
         ui.translate(dxIntro, 0);
         if (I.logo) photo(ui, I.logo, I0.logo[0], I0.logo[1], { w: I0.logo[2], p: seg(lt, 0.14, 0.4), glow: 0.4 });
         splatter(ui, I0.a[0], I0.a[1] - I0.a[2] * 0.3, I0.a[2] * 1.6, { p: seg(lt, 0.1, 0.9), seed: 31, drips: 0.5, alpha: 0.9 });
-        brushTitle(ui, 'SANDWICH', I0.a[0], I0.a[1], { size: I0.a[2], p: seg(lt, 0.08, 0.32), maxWidth: S.w * 0.94, glow: 0.7 });
+        brushTitle(ui, 'SANDWICH', I0.a[0], I0.a[1], { size: I0.a[2], p: seg(lt, 0.08, 0.32), maxWidth: S.w * 0.86, glow: 0.7 });
         brushTitle(ui, '&', I0.amp[0], I0.amp[1], { size: I0.amp[2], font: 'Kaushan Script', color: P.yellow, p: seg(lt, 0.3, 0.42), glow: 0.9, glowColor: '#ff8a00', skew: 0 });
-        brushTitle(ui, 'HAMBURGER', I0.b[0], I0.b[1], { size: I0.b[2], p: seg(lt, 0.46, 0.72), maxWidth: S.w * 0.94, glow: 0.7 });
+        brushTitle(ui, 'HAMBURGER', I0.b[0], I0.b[1], { size: I0.b[2], p: seg(lt, 0.46, 0.72), maxWidth: S.w * 0.86, glow: 0.7 });
         ui.restore();
         particles(fx, W, H, t, { kind: 'sparks', burst: { x: I0.a[0] + dxIntro, y: I0.a[1], t0: f.t - lt + 0.12, power: 1.1 }, seed: 6 });
         particles(fx, W, H, t, { kind: 'sparks', burst: { x: I0.b[0] + dxIntro, y: I0.b[1], t0: f.t - lt + 0.5, power: 0.9 }, seed: 7 });
@@ -341,7 +341,7 @@ export default function create(ctx) {
         // titre du récap
         const tq = seg(lt, T_SAME - 0.02, T_SAME + 0.24);
         if (V) {
-          brushTitle(g, 'SANDWICH OU HAMBURGER', W / 2, H * 0.165, { size: 70 * u, maxWidth: S.w, p: seg(lt, T_GRID, T_GRID + 0.3), glow: 0.5 });
+          brushTitle(g, 'SANDWICH OU HAMBURGER', W / 2, H * 0.165, { size: 70 * u, maxWidth: S.w * 0.88, p: seg(lt, T_GRID, T_GRID + 0.3), glow: 0.5 });
           brushTitle(g, 'MÊMES PRIX', W / 2, H * 0.228, { size: 100 * u, color: P.yellow, p: tq, glow: 0.8, glowColor: P.neon });
         } else {
           // une ligne centrée : « SANDWICH OU HAMBURGER : » + « MÊMES PRIX » (jaune, claque à part)
