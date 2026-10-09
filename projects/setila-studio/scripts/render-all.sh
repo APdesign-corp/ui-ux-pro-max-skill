@@ -17,5 +17,5 @@ ls out/chunks/c*.mp4 | sed "s#^out/chunks/#file '#; s#\$#'#" > out/chunks/list.t
 mkdir -p livraison
 ffmpeg -y -hide_banner -loglevel error -f concat -safe 0 -i out/chunks/list.txt -i out/setila-sound.wav \
   -map 0:v -map 1:a -c:v libx264 -preset slow -crf 17 -pix_fmt yuv420p -profile:v high -r 30 -movflags +faststart \
-  -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 256k -ar 48000 -shortest livraison/SETILA-STUDIO_9x16_1080x1920_30fps.mp4
+  -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 256k -ar 48000 -shortest livraison/SETILA-STUDIO_50s_9x16_1080x1920_30fps.mp4
 echo RENDU_OK

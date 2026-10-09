@@ -621,6 +621,22 @@ add('final', 12, (g, lt) => {
 
 }, [{ t: 0.2, type: 'logo', gain: 1.0 }, { t: 1.0, type: 'chime', gain: 0.4 }, { t: 3.0, type: 'pop', gain: 0.8 }, { t: 3.5, type: 'type', dur: HANDLE.length * 0.055, gain: 0.35 }, { t: 5.0, type: 'soft', gain: 0.5 }, { t: 5.5, type: 'shimmer', gain: 0.5 }, { t: 10.6, type: 'end', gain: 0.8 }]);
 
+// ------------------------------------------------------------------ VERSION COURTE (~50 s) : sélection + accélération
+const SHORT = { ouverture: 5.2, accroche: 2.8, extensions: 3.6, rehaussement: 3, browlift: 3, strass: 3.5, papouilles: 3,
+  formations: 3, 'f-extensions': 2.4, 'f-browlift': 2.4, 'f-blanchiment': 2.4, 'avis-titre': 1.8,
+  'avis-12': 2.6, 'avis-9': 3, 'avis-10': 2.2, final: 6 };
+{
+  const keep = S.filter((sc) => SHORT[sc.id]);
+  S.length = 0;
+  keep.forEach((sc) => {
+    const orig = sc.dur, f = orig / SHORT[sc.id], draw = sc.draw;
+    sc.dur = SHORT[sc.id];
+    sc.draw = (g, lt) => draw(g, lt * f, orig);
+    sc.cues = sc.cues.map((c) => ({ ...c, t: c.t / f, dur: c.dur ? c.dur / f : c.dur }));
+    S.push(sc);
+  });
+}
+
 // ------------------------------------------------------------------ horloge + transitions + post-production
 let acc = 0;
 for (const s of S) { s.start = acc; acc += s.dur; }
