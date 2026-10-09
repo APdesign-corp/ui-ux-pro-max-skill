@@ -54,9 +54,21 @@
 //  particles(g, W, H, t, {kind:'crumbs'|'sparks'|'embers', k, seed, count, area, burst, size})
 //      Miettes (sur f.ui), étincelles et braises (sur f.fx). Sans burst : flux ambiant en boucle.
 //      burst = {x, y, t0, power} : explosion à t0 depuis (x, y) avec gravité (crunch, impact).
-//  photo(g, im, cx, cy, {h, w, scale, rot, alpha, p, shadow, glow, glowColor, anchor})
+//  photo(g, im, cx, cy, {h, w, scale, rot, alpha, p, shadow, glow, glowColor, anchor, crisp})
 //      Dessine une photo découpée du menu (world.images[id]) : pop-in (p), rim-light néon (glow),
 //      ombre de contact (shadow). anchor 'center' | 'bottom'. Retourne {x, y, w, h}.
+//      Une petite photo agrandie > 1,35× passe automatiquement par crispImage (crisp:false pour couper).
+//  crispImage(im, amount) → canvas 2× net (cache) d'une photo du menu, pour drawImage direct.
+//  neonFlicker(t, seed, amount) → 0..1 : grésillement déterministe d'un néon (multiplicateur).
+//  paintWipe(g, W, H, p, {color, seed, angle, dir, n})
+//      TRANSITION : bandes de pinceau qui balaient tout l'écran en alternance (p = 1 : écran plein
+//      de la couleur). Pour RÉVÉLER la scène suivante : paintWipe(g, W, H, 1 - q, {dir: -1}).
+//  splatCover(g, W, H, p, {x, y, color, seed})
+//      TRANSITION : éclaboussure géante (+ 2 secondaires) qui envahit l'écran (p = 1 : plein).
+//
+//  Graines : toute valeur entière ; les textures (pinceau, fumée) sont limitées à quelques sprites
+//  en cache, la graine fait varier la forme (retournement, front, gouttes) sans nouveau calcul.
+//  Coût : 1re image ~0,3-0,6 s (création des sprites, briques), ensuite < 3 ms par appel.
 // ============================================================================
 
 import { E, clamp, lerp, seg, rng, rgba, noise1, hash, TAU } from './anim.js';
@@ -184,15 +196,17 @@ function brushSprite(seed) {
   });
 }
 
+const brushIdx = (seed) => ((Math.abs(Math.round(seed)) % 6) + 6) % 6;
 export function brushStroke(g, x, y, w, h, o = {}) {
   const p = clamp(o.p ?? 1);
   if (p <= 0 || w <= 1 || h <= 0.5) return;
   const seed = o.seed ?? 1;
-  const spr = tinted(brushSprite(seed), o.color || P.red, `brush${seed}`);
+  const bi = brushIdx(seed);   // 6 sprites en cache au plus ; les autres graines = retournement + front différent
+  const spr = tinted(brushSprite(bi), o.color || P.red, `brush${bi}`);
   g.save();
   g.translate(x, y);
   g.rotate(o.angle || 0);
-  if ((o.dir ?? 1) < 0) g.scale(-1, 1);
+  g.scale((o.dir ?? 1) < 0 ? -1 : 1, Math.floor(Math.abs(seed) / 6) % 2 ? -1 : 1);
   g.globalAlpha *= o.alpha ?? 1;
   const x0 = o.anchor === 'start' ? 0 : -w / 2;
   // le front du pinceau est irrégulier : chaque bande de poils avance un peu différemment
@@ -253,6 +267,7 @@ export function splatter(g, x, y, r, o = {}) {
   const seed = o.seed ?? 1;
   const G = splatGeom(seed);
   const col = o.color || P.red;
+  const edge = o.edge || (col === P.red || col === P.neon ? P.deep : col);
   const burst = E.outExpo(seg(p, 0, 0.3));
   const grow = E.outBack(seg(p, 0, 0.22), 2.2);
   const dripsK = o.drips ?? 1;
@@ -262,7 +277,7 @@ export function splatter(g, x, y, r, o = {}) {
   const grad = g.createRadialGradient(-r * 0.15, -r * 0.2, r * 0.05, 0, 0, r * 1.2);
   grad.addColorStop(0, col);
   grad.addColorStop(0.55, col);
-  grad.addColorStop(1, rgba(P.deep, 1));
+  grad.addColorStop(1, edge);
   g.fillStyle = grad;
   // coulures (dessinées avant la tache pour partir de son bord)
   if (dripsK > 0) {
@@ -331,6 +346,10 @@ export function splatter(g, x, y, r, o = {}) {
 //  TITRE BRUSH / GRAFFITI
 // ============================================================================
 export function brushTitle(g, text, x, y, o = {}) {
+  g.save();
+  try { return brushTitleIn(g, String(text), x, y, o); } finally { g.restore(); }
+}
+function brushTitleIn(g, text, x, y, o) {
   const font = o.font || 'Permanent Marker';
   let size = o.size || 120;
   const tr = (o.tracking ?? 0) * size;
@@ -439,6 +458,10 @@ export function brushTitle(g, text, x, y, o = {}) {
 //  ÉTIQUETTE PRIX
 // ============================================================================
 export function priceTag(g, x, y, o = {}) {
+  g.save();
+  try { return priceTagIn(g, x, y, o); } finally { g.restore(); }
+}
+function priceTagIn(g, x, y, o) {
   const price = o.price ?? '';
   const size = o.size || 140;
   const p = clamp(o.p ?? 1);
@@ -1106,11 +1129,104 @@ export function particles(g, W, H, t, o = {}) {
 }
 
 // ============================================================================
+//  TRANSITIONS PRÊTES À L'EMPLOI (sur f.ui, au-dessus de tout)
+// ============================================================================
+export function paintWipe(g, W, H, p, o = {}) {
+  p = clamp(p);
+  if (p <= 0) return;
+  const col = o.color || P.red;
+  const n = o.n ?? (H > W ? 8 : 6);
+  const ang = o.angle ?? -0.09;
+  const seed = o.seed ?? 3;
+  const sa = Math.abs(Math.sin(ang));
+  const Wc = W + H * sa + 0.25 * Math.min(W, H), Hc = H + W * sa + 0.06 * Math.min(W, H);
+  const step = Hc / n, bh = step * 1.75, len = Wc * 1.3;
+  g.save();
+  g.translate(W / 2, H / 2);
+  g.rotate(ang);
+  for (let i = 0; i < n; i++) {
+    const d = (i / n) * 0.34 + 0.08 * hash(i * 3.1 + seed);
+    const q = E.outCubic(clamp((p - d) / 0.56));
+    if (q <= 0) continue;
+    const alt = (o.dir ?? 1) * (i % 2 ? -1 : 1);
+    const y = -Hc / 2 + (i + 0.5) * step + (hash(i * 7.7 + seed) - 0.5) * step * 0.3;
+    brushStroke(g, alt > 0 ? -Wc / 2 - len * 0.12 : Wc / 2 + len * 0.12, y, len, bh,
+      { p: q, seed: seed + i, color: col, anchor: 'start', dir: alt, angle: (hash(i + seed * 2.3) - 0.5) * 0.06 });
+  }
+  g.restore();
+  const fill = seg(p, 0.8, 1);
+  if (fill > 0) { g.save(); g.globalAlpha *= fill; g.fillStyle = col; g.fillRect(0, 0, W, H); g.restore(); }
+}
+
+export function splatCover(g, W, H, p, o = {}) {
+  p = clamp(p);
+  if (p <= 0) return;
+  const col = o.color || P.red;
+  const seed = o.seed ?? 7;
+  const x = o.x ?? W / 2, y = o.y ?? H / 2;
+  const diag = Math.hypot(W, H);
+  // deux éclaboussures secondaires (coins opposés) qui partent un peu après
+  const r2 = rng(seed * 31 + 5);
+  for (let k = 0; k < 2; k++) {
+    const sx = (k ? 0.85 : 0.12) * W + (r2() - 0.5) * W * 0.1, sy = (k ? 0.2 : 0.82) * H + (r2() - 0.5) * H * 0.1;
+    const q = seg(p, 0.12 + k * 0.08, 0.9);
+    if (q > 0) splatter(g, sx, sy, diag * (0.08 + 0.4 * E.inCubic(q)), { seed: seed + 11 + k, p: clamp(q * 2.4), color: col, drips: 0.7 });
+  }
+  splatter(g, x, y, diag * (0.1 + 0.62 * E.inCubic(p)), { seed, p: clamp(p * 2.2), color: col, drips: 0.8 });
+  const fill = seg(p, 0.84, 1);
+  if (fill > 0) { g.save(); g.globalAlpha *= fill; g.fillStyle = col; g.fillRect(0, 0, W, H); g.restore(); }
+}
+
+// ============================================================================
 //  PHOTO DÉCOUPÉE DU MENU
 // ============================================================================
+// Version 2× nette d'une petite photo du menu (les captures sont en 1170 px de large : un burger fait
+// ~270 px). Calculée UNE fois par image (cache) : agrandissement lissé « high » puis masque flou
+// (unsharp) pondéré par l'alpha (pas de liseré sombre). Utilisée automatiquement par photo().
+export function crispImage(im, amount = 0.7) {
+  const img = im && (im.img || im);
+  if (!img) return null;
+  const key = `crisp|${img.src || im.file || ''}|${amount}`;
+  return cached(key, () => {
+    const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height;
+    const w = iw * 2, h = ih * 2;
+    const c = mkCanvas(w, h);
+    const g = ctx2d(c);
+    g.imageSmoothingEnabled = true;
+    g.imageSmoothingQuality = 'high';
+    g.drawImage(img, 0, 0, w, h);
+    const id = g.getImageData(0, 0, w, h);
+    const d = id.data, n = w * h;
+    // flou [1 2 1]² pondéré par l'alpha (séparable)
+    const pr = new Float32Array(n * 4), tmp = new Float32Array(n * 4);
+    for (let i = 0; i < n; i++) {
+      const a = d[i * 4 + 3] / 255;
+      pr[i * 4] = d[i * 4] * a; pr[i * 4 + 1] = d[i * 4 + 1] * a; pr[i * 4 + 2] = d[i * 4 + 2] * a; pr[i * 4 + 3] = a;
+    }
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const i = (y * w + x) * 4, l = (y * w + Math.max(0, x - 1)) * 4, r = (y * w + Math.min(w - 1, x + 1)) * 4;
+      for (let k = 0; k < 4; k++) tmp[i + k] = (pr[l + k] + 2 * pr[i + k] + pr[r + k]) * 0.25;
+    }
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const i = (y * w + x) * 4;
+      const a = d[i + 3];
+      if (a < 8) continue;
+      const t0 = (Math.max(0, y - 1) * w + x) * 4, b0 = (Math.min(h - 1, y + 1) * w + x) * 4;
+      const ba = (tmp[t0 + 3] + 2 * tmp[i + 3] + tmp[b0 + 3]) * 0.25;
+      if (ba < 1e-3) continue;
+      for (let k = 0; k < 3; k++) {
+        const bl = (tmp[t0 + k] + 2 * tmp[i + k] + tmp[b0 + k]) * 0.25 / ba;
+        d[i + k] = clamp(d[i + k] + amount * (d[i + k] - bl), 0, 255);
+      }
+    }
+    g.putImageData(id, 0, 0);
+    return c;
+  });
+}
+
 export function photo(g, im, cx, cy, o = {}) {
   if (!im) return null;
-  const img = im.img || im;
+  let img = im.img || im;
   const iw = im.w || img.naturalWidth || img.width, ih = im.h || img.naturalHeight || img.height;
   if (!iw || !ih) return null;
   let h = o.h ?? (o.w ? (o.w * ih) / iw : ih);
@@ -1126,19 +1242,26 @@ export function photo(g, im, cx, cy, o = {}) {
   g.scale(sc, sc);
   g.globalAlpha *= (o.alpha ?? 1) * clamp(p * 3);
   if (o.shadow) {
-    const sh = g.createRadialGradient(0, h * 0.48, 0, 0, h * 0.48, w * 0.5);
-    sh.addColorStop(0, `rgba(0,0,0,${0.75 * o.shadow})`);
-    sh.addColorStop(1, 'rgba(0,0,0,0)');
     g.save();
+    g.translate(0, h * 0.46);
     g.scale(1, 0.16);
+    const sh = g.createRadialGradient(0, 0, 0, 0, 0, w * 0.55);
+    sh.addColorStop(0, `rgba(0,0,0,${Math.min(1, 0.8 * o.shadow)})`);
+    sh.addColorStop(0.6, `rgba(0,0,0,${Math.min(1, 0.35 * o.shadow)})`);
+    sh.addColorStop(1, 'rgba(0,0,0,0)');
     g.fillStyle = sh;
-    g.fillRect(-w * 0.5, h * 0.48 / 0.16 - w * 0.5, w, w);
+    g.fillRect(-w * 0.55, -w * 0.55, w * 1.1, w * 1.1);
     g.restore();
   }
   if (o.glow) {
     g.shadowColor = rgba(o.glowColor || P.neon, Math.min(1, 0.9 * o.glow));
     g.shadowBlur = Math.max(w, h) * 0.06 * o.glow;
   }
+  // petite photo très agrandie → version 2× nette (en cache)
+  const nat = img.naturalWidth || img.width;
+  if (o.crisp !== false && nat && nat <= 760 && (w * sc) / nat > 1.35) img = crispImage(im) || img;
+  g.imageSmoothingEnabled = true;
+  g.imageSmoothingQuality = 'high';
   g.drawImage(img, -w / 2 + ax, -h / 2, w, h);
   g.restore();
   return { x: cx - (w * sc) / 2, y: cy + ay - (h * sc) / 2, w: w * sc, h: h * sc };

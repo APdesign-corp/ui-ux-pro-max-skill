@@ -40,16 +40,17 @@
  },
  "crousty": {
   "file": "crousty.png",
-  "w": 670,
-  "h": 531,
+  "w": 668,
+  "h": 529,
   "src": "menu-1",
   "label": "Crousty Binks : barquette noire O'BINKS, riz, tenders, sauces",
   "box": [
-   208,
-   476,
-   670,
-   531
-  ]
+   209,
+   477,
+   668,
+   529
+  ],
+  "name": "CROUSTY BINKS"
  },
  "coca_cherry": {
   "file": "coca_cherry.png",
@@ -63,7 +64,8 @@
    198,
    408
   ],
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "Coca-Cola cherry"
  },
  "tacos_nuggets": {
   "file": "tacos_nuggets.png",
@@ -76,7 +78,8 @@
    1566,
    249,
    252
-  ]
+  ],
+  "name": "NUGGETS"
  },
  "tacos_tenders": {
   "file": "tacos_tenders.png",
@@ -89,7 +92,8 @@
    1562,
    266,
    258
-  ]
+  ],
+  "name": "TENDERS"
  },
  "tacos_cordonbleu": {
   "file": "tacos_cordonbleu.png",
@@ -102,7 +106,8 @@
    1562,
    263,
    258
-  ]
+  ],
+  "name": "CORDON BLEU"
  },
  "tacos_tandoori": {
   "file": "tacos_tandoori.png",
@@ -115,7 +120,8 @@
    1562,
    268,
    258
-  ]
+  ],
+  "name": "POULET MARINÉ TANDOORI"
  },
  "sauce_fromagere": {
   "file": "sauce_fromagere.png",
@@ -128,7 +134,8 @@
    2057,
    184,
    143
-  ]
+  ],
+  "name": "SAUCE FROMAGÈRE"
  },
  "sauces_tacos": {
   "file": "sauces_tacos.png",
@@ -141,7 +148,8 @@
    2102,
    532,
    91
-  ]
+  ],
+  "name": "CHOISIS TA SAUCE"
  },
  "supp_piquante": {
   "file": "supp_piquante.png",
@@ -154,7 +162,8 @@
    630,
    70,
    63
-  ]
+  ],
+  "name": "SAUCE PIQUANTE"
  },
  "supp_creme": {
   "file": "supp_creme.png",
@@ -167,7 +176,8 @@
    820,
    82,
    67
-  ]
+  ],
+  "name": "SAUCE CRÈME"
  },
  "supp_tenders": {
   "file": "supp_tenders.png",
@@ -180,7 +190,8 @@
    997,
    120,
    101
-  ]
+  ],
+  "name": "TENDERS"
  },
  "sandwich_ocheesy": {
   "file": "sandwich_ocheesy.png",
@@ -195,7 +206,8 @@
    141
   ],
   "recipe": "O'CHEESY",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "O'CHEESY"
  },
  "sandwich_doublesmash": {
   "file": "sandwich_doublesmash.png",
@@ -210,7 +222,8 @@
    127
   ],
   "recipe": "DOUBLE SMASH",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "DOUBLE SMASH"
  },
  "sandwich_raclette": {
   "file": "sandwich_raclette.png",
@@ -225,7 +238,8 @@
    131
   ],
   "recipe": "RACLETTE",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "RACLETTE"
  },
  "sandwich_ocrispy": {
   "file": "sandwich_ocrispy.png",
@@ -240,7 +254,8 @@
    146
   ],
   "recipe": "O'CRISPY",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "O'CRISPY"
  },
  "sandwich_opepper": {
   "file": "sandwich_opepper.png",
@@ -255,7 +270,8 @@
    140
   ],
   "recipe": "O'PEPPER",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "O'PEPPER"
  },
  "sandwich_chevremiel": {
   "file": "sandwich_chevremiel.png",
@@ -270,7 +286,8 @@
    133
   ],
   "recipe": "CHÈVRE MIEL",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "CHÈVRE MIEL"
  },
  "sandwich_barbecue": {
   "file": "sandwich_barbecue.png",
@@ -285,7 +302,8 @@
    161
   ],
   "recipe": "BARBECUE",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "BARBECUE"
  },
  "sandwich_bigbinks": {
   "file": "sandwich_bigbinks.png",
@@ -300,7 +318,8 @@
    111
   ],
   "recipe": "BIG BINKS",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "BIG BINKS"
  },
  "burger_ocheesy": {
   "file": "burger_ocheesy.png",
@@ -315,7 +334,8 @@
    135
   ],
   "recipe": "O'CHEESY",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "O'CHEESY"
  },
  "burger_doublesmash": {
   "file": "burger_doublesmash.png",
@@ -330,7 +350,8 @@
    104
   ],
   "recipe": "DOUBLE SMASH",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "DOUBLE SMASH"
  },
  "burger_raclette": {
   "file": "burger_raclette.png",
@@ -345,7 +366,8 @@
    106
   ],
   "recipe": "RACLETTE",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "RACLETTE"
  },
  "burger_ocrispy": {
   "file": "burger_ocrispy.png",
@@ -360,7 +382,8 @@
    119
   ],
   "recipe": "O'CRISPY",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "O'CRISPY"
  },
  "burger_opepper": {
   "file": "burger_opepper.png",
@@ -375,7 +398,8 @@
    121
   ],
   "recipe": "O'PEPPER",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "O'PEPPER"
  },
  "burger_chevremiel": {
   "file": "burger_chevremiel.png",
@@ -390,7 +414,8 @@
    119
   ],
   "recipe": "CHÈVRE MIEL",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "CHÈVRE MIEL"
  },
  "burger_barbecue": {
   "file": "burger_barbecue.png",
@@ -405,7 +430,8 @@
    157
   ],
   "recipe": "BARBECUE",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "BARBECUE"
  },
  "burger_bigbinks": {
   "file": "burger_bigbinks.png",
@@ -420,7 +446,8 @@
    158
   ],
   "recipe": "BIG BINKS",
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "BIG BINKS"
  },
  "kapsalone": {
   "file": "kapsalone.png",
@@ -433,7 +460,8 @@
    562,
    582,
    1404
-  ]
+  ],
+  "name": "KAPSALONE"
  },
  "kapsalone_salade": {
   "file": "kapsalone_salade.png",
@@ -447,7 +475,8 @@
    560,
    282
   ],
-  "layer": true
+  "layer": true,
+  "name": "salade"
  },
  "kapsalone_oignon": {
   "file": "kapsalone_oignon.png",
@@ -461,7 +490,8 @@
    535,
    158
   ],
-  "layer": true
+  "layer": true,
+  "name": "oignon rouge"
  },
  "kapsalone_tomate": {
   "file": "kapsalone_tomate.png",
@@ -475,7 +505,8 @@
    555,
    194
   ],
-  "layer": true
+  "layer": true,
+  "name": "tomate"
  },
  "kapsalone_cheddar": {
   "file": "kapsalone_cheddar.png",
@@ -489,7 +520,8 @@
    566,
    150
   ],
-  "layer": true
+  "layer": true,
+  "name": "cheddar fondu"
  },
  "kapsalone_viande": {
   "file": "kapsalone_viande.png",
@@ -503,7 +535,8 @@
    575,
    328
   ],
-  "layer": true
+  "layer": true,
+  "name": "viande"
  },
  "kapsalone_frites": {
   "file": "kapsalone_frites.png",
@@ -517,7 +550,8 @@
    582,
    364
   ],
-  "layer": true
+  "layer": true,
+  "name": "frites"
  },
  "hotdog": {
   "file": "hotdog.png",
@@ -530,7 +564,8 @@
    835,
    1161,
    873
-  ]
+  ],
+  "name": "HOT DOG"
  },
  "hotdog_front": {
   "file": "hotdog_front.png",
@@ -543,7 +578,8 @@
    1037,
    866,
    671
-  ]
+  ],
+  "name": "HOT DOG"
  },
  "hotdog_back": {
   "file": "hotdog_back.png",
@@ -556,7 +592,8 @@
    835,
    685,
    467
-  ]
+  ],
+  "name": "HOT DOG"
  },
  "hotdog_ing_1": {
   "file": "hotdog_ing_1.png",
@@ -570,7 +607,8 @@
    216,
    225
   ],
-  "ingredient": "KETCHUP MOUTARDE MIEL"
+  "ingredient": "KETCHUP MOUTARDE MIEL",
+  "name": "KETCHUP MOUTARDE MIEL"
  },
  "hotdog_ing_2": {
   "file": "hotdog_ing_2.png",
@@ -584,7 +622,8 @@
    217,
    220
   ],
-  "ingredient": "SAUCISSE DE POULET"
+  "ingredient": "SAUCISSE DE POULET",
+  "name": "SAUCISSE DE POULET"
  },
  "hotdog_ing_3": {
   "file": "hotdog_ing_3.png",
@@ -598,7 +637,8 @@
    216,
    220
   ],
-  "ingredient": "OIGNON CRISPY"
+  "ingredient": "OIGNON CRISPY",
+  "name": "OIGNON CRISPY"
  },
  "hotdog_ing_4": {
   "file": "hotdog_ing_4.png",
@@ -612,7 +652,8 @@
    216,
    220
   ],
-  "ingredient": "PERSIL EN DÉCORATION"
+  "ingredient": "PERSIL EN DÉCORATION",
+  "name": "PERSIL EN DÉCORATION"
  },
  "hotdog_ing_5": {
   "file": "hotdog_ing_5.png",
@@ -626,7 +667,8 @@
    216,
    223
   ],
-  "ingredient": "CORNICHON"
+  "ingredient": "CORNICHON",
+  "name": "CORNICHON"
  },
  "texmex_tenders": {
   "file": "texmex_tenders.png",
@@ -640,7 +682,8 @@
    527,
    173
   ],
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "TENDERS"
  },
  "texmex_nuggets": {
   "file": "texmex_nuggets.png",
@@ -654,7 +697,8 @@
    450,
    166
   ],
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "NUGGETS"
  },
  "texmex_wings": {
   "file": "texmex_wings.png",
@@ -668,7 +712,8 @@
    471,
    157
   ],
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "WINGS"
  },
  "texmex_mozza": {
   "file": "texmex_mozza.png",
@@ -681,7 +726,8 @@
    824,
    402,
    243
-  ]
+  ],
+  "name": "MOZZA STICK"
  },
  "texmex_camembert": {
   "file": "texmex_camembert.png",
@@ -694,7 +740,8 @@
    1118,
    372,
    229
-  ]
+  ],
+  "name": "CROQ CAMEMBERT"
  },
  "texmex_jalapenos": {
   "file": "texmex_jalapenos.png",
@@ -707,7 +754,8 @@
    1115,
    327,
    226
-  ]
+  ],
+  "name": "JALAPENOS CRÈME"
  },
  "frites_cheddar": {
   "file": "frites_cheddar.png",
@@ -721,7 +769,8 @@
    366,
    135
   ],
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "FRITES CHEDDAR BACON"
  },
  "frites_gaufrette": {
   "file": "frites_gaufrette.png",
@@ -735,7 +784,8 @@
    335,
    138
   ],
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "FRITES GAUFRETTE"
  },
  "can_coca": {
   "file": "can_coca.png",
@@ -748,7 +798,8 @@
    1453,
    137,
    301
-  ]
+  ],
+  "name": "Coca-Cola cherry"
  },
  "can_oasis": {
   "file": "can_oasis.png",
@@ -762,7 +813,8 @@
    130,
    242
   ],
-  "fadeBottom": true
+  "fadeBottom": true,
+  "name": "Oasis tropical"
  },
  "can_lipton": {
   "file": "can_lipton.png",
@@ -775,150 +827,162 @@
    1456,
    134,
    300
-  ]
+  ],
+  "name": "Lipton pêche"
  },
  "sauce_brazil": {
   "file": "sauce_brazil.png",
   "w": 182,
   "h": 81,
   "src": "menu-3",
-  "label": "Pot de sauce brazil",
+  "label": "Pot de sauce Brazil",
   "box": [
    54,
    1883,
    182,
    81
-  ]
+  ],
+  "name": "Brazil"
  },
  "sauce_toscane": {
   "file": "sauce_toscane.png",
   "w": 182,
   "h": 81,
   "src": "menu-3",
-  "label": "Pot de sauce toscane",
+  "label": "Pot de sauce Toscane",
   "box": [
    271,
    1883,
    182,
    81
-  ]
+  ],
+  "name": "Toscane"
  },
  "sauce_cocktail": {
   "file": "sauce_cocktail.png",
   "w": 182,
   "h": 81,
   "src": "menu-3",
-  "label": "Pot de sauce cocktail",
+  "label": "Pot de sauce Cocktail",
   "box": [
    495,
    1883,
    182,
    81
-  ]
+  ],
+  "name": "Cocktail"
  },
  "sauce_mayonnaise": {
   "file": "sauce_mayonnaise.png",
   "w": 182,
   "h": 81,
   "src": "menu-3",
-  "label": "Pot de sauce mayonnaise",
+  "label": "Pot de sauce Mayonnaise",
   "box": [
    713,
    1883,
    182,
    81
-  ]
+  ],
+  "name": "Mayonnaise"
  },
  "sauce_ketchup": {
   "file": "sauce_ketchup.png",
   "w": 182,
   "h": 81,
   "src": "menu-3",
-  "label": "Pot de sauce ketchup",
+  "label": "Pot de sauce Ketchup",
   "box": [
    929,
    1883,
    182,
    81
-  ]
+  ],
+  "name": "Ketchup"
  },
  "sauce_tartare": {
   "file": "sauce_tartare.png",
   "w": 182,
   "h": 90,
   "src": "menu-3",
-  "label": "Pot de sauce tartare",
+  "label": "Pot de sauce Tartare",
   "box": [
    54,
    2055,
    182,
    90
-  ]
+  ],
+  "name": "Tartare"
  },
  "sauce_algerienne": {
   "file": "sauce_algerienne.png",
   "w": 182,
   "h": 90,
   "src": "menu-3",
-  "label": "Pot de sauce algerienne",
+  "label": "Pot de sauce Algérienne",
   "box": [
    273,
    2055,
    182,
    90
-  ]
+  ],
+  "name": "Algérienne"
  },
  "sauce_andalouse": {
   "file": "sauce_andalouse.png",
   "w": 182,
   "h": 90,
   "src": "menu-3",
-  "label": "Pot de sauce andalouse",
+  "label": "Pot de sauce Andalouse",
   "box": [
    495,
    2055,
    182,
    90
-  ]
+  ],
+  "name": "Andalouse"
  },
  "sauce_samourai": {
   "file": "sauce_samourai.png",
   "w": 182,
   "h": 90,
   "src": "menu-3",
-  "label": "Pot de sauce samourai",
+  "label": "Pot de sauce Samouraï",
   "box": [
    714,
    2055,
    182,
    90
-  ]
+  ],
+  "name": "Samouraï"
  },
  "sauce_americaine": {
   "file": "sauce_americaine.png",
   "w": 182,
   "h": 90,
   "src": "menu-3",
-  "label": "Pot de sauce americaine",
+  "label": "Pot de sauce Américaine",
   "box": [
    931,
    2055,
    182,
    90
-  ]
+  ],
+  "name": "Américaine"
  },
  "tiramisu": {
   "file": "tiramisu.png",
-  "w": 798,
-  "h": 585,
+  "w": 790,
+  "h": 584,
   "src": "menu-2",
   "label": "Tiramisu en verrines (Oreo, Bueno, Raffaello, Spéculoos) + garnitures",
   "box": [
-   372,
+   380,
    276,
-   798,
-   585
-  ]
+   790,
+   584
+  ],
+  "name": "TIRAMISU"
  },
  "milkshake_fraisebanane": {
   "file": "milkshake_fraisebanane.png",
@@ -932,7 +996,8 @@
    205,
    362
   ],
-  "flavor": "Fraise banane"
+  "flavor": "Fraise banane",
+  "name": "Fraise banane"
  },
  "milkshake_oreo": {
   "file": "milkshake_oreo.png",
@@ -946,7 +1011,8 @@
    163,
    308
   ],
-  "flavor": "Oreo"
+  "flavor": "Oreo",
+  "name": "Oreo"
  },
  "milkshake_bueno": {
   "file": "milkshake_bueno.png",
@@ -960,7 +1026,8 @@
    169,
    332
   ],
-  "flavor": "Bueno"
+  "flavor": "Bueno",
+  "name": "Bueno"
  },
  "milkshake_speculoos": {
   "file": "milkshake_speculoos.png",
@@ -974,7 +1041,8 @@
    233,
    372
   ],
-  "flavor": "Spéculoos"
+  "flavor": "Spéculoos",
+  "name": "Spéculoos"
  },
  "milkshake_snickers": {
   "file": "milkshake_snickers.png",
@@ -988,7 +1056,8 @@
    177,
    319
   ],
-  "flavor": "Snickers"
+  "flavor": "Snickers",
+  "name": "Snickers"
  },
  "milkshake_pistache": {
   "file": "milkshake_pistache.png",
@@ -1002,7 +1071,8 @@
    188,
    321
   ],
-  "flavor": "Pistache"
+  "flavor": "Pistache",
+  "name": "Pistache"
  },
  "milkshake_raffaello": {
   "file": "milkshake_raffaello.png",
@@ -1016,7 +1086,8 @@
    171,
    367
   ],
-  "flavor": "Raffaello"
+  "flavor": "Raffaello",
+  "name": "Raffaello"
  },
  "crepes": {
   "file": "crepes.png",
@@ -1029,20 +1100,22 @@
    1686,
    403,
    443
-  ]
+  ],
+  "name": "CRÊPES"
  },
  "gaufre": {
   "file": "gaufre.png",
-  "w": 506,
-  "h": 419,
+  "w": 504,
+  "h": 414,
   "src": "menu-2",
   "label": "Gaufres (dont gaufre sur bâtonnet)",
   "box": [
-   664,
-   1781,
-   506,
-   419
-  ]
+   665,
+   1782,
+   504,
+   414
+  ],
+  "name": "GAUFRES"
  },
  "mojito_fraise": {
   "file": "mojito_fraise.png",
@@ -1056,7 +1129,8 @@
    388,
    448
   ],
-  "flavor": "Fraise"
+  "flavor": "Fraise",
+  "name": "Fraise"
  },
  "mojito_violette": {
   "file": "mojito_violette.png",
@@ -1070,7 +1144,8 @@
    336,
    462
   ],
-  "flavor": "Violette"
+  "flavor": "Violette",
+  "name": "Violette"
  },
  "mojito_original": {
   "file": "mojito_original.png",
@@ -1084,7 +1159,8 @@
    412,
    440
   ],
-  "flavor": "Original"
+  "flavor": "Original",
+  "name": "Original"
  },
  "mojito_pasteque": {
   "file": "mojito_pasteque.png",
@@ -1098,7 +1174,8 @@
    482,
    455
   ],
-  "flavor": "Pastèque"
+  "flavor": "Pastèque",
+  "name": "Pastèque"
  },
  "mojito_bubblegum": {
   "file": "mojito_bubblegum.png",
@@ -1112,7 +1189,8 @@
    241,
    341
   ],
-  "flavor": "Bubble gum"
+  "flavor": "Bubble gum",
+  "name": "Bubble gum"
  },
  "lampadaire": {
   "file": "lampadaire.png",
@@ -1129,15 +1207,16 @@
  },
  "livraison": {
   "file": "livraison.png",
-  "w": 1168,
-  "h": 1271,
+  "w": 1165,
+  "h": 1255,
   "src": "menu-9",
   "label": "Plateau livraison : boîte (riz/poulet), frites, milkshake caramel, sauce",
   "box": [
-   2,
+   5,
    858,
-   1168,
-   1271
-  ]
+   1165,
+   1255
+  ],
+  "name": "LIVRAISON PARTOUT"
  }
 }

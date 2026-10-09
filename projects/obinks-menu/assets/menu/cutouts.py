@@ -14,6 +14,7 @@ Principe de chaque découpe (coordonnées en pixels de la capture source) :
              'lum'   = luminance           (fond noir texturé)
              'g'     = 0.15R+0.7G+0.15B    (fond noir + lueurs rouges : le rouge néon disparaît)
              'white' = écart au blanc      (mojitos sur carte blanche)
+             'red'   = anti-néon rouge     (en clé secondaire key2 : retire peinture/néon rouges du menu)
         lo/hi  : seuils de la rampe (smoothstep) ;
         fill   : bouche les trous intérieurs (zones sombres DANS l'aliment : viande, chocolat…)
                  jusqu'à `fillmax` px d'aire ;
@@ -66,7 +67,7 @@ add('crousty', 1, "Crousty Binks : barquette noire O'BINKS, riz, tenders, sauces
           (830, 975), (800, 996), (560, 1003), (430, 996), (412, 960), (330, 955), (290, 942), (262, 915), (225, 860),
           (212, 780), (218, 700), (240, 620), (262, 570), (300, 525))],
     cut=[poly((250, 430), (340, 430), (340, 505), (318, 548), (280, 560), (250, 560))],
-    key=dict(kind='max', lo=16, hi=48, band=12), feather=2.5)
+    key=dict(kind='max', lo=16, hi=48, band=12, key2=dict(kind='red', lo=30, hi=80)), feather=2.5, despeckle=200)
 add('coca_cherry', 1, 'Canette Coca-Cola cherry (boisson du Crousty Binks)',
     [poly((48, 500), (56, 480), (140, 472), (222, 478), (232, 500), (234, 875), (140, 880), (46, 875))],
     feather=1.8, fade=(874, 30))
@@ -186,15 +187,17 @@ add('can_oasis', 3, 'Canette Oasis tropical (bas en fondu)',
     [poly((905, 1480), (915, 1461), (965, 1454), (1014, 1461), (1023, 1480), (1023, 1692), (905, 1692))], feather=1.8, fade=(1690, 24))
 add('can_lipton', 3, 'Canette Lipton pêche (ice tea)',
     [poly((1028, 1490), (1038, 1466), (1090, 1460), (1140, 1468), (1150, 1490), (1150, 1720), (1140, 1744), (1090, 1752), (1053, 1745), (1050, 1700), (1028, 1692))], feather=1.8)
+SAUCE_LABEL = {'algerienne': 'Algérienne', 'samourai': 'Samouraï', 'americaine': 'Américaine'}
 for name, cx, row in [('brazil', 145, 1), ('toscane', 362, 1), ('cocktail', 586, 1), ('mayonnaise', 804, 1), ('ketchup', 1020, 1),
                       ('tartare', 145, 2), ('algerienne', 364, 2), ('andalouse', 586, 2), ('samourai', 805, 2), ('americaine', 1022, 2)]:
     top, bot = (1889, 1958) if row == 1 else (2061, 2139)
-    add(f'sauce_{name}', 3, f'Pot de sauce {name}', [pot(cx, top, bot)], feather=2)
+    add(f'sauce_{name}', 3, f'Pot de sauce {SAUCE_LABEL.get(name, name.capitalize())}', [pot(cx, top, bot)], feather=2)
 
 # --- Capture 2 : desserts
 add('tiramisu', 2, 'Tiramisu en verrines (Oreo, Bueno, Raffaello, Spéculoos) + garnitures',
     [poly((565, 400), (620, 375), (700, 385), (760, 330), (800, 285), (880, 278), (960, 298), (990, 320), (1005, 395), (1080, 412), (1130, 440), (1168, 470), (1168, 780), (1100, 800), (1060, 830), (950, 852), (800, 856), (700, 852), (560, 842), (470, 832), (400, 782), (378, 720), (378, 620), (420, 572), (520, 560), (560, 520))],
-    key=DESSERT_KEY)
+    key=dict(DESSERT_KEY, key2=dict(kind='red', lo=30, hi=80)), despeckle=60,
+    solid=[ell(651, 432, 62, 60), ell(446, 606, 58, 28), ell(445, 676, 46, 28)])
 MS = {
     'fraisebanane': ('Fraise banane', [(30, 1240), (25, 1200), (60, 1165), (110, 1148), (160, 1143), (192, 1160), (200, 1200), (198, 1260), (194, 1440), (202, 1478), (150, 1500), (60, 1502), (0, 1482), (0, 1400), (28, 1380)]),
     'oreo': ('Oreo', [(200, 1250), (205, 1210), (240, 1168), (300, 1168), (340, 1200), (352, 1250), (347, 1445), (332, 1462), (250, 1466), (205, 1456), (198, 1300)]),
@@ -215,7 +218,9 @@ add('crepes', 2, 'Crêpes (Nutella, Spéculoos, Oreo, Bueno)',
     key=DESSERT_KEY)
 add('gaufre', 2, 'Gaufres (dont gaufre sur bâtonnet)',
     [poly((800, 1890), (880, 1845), (960, 1822), (1000, 1808), (1060, 1782), (1130, 1798), (1162, 1840), (1166, 1950), (1140, 2010), (1060, 2035), (1000, 2060), (960, 2090), (880, 2120), (800, 2160), (782, 2196), (700, 2196), (660, 2172), (700, 2130), (740, 2090), (745, 2020), (770, 1960))],
-    cut=[rect(946, 2036, 1172, 2198)], key=DESSERT_KEY)
+    cut=[rect(946, 2036, 1172, 2198)], key=dict(kind='g', lo=22, hi=52, fill=True, fillmax=20000), despeckle=60,
+    solid=[poly((792, 1990), (830, 1935), (900, 1890), (980, 1850), (1040, 1828), (1080, 1848), (1062, 1900), (980, 1962),
+                (900, 2032), (842, 2080), (792, 2082))])
 
 # --- Capture 7 : mojitos (fond carte blanche) + lampadaire
 MOJ = {
@@ -240,14 +245,22 @@ add('lampadaire', 7, 'Lampadaire de rue (lanterne allumée + mât)',
           (563, 1630), (561, 811), (545, 800), (539, 721), (514, 700), (511, 600), (530, 585), (556, 560))], feather=1.8, smooth=1)
 
 # --- Capture 9 : livraison (plateau : boîte, frites, milkshake, sauce)
-LIV_KEY = dict(kind='max', lo=50, hi=110, fill=True, fillmax=60000)
+LIV_KEY = dict(kind='g', lo=52, hi=108, fill=True, fillmax=120000)
 add('livraison', 9, 'Plateau livraison : boîte (riz/poulet), frites, milkshake caramel, sauce',
     [poly((20, 1300), (40, 1250), (80, 1100), (122, 970), (160, 872), (210, 858), (440, 895), (611, 935), (655, 962), (722, 1185), (760, 1295), (766, 1500), (750, 1660), (360, 1565), (28, 1452)),
      poly((375, 1612), (470, 1595), (560, 1600), (700, 1640), (764, 1700), (766, 1840), (722, 2034), (653, 2132), (560, 2120), (354, 2034), (319, 1812), (330, 1700)),
      poly((5, 1812), (30, 1760), (83, 1726), (160, 1705), (225, 1706), (280, 1740), (295, 1812), (270, 1905), (200, 1918), (125, 1918), (14, 1898)),
      poly((785, 1562), (800, 1500), (833, 1462), (900, 1440), (972, 1432), (1080, 1400), (1100, 1365), (1170, 1350), (1170, 2120), (972, 2120), (833, 2092), (764, 1951), (750, 1743))],
-    cut=[poly((700, 940), (760, 878), (1135, 874), (1135, 1322), (1040, 1322), (1040, 1196), (780, 1190), (735, 1120))],
-    key=LIV_KEY, feather=2.5)
+    cut=[poly((700, 940), (760, 878), (1135, 874), (1135, 1322), (1040, 1322), (1040, 1196), (780, 1190), (735, 1120)),
+         rect(112, 954, 149, 977),                                                       # trait de néon rouge
+         poly((306, 1664), (382, 1664), (382, 1700), (370, 1722), (358, 1745), (350, 1772), (306, 1772))],  # lettres du logo du plateau
+    key=LIV_KEY, feather=2.5, despeckle=900,
+    solid=[poly((180, 920), (360, 915), (560, 975), (660, 1050), (690, 1170), (735, 1300), (750, 1450), (745, 1560), (720, 1600),
+                (600, 1585), (350, 1530), (130, 1460), (75, 1420), (70, 1360), (110, 1260), (150, 1150), (165, 1000)),
+           poly((372, 1720), (430, 1690), (560, 1680), (690, 1690), (732, 1760), (716, 1950), (688, 2082), (560, 2098), (425, 2072), (386, 1900)),
+           poly((812, 1560), (842, 1512), (900, 1482), (980, 1462), (1060, 1456), (1166, 1456), (1166, 1720), (1120, 1850), (1085, 2000),
+                (1060, 2088), (980, 2098), (840, 2088), (775, 2000), (770, 1850), (800, 1700)),
+           poly((30, 1800), (80, 1752), (150, 1730), (215, 1735), (262, 1770), (272, 1830), (250, 1885), (150, 1900), (40, 1880))])
 
 
 # ----------------------------------------------------------------------------- outils image
@@ -343,6 +356,10 @@ def key_value(rgb, kind):
         mean = rgb.mean(axis=-1)
         sat = rgb.max(axis=-1) - rgb.min(axis=-1)
         return np.maximum(255 - mean, sat * 1.4)
+    if kind == 'red':  # anti-néon : rouge saturé (peinture / néon du menu) → 0 ; chocolat, caramel, biscuit → haut
+        mx = rgb.max(axis=-1)
+        red = np.clip((r - np.maximum(g, b)) / np.maximum(r, 1.0), 0, 1)
+        return 255.0 * (1 - red) * (r >= mx - 1) + 255.0 * (r < mx - 1)
     if kind == 'food':  # aliments chauds/saturés ou très clairs sur fond neutre (ardoise, asphalte)
         mx = rgb.max(axis=-1)
         return 1.5 * (mx - rgb.min(axis=-1)) + 1.5 * np.maximum(0, mx - 170)
@@ -463,6 +480,31 @@ def cut_one(id_, spec, cache):
     return entry
 
 
+# Nom EXACT du produit tel qu'écrit dans FACTS.md (à réutiliser tel quel dans la vidéo).
+FACT_NAME = {
+    'crousty': 'CROUSTY BINKS', 'coca_cherry': 'Coca-Cola cherry',
+    'tacos_nuggets': 'NUGGETS', 'tacos_tenders': 'TENDERS', 'tacos_cordonbleu': 'CORDON BLEU',
+    'tacos_tandoori': 'POULET MARINÉ TANDOORI', 'sauce_fromagere': 'SAUCE FROMAGÈRE', 'sauces_tacos': 'CHOISIS TA SAUCE',
+    'supp_piquante': 'SAUCE PIQUANTE', 'supp_creme': 'SAUCE CRÈME', 'supp_tenders': 'TENDERS',
+    'kapsalone': 'KAPSALONE', 'hotdog': 'HOT DOG', 'hotdog_front': 'HOT DOG', 'hotdog_back': 'HOT DOG',
+    'texmex_tenders': 'TENDERS', 'texmex_nuggets': 'NUGGETS', 'texmex_wings': 'WINGS', 'texmex_mozza': 'MOZZA STICK',
+    'texmex_camembert': 'CROQ CAMEMBERT', 'texmex_jalapenos': 'JALAPENOS CRÈME', 'frites_cheddar': 'FRITES CHEDDAR BACON',
+    'frites_gaufrette': 'FRITES GAUFRETTE', 'can_coca': 'Coca-Cola cherry', 'can_oasis': 'Oasis tropical',
+    'can_lipton': 'Lipton pêche', 'sauce_brazil': 'Brazil', 'sauce_toscane': 'Toscane', 'sauce_cocktail': 'Cocktail',
+    'sauce_mayonnaise': 'Mayonnaise', 'sauce_ketchup': 'Ketchup', 'sauce_tartare': 'Tartare', 'sauce_algerienne': 'Algérienne',
+    'sauce_andalouse': 'Andalouse', 'sauce_samourai': 'Samouraï', 'sauce_americaine': 'Américaine', 'tiramisu': 'TIRAMISU',
+    'crepes': 'CRÊPES', 'gaufre': 'GAUFRES', 'livraison': 'LIVRAISON PARTOUT',
+    'kapsalone_salade': 'salade', 'kapsalone_oignon': 'oignon rouge', 'kapsalone_tomate': 'tomate',
+    'kapsalone_cheddar': 'cheddar fondu', 'kapsalone_viande': 'viande', 'kapsalone_frites': 'frites',
+}
+FACT_NAME.update({f'sandwich_{k}': v for k, v in NAMES.items()})
+FACT_NAME.update({f'burger_{k}': v for k, v in NAMES.items()})
+FACT_NAME.update({f'milkshake_{k}': v[0] for k, v in MS.items()})
+FACT_NAME.update({f'mojito_{k}': v[0] for k, v in MOJ.items()})
+FACT_NAME.update({f'hotdog_ing_{i}': n for i, n in enumerate(['KETCHUP MOUTARDE MIEL', 'SAUCISSE DE POULET', 'OIGNON CRISPY',
+                                                                'PERSIL EN DÉCORATION', 'CORNICHON'], 1)})
+
+
 def main():
     only = set(sys.argv[1:])
     man_path = os.path.join(HERE, 'manifest.json')
@@ -476,6 +518,8 @@ def main():
         e = manifest[id_]
         print(f"{id_:24s} {e['w']:4d}×{e['h']:<4d} {e['src']}")
     ordered = {k: manifest[k] for k in S if k in manifest}
+    for k, e in ordered.items():
+        if k in FACT_NAME: e['name'] = FACT_NAME[k]
     with open(man_path, 'w') as f:
         json.dump(ordered, f, ensure_ascii=False, indent=1)
     print(f'→ {len(ordered)} découpes, manifest.json')
