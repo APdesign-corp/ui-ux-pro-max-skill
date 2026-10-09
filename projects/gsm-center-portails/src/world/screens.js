@@ -123,7 +123,7 @@ const LIST = [
   ['Réparation', 'Écran, batterie, connecteur'],
   ['Accessoires', 'Coques, chargeurs, écouteurs'],
   ['Multimédia', 'Écouteurs, chargeurs'],
-  ['Internet', 'Cartes SIM'],
+  ['Western Union & Ria', "Envoyez et recevez de l'argent"],
 ];
 
 function drawApp(g, w, h, app, t, P) {
@@ -435,7 +435,7 @@ function drawApp(g, w, h, app, t, P) {
       if (erasing || Math.floor(t * 2.6) % 2 === 0 || t < (P.resultsAt ?? 99)) { g.fillStyle = C.neon; g.fillRect(128 + cw, 136, 4, 44); }
       const ra = P.resultsAt ?? 99;
       const RES = [
-        ['GSM Center Liège', 'Téléphonie mobile · Réparation · Accessoires', 'Rue St Léonard 203, 4000 Liège'],
+        ['GSM Center Liège', 'Smartphones · Réparation · Western Union · Ria', 'Rue St Léonard 203, 4000 Liège'],
         ['Smartphones', 'Neufs & reconditionnés', ''],
         ['Réparation', 'Écran, batterie, connecteur', ''],
         ['Accessoires', 'Coques, chargeurs, écouteurs', ''],
@@ -495,7 +495,7 @@ function drawApp(g, w, h, app, t, P) {
       g.globalAlpha = 1;
       void gw;
       // services : cartes qui glissent une à une (en alternance gauche/droite)
-      const SV = [['Smartphones', 'Neufs & reconditionnés'], ['Réparation', 'Écran, batterie, connecteur'], ['Accessoires', 'Coques, chargeurs, écouteurs'], ['Multimédia & Internet', 'Écouteurs, chargeurs, SIM']];
+      const SV = [['Smartphones', 'Neufs & reconditionnés'], ['Réparation', 'Écran, batterie, connecteur'], ['Accessoires', 'Coques, chargeurs, écouteurs'], ['Western Union & Ria', "Envoyez et recevez de l'argent"]];
       const ca = P.cardsAt ?? 0.5;
       SV.forEach(([a, b], i) => {
         const k = E.outExpo(seg(t, ca + i * 0.12, ca + i * 0.12 + 0.55));

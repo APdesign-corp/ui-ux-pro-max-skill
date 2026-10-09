@@ -16,6 +16,7 @@ export const cues = [
   { t: 0.9, type: 'swish', gain: 0.6 },
   { t: 1.3, type: 'swish', gain: 0.6 },
   { t: 1.7, type: 'pop', gain: 0.8 },
+  { t: 1.5, type: 'swish', gain: 0.5 },
   { t: 2.0, type: 'click', gain: 0.9 },
   { t: 3.5, type: 'suck', dur: 0.45, gain: 0.9 },
 ];
@@ -44,8 +45,8 @@ export default function create(ctx) {
   const camera = (lt) => {
     const k = E.outCubic(seg(lt, 0, 3.5));
     const a = lerp(0.35, 0.08, k);
-    const R = V ? lerp(7.4, 6.9, k) : lerp(5.0, 4.5, k);
-    return { pos: [Math.sin(a) * R, lerp(0.35, 0.12, k), Math.cos(a) * R], target: [0, V ? -0.3 : 0.32, 0], roll: lerp(0.06, 0, k), fov: V ? 40 : 30 };
+    const R = V ? lerp(8.5, 8.0, k) : lerp(5.0, 4.5, k);
+    return { pos: [Math.sin(a) * R, lerp(0.35, 0.12, k), Math.cos(a) * R], target: [0, V ? -0.5 : 0.32, 0], roll: lerp(0.06, 0, k), fov: V ? 40 : 30 };
   };
 
   return {
@@ -72,7 +73,7 @@ export default function create(ctx) {
       world.studio.sweep.intensity = 3 * Math.exp(-Math.pow((lt - 1.1) * 2.2, 2)) * (1 - fold);
       world.studio.sweep.position.set(lerp(-2, 2, seg(lt, 0.5, 1.8)), 0.8, 1.2);
       post.bloom = 0.7; post.vignette = 1.0;
-      post.dof = { focus: V ? 6.9 : 4.5, aperture: 0.015, maxblur: 0.004 };
+      post.dof = { focus: V ? 8.0 : 4.5, aperture: 0.015, maxblur: 0.004 };
       // sortie du flash blanc
       post.flash += 1.0 * (1 - E.outCubic(seg(lt, 0, 0.45)));
       post.flashColor = [1, 1, 1];
@@ -97,10 +98,11 @@ export default function create(ctx) {
       // adresse, slogan, appel à l'action
       const aS = (V ? 50 : 40) * u, sS = (V ? 44 : 36) * u;
       const addr1 = 'Rue St Léonard 203', addr2 = '4000 Liège';
+      const kw = E.outExpo(seg(lt, 1.5, 1.95));
       const ka = E.outExpo(seg(lt, 0.9, 1.35)), ks = E.outExpo(seg(lt, 1.3, 1.75)), kc = E.outBack(seg(lt, 1.7, 2.05), 1.8);
       if (V) {
         // sous le téléphone, dans la zone sûre
-        let y = S.b - 290 * u;
+        let y = S.b - 400 * u;
         ui.textAlign = 'center';
         ui.globalAlpha = ka * (1 - fold);
         setFont(ui, aS, 800, -0.01); ui.fillStyle = C.white; ui.fillText(addr1, W / 2, y + (1 - ka) * 30 * u);
@@ -108,6 +110,8 @@ export default function create(ctx) {
         y += aS * 2.0;
         ui.globalAlpha = ks * (1 - fold);
         drawSlogan(ui, W / 2, y + sS * 0.6, sS, 'center');
+        ui.globalAlpha = kw * (1 - fold);
+        drawTransfer(ui, W / 2, S.b - 150 * u, 34 * u, 'center', u);
         drawCTA(ui, W / 2, S.b - 50 * u, (V ? 40 : 34) * u, kc * sc, lt, u);
       } else {
         // gauche : slogan ; droite : adresse + appel à l'action
@@ -118,6 +122,8 @@ export default function create(ctx) {
         ui.fillText('Ton téléphone,', S.l, yl);
         setFont(ui, sS * 1.25, 800, -0.01); ui.fillStyle = C.neon;
         ui.fillText('notre spécialité.', S.l, yl + sS * 1.55);
+        ui.globalAlpha = kw * (1 - fold);
+        drawTransfer(ui, S.l, S.b - 62 * u, 38 * u, 'left', u);
         ui.globalAlpha = ka * (1 - fold);
         ui.textAlign = 'right';
         setFont(ui, aS * 1.15, 800, -0.01); ui.fillStyle = C.white; ui.fillText(addr1, S.r, yl);
@@ -153,6 +159,22 @@ function drawSlogan(g, x, y, s, align) {
   g.textAlign = 'left';
   setFont(g, s, 300, 0); g.fillStyle = C.white; g.fillText(a, x0, y);
   setFont(g, s, 800, -0.01); g.fillStyle = C.neon; g.fillText(b, x0 + wa, y);
+}
+
+// Service de transfert d'argent (confirmé : site du client) — noms composés dans la typo de la pub (pas de logos)
+function drawTransfer(g, x, y, s, align, u) {
+  const a = "TRANSFERTS D'ARGENT", b = 'WESTERN UNION · RIA';
+  setFont(g, s * 0.62, 600, 0.22);
+  const wa = textWidth(g, a, s * 0.62, 600, 0.22);
+  setFont(g, s, 800, 0.02);
+  const wb = textWidth(g, b, s, 800, 0.02);
+  const x0 = align === 'center' ? x - Math.max(wa, wb) / 2 : x;
+  g.textAlign = 'left';
+  setFont(g, s * 0.62, 600, 0.22); g.fillStyle = C.muted;
+  g.fillText(a, x0 + (align === 'center' ? (Math.max(wa, wb) - wa) / 2 : 0), y - s * 1.05);
+  g.fillStyle = C.neon; g.fillRect(x0 + (align === 'center' ? (Math.max(wa, wb) - wb) / 2 : 0), y + s * 0.32, Math.min(wb, 60 * u), 2 * u);
+  setFont(g, s, 800, 0.02); g.fillStyle = C.white;
+  g.fillText(b, x0 + (align === 'center' ? (Math.max(wa, wb) - wb) / 2 : 0), y);
 }
 
 function drawCTA(g, cx, cy, s, k, lt, u) {

@@ -65,8 +65,8 @@ export default function create(ctx) {
   const N = 54, SPACING = 0.82, Z_FIRST = Z0 - 4.5;
   const APPS = ['store', 'list', 'counter', 'pills', 'repair', 'store', 'list', 'home', 'find', 'pills'];
   const WIDGETS = ['pill', 'dot', 'toggle', 'pill', 'counterW', 'dot', 'pill', 'glass'];
-  const PILL_TXT = ['SMARTPHONES', 'RÉPARATION', 'ACCESSOIRES', 'MULTIMÉDIA', 'INTERNET', 'CARTES SIM'];
-  const GLASS_TXT = ['Neufs & reconditionnés', 'Réparation rapide', 'Accessoires & multimédia'];
+  const PILL_TXT = ['SMARTPHONES', 'RÉPARATION', 'WESTERN UNION', 'ACCESSOIRES', 'RIA', 'MULTIMÉDIA'];
+  const GLASS_TXT = ['Neufs & reconditionnés', 'Réparation rapide', "Envoi d'argent · Western Union · Ria", 'Accessoires & multimédia'];
   const r = rng(808);
 
   const STATIC_W = 220, STATIC_H = Math.round(220 * ASPECT);
