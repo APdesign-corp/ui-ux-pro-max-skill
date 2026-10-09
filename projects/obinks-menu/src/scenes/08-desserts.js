@@ -9,7 +9,7 @@ import { E, clamp, seg } from '../core/anim.js';
 import { createFood, createFoodLights } from '../world/food.js';
 import { P, brushTitle, splatter, smoke, streetBackdrop, particles, priceTag, photo } from '../core/obinks.js';
 import { ingLabel } from './03-tacos.js';
-import { rig, placeFood, text, rubric } from './_kit.js';
+import { ambience, rig, placeFood, text, rubric } from './_kit.js';
 
 const DUR = 5.5;
 const TIRA = [['bueno', 'BUENO'], ['oreo', 'OREO'], ['raffaello', 'RAFFAELLO'], ['speculoos', 'SPÉCULOOS']];
@@ -90,7 +90,7 @@ export default function create(ctx) {
     update(f) {
       const { lt, t, ui, fx } = f;
       const dx = r.shift(lt);
-      streetBackdrop(f.bg, W, H, t, { k: 0.55, lamps, parallax: lt * 30 * u - dx * 0.7, seed: 8, light: 0.8 });
+      ambience(f, ctx, { dx, seed: 4 });
       particles(fx, W, H, t, { kind: 'sparks', k: 0.5, seed: 18, count: 20 });
 
       // ---- 3D : tiramisu (0 → 1.9) puis milkshake (1.9 → 3.55)

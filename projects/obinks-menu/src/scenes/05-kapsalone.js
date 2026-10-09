@@ -9,7 +9,7 @@ import { E, clamp, seg } from '../core/anim.js';
 import { createFood, createFoodLights } from '../world/food.js';
 import { P, brushTitle, splatter, smoke, streetBackdrop, particles, priceTag } from '../core/obinks.js';
 import { meatTag, ingLabel } from './03-tacos.js';
-import { rig, placeFood, text } from './_kit.js';
+import { ambience, rig, placeFood, text } from './_kit.js';
 
 const DUR = 3.5;
 const MEATS = [
@@ -71,7 +71,7 @@ export default function create(ctx) {
     update(f) {
       const { lt, t, ui, fx } = f;
       const dx = r.shift(lt);
-      streetBackdrop(f.bg, W, H, t, { k: 0.6, lamps, parallax: lt * 30 * u - dx * 0.7, seed: 5, light: 0.85 });
+      ambience(f, ctx, { dx, seed: 1 });
       particles(fx, W, H, t, { kind: 'embers', k: 0.7, seed: 15, count: 26 });
 
       const toB = E.inOutCubic(seg(lt, 0.5, 0.75)) * (1 - E.inOutCubic(seg(lt, 2.3, 2.55)));

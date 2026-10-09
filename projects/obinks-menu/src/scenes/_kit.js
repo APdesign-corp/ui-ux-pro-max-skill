@@ -130,3 +130,108 @@ export function stars(g, x, y, r, value, { a = 1, gap = 0.35 } = {}) {
 }
 
 export { priceTag };
+
+// ---------------------------------------------------------------------------------------------
+//  AMBIANCE RÉALISTE (scènes 05 → 10) : la vraie rue du client (photo de la façade) en arrière-plan
+//  très floue (profondeur de champ), étalonnée nuit/rouge, dérive lente (Ken Burns) + parallaxe ;
+//  bokeh des lumières de rue, sol mouillé (reflet), faisceau de lampadaire volumétrique, brume,
+//  flash léger sur les impacts. Tout est déterministe (t).
+// ---------------------------------------------------------------------------------------------
+const plates = new Map();
+function plate(ctx) {
+  const { W, H, world } = ctx;
+  const key = W + 'x' + H;
+  if (plates.has(key)) return plates.get(key);
+  const im = world.images && world.images.facade && world.images.facade.img;
+  let c = null;
+  if (im && im.naturalWidth) {
+    const k = im.naturalWidth / 1170, sy = 340 * k, sw = 1170 * k, sh = 1480 * k;
+    const pw = Math.round(W / 5), ph = Math.round(H / 5); // petit → l'agrandissement floute
+    c = document.createElement('canvas'); c.width = pw * 1.3; c.height = ph * 1.3;
+    const g = c.getContext('2d');
+    const s = Math.max(c.width / sw, c.height / sh);
+    g.filter = 'blur(3px) saturate(1.25) contrast(1.1)';
+    g.drawImage(im, 0, sy, sw, sh, (c.width - sw * s) / 2, (c.height - sh * s) / 2, sw * s, sh * s);
+    g.filter = 'none';
+    // étalonnage nuit : sombre, rouge dans les hautes lumières
+    g.globalCompositeOperation = 'multiply'; g.fillStyle = '#c07a70'; g.fillRect(0, 0, c.width, c.height);
+    g.globalCompositeOperation = 'source-over';
+  }
+  plates.set(key, c);
+  return c;
+}
+const BOKEH = Array.from({ length: 18 }, (_, i) => {
+  const h = (n) => { const x = Math.sin(i * 127.1 + n * 311.7) * 43758.5453; return x - Math.floor(x); };
+  return { x: h(1), y: h(2) * 0.8, r: 0.012 + 0.05 * h(3) ** 2, c: h(4) < 0.55 ? [255, 42, 42] : h(4) < 0.85 ? [255, 170, 80] : [255, 240, 220], sp: 0.2 + h(5), ph: h(6) * 6.28, z: 0.3 + h(7) };
+});
+export function ambience(f, ctx, { dx = 0, seed = 0 } = {}) {
+  const { W, H, V, u } = ctx;
+  const { bg, fx, t, lt } = f;
+  const m = Math.min(W, H);
+  bg.save();
+  bg.fillStyle = '#060404'; bg.fillRect(0, 0, W, H);
+  const pl = plate(ctx);
+  const floorY = H * (V ? 0.8 : 0.78);
+  if (pl) {
+    const s = Math.max(W / pl.width, H / pl.height) * (1.12 + 0.04 * Math.sin(lt * 0.25 + seed));
+    const pw = pl.width * s, ph = pl.height * s;
+    const ox = (W - pw) / 2 + dx * 0.25 + Math.sin(seed * 1.7) * W * 0.04 - lt * 6 * u, oy = (H - ph) / 2 - H * 0.04;
+    bg.imageSmoothingEnabled = true; bg.imageSmoothingQuality = 'high';
+    bg.globalAlpha = 1;
+    bg.drawImage(pl, ox, oy, pw, ph);
+    // sol mouillé : reflet inversé, sombre, ondulant
+    bg.save();
+    bg.beginPath(); bg.rect(0, floorY, W, H - floorY); bg.clip();
+    bg.globalAlpha = 0.45;
+    bg.translate(Math.sin(t * 1.3) * 3 * u, floorY * 2); bg.scale(1, -1);
+    bg.drawImage(pl, ox, oy, pw, ph);
+    bg.restore();
+    bg.globalAlpha = 1;
+  }
+  // assombrissement vers le haut et le bas (lisibilité des titres) + ligne d'horizon du trottoir
+  let gr = bg.createLinearGradient(0, 0, 0, H);
+  gr.addColorStop(0, 'rgba(4,2,2,0.7)'); gr.addColorStop(0.3, 'rgba(4,2,2,0.2)');
+  gr.addColorStop(0.62, 'rgba(4,2,2,0.15)'); gr.addColorStop(V ? 0.8 : 0.78, 'rgba(4,2,2,0.35)'); gr.addColorStop(1, 'rgba(4,2,2,0.75)');
+  bg.fillStyle = gr; bg.fillRect(0, 0, W, H);
+  gr = bg.createLinearGradient(0, floorY - 3 * u, 0, floorY + 6 * u);
+  gr.addColorStop(0, 'rgba(255,60,50,0)'); gr.addColorStop(0.5, 'rgba(255,60,50,0.18)'); gr.addColorStop(1, 'rgba(255,60,50,0)');
+  bg.fillStyle = gr; bg.fillRect(0, floorY - 3 * u, W, 9 * u);
+  // bokeh (lumières de rue hors champ), parallaxe selon la profondeur
+  bg.globalCompositeOperation = 'lighter';
+  for (const b of BOKEH) {
+    const x = ((b.x * 1.4 - 0.2) * W + dx * 0.35 * b.z - lt * 14 * u * b.z + 5 * W) % (1.4 * W) - 0.2 * W;
+    const y = b.y * H + Math.sin(t * b.sp + b.ph) * 6 * u;
+    const r = b.r * m * (V ? 1.3 : 1);
+    const a = (0.05 + 0.07 * b.z) * (0.75 + 0.25 * Math.sin(t * 2.1 * b.sp + b.ph));
+    const g2 = bg.createRadialGradient(x, y, 0, x, y, r);
+    g2.addColorStop(0, `rgba(${b.c},${a * 0.7})`); g2.addColorStop(0.7, `rgba(${b.c},${a})`); g2.addColorStop(1, `rgba(${b.c},0)`);
+    bg.fillStyle = g2; bg.beginPath(); bg.arc(x, y, r, 0, TAU); bg.fill();
+  }
+  bg.restore();
+  // faisceau volumétrique d'un lampadaire (calque lumière, léger) + poussières dans le faisceau
+  const lx = W * (V ? 0.82 : 0.86) + dx * 0.4;
+  fx.save();
+  fx.globalCompositeOperation = 'lighter';
+  const fl = 0.85 + 0.15 * Math.sin(t * 7.3 + seed) * Math.sin(t * 3.1);
+  gr = fx.createLinearGradient(lx, 0, lx - W * 0.1, floorY);
+  gr.addColorStop(0, `rgba(255,70,50,${0.2 * fl})`); gr.addColorStop(1, 'rgba(255,40,30,0)');
+  fx.fillStyle = gr;
+  fx.beginPath(); fx.moveTo(lx - 12 * u, 0); fx.lineTo(lx + 12 * u, 0); fx.lineTo(lx + W * 0.12, floorY); fx.lineTo(lx - W * 0.32, floorY); fx.closePath(); fx.fill();
+  for (let i = 0; i < 40; i++) {
+    const h1 = Math.sin(i * 91.3 + seed) * 4375.85, q = h1 - Math.floor(h1);
+    const yy = ((q * 7.1 + t * (0.03 + q * 0.04)) % 1) * floorY;
+    const xx = lx + (q - 0.7) * (yy / floorY) * W * 0.4 + Math.sin(t * 0.7 + i) * 8 * u;
+    fx.fillStyle = `rgba(255,200,170,${0.25 * (1 - yy / floorY)})`;
+    fx.beginPath(); fx.arc(xx, yy, (0.8 + q * 1.6) * u, 0, TAU); fx.fill();
+  }
+  fx.restore();
+  // flash réaliste (exposition) sur les impacts de la scène + étalonnage
+  const post = f.post;
+  let fl2 = 0;
+  for (const c of f.cues) if (c.seg === f.seg.id && (c.type === 'impact' || c.type === 'slam' || c.type === 'boom')) {
+    const d = f.t - c.t; if (d >= 0 && d < 0.25) fl2 = Math.max(fl2, Math.exp(-d / 0.05) * (c.type === 'boom' ? 0.35 : 0.18));
+  }
+  post.flash = Math.max(post.flash, fl2);
+  post.flashColor = [1, 0.62, 0.52];
+  post.vignette = Math.max(post.vignette || 0, 1.15);
+}

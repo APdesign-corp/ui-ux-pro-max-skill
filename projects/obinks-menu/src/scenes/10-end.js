@@ -8,7 +8,7 @@
 import { E, clamp, seg } from '../core/anim.js';
 import { createFoodLights } from '../world/food.js';
 import { P, brushTitle, splatter, splatCover, streetBackdrop, particles, photo, neonFrame, smoke } from '../core/obinks.js';
-import { rig, text, stars } from './_kit.js';
+import { ambience, rig, text, stars } from './_kit.js';
 
 const DUR = 8, T_INFO = 2.4, T_LOGO = 5.2;
 
@@ -64,7 +64,7 @@ export default function create(ctx) {
       const { lt, t, ui, fx } = f;
       const dx = r.shift(lt);
       const lampOn = lt < T_LOGO ? 1 : 0.7 + 0.3 * seg(lt, T_LOGO, T_LOGO + 0.6);
-      streetBackdrop(f.bg, W, H, t, { k: 0.6, lamps: V ? [0.1, 0.9] : [0.06, 0.5, 0.94], parallax: lt * 25 * u - dx * 0.7, seed: 10, light: 0.85 * lampOn });
+      ambience(f, ctx, { dx, seed: 6 });
       particles(fx, W, H, t, { kind: 'embers', k: 0.8, seed: 20, count: 30 });
       ui.save();
       ui.translate(dx, 0);
