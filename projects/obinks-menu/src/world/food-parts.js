@@ -16,7 +16,7 @@ const mixC = (a, b, t) => a.clone().lerp(b, clamp(t));
 const mesh = (geo, mat) => { const m = new THREE.Mesh(geo, mat); return m; };
 
 // ------------------------------------------------------------------ pains
-const CR_TOP = C('#7a300b'), CR_MID = C('#b5601e'), CR_LOW = C('#e09c48'), CR_BAND = C('#eec27a');
+const CR_TOP = C('#6a2806'), CR_MID = C('#a04e14'), CR_LOW = C('#d08a38'), CR_BAND = C('#ebbd72');
 const CRUMB_IN = C('#eccb8a'), CRUMB_TOAST = C('#b86a2a');
 
 /** Chapeau de pain (brioche ronde ou pain long), dôme brillant, face coupée grillée, sésame optionnel. */
@@ -27,7 +27,7 @@ export function bunTop(fp, { h = 0.3, seed = 1, sesame = true, soft = false } = 
   const hE = h * 0.2;
   const dome = (x, z) => {
     const d = clamp(stadiumD(x, z, L, r) / r);
-    return hE + (h - hE) * Math.pow(1 - Math.pow(1 - d, 2.4), 0.55) + vn2(x * 7, z * 7, seed) * 0.006;
+    return hE + (h - hE) * Math.pow(1 - Math.pow(1 - d, 2.4), 0.55) + (vn2(x * 5, z * 5, seed) * 0.005 + vn2(x * 15, z * 15, seed + 2) * 0.0025) * smooth(clamp(d * 3));
   };
   const geo = slab({
     R, segs: L > 0 ? 88 : 64, rings: 12, sideRows: 4, bulge: 0.018, tile: 0.45,
@@ -36,8 +36,9 @@ export function bunTop(fp, { h = 0.3, seed = 1, sesame = true, soft = false } = 
       if (part === 2) { const d = clamp(stadiumD(x, z, L, r) / (r * 0.25)); return mixC(CRUMB_TOAST, CRUMB_IN, smooth(d) * 0.75); }
       if (part === 1) return mixC(CR_BAND, CR_LOW, clamp(y / hE));
       const t = clamp((y - hE) / (h - hE));
-      const n = vn2(x * 5, z * 5, seed + 3) * 0.16 + vn2(x * 13, z * 13, seed + 4) * 0.07;
-      return t < 0.35 ? mixC(CR_LOW, CR_MID, t / 0.35 + n) : mixC(CR_MID, CR_TOP, (t - 0.35) / 0.65 + n);
+      const n = vn2(x * 4, z * 4, seed + 3) * 0.22 + vn2(x * 11, z * 11, seed + 4) * 0.1;
+      const c = t < 0.3 ? mixC(CR_BAND, CR_LOW, t / 0.3 + n * 0.5) : t < 0.6 ? mixC(CR_LOW, CR_MID, (t - 0.3) / 0.3 + n) : mixC(CR_MID, CR_TOP, (t - 0.6) / 0.4 + n);
+      return c;
     },
   });
   const crust = soft ? K.M.bunSoft : K.M.crust;
@@ -174,11 +175,11 @@ export function meatPieces(R, type, { seed = 7, n, y = 0, glazed = false, spread
     h = 0.06 * scale;
   } else if (type === 'tandoori' || type === 'poulet') {
     mat = K.M.chicken;
-    const P = pts(n || 12, 0.075 * scale);
-    const c0 = type === 'tandoori' ? C('#e2561e') : C('#e7a24a'), c1 = type === 'tandoori' ? C('#8a240a') : C('#9c5418');
+    const P = pts(n || 15, 0.06 * scale);
+    const c0 = type === 'tandoori' ? C('#d24a18') : C('#c87a26'), c1 = type === 'tandoori' ? C('#6a1806') : C('#5e2808');
     for (const [x, z, k] of P) {
-      const g = lump({ seg: 12, amp: 0.3, freq: 2.2, seed: seed + Math.floor(k * 999), scale: [0.07 * scale, 0.042 * scale, 0.055 * scale], flat: 0.5 });
-      paint(g, (px, py, pz) => mixC(c0, c1, smooth(clamp((vn2(px * 60 + k * 9, pz * 60, seed) * 0.5 + 0.5) * 1.3 - 0.35 + (py < 0 ? 0.2 : 0)))));
+      const g = lump({ seg: 12, amp: 0.42, freq: 2.8, seed: seed + Math.floor(k * 999), scale: [(0.06 + k * 0.03) * scale, 0.034 * scale, (0.04 + (1 - k) * 0.02) * scale], flat: 0.65, sharp: 0.35 });
+      paint(g, (px, py, pz) => mixC(c0, c1, smooth(clamp((vn2(px * 70 + k * 9, pz * 70 + py * 50, seed) * 0.5 + 0.5) * 1.6 - 0.45 + (py < 0 ? 0.15 : 0)))));
       geos.push(place(g, [x, y + 0.03 * scale, z], [0.2 * (rr() - 0.5), k * TAU, 0.2 * (rr() - 0.5)]));
     }
     h = 0.07 * scale;
@@ -243,9 +244,10 @@ export function cheese(fp, { kind = 'cheddar', seed = 11, rot = 0.4, support = n
   const maxDrop = rac ? 0.085 : 0.06;
   const drape = (x, z) => -maxDrop * (1 - Math.exp(-overOf(x, z) * (rac ? 16 : 13))) + vn2(x * 6, z * 6, seed) * (rac ? 0.01 : 0.004);
   const geo = slab({
-    R, segs: 80, rings: 9, sideRows: 3, bulge: th * 0.4, tile: 0.4,
-    top: (x, z) => th + drape(x, z) + (rac ? vn2(x * 10, z * 10, seed + 2) * 0.008 : 0),
+    R, segs: 80, rings: 9, sideRows: 3, bulge: th * 0.6, tile: 0.4,
+    top: (x, z) => th + drape(x, z) + (rac ? vn2(x * 10, z * 10, seed + 2) * 0.008 : vn2(x * 8, z * 8, seed + 2) * 0.004),
     bot: (x, z) => drape(x, z),
+    color: (x, y, z, part, k) => mixC(C('#ffffff'), C('#d8d8d8'), clamp(0.5 + vn2(x * 6, z * 6, seed + 5) * 0.7) * 0.7 + (part === 1 ? 0.15 : 0)),
   });
   const geos = [geo];
   const rr = rng(seed + 20);
@@ -260,7 +262,8 @@ export function cheese(fp, { kind = 'cheddar', seed = 11, rot = 0.4, support = n
     place(d, [x, drape(x, z) + th * 0.5, z], [0, -a, 0], [1, 1, 0.7]);
     geos.push(d);
   }
-  return { obj: mesh(merge(geos), rac ? K.M.raclette : K.M.cheddar), h: th * 0.9 };
+  for (let i = 1; i < geos.length; i++) paint(geos[i], () => C('#ffffff'));
+  return { obj: mesh(merge(geos, true), rac ? K.M.raclette : K.M.cheddar), h: th * 0.9 };
 }
 
 /** Rondelles de chèvre (croûte blanche, dessus doré). */
@@ -288,7 +291,7 @@ export function chevreRounds(fp, { seed = 13, n } = {}) {
 
 // ------------------------------------------------------------------ légumes
 /** Feuille de salade frisée (batavia) ondulée qui déborde du pain. */
-export function lettuce(fp, { seed = 15, over = 0.075, mound = 0.03 } = {}) {
+export function lettuce(fp, { seed = 15, over = 0.075, mound = 0.03, segs = 0, rings = 10 } = {}) {
   const K = kit();
   const L = fp.L + (fp.L > 0 ? 0.04 : 0), r = fp.r + over;
   const base = noisyR(stadiumR(L, r), 0.07, 4, seed);
@@ -299,7 +302,7 @@ export function lettuce(fp, { seed = 15, over = 0.075, mound = 0.03 } = {}) {
   };
   const top = (x, z, k, a) => mound * (1 - k * k) + ruf(x, z, k, a) - 0.035 * Math.pow(k, 4);
   const geo = slab({
-    R, segs: fp.L > 0 ? 140 : 112, rings: 10, sideRows: 2, bulge: 0, tile: 0.5,
+    R, segs: segs || (fp.L > 0 ? 140 : 112), rings, sideRows: 2, bulge: 0, tile: 0.5,
     top, bot: (x, z, k, a) => top(x, z, k, a) - 0.008,
     color: (x, y, z, part, k, a) => {
       const w = ruf(x, z, k, a) / 0.045;
@@ -407,7 +410,7 @@ export const SAUCES = {
   blanche: { color: '#d8d2c4', rough: 0.22, sheen: 0.2 },
   poivre: { color: '#9a6a42', rough: 0.16, speck: true, sheen: 0.2, sheenColor: '#e0b080' },
   barbecue: { color: '#5a170a', rough: 0.1, emissive: '#3a0800' },
-  aigredouce: { color: '#f0581a', rough: 0.08, opacity: 0.94, emissive: '#ff3a00', emissiveIntensity: 0.12 },
+  aigredouce: { color: '#e8660c', rough: 0.07, opacity: 0.95, emissive: '#a83800', emissiveIntensity: 0.18, sheen: 0.2, sheenColor: '#ffb040' },
   ketchup: { color: '#b8130f', rough: 0.1, emissive: '#5a0000', emissiveIntensity: 0.1 },
   moutardemiel: { color: '#e8b41c', rough: 0.12, emissive: '#7a4a00', emissiveIntensity: 0.1 },
   fromagere: { color: '#ffb12a', rough: 0.12, emissive: '#ff7a00', emissiveIntensity: 0.14, sheen: 0.5, sheenColor: '#ffe080' },
@@ -446,7 +449,7 @@ export function sauceSheet(fp, id, { seed = 25, scale = 1, th = 0.022, drips = 7
 }
 
 /** Filet de sauce en zigzag (le long de X), suivant la hauteur yFn(x,z). */
-export function zigzag(fp, id, { seed = 27, y = 0, yFn = null, n, amp = 0.8, radius = 0.011, cross = false, along = 'x', ext = 0.9 } = {}) {
+export function zigzag(fp, id, { seed = 27, y = 0, yFn = null, n, amp = 0.8, radius = 0.011, cross = false, along = 'x', ext = 0.9, flat = 0.6 } = {}) {
   const L = fp.L, r = fp.r;
   const rr = rng(seed);
   const len = (L + r) * ext;
@@ -463,16 +466,26 @@ export function zigzag(fp, id, { seed = 27, y = 0, yFn = null, n, amp = 0.8, rad
       pts.push([X2, (yFn ? yFn(X2, Z2) : y) + radius * 0.6, Z2]);
     }
   }
-  const geos = [tubeGeo(pts, radius, pts.length * 8, 8)];
+  const geos = [tubeGeo(pts, radius, pts.length * 4, 7)];
   if (cross) {
     const p2 = pts.map(([x, yy, z]) => [z * (L > 0 ? 1 : 1), yy + radius * 0.5, x]);
-    if (L <= 0) geos.push(tubeGeo(p2, radius, p2.length * 8, 8));
+    if (L <= 0) geos.push(tubeGeo(p2, radius, p2.length * 4, 7));
   }
-  return { obj: mesh(merge(geos), sauce(id)), h: radius * 2 };
+  const out = merge(geos);
+  flatten(out, (x, z) => (yFn ? yFn(x, z) : y) + radius * 0.6, flat);
+  return { obj: mesh(out, sauce(id)), h: radius * 2 };
+}
+
+/** Écrase verticalement un tube de sauce autour de sa ligne médiane (ruban posé, pas un spaghetti). */
+function flatten(geo, mid, k) {
+  if (k >= 1) return;
+  const p = geo.attributes.position;
+  for (let i = 0; i < p.count; i++) { const c = mid(p.getX(i), p.getZ(i)); p.setY(i, c + (p.getY(i) - c) * k); }
+  geo.computeVertexNormals();
 }
 
 /** Filets libres (miel, aigre-douce, crème) : courbes ondulées sur la surface. */
-export function drizzle(R, id, { seed = 29, n = 4, y = 0, yFn = null, radius = 0.01, margin = 0.85 } = {}) {
+export function drizzle(R, id, { seed = 29, n = 4, y = 0, yFn = null, radius = 0.01, margin = 0.85, flat = 0.55 } = {}) {
   const rr = rng(seed);
   const geos = [];
   for (let i = 0; i < n; i++) {
@@ -487,18 +500,20 @@ export function drizzle(R, id, { seed = 29, n = 4, y = 0, yFn = null, radius = 0
       const x = lerp(x0, x1, t) + wob * (z1 - z0) * 1.5, z = lerp(z0, z1, t) - wob * (x1 - x0) * 1.5;
       pts.push([x, (yFn ? yFn(x, z) : y) + radius * 0.7, z]);
     }
-    geos.push(tubeGeo(pts, radius * (0.8 + rr() * 0.5), 90, 8));
+    geos.push(tubeGeo(pts, radius * (0.8 + rr() * 0.5), 56, 6));
   }
-  return { obj: mesh(merge(geos), sauce(id)), h: radius * 2 };
+  const out = merge(geos);
+  flatten(out, (x, z) => (yFn ? yFn(x, z) : y) + radius * 0.7, flat);
+  return { obj: mesh(out, sauce(id)), h: radius * 2 };
 }
 
 // ------------------------------------------------------------------ petits éléments (instanciés)
 /** Frites (InstancedMesh) : bâtonnets dorés à bouts plus foncés. place(i, rr) → { p:[x,y,z], r:[x,y,z], len } */
-export function fries(n, seed, placeFn, { thick = 0.03 } = {}) {
+export function fries(n, seed, placeFn, { thick = 0.034 } = {}) {
   const K = kit();
-  const g = new THREE.CylinderGeometry(0.5, 0.5, 1, 6, 4);
+  const g = new THREE.CylinderGeometry(0.5, 0.5, 1, 6, 3);
   g.rotateY(Math.PI / 6);
-  paint(g, (x, y) => mixC(C('#ffd06a'), C('#c9761e'), Math.pow(Math.abs(y) * 2, 3)));
+  paint(g, (x, y) => mixC(C('#ffe28a'), C('#d0902e'), Math.pow(Math.abs(y) * 2, 4)));
   const im = new THREE.InstancedMesh(g, K.M.fries, n);
   const rr = rng(seed), m = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), p = new THREE.Vector3(), s = new THREE.Vector3(), c = new THREE.Color();
   for (let i = 0; i < n; i++) {
@@ -506,8 +521,8 @@ export function fries(n, seed, placeFn, { thick = 0.03 } = {}) {
     e.set(o.r[0], o.r[1], o.r[2]); q.setFromEuler(e);
     const th = thick * (0.85 + rr() * 0.3);
     im.setMatrixAt(i, m.compose(p.set(o.p[0], o.p[1], o.p[2]), q, s.set(th, o.len, th * (0.9 + rr() * 0.2))));
-    const l = 0.86 + rr() * 0.2;
-    im.setColorAt(i, c.setRGB(l, l * (0.94 + rr() * 0.06), l * (0.85 + rr() * 0.1)));
+    const l = 0.8 + rr() * 0.22;
+    im.setColorAt(i, c.setRGB(l, l * (0.95 + rr() * 0.05), l * (0.8 + rr() * 0.12)));
   }
   im.instanceMatrix.needsUpdate = true; im.instanceColor.needsUpdate = true;
   im.computeBoundingBox(); im.computeBoundingSphere();
@@ -516,7 +531,7 @@ export function fries(n, seed, placeFn, { thick = 0.03 } = {}) {
 
 /** Petits éclats (oignon crispy, persil, miettes, coco…) en InstancedMesh. */
 export function bits(n, seed, mat, placeFn, { seg = 5, colorFn = null, flat = 0.4 } = {}) {
-  const g = lump({ seg, amp: 0.35, freq: 1.8, seed, scale: [1, flat, 1] });
+  const g = lump({ seg, amp: 0.35, freq: 1.8, seed, scale: [1, flat, 1], rings: Math.max(3, seg - 2) });
   paint(g, () => C('#ffffff'));
   const im = new THREE.InstancedMesh(g, mat, n);
   const rr = rng(seed + 1), m = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), p = new THREE.Vector3(), s = new THREE.Vector3(), c = new THREE.Color();
@@ -542,3 +557,35 @@ export function walnuts(fp, { seed = 31, n = 7, y = 0 } = {}) {
 }
 
 export { mixC, C as colorOf, mesh };
+
+/** Tas de feuilles de salade frisée (kapsalone) : plusieurs petites feuilles inclinées en dôme. */
+export function leafHeap(R, { seed = 33, n = 6, size = 0.15, mound = 0.08 } = {}) {
+  const K = kit();
+  const P = scatter(R, n, seed, { margin: 0.55, minD: size * 0.9 });
+  const geos = P.map(([x, z, k], i) => {
+    const g = lettuce({ L: 0, r: size * (0.85 + k * 0.3) }, { seed: seed + i * 7, over: 0, mound: 0.025, segs: 56, rings: 6 }).obj.geometry;
+    const d = Math.hypot(x, z) + 1e-6;
+    return place(g, [x, mound * (1 - Math.min(1, d / (R(Math.atan2(z, x)) * 0.8))) + i * 0.004, z], [(-z / d) * 0.45 * (0.4 + k), k * 6, (x / d) * 0.45 * (0.4 + k)]);
+  });
+  return { obj: mesh(merge(geos, true), K.M.lettuce), h: mound + 0.04 };
+}
+
+/** Flaques / éclaboussures de sauce brillante (plusieurs petites nappes + coulures). */
+export function saucePuddles(R, id, { seed = 35, n = 6, size = 0.12, th = 0.016, y = 0, margin = 0.7, drips = 1 } = {}) {
+  const P = scatter(R, n, seed, { margin, minD: size * 1.1 });
+  const rr = rng(seed + 3);
+  const geos = [];
+  P.forEach(([x, z, k], i) => {
+    const r0 = size * (0.7 + k * 0.6);
+    const Rb = noisyR(() => r0, 0.22, 2.5, seed + i * 5);
+    geos.push(place(slab({
+      R: Rb, segs: 40, rings: 5, sideRows: 3, bulge: th * 0.5, tile: 0.3,
+      top: (xx, zz, kk) => th * (0.4 + 0.6 * (1 - kk * kk)) + vn2(xx * 20, zz * 20, seed + i) * 0.003, bot: 0,
+    }), [x, y, z], [0, 0, 0]));
+    for (let d = 0; d < drips; d++) {
+      const a = rr() * TAU, rad = Rb(a) * 0.9;
+      geos.push(place(dripGeo(0.02 + rr() * 0.04, 0.009 + rr() * 0.005, 8), [x + Math.cos(a) * rad, y + th * 0.3, z + Math.sin(a) * rad], [0, -a, 0], [1, 1, 0.7]));
+    }
+  });
+  return { obj: mesh(merge(geos), sauce(id)), h: th };
+}

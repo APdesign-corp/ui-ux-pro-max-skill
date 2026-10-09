@@ -58,7 +58,7 @@ import {
 } from './food-kit.js';
 import {
   bunTop, bunBottom, patty, crispyFillet, meatPieces, sausage, cheese, chevreRounds, lettuce, onionRings,
-  friedOnionRings, pickles, tomatoSlices, sauceSheet, zigzag, drizzle, fries, bits, walnuts, sauce, mixC, colorOf as C, mesh,
+  friedOnionRings, pickles, tomatoSlices, sauceSheet, zigzag, drizzle, fries, bits, walnuts, sauce, leafHeap, saucePuddles, mixC, colorOf as C, mesh,
 } from './food-parts.js';
 
 export const BURGER_IDS = ['ocheesy', 'doublesmash', 'raclette', 'ocrispy', 'opepper', 'chevremiel', 'barbecue', 'bigbinks'];
@@ -106,7 +106,7 @@ function finalize(kind, recipe, defs, { gap = 0.16, spin = 0.25, tilt = 0.05, bo
     layers.push({
       name: d.name, label: d.label, minor: !!d.minor, obj: d.obj,
       base: d.obj.position.clone(), baseRot: d.obj.rotation.clone(),
-      bottom: box.min.y, top: box.max.y, xmax: box.max.x, xmin: box.min.x, zc: (box.min.z + box.max.z) / 2,
+      bottom: box.min.y, top: d.stackTop ?? box.max.y, xmax: box.max.x, xmin: box.min.x, zc: (box.min.z + box.max.z) / 2,
     });
   }
   const n = layers.length;
@@ -197,7 +197,7 @@ function burgerLike(kind, recipe) {
       L_('sauce', 'Sauce poivre', sauceSheet(fp, 'poivre', { seed: sd + 72, scale: 1.0, th: 0.03, drips: 9, dripLen: [0.04, 0.12], support: fp.r * 1.02 }), { sink: 0.012 }));
   } else if (id === 'chevremiel') {
     defs.push(steak('steak', 'Steak haché'), L_('chevre', 'Chèvre', chevreRounds(fp, { seed: sd + 80 })),
-      L_('miel', 'Miel', drizzle(stadiumR(fp.L, fp.r), 'miel', { seed: sd + 81, n: long ? 6 : 5, radius: 0.0075, margin: 0.78, y: 0.004 }), { sink: 0.012 }),
+      L_('miel', 'Miel', honey(fp, sd + 81), { sink: 0.012 }),
       L_('noix', 'Noix', walnuts(fp, { seed: sd + 82, n: long ? 8 : 6 })));
   } else if (id === 'barbecue') {
     defs.push(steak('steak', 'Steak haché'),
@@ -211,6 +211,14 @@ function burgerLike(kind, recipe) {
   defs.push(top);
   stack(defs);
   return finalize(kind, { ...recipe, id }, defs, { gap: long ? 0.15 : 0.17, spin: long ? 0.12 : 0.3 });
+}
+
+/** Miel : fine nappe ambrée translucide avec coulures + deux filets. */
+function honey(fp, seed) {
+  const g = new THREE.Group();
+  g.add(sauceSheet(fp, 'miel', { seed, scale: 0.8, th: 0.01, drips: 6, dripLen: [0.03, 0.07], drapeK: 0.6 }).obj);
+  g.add(drizzle(stadiumR(fp.L * 0.8, fp.r * 0.8), 'miel', { seed: seed + 1, n: 3, radius: 0.0065, y: 0.012, margin: 0.9 }).obj);
+  return { obj: g, h: 0.018 };
 }
 
 // ------------------------------------------------------------------ tacos
@@ -246,15 +254,15 @@ function tacos(recipe) {
   const galH = { obj: mesh(hiGeo, [K.M.tortilla, K.M.tortillaIn]), h: 0 };
   // frites à l'intérieur
   const Rin = superR(A * 0.8, B * 0.75, 4);
-  const fr = fries(54, 311, (i, rr) => {
+  const fr = fries(46, 311, (i, rr) => {
     const a = rr() * TAU, k = Math.sqrt(rr()) * 0.9, x = Math.cos(a) * Rin(a) * k, z = Math.sin(a) * Rin(a) * k;
-    return { p: [x, 0.035 + rr() * 0.05 + (1 - k) * 0.02, z], r: [Math.PI / 2 + (rr() - 0.5) * 0.3, 0, rr() * TAU], len: 0.16 + rr() * 0.12 };
-  });
+    return { p: [x, 0.045 + rr() * 0.05 + (1 - k) * 0.02, z], r: [Math.PI / 2 + (rr() - 0.5) * 0.3, 0, rr() * TAU], len: 0.17 + rr() * 0.12 };
+  }, { thick: 0.042 });
   fr.rotation.set(0, 0, 0);
   // frites couchées : le cylindre (axe Y) est basculé par r.x = π/2 puis tourné par r.z → on corrige : rotation Euler 'XYZ'
   const frites = { obj: fr, h: 0 };
   // viande
-  const vi = meatPieces(superR(A * 0.78, B * 0.72, 4), meat, { seed: 320, y: 0, spread: 0.88, n: meat === 'tandoori' ? 14 : undefined });
+  const vi = meatPieces(superR(A * 0.78, B * 0.72, 4), meat, { seed: 320, y: 0, spread: 0.85, scale: 1.3, n: meat === 'tandoori' ? 11 : meat === 'nuggets' ? 7 : meat === 'tenders' ? 4 : undefined });
   vi.obj.position.y = 0.1;
   // sauce fromagère qui coule (nappe + coulures hors de la galette)
   const Rs = noisyR(superR(A * 1.0, B * 1.0, 4), 0.04, 4, 330);
@@ -284,7 +292,7 @@ function tacos(recipe) {
 function hotdog(recipe) {
   const K = kit();
   const L = 0.5, r = 0.2, fp = { L, r };
-  const H = 0.24, gD = 0.1, gW = 0.07;
+  const H = 0.25, gD = 0.13, gW = 0.095;
   const dome = (x, z) => {
     const d = clamp(stadiumD(x, z, L, r) / r);
     return 0.055 + (H - 0.055) * Math.pow(1 - Math.pow(1 - d, 2.2), 0.5);
@@ -303,25 +311,25 @@ function hotdog(recipe) {
     },
   });
   const pain = { obj: mesh(geo, [K.M.bunSoft, K.M.bunSoft, K.M.bunSoft]), h: H };
-  const sau = sausage({ len: 1.5, rad: 0.07, seed: 410 });
-  const yS = dome(0, 0) - gD + 0.05;
+  const sau = sausage({ len: 1.5, rad: 0.078, seed: 410 });
+  const yS = dome(0, 0) - gD + 0.045;
   sau.obj.position.y = yS;
-  const topS = yS + 0.075; // dessus de la saucisse
+  const topS = yS + 0.08; // dessus de la saucisse
   const fpS = { L: 0.62, r: 0.055 };
   const corn = pickles({ L: 0.5, r: 0.04 }, { seed: 420, n: 5, rad: 0.042 });
   corn.obj.position.y = topS - 0.012;
   const sY = (x) => topS + 0.004 - 0.04 * (x / 0.75) ** 2;
-  const ket = zigzag(fpS, 'ketchup', { seed: 430, yFn: (x) => sY(x) + 0.012, n: 22, amp: 1.2, radius: 0.0125, ext: 0.92 });
-  const mou = zigzag(fpS, 'moutardemiel', { seed: 431, yFn: (x) => sY(x) + 0.03, n: 17, amp: 1.0, radius: 0.0115, ext: 0.86 });
+  const ket = zigzag(fpS, 'ketchup', { seed: 430, yFn: (x) => sY(x) + 0.012, n: 20, amp: 1.25, radius: 0.017, ext: 0.92, flat: 0.6 });
+  const mou = zigzag(fpS, 'moutardemiel', { seed: 431, yFn: (x) => sY(x) + 0.032, n: 15, amp: 1.05, radius: 0.015, ext: 0.86, flat: 0.6 });
   const sauces = new THREE.Group();
   sauces.add(ket.obj, mou.obj);
-  const onion = bits(80, 440, K.M.crispyOnion, (i, rr) => {
-    const x = (rr() - 0.5) * 1.25, z = (rr() - 0.5) * 0.17;
-    return { p: [x, sY(x) + 0.045 + rr() * 0.02, z], s: [0.018 + rr() * 0.01, 0.01, 0.014 + rr() * 0.008] };
+  const onion = bits(95, 440, K.M.crispyOnion, (i, rr) => {
+    const x = (rr() - 0.5) * 1.25, z = (rr() - 0.5) * 0.2;
+    return { p: [x, sY(x) + 0.05 + rr() * 0.025, z], s: [0.03 + rr() * 0.016, 0.013, 0.022 + rr() * 0.012] };
   }, { seg: 6, flat: 0.5, colorFn: (i, rr, c) => c.copy(mixC(C('#ffe0a0'), C('#b0601c'), rr())) });
   const persil = bits(110, 450, K.M.parsley, (i, rr) => {
     const x = (rr() - 0.5) * 1.3, z = (rr() - 0.5) * 0.2;
-    return { p: [x, sY(x) + 0.07 + rr() * 0.015, z], s: [0.011 + rr() * 0.006, 0.0025, 0.008 + rr() * 0.005] };
+    return { p: [x, sY(x) + 0.075 + rr() * 0.015, z], s: [0.015 + rr() * 0.008, 0.003, 0.011 + rr() * 0.006] };
   }, { seg: 5, flat: 0.3, colorFn: (i, rr, c) => c.copy(mixC(C('#3fae2a'), C('#1f6a14'), rr())) });
   const defs = [
     L_('pain', 'Pain', pain, { minor: true }),
@@ -393,34 +401,35 @@ function crousty(recipe) {
   const boite = { obj: box, h: 0 };
   // riz : lit bombé + grains en relief
   const Rr = noisyR(superR(A * 0.92, B * 0.88, 5), 0.02, 3, 501);
-  const riceTop = (x, z, k) => 0.15 + 0.035 * (1 - k * k) + vn2(x * 14, z * 14, 502) * 0.008;
-  const bed = slab({ R: Rr, segs: 80, rings: 10, sideRows: 2, bulge: 0.01, tile: 0.22, top: riceTop, bot: 0.012 });
+  const riceTop = (x, z, k) => 0.15 + 0.035 * (1 - k * k) + vn2(x * 9, z * 9, 502) * 0.016 + vn2(x * 30, z * 30, 504) * 0.005;
+  const bed = slab({ R: Rr, segs: 72, rings: 8, sideRows: 4, bulge: 0.025, tile: 0.13, top: riceTop, bot: (x, z, k) => 0.07 + 0.02 * k * k, sideUV: 's' });
   const riz = new THREE.Group();
   riz.add(mesh(bed, K.M.rice));
-  const grains = new THREE.InstancedMesh(new THREE.SphereGeometry(1, 6, 4), K.M.riceGrain, 260);
+  const NG = 520;
+  const grains = new THREE.InstancedMesh(new THREE.SphereGeometry(1, 5, 3), K.M.riceGrain, NG);
   {
-    const P = scatter(Rr, 260, 503, { margin: 0.95 });
+    const P = scatter(Rr, NG, 503, { margin: 0.97 });
     const m = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), p = new THREE.Vector3(), s = new THREE.Vector3();
     P.forEach(([x, z, k], i) => {
       const kk = Math.hypot(x / (A * 0.92), z / (B * 0.88));
       e.set((k - 0.5) * 0.6, k * TAU * 3, (k - 0.5) * 0.4); q.setFromEuler(e);
-      grains.setMatrixAt(i, m.compose(p.set(x, riceTop(x, z, Math.min(1, kk)) + 0.002, z), q, s.set(0.02, 0.0075, 0.0085)));
+      grains.setMatrixAt(i, m.compose(p.set(x, riceTop(x, z, Math.min(1, kk)) + 0.001 + (k - 0.5) * 0.006, z), q, s.set(0.026, 0.0095, 0.011)));
     });
     grains.instanceMatrix.needsUpdate = true; grains.computeBoundingBox(); grains.computeBoundingSphere();
   }
   riz.add(grains);
   const rizP = { obj: riz, h: 0 };
   // crème fraîche : filets + noisettes
-  const cr = drizzle(superR(A * 0.85, B * 0.8, 4), 'creme', { seed: 510, n: 5, radius: 0.013, yFn: (x, z) => riceTop(x, z, Math.min(1, Math.hypot(x / A, z / B))) + 0.01 });
+  const cr = zigzag({ L: A * 0.5, r: B * 0.65 }, 'creme', { seed: 510, n: 13, radius: 0.014, yFn: (x, z) => riceTop(x, z, Math.min(1, Math.hypot(x / A, z / B))) + 0.008, amp: 0.9, flat: 0.5 });
   const creme = { obj: cr.obj, h: 0 };
   // tenders glacés
-  const td = meatPieces(superR(A * 0.8, B * 0.72, 4), 'tenders', { seed: 520, n: 6, glazed: true, spread: 0.85 });
-  td.obj.position.y = 0.2;
+  const td = meatPieces(superR(A * 0.86, B * 0.8, 4), 'tenders', { seed: 520, n: 9, glazed: true, spread: 0.9, scale: 1.3 });
+  td.obj.position.y = 0.19;
   // sauce aigre-douce : rubans brillants + gouttes + sésame
   const ad = new THREE.Group();
-  const yA = 0.29;
-  const adr = drizzle(superR(A * 0.8, B * 0.7, 4), 'aigredouce', { seed: 530, n: 7, radius: 0.017, y: yA, margin: 0.9 });
-  ad.add(adr.obj);
+  const yA = 0.31;
+  ad.add(zigzag({ L: A * 0.5, r: B * 0.62 }, 'aigredouce', { seed: 530, n: 16, radius: 0.016, y: yA, amp: 0.92, flat: 0.5 }).obj);
+  ad.add(zigzag({ L: A * 0.45, r: B * 0.6 }, 'aigredouce', { seed: 533, n: 9, radius: 0.014, y: yA + 0.006, amp: 0.85, flat: 0.5, along: 'z' }).obj);
   ad.add(bits(70, 531, K.M.sesame, (i, rr) => {
     const a = rr() * TAU, k = Math.sqrt(rr()) * 0.8;
     return { p: [Math.cos(a) * A * k, yA + 0.02 + rr() * 0.01, Math.sin(a) * B * k], s: [0.012, 0.004, 0.007] };
@@ -430,7 +439,7 @@ function crousty(recipe) {
     return { p: [Math.cos(a) * A * k, yA + 0.025, Math.sin(a) * B * k], s: [0.014, 0.006, 0.014] };
   }, { seg: 6, flat: 0.5, colorFn: (i, rr, c) => c.copy(mixC(C('#5cc23a'), C('#2a8a1c'), rr())) }));
   const defs = [
-    L_('boite', "Boîte O'BINKS", boite, { minor: true }),
+    L_('boite', "Boîte O'BINKS", boite, { minor: true, stackTop: H + 0.03 }),
     L_('riz', 'Riz', rizP),
     L_('creme', 'Crème fraîche', creme),
     L_('tenders', 'Tenders', td),
@@ -445,36 +454,38 @@ function kapsalone(recipe) {
   const meat = KAPSALONE_MEATS.includes(recipe.meat) ? recipe.meat : 'poulet';
   const A = 0.58, B = 0.4, H = 0.2;
   const Rb = superR(A, B, 5);
-  const tray = { obj: mesh(trayGeo(Rb, H, { flare: 0.14, lip: 0.02 }), [K.M.foil, K.M.foil, K.M.foil]), h: 0 };
+  const tray = { obj: mesh(trayGeo(Rb, H, { flare: 0.14, lip: 0.02, segs: 80 }), [K.M.foil, K.M.foil, K.M.foil]), h: 0 };
   // frites en monticule
   const Rf = superR(A * 1.0, B * 1.0, 5);
-  const fr = fries(170, 601, (i, rr) => {
+  const fr = fries(120, 601, (i, rr) => {
     const a = rr() * TAU, k = Math.sqrt(rr()) * 0.95, x = Math.cos(a) * Rf(a) * k, z = Math.sin(a) * Rf(a) * k;
     const ytop = 0.2 + 0.07 * (1 - k * k);
-    return { p: [x, 0.03 + rr() * (ytop - 0.03), z], r: [Math.PI / 2 + (rr() - 0.5) * 0.9, 0, rr() * TAU], len: 0.17 + rr() * 0.13 };
-  }, { thick: 0.032 });
+    return { p: [x, 0.035 + rr() * (ytop - 0.035), z], r: [Math.PI / 2 + (rr() - 0.5) * 0.9, 0, rr() * TAU], len: 0.2 + rr() * 0.14 };
+  }, { thick: 0.046 });
   const frites = { obj: fr, h: 0 };
   // cheddar fondu en nappe épaisse avec coulures
-  const Rc = noisyR(superR(A * 0.98, B * 0.98, 5), 0.06, 4, 610);
+  const Rc = noisyR(superR(A * 0.92, B * 0.9, 5), 0.06, 4, 610);
   const cTop = (x, z, k) => 0.25 + 0.055 * (1 - k * k) + vn2(x * 9, z * 9, 611) * 0.01;
-  const cg = slab({ R: Rc, segs: 96, rings: 10, sideRows: 3, bulge: 0.008, tile: 0.4, top: (x, z, k) => cTop(x, z, k) + 0.024, bot: cTop });
+  const cg = slab({ R: Rc, segs: 80, rings: 9, sideRows: 3, bulge: 0.008, tile: 0.4, top: (x, z, k) => cTop(x, z, k) + 0.024, bot: cTop });
   const cgeos = [cg];
   for (let i = 0; i < 10; i++) {
     const a = (i / 10) * TAU + Math.sin(i * 7.1) * 0.3, rad = Rc(a) * 0.97;
-    cgeos.push(place(dripGeo(0.05 + ((i * 37) % 10) / 100, 0.018, 10), [Math.cos(a) * rad, cTop(0, 0, 1) + 0.01, Math.sin(a) * rad], [0, -a, 0], [1, 1, 0.75]));
+    cgeos.push(place(dripGeo(0.03 + ((i * 37) % 10) / 250, 0.018, 10), [Math.cos(a) * rad, cTop(0, 0, 1) + 0.01, Math.sin(a) * rad], [0, -a, 0], [1, 1, 0.75]));
   }
-  const ched = { obj: mesh(merge(cgeos), K.M.cheddar), h: 0 };
+  for (const g of cgeos) paint(g, (x, y, z) => mixC(C('#ffffff'), C('#ffd27a'), clamp(0.5 + vn2(x * 6, z * 6, 612) * 0.6) * 0.6));
+  const ched = { obj: mesh(merge(cgeos, true), K.M.cheddar), h: 0 };
   // viande, tomate, oignon, salade, sauce : posées au-dessus
   const Rm = superR(A * 0.85, B * 0.8, 4);
-  const vi = meatPieces(Rm, meat, { seed: 620, spread: 0.85, n: meat === 'cordonbleu' ? 4 : meat === 'tenders' ? 6 : meat === 'nuggets' ? 11 : undefined });
+  const vi = meatPieces(Rm, meat, { seed: 620, spread: 0.85, scale: 1.25, n: meat === 'cordonbleu' ? 4 : meat === 'tenders' ? 6 : meat === 'nuggets' ? 9 : meat === 'hachee' ? 30 : 11 });
   vi.obj.position.y = 0.32;
   const tom = tomatoSlices(superR(A * 0.8, B * 0.75, 4), { seed: 630, n: 6, rad: 0.095, margin: 0.75 });
   tom.obj.position.y = 0.4;
-  const oi = onionRings({ L: 0.24, r: 0.3 }, { seed: 640, red: true, n: 7 });
+  const oi = onionRings({ L: 0.24, r: 0.3 }, { seed: 640, red: true, n: 5 });
   oi.obj.position.y = 0.44;
-  const sal = lettuce({ L: 0.2, r: 0.32 }, { seed: 650, over: 0.02, mound: 0.06 });
+  const sal = leafHeap(superR(A * 0.85, B * 0.85, 4), { seed: 650, n: 6, size: 0.15, mound: 0.06 });
   sal.obj.position.y = 0.46;
-  const sc = drizzle(superR(A * 0.8, B * 0.75, 4), 'blanche', { seed: 660, n: 6, radius: 0.012, y: 0.56, margin: 0.85 });
+  const heapY = (x, z) => 0.5 + 0.06 * Math.max(0, 1 - Math.hypot(x / (A * 0.7), z / (B * 0.7)));
+  const sc = zigzag({ L: A * 0.35, r: B * 0.5 }, 'blanche', { seed: 660, n: 12, radius: 0.012, yFn: heapY, amp: 0.9 });
   const defs = [
     L_('barquette', 'Barquette', tray, { minor: true }),
     L_('frites', 'Frites', frites),
@@ -615,7 +626,8 @@ function tiramisu(recipe) {
   const rb = 0.24, rt = 0.29, H = 0.6, th = 0.012, base = 0.035;
   const rAt = (y) => lerp(rb, rt, y / H) - th - 0.006;
   const glass = new THREE.Group();
-  glass.add(new THREE.Mesh(cupGeo(rb, rt, H, { th, base }), K.M.glass));
+  const gg = cupGeo(rb, rt, H, { th, base });
+  glass.add(new THREE.Mesh(gg, K.M.glass), new THREE.Mesh(gg, K.M.glassTint));
   const verrine = { obj: glass, h: 0 };
   const layer = (y0, y1, type, seed) => {
     const isCream = type === 'cream';
@@ -659,7 +671,8 @@ function milkshake(recipe) {
   const rAt = (y) => lerp(rb, rt, y / H);
   // gobelet + coulures sur la paroi intérieure
   const cup = new THREE.Group();
-  cup.add(new THREE.Mesh(cupGeo(rb, rt, H, { th, base, lip: 0.012 }), K.M.cupPlastic));
+  const cg = cupGeo(rb, rt, H, { th, base, lip: 0.012 });
+  cup.add(new THREE.Mesh(cg, K.M.cupPlastic), new THREE.Mesh(cg, K.M.glassTint));
   const dg = [];
   for (let i = 0; i < 11; i++) {
     const a = (i / 11) * TAU + Math.sin(i * 3.7) * 0.2;
@@ -715,6 +728,26 @@ function milkshake(recipe) {
     L_('topping', FLAVOR_LABEL[flavor], { obj: top, h: 0 }),
   ];
   return finalize('milkshake', { ...recipe, flavor }, defs, { gap: 0.13, spin: 0.25, tilt: 0.035 });
+}
+
+// ------------------------------------------------------------------ éclairage conseillé
+/**
+ * Éclairage « pub fast-food » conseillé pour les produits (à ajouter au group de la scène) :
+ * key chaude devant-gauche-haut, contre-jour rouge RASANT (faible hauteur, derrière : il ne
+ * rosit pas les dessus), débouchage doux. o = { key, rim, fill, rimColor } (multiplicateurs).
+ * Renvoie un THREE.Group (lumières directionnelles : la position du group n'a pas d'effet,
+ * seules leurs directions comptent).
+ */
+export function createFoodLights(o = {}) {
+  const g = new THREE.Group();
+  g.name = 'food-lights';
+  const key = new THREE.DirectionalLight('#ffd6a8', 2.2 * (o.key ?? 1)); key.position.set(-3.5, 4.5, 6);
+  const rim = new THREE.DirectionalLight(o.rimColor || '#ff2a2a', 3.4 * (o.rim ?? 1)); rim.position.set(4, 1.2, -6);
+  const rim2 = new THREE.DirectionalLight('#ff6a3a', 1.2 * (o.rim ?? 1)); rim2.position.set(-5, 0.8, -4);
+  const fill = new THREE.HemisphereLight('#fff2e2', '#1a0303', 0.45 * (o.fill ?? 1));
+  g.add(key, rim, rim2, fill);
+  g.userData = { key, rim, rim2, fill };
+  return g;
 }
 
 // ------------------------------------------------------------------ point d'entrée

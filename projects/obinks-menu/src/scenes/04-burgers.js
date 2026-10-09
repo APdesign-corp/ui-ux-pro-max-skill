@@ -1,7 +1,7 @@
 // VITRINE PROVISOIRE (agent Food 3D) — à remplacer par l'agent burgers.
 // Montre tous les produits de src/world/food.js : assemblés, puis éclatés (vue éclatée), puis
 // réassemblés, page par page, avec les étiquettes d'ingrédients accrochées aux anchors.
-import { createFood } from '../world/food.js';
+import { createFood, createFoodLights } from '../world/food.js';
 import { E, clamp, seg } from '../core/anim.js';
 import { C } from '../core/type.js';
 
@@ -24,10 +24,7 @@ export default function create(ctx) {
   const { THREE, V } = ctx;
   const group = new THREE.Group();
   // éclairage de test : key chaude + contre-jour rouge + débouchage doux
-  const key = new THREE.DirectionalLight('#ffd2a0', 1.9); key.position.set(-3, 5, 6);
-  const back = new THREE.DirectionalLight('#ff2a2a', 3.2); back.position.set(3, 3, -5);
-  const fill = new THREE.HemisphereLight('#fff0e0', '#200404', 0.35);
-  group.add(key, back, fill);
+  group.add(createFoodLights());
   const pages = PAGES.map((items) => {
     const pg = new THREE.Group();
     const foods = items.map(([kind, recipe], i) => {
