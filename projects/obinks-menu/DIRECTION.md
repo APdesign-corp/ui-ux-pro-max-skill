@@ -9,7 +9,7 @@ on garde **les mêmes couleurs, visuels et textes**.
 ## 0. Règles d'or
 1. **Aucune faute de prix ni de texte** : tout vient de `FACTS.md` (format `10,00€`, virgule).
    Adresse et téléphone RÉELS (fiche Google) : **Rue St Nicolas 460, 4000 Liège** · **0472 65 40 43**.
-   Pas de note/avis ni de statistique.
+   Note Google RÉELLE à afficher (demande du client) : **4,8 ★ — 61 avis Google**. Pas d'autre statistique.
 2. **Appétissant** : gros plans, vapeur/fumée chaude, fromage qui coule, brillance des sauces,
    miettes, croustillant. Les **photos du menu** (découpées dans `assets/menu/`) sont le visuel
    « beauté » ; la **3D procédurale** (`src/world/food.js`) sert aux **vues éclatées**.
@@ -49,7 +49,7 @@ Constantes : `import { C } from '../core/type.js'` (`C.neon` = rouge néon, `C.y
 | 7 | texmex | 31.5 → 38 | TEX-MEX : 8 produits et prix exacts (FACTS §6) |
 | 8 | desserts | 38 → 45.5 | TIRAMISU 4,50€ (4 parfums) · MILKSHAKE 5,00€ (7 parfums) · CRÊPES 5,50€ · GAUFRES 5,50€ (4 parfums chacun) · suppléments fraise / coulis / boule de glace 0,50€ |
 | 9 | drinks | 45.5 → 51 | MOJITOS 5,00€ (Fraise, Violette, Original, Pastèque, Bubble gum) · CANETTES 2,00€ (Coca-Cola cherry, Oasis tropical, Lipton pêche) · SAUCES 0,80€ (10 sauces) |
-| 10 | end | 51 → 57 | (ajout client) la **vraie façade** (`assets/source/facade.png`, à découper/détourer : enseigne O'BINKS FAST FOOD, bandeau TASTE THE DIFFERENCE) + **Rue St Nicolas 460, 4000 Liège** + **0472 65 40 43** + « À EMPORTER · LIVRAISON » · **LIVRAISON PARTOUT** · « On te livre directement chez toi ! » · « Indique ta commande détaillée et ton adresse complète » (petit écran de téléphone où la commande se tape) · **OUVERT 12h – 22h TOUS LES JOURS** · logo + TASTE THE DIFFERENCE · la toute dernière image = la première (boucle) |
+| 10 | end | 51 → 57 | (ajout client) la **vraie façade** (`assets/source/facade.png`, à découper/détourer : enseigne O'BINKS FAST FOOD, bandeau TASTE THE DIFFERENCE) + **Rue St Nicolas 460, 4000 Liège** + **0472 65 40 43** + « À EMPORTER · LIVRAISON » + note **4,8 ★ (61 avis Google)** · **LIVRAISON PARTOUT** · « On te livre directement chez toi ! » · « Indique ta commande détaillée et ton adresse complète » (petit écran de téléphone où la commande se tape) · **OUVERT 12h – 22h TOUS LES JOURS** · logo + TASTE THE DIFFERENCE · la toute dernière image = la première (boucle) |
 
 ## 3. Architecture technique (contrat — fichiers partagés en lecture seule)
 Même moteur que le projet GSM Center (`src/main.js`, `src/engine/*`, `src/core/*`). Un segment =

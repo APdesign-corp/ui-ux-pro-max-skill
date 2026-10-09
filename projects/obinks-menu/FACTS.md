@@ -1,7 +1,7 @@
 # O'BINKS — faits (source : 9 captures du menu fournies par le client, `assets/source/menu-1..9.png`)
 
 **Chaque texte et chaque prix de la vidéo vient de cette liste. Aucune autre information** (pas
-de promo, d'avis ni de statistique inventés).
+de promo ni de statistique inventés).
 Format des prix dans la vidéo : virgule française, symbole collé (`10,00€`, `4,50€`, `0,80€`).
 
 | Élément | Valeur exacte | Capture |
@@ -13,6 +13,7 @@ Format des prix dans la vidéo : virgule française, symbole collé (`10,00€`,
 | Téléphone | **0472 65 40 43** | fiche |
 | Horaires détaillés | lundi → dimanche 12:00–22:00 (confirmé par la fiche) | fiche |
 | Services | À EMPORTER · SE FAIRE LIVRER | fiche |
+| Note Google (demandée par le client) | **4,8 ★ — 61 avis Google** (à afficher tel quel, avec 5 étoiles dont la dernière remplie à 80 %) | fiche |
 | Façade | enseigne ronde « O'BINKS FAST FOOD », bandeau « O'BINKS TASTE THE DIFFERENCE », briques (`assets/source/facade.png`) | photo |
 | Livraison | LIVRAISON PARTOUT · « Grève de bus ? Pas envie de te déplacer ? » · « On te livre directement chez toi ! » · « Indique-nous simplement ta commande détaillée et ton adresse complète, et on s'occupe du reste. » | 9 |
 
