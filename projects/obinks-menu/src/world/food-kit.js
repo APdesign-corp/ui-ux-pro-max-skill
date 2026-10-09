@@ -166,7 +166,7 @@ function buildTextures() {
       k *= 0.9 + 0.1 * smooth(clamp(e / 0.16)); // bords de cellules un peu plus foncés
       if (wp(u, v) < 0.07) k *= 0.86;            // pores
       let c = [k, k * 0.95, k * 0.88];
-      c = mixc(c, [1.0, 0.95, 0.82], line * 0.4);
+      c = mixc(c, [1.0, 0.95, 0.82], line * 0.32);
       return c.map(c255);
     });
     const h = heightField(S, (u, v) => {
@@ -401,7 +401,7 @@ export function kit() {
   const n = (s) => new THREE.Vector2(s, s);
   const M = {};
   // Pains : croûte brillante dorée (dorure à l'œuf) + velours (sheen) ; mie grillée
-  M.crust = P({ vertexColors: true, map: T.bun, normalMap: T.bunN, normalScale: n(0.42), roughness: 0.4, clearcoat: 0.7, clearcoatRoughness: 0.16, sheen: 0.18, sheenColor: new THREE.Color('#ff9a40'), sheenRoughness: 0.45 });
+  M.crust = P({ vertexColors: true, map: T.bun, normalMap: T.bunN, normalScale: n(0.36), roughness: 0.4, clearcoat: 0.7, clearcoatRoughness: 0.16, sheen: 0.18, sheenColor: new THREE.Color('#ff9a40'), sheenRoughness: 0.45 });
   M.crustPlain = P({ vertexColors: true, map: T.crust, normalMap: T.crustN, normalScale: n(0.6), roughness: 0.42, clearcoat: 0.55, clearcoatRoughness: 0.22, sheen: 0.2, sheenColor: new THREE.Color('#ff9a40'), sheenRoughness: 0.5 });
   M.bunSoft = P({ vertexColors: true, map: T.crust, normalMap: T.crustN, normalScale: n(0.4), roughness: 0.5, clearcoat: 0.3, clearcoatRoughness: 0.4, sheen: 0.4, sheenColor: new THREE.Color('#e8b070'), sheenRoughness: 0.55 });
   M.crumb = P({ vertexColors: true, map: T.crumb, normalMap: T.crumbN, normalScale: n(0.9), roughness: 0.85, sheen: 0.25, sheenColor: new THREE.Color('#e8c890'), sheenRoughness: 0.7 });
@@ -436,7 +436,7 @@ export function kit() {
   // verre : uniquement les reflets (mélange additif sur albédo noir) + un voile très léger
   M.glass = P({ color: '#000000', roughness: 0.05, metalness: 0, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, clearcoat: 1, clearcoatRoughness: 0.04, envMapIntensity: 0.9, specularIntensity: 0.8, ior: 1.5 });
   M.glassTint = new THREE.MeshBasicMaterial({ color: '#c8d0d8', transparent: true, opacity: 0.045, depthWrite: false });
-  M.cupPlastic = P({ color: '#000000', roughness: 0.14, metalness: 0, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, clearcoat: 1, clearcoatRoughness: 0.1, envMapIntensity: 0.8, specularIntensity: 0.7 });
+  M.cupPlastic = P({ color: '#000000', roughness: 0.14, metalness: 0, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, clearcoat: 0.8, clearcoatRoughness: 0.1, envMapIntensity: 0.75, specularIntensity: 0.5 });
   // Desserts
   M.cream = P({ vertexColors: true, color: '#d9d2c6', map: T.soft, normalMap: T.softN, normalScale: n(0.4), roughness: 0.5, sheen: 0.35, sheenColor: new THREE.Color('#ffffff'), sheenRoughness: 0.45, clearcoat: 0.2, clearcoatRoughness: 0.35 });
   M.cake = P({ vertexColors: true, map: T.cake, normalMap: T.cakeN, normalScale: n(1.1), roughness: 0.75, sheen: 0.3, sheenColor: new THREE.Color('#d9a066') });

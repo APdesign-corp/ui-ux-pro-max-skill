@@ -2,52 +2,72 @@
 //  O'BINKS — produits 3D PROCÉDURAUX avec VUES ÉCLATÉES (exploded views)
 // ============================================================================
 //
-//  import { createFood, BURGER_IDS, TACOS_MEATS, KAPSALONE_MEATS, TIRAMISU_FLAVORS, MILKSHAKE_FLAVORS } from '../world/food.js';
+//  import { createFood, createFoodLights, BURGER_IDS, TACOS_MEATS, KAPSALONE_MEATS,
+//           TIRAMISU_FLAVORS, MILKSHAKE_FLAVORS } from '../world/food.js';
 //
-//  const f = createFood(kind, recipe = {})   // à appeler dans create() (JAMAIS dans update())
+//  const food = createFood(kind, recipe = {})   // dans create() (JAMAIS dans update())
 //    → {
-//        group,            THREE.Group à ajouter à la scène (unités : un burger fait ~1 de large)
+//        group,            THREE.Group à ajouter à la scène. Unités : un burger fait ~1,1 de large,
+//                          le BAS du produit assemblé est à y = 0, centré en X/Z.
 //        layers,           [{ name, label, minor, obj }] du BAS vers le HAUT
 //                            label = nom de l'ingrédient en français pour les étiquettes
-//                            minor = true pour les couches « secondaires » (talon de pain, contenant,
-//                                    2e steak…) que l'on peut ne pas étiqueter
-//        setExplode(p, t, opts)   p ∈ [0,1] : 0 = produit assemblé, 1 = couches séparées
-//                            verticalement (espacement régulier ENTRE les boîtes englobantes, donc
-//                            aucune interpénétration), légère rotation/flottement selon t (s).
-//                            opts = {
-//                              spread  : 1     multiplie l'écart entre couches (0.5 serré … 2.5 très éclaté)
-//                              anchor  : 'center' | 'bottom' | 'top'  — point fixe de l'éclatement
-//                              stagger : 0     0..0.8 : les couches extérieures partent d'abord
-//                              wobble  : 1     amplitude du flottement / des inclinaisons (0 = figé)
-//                              spin    : 1     amplitude des rotations autour de Y
-//                            }
-//                            Fonction pure de (p, t, opts) : appelable à chaque image, ne crée rien.
-//        anchors,          { [name]: THREE.Object3D } enfant de group : point d'accroche d'étiquette
-//                            au BORD DROIT (+X local) de la couche, à mi-hauteur ; suit l'éclatement.
-//                            anchorsL : idem au bord gauche (−X).  → anchor.getWorldPosition(v) puis f.project
-//        height            hauteur assemblée (le bas du produit est à y = 0, centré en X/Z)
-//        width, depth      emprise X / Z assemblée
-//        gap               écart de base entre couches éclatées (× spread)
-//        explodedHeight(spread = 1)  hauteur totale une fois éclaté (p = 1)
-//        kind, recipe
+//                                    (« Steak haché », « Cheddar fondu », « Sauce poivre »…)
+//                            minor = true pour les couches secondaires (talon de pain, contenant,
+//                                    2e/3e steak…) que l'on peut ne pas étiqueter
+//        setExplode(p, t, opts)
+//                          p ∈ [0,1] : 0 = produit assemblé, 1 = couches séparées verticalement
+//                          (écart régulier ENTRE les boîtes englobantes → aucune interpénétration),
+//                          légère rotation + flottement fonction de t (secondes, ex. f.t).
+//                          opts = {
+//                            spread  : 1     multiplie l'écart (0.5 serré … 2.5 très éclaté)
+//                            anchor  : 'center' | 'bottom' | 'top'  — point fixe de l'éclatement
+//                            stagger : 0     0..0.8 : les couches extérieures partent d'abord
+//                            wobble  : 1     amplitude du flottement / des inclinaisons (0 = figé)
+//                            spin    : 1     amplitude des rotations autour de Y
+//                          }
+//                          Fonction PURE de (p, t, opts) : appelable à chaque image, ne crée rien.
+//        anchors           { [name]: THREE.Object3D } (enfants de group) : point d'accroche d'étiquette
+//                          au BORD DROIT (+X local) de la couche, à mi-hauteur ; suit l'éclatement.
+//                          anchor.getWorldPosition(v) puis f.project([v.x, v.y, v.z]) → [x, y] écran.
+//        anchorsL          idem au bord GAUCHE (−X) — pour des étiquettes à gauche.
+//        height            hauteur assemblée ; width, depth : emprise X / Z assemblée
+//        explodedHeight(spread = 1)  hauteur totale à p = 1 (pour cadrer la caméra)
+//        gap               écart de base entre couches éclatées (× spread) ; kind, recipe
 //      }
 //
-//  KINDS ET RECETTES
-//   'burger'   (pain rond brioché, sésame) et 'sandwich' (pain long) : recipe.id ∈ BURGER_IDS =
-//              ocheesy | doublesmash | raclette | ocrispy | opepper | chevremiel | barbecue | bigbinks
-//   'tacos'    recipe.meat ∈ nuggets | tenders | cordonbleu | tandoori (galette grillée pliée,
-//              frites, viande, sauce fromagère qui coule, sauce au choix)
-//   'hotdog'   pain, saucisse de poulet, cornichon, ketchup moutarde miel, oignon crispy, persil
-//   'crousty'  boîte noire « O'BINKS » ouverte, riz, crème fraîche, tenders, sauce aigre-douce
-//              (recipe.logo = HTMLImageElement facultatif pour le couvercle)
-//   'kapsalone' recipe.meat ∈ poulet | tenders | nuggets | cordonbleu | hachee (barquette alu,
-//              frites, cheddar fondu, viande, tomate, oignon rouge, salade, sauce)
-//   'tiramisu' recipe.flavor ∈ bueno | oreo | raffaello | speculoos (verrine transparente)
-//   'milkshake' recipe.flavor ∈ fraisebanane | oreo | bueno | speculoos | snickers | pistache | raffaello
+//  Réassemblage « avec impact » : animer p de 1 → 0 en E.inCubic, cue 'impact' à p = 0, et
+//  un petit écrasement du holder (scale.y × 0,94 qui revient) — voir src/scenes/04-burgers.js.
 //
-//  Matériaux et textures partagés entre tous les produits (créés une seule fois). Éclairage fourni
-//  par la scène : les produits sont réglés pour une key chaude + contre-jour rouge + env du studio.
-//  Budget < 40 k triangles par produit.
+//  KINDS ET RECETTES (alignés sur les captures du menu)
+//   'burger'    pain rond brioché brillant, craquelé, sésame (InstancedMesh)
+//   'sandwich'  pain long doré            — recipe.id ∈ BURGER_IDS (mêmes recettes) :
+//               ocheesy (steak, cheddar, cornichons, oignons) · doublesmash (2 steaks smashés,
+//               cheddar, oignon rouge, salade) · raclette (steak, raclette coulante, oignon rouge) ·
+//               ocrispy (salade, poulet croustillant, sauce blanche) · opepper (steak, sauce poivre) ·
+//               chevremiel (steak, chèvre gratiné, miel, noix) · barbecue (steak, sauce barbecue,
+//               oignons frits) · bigbinks (3 steaks, double cheddar)
+//   'tacos'     galette grillée pliée (quadrillage doré), frites, viande, sauce fromagère qui coule,
+//               sauce au choix — recipe.meat ∈ TACOS_MEATS = nuggets | tenders | cordonbleu | tandoori
+//   'hotdog'    pain fendu, saucisse de poulet grillée bien visible, cornichons, zigzags ketchup +
+//               moutarde-miel, oignon crispy, persil
+//   'crousty'   boîte noire ouverte « O'BINKS » (recipe.logo = HTMLImageElement, ex.
+//               world.images.logo.img, sinon logo dessiné en Permanent Marker), riz, crème fraîche,
+//               tenders panés, sauce aigre-douce brillante (nappage + filet), sésame, ciboulette
+//   'kapsalone' barquette alu, frites, cheddar fondu, viande, tomate, oignon rouge, salade, sauce —
+//               recipe.meat ∈ KAPSALONE_MEATS = poulet | tenders | nuggets | cordonbleu | hachee
+//   'tiramisu'  verrine transparente (biscuit / crème / biscuit / crème / topping) —
+//               recipe.flavor ∈ TIRAMISU_FLAVORS = bueno | oreo | raffaello | speculoos
+//   'milkshake' gobelet transparent, coulures intérieures, milkshake, chantilly, topping —
+//               recipe.flavor ∈ MILKSHAKE_FLAVORS = fraisebanane | oreo | bueno | speculoos |
+//               snickers | pistache | raffaello
+//
+//  MATÉRIAUX : MeshPhysicalMaterial partagés entre tous les produits (food-kit.js : créés UNE fois,
+//  au 1er createFood, ~3-4 s de textures Canvas procédurales). Clearcoat pour sauces / fromages /
+//  dorure du pain, sheen pour pain et crèmes, cartes de normales (panure, grain du steak, alvéoles,
+//  nervures de salade, craquelin de la brioche). Budget < 40 k triangles par produit
+//  (triangleCount(food) pour vérifier).
+//  ÉCLAIRAGE : fourni par la scène. Conseillé : group.add(createFoodLights()) — key chaude
+//  devant-gauche-haut + contre-jour rouge rasant + débouchage (+ l'env/lumières du studio).
 // ============================================================================
 
 import * as THREE from 'three';
@@ -717,14 +737,14 @@ function milkshake(recipe) {
   bodyGeo.computeVertexNormals();
   const body = { obj: mesh(bodyGeo, creamyMat('shake-' + flavor, D.shake, { speck: !!D.speck })), h: 0 };
   // chantilly : spirale cannelée
-  const turns = 3.2, cH = 0.24, r0 = rAt(H) - 0.06;
+  const turns = 2.6, cH = 0.27, r0 = rAt(H) - 0.075;
   const curve = new THREE.Curve();
   curve.getPoint = (u, target = new THREE.Vector3()) => {
     const a = u * turns * TAU, rr = r0 * Math.pow(1 - u, 0.85) + 0.004;
     return target.set(Math.cos(a) * rr, yTop + 0.03 + cH * Math.pow(u, 0.9), Math.sin(a) * rr);
   };
   const prof = [];
-  for (let i = 0; i < 16; i++) { const a = (i / 16) * TAU, rr = 0.055 * (1 + 0.16 * Math.cos(a * 8)); prof.push([Math.cos(a) * rr, Math.sin(a) * rr]); }
+  for (let i = 0; i < 16; i++) { const a = (i / 16) * TAU, rr = 0.072 * (1 + 0.14 * Math.cos(a * 8)); prof.push([Math.cos(a) * rr, Math.sin(a) * rr]); }
   const ch = sweepGeo(curve, prof, 220, (u) => (1 - 0.5 * u) * smooth(clamp(u * 25)) * (1 - smooth(clamp((u - 0.94) / 0.06))) + 0.02);
   paint(ch, () => C('#ffffff'));
   const chantilly = { obj: mesh(ch, K.M.cream), h: 0 };

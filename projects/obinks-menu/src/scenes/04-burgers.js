@@ -59,11 +59,11 @@ export default function create(ctx) {
     group,
     camera(lt) {
       const sw = Math.sin(lt * 0.35) * 0.25;
-      return V ? { pos: [sw, 1.5, 9.4], target: [0, 0.12, 0], roll: 0, fov: 30 } : { pos: [sw, 2.0, 7.3], target: [0, 0.08, 0], roll: 0, fov: 30 };
+      return V ? { pos: [sw, 1.4, 9.4], target: [0, 0.08, 0], roll: 0, fov: 30 } : { pos: [sw, 1.75, 7.2], target: [0, -0.12, 0], roll: 0, fov: 30 };
     },
     update(f) {
       const { u, W, H } = f;
-      streetBackdrop(f.bg, W, H, f.t, { k: 0.45, lamps: V ? [0.14, 0.86] : [0.1, 0.5, 0.9] });
+      streetBackdrop(f.bg, W, H, f.t, { k: 0.45, lamps: V ? 0 : [0.08, 0.5, 0.92] });
       let pi = PAGES.length - 1;
       for (let i = 0; i < PAGES.length; i++) if (f.lt >= PAGES[i].t0) pi = i;
       pages.forEach((P, i) => { P.g.visible = i === pi; });

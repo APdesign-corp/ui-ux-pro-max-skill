@@ -165,7 +165,7 @@ export function meatPieces(R, type, { seed = 7, n, y = 0, glazed = false, spread
     for (const [x, z, k] of P) {
       const R2 = noisyR(superR(0.11 * scale, 0.075 * scale, 3), 0.06, 3, seed + Math.floor(k * 99));
       const g = slab({
-        R: R2, segs: 40, rings: 6, sideRows: 4, bulge: 0.012 * scale, tile: 0.25,
+        R: R2, segs: 32, rings: 5, sideRows: 4, bulge: 0.012 * scale, tile: 0.25,
         top: (xx, zz) => 0.05 * scale + vn2(xx * 25, zz * 25, seed) * 0.005,
         bot: (xx, zz) => vn2(xx * 25, zz * 25, seed + 3) * 0.003,
         color: () => C('#ffffff'),
@@ -296,9 +296,10 @@ export function chevreRounds(fp, { seed = 13, n } = {}) {
       top: (xx, zz) => 0.05 + vn2(xx * 40, zz * 40, seed) * 0.003, bot: 0,
       color: (xx, yy, zz, part, kk) => {
         if (part === 1) return mixC(C('#f2eee6'), C('#c9c0ae'), 0.5);
-        const spot = vn2(xx * 30 + x * 9, zz * 30, seed + 5);
-        if (part === 0 && kk > 0.86) return C('#e8e2d4');
-        return part === 0 ? mixC(C('#fcf5e4'), C('#d4892e'), smooth(clamp(spot * 1.1 + 0.55 * (1 - kk * kk) - 0.05)) * 0.8) : C('#f3eee2');
+        const spot = vn2(xx * 22 + x * 9, zz * 22 + z * 7, seed + 5) * 0.6 + vn2(xx * 60, zz * 60, seed + 6) * 0.4;
+        if (part === 0 && kk > 0.9) return C('#efe9da');
+        // dessus gratiné : doré au centre, marbré, bord blanc crémeux
+        return part === 0 ? mixC(C('#fcf5e4'), C('#a4561a'), smooth(clamp(1.05 * Math.pow(1 - kk * kk, 0.5) + spot * 0.35 - 0.1)) * 0.92) : C('#f3eee2');
       },
     });
     geos.push(place(g, [x, 0, z], [0.05 * (k - 0.5), k * 6, 0.05 * (0.5 - k)]));
