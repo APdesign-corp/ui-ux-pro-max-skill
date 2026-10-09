@@ -109,8 +109,6 @@ function finish(g, t, dark = false) {
   const vg = g.createRadialGradient(W / 2, H / 2, H * 0.32, W / 2, H / 2, H * 0.75);
   vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, dark ? 'rgba(10,6,4,0.55)' : 'rgba(90,60,40,0.16)');
   g.fillStyle = vg; g.fillRect(0, 0, W, H);
-}
-function grain(g, t) {
   g.save(); g.globalCompositeOperation = 'overlay';
   const ox = Math.floor((t * 97) % 512), oy = Math.floor((t * 61) % 512);
   for (let x = -ox; x < W; x += 512) for (let y = -oy; y < H; y += 512) g.drawImage(GRAIN, x, y);
@@ -147,18 +145,8 @@ function revealText(g, str, x, y, size, fam, p, o = {}) {
   if (o.mask !== false) { g.beginPath(); g.rect(x0 - 40, y - size * 1.3, (w + 80) * E.out(p), size * 1.9); g.clip(); }
   g.fillStyle = o.color || C.text;
   g.fillText(str, x, y + (1 - E.out(p)) * size * 0.25);
-  if (o.foil) foilPass(g, str, x0, w, x, y + (1 - E.out(p)) * size * 0.25, size, p);
   g.restore();
   return w;
-}
-// balayage lumineux doré sur un texte déjà posé (même police / alignement courants)
-function foilPass(g, str, x0, w, dx, y, size, p, period = 3.2) {
-  const T = (window.__t || 0) * 1;
-  const ph = ((T / period) % 1) * 1.6 - 0.3;
-  const cx = x0 + w * ph;
-  const lg = g.createLinearGradient(cx - size * 1.4, y - size, cx + size * 1.4, y);
-  lg.addColorStop(0, 'rgba(255,236,190,0)'); lg.addColorStop(0.5, `rgba(255,236,190,${0.85 * clamp(p)})`); lg.addColorStop(1, 'rgba(255,236,190,0)');
-  g.fillStyle = lg; g.fillText(str, dx, y);
 }
 // lettres une à une (fondu + resserrement)
 function lettersIn(g, str, x, y, size, fam, t, o = {}) {
@@ -173,7 +161,6 @@ function lettersIn(g, str, x, y, size, fam, t, o = {}) {
     g.globalAlpha = k * (o.alpha ?? 1);
     g.fillStyle = o.color || C.ink;
     g.fillText(ch, cx, y + (1 - k) * size * 0.18);
-    if (o.foil) foilPass(g, ch, x - total / 2, total, cx, y + (1 - k) * size * 0.18, size, k);
     cx += ws[i] + tr;
   });
   g.restore();
@@ -205,7 +192,7 @@ function roundRect(g, x, y, w, h, r) { g.beginPath(); g.roundRect(x, y, w, h, r)
 function sectionTitle(g, lt, kicker, title, y, dark = false, sub) {
   const col = dark ? C.goldL : C.gold;
   revealText(g, kicker, W / 2, y, 30, F.sans, seg(lt, 0.1, 0.8), { weight: 500, track: 9, color: col });
-  revealText(g, title, W / 2, y + 92, 82, F.serif, seg(lt, 0.25, 1.1), { weight: 500, color: dark ? C.ivory : C.ink, foil: true });
+  revealText(g, title, W / 2, y + 92, 82, F.serif, seg(lt, 0.25, 1.1), { weight: 500, color: dark ? C.ivory : C.ink });
   goldLine(g, W / 2, y + 130, 420, seg(lt, 0.5, 1.4), true, col);
   if (sub) revealText(g, sub, W / 2, y + 196, 46, F.serif, seg(lt, 0.7, 1.5), { style: 'italic', color: dark ? C.cream : C.choc });
 }
@@ -296,7 +283,7 @@ add('ouverture', 8.4, (g, lt) => {
   }
   // SETÍLA (point doré sur le Í comme le logo)
   g.save(); g.globalAlpha = 1 - out;
-  const tw = lettersIn(g, 'SETÍLA', W / 2, 395, 132, F.logo, lt - 0.15, { color: C.ink, trackFrom: 70, track: 22, stagger: 0.09, foil: true });
+  const tw = lettersIn(g, 'SETÍLA', W / 2, 395, 132, F.logo, lt - 0.15, { color: C.ink, trackFrom: 70, track: 22, stagger: 0.09 });
   const dk = E.back(seg(lt, 1.2, 1.7));
   if (dk > 0) { g.fillStyle = C.gold; g.beginPath(); g.arc(W / 2 + tw * 0.08, 262 + (1 - dk) * -30, 8 * dk, 0, 6.283); g.fill(); }
   sparkle(g, W / 2 + tw / 2 + 24, 300, 7, win(lt, 1.4, 1.8, 2.2, 2.9));
@@ -330,7 +317,7 @@ add('ouverture', 8.4, (g, lt) => {
 add('accroche', 4.2, (g, lt) => {
   background(g, lt, 'choc');
   dust(g, lt, 0.9);
-  revealText(g, 'La beauté du regard,', W / 2, 860, 120, F.script, seg(lt, 0.2, 1.4), { color: C.goldL, foil: true });
+  revealText(g, 'La beauté du regard,', W / 2, 860, 120, F.script, seg(lt, 0.2, 1.4), { color: C.goldL });
   revealText(g, 'sublimée avec passion.', W / 2, 1000, 74, F.serif, seg(lt, 0.9, 2.0), { style: 'italic', weight: 400, color: C.ivory });
   goldLine(g, W / 2, 1080, 300, seg(lt, 1.4, 2.4), true, C.goldL);
   sparkle(g, W / 2 + 330, 760, 8, win(lt, 1.2, 1.6, 2.4, 3.2));
@@ -414,7 +401,7 @@ add('papouilles', 8, (g, lt) => {
   background(g, lt, 'choc');
   const fk = E.out(seg(lt, 0.2, 1.2));
   photoFrame(g, IMG['papouilles-ambiance'], 90, 300, W - 180, 520, { zoom: 1.04 + 0.06 * seg(lt, 0, 8), alpha: fk, fy: 0.5 });
-  revealText(g, 'Papouilles', W / 2, 990, 150, F.script, seg(lt, 0.7, 1.7), { color: C.goldL, foil: true });
+  revealText(g, 'Papouilles', W / 2, 990, 150, F.script, seg(lt, 0.7, 1.7), { color: C.goldL });
   revealText(g, 'Un moment rien qu’à vous…', W / 2, 1065, 48, F.serif, seg(lt, 1.2, 2.0), { style: 'italic', color: C.cream });
   revealText(g, 'RELAXATION  •  BIEN-ÊTRE  •  ÉVASION', W / 2, 1135, 28, F.sans, seg(lt, 1.6, 2.4), { weight: 500, track: 5, color: C.goldL });
   [['15 min', '15€', '(après un soin)'], ['30 min', '25€', ''], ['45 min', '35€', '']].forEach(([a, b, c], i) => {
@@ -436,7 +423,7 @@ add('formations', 6, (g, lt) => {
   background(g, lt);
   revealText(g, 'LE TEMPS DU CHANGEMENT EST ARRIVÉ', W / 2, 400, 28, F.sans, seg(lt, 0.1, 0.8), { weight: 500, track: 6, color: C.gold });
   revealText(g, 'DEVENEZ VOTRE', W / 2, 560, 92, F.serif, seg(lt, 0.3, 1.1), { weight: 500, color: C.ink });
-  revealText(g, 'PROPRE BOSS GIRL', W / 2, 670, 92, F.serif, seg(lt, 0.5, 1.3), { weight: 500, color: C.ink, foil: true });
+  revealText(g, 'PROPRE BOSS GIRL', W / 2, 670, 92, F.serif, seg(lt, 0.5, 1.3), { weight: 500, color: C.ink });
   revealText(g, 'Formations Professionnelles', W / 2, 810, 96, F.script, seg(lt, 1.0, 2.0), { color: C.choc });
   const bk = E.out(seg(lt, 1.6, 2.3));
   g.fillStyle = rgba(C.powder, 0.95 * bk); g.fillRect(W / 2 - 440 * bk, 880, 880 * bk, 76);
@@ -460,7 +447,7 @@ function formation(id, title, icons, extraTop) {
       y += 90;
     }
     revealText(g, 'DEVENEZ EXPERTE EN', W / 2, y + 30, 30, F.sans, seg(lt, 0.1, 0.7), { weight: 500, track: 6, color: C.gold });
-    title.forEach((l, i) => revealText(g, l, W / 2, y + 130 + i * 98, 96, F.serif, seg(lt, 0.25 + i * 0.15, 1.1 + i * 0.15), { weight: 500, color: C.ink, foil: true }));
+    title.forEach((l, i) => revealText(g, l, W / 2, y + 130 + i * 98, 96, F.serif, seg(lt, 0.25 + i * 0.15, 1.1 + i * 0.15), { weight: 500, color: C.ink }));
     y += 130 + title.length * 98;
     revealText(g, 'Formations Professionnelles', W / 2, y + 20, 72, F.script, seg(lt, 0.8, 1.6), { color: C.choc });
     y += 90;
@@ -505,7 +492,7 @@ add('f-fin', 5.5, (g, lt) => {
 add('avis-titre', 4, (g, lt) => {
   background(g, lt);
   revealText(g, 'ELLES EN PARLENT', W / 2, 760, 32, F.sans, seg(lt, 0.1, 0.8), { weight: 500, track: 10, color: C.gold });
-  revealText(g, 'Avis clientes', W / 2, 920, 150, F.script, seg(lt, 0.3, 1.4), { color: C.choc, foil: true });
+  revealText(g, 'Avis clientes', W / 2, 920, 150, F.script, seg(lt, 0.3, 1.4), { color: C.choc });
   goldLine(g, W / 2, 990, 420, seg(lt, 0.9, 1.8));
   revealText(g, 'Messages authentiques, reproduits mot pour mot', W / 2, 1070, 40, F.serif, seg(lt, 1.3, 2.1), { style: 'italic', color: C.text });
   for (let i = 0; i < 5; i++) { const k = E.back(seg(lt, 1.6 + i * 0.12, 2.0 + i * 0.12)); if (k > 0) { g.save(); g.translate(W / 2 - 160 + i * 80, 1180); g.scale(k, k); star(g, 0, 0, 26, C.gold); g.restore(); } }
@@ -535,8 +522,6 @@ AVIS.forEach((a, idx) => {
     const ck = E.out(seg(lt, 0.25, 1.0));
     const cy = (band ? 610 : 280) + (1 - ck) * 50;
     g.save(); g.globalAlpha = ck;
-    const flip = E.out(seg(lt, 0.25, 0.95)), cmy = (cy + SAFE.b) / 2;
-    g.translate(W / 2, cmy); g.scale(lerp(0.35, 1, flip), 1); g.rotate(0.004 * Math.sin(lt * 0.9)); g.translate(-W / 2, -cmy + 5 * Math.sin(lt * 1.1));
     g.shadowColor = 'rgba(80,50,30,0.18)'; g.shadowBlur = 40; g.shadowOffsetY = 16;
     g.fillStyle = '#fffdf9'; roundRect(g, 70, cy, W - 140, SAFE.b - cy - 10, 34); g.fill();
     g.shadowColor = 'transparent';
@@ -566,7 +551,7 @@ AVIS.forEach((a, idx) => {
 });
 add('mots', 9, (g, lt) => {
   background(g, lt, 'choc');
-  revealText(g, 'Leurs mots', W / 2, 400, 120, F.script, seg(lt, 0.1, 1.0), { color: C.goldL, foil: true });
+  revealText(g, 'Leurs mots', W / 2, 400, 120, F.script, seg(lt, 0.1, 1.0), { color: C.goldL });
   revealText(g, 'EXTRAITS PARTAGÉS PAR SETÍLA', W / 2, 470, 26, F.sans, seg(lt, 0.4, 1.0), { weight: 500, track: 5, color: C.cream });
   MOTS.forEach((m, i) => {
     const k = E.out(seg(lt, 0.8 + i * 0.35, 1.4 + i * 0.35));
@@ -589,7 +574,7 @@ add('final', 12, (g, lt) => {
   rg.addColorStop(0, 'rgba(225,200,155,0.35)'); rg.addColorStop(1, 'rgba(225,200,155,0)');
   g.fillStyle = rg; g.fillRect(0, 0, W, H);
   // 1. nom
-  lettersIn(g, 'SETÌLA', W / 2, 640, 150, F.logo, lt - 0.2, { color: C.ink, trackFrom: 80, track: 26, stagger: 0.08, foil: true });
+  lettersIn(g, 'SETÌLA', W / 2, 640, 150, F.logo, lt - 0.2, { color: C.ink, trackFrom: 80, track: 26, stagger: 0.08 });
   revealText(g, 'S T U D I O', W / 2, 730, 44, F.serif, seg(lt, 0.9, 1.6), { weight: 500, track: 10, color: C.gold });
   goldLine(g, W / 2, 785, 520, seg(lt, 1.1, 2.0));
   revealText(g, 'Beauté du regard & du sourire', W / 2, 880, 78, F.script, seg(lt, 1.5, 2.5), { color: C.choc });
@@ -618,158 +603,32 @@ add('final', 12, (g, lt) => {
   goldLine(g, W / 2, 1375, 620, seg(lt, 6.0, 6.9));
   dust(g, lt, 0.6, C.gold);
   finish(g, lt);
-
+  // fermeture douce
+  const fo = seg(lt, 11.3, 12);
+  if (fo > 0) { g.fillStyle = `rgba(248,242,233,${fo})`; g.fillRect(0, 0, W, H); }
 }, [{ t: 0.2, type: 'logo', gain: 1.0 }, { t: 1.0, type: 'chime', gain: 0.4 }, { t: 3.0, type: 'pop', gain: 0.8 }, { t: 3.5, type: 'type', dur: HANDLE.length * 0.055, gain: 0.35 }, { t: 5.0, type: 'soft', gain: 0.5 }, { t: 5.5, type: 'shimmer', gain: 0.5 }, { t: 10.6, type: 'end', gain: 0.8 }]);
 
-// ------------------------------------------------------------------ horloge + transitions + post-production
+// ------------------------------------------------------------------ horloge
 let acc = 0;
 for (const s of S) { s.start = acc; acc += s.dur; }
 const DURATION = acc;
-// transition D'ENTRÉE de chaque scène (toutes différentes, la formatrice n'est jamais déformée)
-const TR = { accroche: 'flash', extensions: 'iris', rehaussement: 'zoom', browlift: 'wipe', strass: 'flash', papouilles: 'zoom',
-  formations: 'wipe', 'f-extensions': 'flip', 'f-browlift': 'flip', 'f-blanchiment': 'flip', 'f-fin': 'zoom', 'avis-titre': 'iris',
-  mots: 'flash', final: 'iris' };
-S.forEach((sc, i) => { sc.trans = TR[sc.id] || (sc.id.startsWith('avis-') ? (i % 2 ? 'slide' : 'zoom') : 'fade'); });
-const H2 = 0.38; // demi-durée de transition (s)
-
-const mk = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
-let SA, SB, gA, gB, FXC, gFX, BLC, gBL, BOKEH;
-function initPost() {
-  SA = mk(W, H); SB = mk(W, H); gA = SA.getContext('2d'); gB = SB.getContext('2d');
-  FXC = mk(W, H); gFX = FXC.getContext('2d'); BLC = mk(W / 4, H / 4); gBL = BLC.getContext('2d');
-  // orbes de lumière (bokeh) pré-rendus
-  BOKEH = [64, 110, 160].map((r) => { const c = mk(r * 2, r * 2), g = c.getContext('2d'); const rg = g.createRadialGradient(r, r, r * 0.55, r, r, r);
-    rg.addColorStop(0, 'rgba(255,236,200,0.55)'); rg.addColorStop(0.85, 'rgba(255,230,190,0.35)'); rg.addColorStop(1, 'rgba(255,230,190,0)'); g.fillStyle = rg; g.fillRect(0, 0, r * 2, r * 2); return c; });
-}
-function drawScene(g, sc, t) { g.reset(); sc.draw(g, t - sc.start, sc.dur); }
-function blurDraw(g, src, px, alpha = 1) { g.save(); g.globalAlpha = alpha; if (px > 0.4) g.filter = `blur(${px.toFixed(1)}px)`; g.drawImage(src, 0, 0); g.restore(); }
-
-function compose(g, type, k, t) {
-  const e = E.inOut(k);
-  switch (type) {
-    case 'zoom': { // traversée : A s'envole en zoom flouté, B arrive de la profondeur
-      g.save(); g.translate(W / 2, H / 2); g.scale(1 + 0.22 * e, 1 + 0.22 * e); g.translate(-W / 2, -H / 2); blurDraw(g, SA, 16 * e, 1); g.restore();
-      g.save(); g.translate(W / 2, H / 2); g.scale(0.9 + 0.1 * e, 0.9 + 0.1 * e); g.translate(-W / 2, -H / 2); blurDraw(g, SB, 16 * (1 - e), e); g.restore();
-      return;
-    }
-    case 'flash': { // coupe sous un éclat de lumière dorée
-      g.drawImage(k < 0.5 ? SA : SB, 0, 0);
-      const f = Math.sin(Math.PI * k);
-      const rg = g.createRadialGradient(W / 2, H * 0.45, 0, W / 2, H * 0.45, H * 0.8);
-      rg.addColorStop(0, `rgba(255,248,232,${0.95 * f})`); rg.addColorStop(0.5, `rgba(240,215,170,${0.55 * f})`); rg.addColorStop(1, `rgba(220,190,140,${0.15 * f})`);
-      g.fillStyle = rg; g.fillRect(0, 0, W, H);
-      return;
-    }
-    case 'wipe': { // vague dorée diagonale
-      g.drawImage(SA, 0, 0);
-      const pos = lerp(-0.3, 1.3, e) * (W + H);
-      g.save(); g.beginPath(); g.moveTo(0, 0);
-      for (let y = 0; y <= H; y += 40) { const x = pos - y + 60 * Math.sin(y * 0.006 + t * 3); g.lineTo(clamp(x, -10, W + 10), y); }
-      g.lineTo(-10, H); g.closePath(); g.clip(); g.drawImage(SB, 0, 0); g.restore();
-      gFX.save(); gFX.lineWidth = 10; gFX.strokeStyle = 'rgba(240,210,150,0.95)'; gFX.beginPath();
-      for (let y = 0; y <= H; y += 40) { const x = pos - y + 60 * Math.sin(y * 0.006 + t * 3); y ? gFX.lineTo(x, y) : gFX.moveTo(x, y); }
-      gFX.stroke(); gFX.restore();
-      return;
-    }
-    case 'flip': { // carte qui se retourne (pseudo-3D)
-      const a = k < 0.5 ? SA : SB, q = k < 0.5 ? Math.cos(Math.PI * k) : -Math.cos(Math.PI * k);
-      g.fillStyle = '#2b1d15'; g.fillRect(0, 0, W, H);
-      g.save(); g.translate(W / 2, H / 2); g.scale(Math.max(0.02, q), 1 - 0.06 * (1 - q)); g.translate(-W / 2, -H / 2); g.drawImage(a, 0, 0);
-      g.fillStyle = `rgba(30,18,10,${0.5 * (1 - q)})`; g.fillRect(0, 0, W, H); g.restore();
-      return;
-    }
-    case 'iris': { // cercle qui s'ouvre, anneau doré
-      g.drawImage(SA, 0, 0);
-      const r = E.inOut(k) * Math.hypot(W, H) * 0.6;
-      g.save(); g.beginPath(); g.arc(W / 2, H * 0.45, Math.max(1, r), 0, 6.283); g.clip(); g.drawImage(SB, 0, 0); g.restore();
-      gFX.save(); gFX.strokeStyle = `rgba(245,215,160,${Math.sin(Math.PI * k)})`; gFX.lineWidth = 8; gFX.beginPath(); gFX.arc(W / 2, H * 0.45, Math.max(1, r), 0, 6.283); gFX.stroke(); gFX.restore();
-      return;
-    }
-    case 'slide': { // poussée verticale avec flou de mouvement
-      const m = 22 * Math.sin(Math.PI * k);
-      g.save(); g.translate(0, -H * 0.35 * e); blurDraw(g, SA, m, 1 - e * 0.6); g.restore();
-      g.save(); g.translate(0, H * 0.35 * (1 - e)); blurDraw(g, SB, m, e); g.restore();
-      return;
-    }
-    default: g.drawImage(SA, 0, 0); blurDraw(g, SB, 0, e);
-  }
-}
-
-// gerbes de paillettes / flares sur les temps forts (dérivés des cues)
-const BURST = { logo: 1.2, chime: 0.6, pop: 0.8, impact: 0.9, end: 1.0 };
-const BURST_POS = { ouverture: [0.5, 0.17], final: [0.5, 0.31], 'avis-titre': [0.5, 0.62], strass: [0.5, 0.4] };
-function bursts(t) {
-  for (const c of ALLCUES) {
-    const amp = BURST[c.type]; if (!amp) continue;
-    const dt = t - c.t; if (dt < 0 || dt > 1.8) continue;
-    const [px, py] = c.type === 'pop' && c.seg === 'final' ? [0.36, 0.54] : (BURST_POS[c.seg] || [0.5, 0.45]);
-    const r = rng(Math.floor(c.t * 1000));
-    const n = Math.round(46 * amp);
-    for (let i = 0; i < n; i++) {
-      const a = r() * 6.283, sp = (180 + r() * 520) * amp, life = 0.8 + r() * 1.0;
-      if (dt > life) continue;
-      const q = dt / life, d = sp * (1 - Math.pow(1 - q, 2.4)) * 0.9;
-      const x = px * W + Math.cos(a) * d, y = py * H + Math.sin(a) * d + 120 * q * q;
-      sparkle(gFX, x, y, 2.2 + r() * 3.5, (1 - q) * 0.9);
-    }
-    // flare anamorphique
-    if (c.type === 'logo' || c.type === 'end') {
-      const f = Math.exp(-dt / 0.5) * amp;
-      gFX.save(); gFX.translate(px * W, py * H); gFX.scale(1, 0.03);
-      const rg = gFX.createRadialGradient(0, 0, 0, 0, 0, W * 0.7); rg.addColorStop(0, `rgba(255,236,190,${0.9 * f})`); rg.addColorStop(1, 'rgba(255,236,190,0)');
-      gFX.fillStyle = rg; gFX.fillRect(-W, -W, W * 2, W * 2); gFX.restore();
-      const rg2 = gFX.createRadialGradient(px * W, py * H, 0, px * W, py * H, 160); rg2.addColorStop(0, `rgba(255,246,225,${0.8 * f})`); rg2.addColorStop(1, 'rgba(255,246,225,0)');
-      gFX.fillStyle = rg2; gFX.fillRect(px * W - 160, py * H - 160, 320, 320);
-    }
-  }
-}
-function lightLeaks(g, t, boost) {
-  g.save(); g.globalCompositeOperation = 'screen';
-  const leaks = [[0.1, 0.2, '255,190,130'], [0.9, 0.75, '255,215,160']];
-  leaks.forEach(([x, y, col], i) => {
-    const a = 0.045 + 0.16 * boost + 0.02 * Math.sin(t * 0.7 + i * 2);
-    const cx = (x + 0.15 * Math.sin(t * 0.18 + i * 3)) * W, cy = (y + 0.08 * Math.cos(t * 0.22 + i)) * H;
-    const rg = g.createRadialGradient(cx, cy, 0, cx, cy, W * 0.9); rg.addColorStop(0, `rgba(${col},${a})`); rg.addColorStop(1, `rgba(${col},0)`);
-    g.fillStyle = rg; g.fillRect(0, 0, W, H);
-  });
-  // orbes flous en avant-plan (parallaxe lente)
-  const r = rng(5);
-  for (let i = 0; i < 6; i++) {
-    const sp = BOKEH[i % 3], sx = r(), sy = r(), v = 0.01 + r() * 0.025, ph = r() * 6.28;
-    const x = ((sx + t * v) % 1.2 - 0.1) * W, y = (sy * 1.1 - 0.05) * H + 30 * Math.sin(t * 0.4 + ph);
-    g.globalAlpha = Math.max(0, 0.07 + 0.05 * Math.sin(t * 0.8 + ph) + 0.12 * boost);
-    g.drawImage(sp, x - sp.width / 2, y - sp.height / 2);
-  }
-  g.restore();
-}
-let ALLCUES = [];
+const TRANS = 0.5;
 function renderFrame(t) {
-  window.__t = t;
   const g = window.__g;
   g.reset();
-  gFX.reset();
-  const i = Math.max(0, S.findIndex((sc) => t >= sc.start && t < sc.start + sc.dur));
-  const sc = S[i] || S[S.length - 1];
-  const prev = S[i - 1], next = S[i + 1];
-  let boost = 0;
-  if (prev && t < sc.start + H2) {
-    const k = seg(t, sc.start - H2, sc.start + H2); boost = Math.sin(Math.PI * k);
-    drawScene(gA, prev, t); drawScene(gB, sc, t); compose(g, sc.trans, k, t);
-  } else if (next && t > next.start - H2) {
-    const k = seg(t, next.start - H2, next.start + H2); boost = Math.sin(Math.PI * k);
-    drawScene(gA, sc, t); drawScene(gB, next, t); compose(g, next.trans, k, t);
-  } else {
-    drawScene(gA, sc, t); g.drawImage(SA, 0, 0);
+  const i = Math.max(0, S.findIndex((s) => t >= s.start && t < s.start + s.dur));
+  const s = S[i] || S[S.length - 1];
+  s.draw(g, t - s.start, s.dur);
+  const nx = S[i + 1];
+  if (nx && t > nx.start - TRANS) {
+    // fondu enchaîné + balayage de lumière dorée
+    const k = E.inOut(seg(t, nx.start - TRANS, nx.start));
+    g.save(); g.globalAlpha = k; nx.draw(g, t - nx.start, nx.dur); g.restore();
+    const sx = lerp(-300, W + 300, k);
+    const lg = g.createLinearGradient(sx - 220, 0, sx + 220, 0);
+    lg.addColorStop(0, 'rgba(255,240,210,0)'); lg.addColorStop(0.5, `rgba(255,240,210,${0.35 * Math.sin(Math.PI * k)})`); lg.addColorStop(1, 'rgba(255,240,210,0)');
+    g.fillStyle = lg; g.fillRect(0, 0, W, H);
   }
-  lightLeaks(g, t, boost);
-  bursts(t);
-  // halo (bloom) des lumières et paillettes
-  gBL.reset(); gBL.filter = 'blur(6px)'; gBL.drawImage(FXC, 0, 0, W / 4, H / 4);
-  g.save(); g.globalCompositeOperation = 'lighter'; g.drawImage(FXC, 0, 0); g.globalAlpha = 0.9; g.drawImage(BLC, 0, 0, W, H); g.restore();
-  grain(g, t);
-  // fin : retour doux vers l'ivoire
-  const fo = seg(t, DURATION - 0.7, DURATION);
-  if (fo > 0) { g.fillStyle = `rgba(248,242,233,${fo})`; g.fillRect(0, 0, W, H); }
 }
 
 export async function boot(canvas) {
@@ -777,12 +636,6 @@ export async function boot(canvas) {
   window.__g = canvas.getContext('2d');
   await loadAll();
   prepare();
-  initPost();
-  // sons de transition ajoutés automatiquement selon le type
-  const TSND = { zoom: [['whoosh', -0.35, 0.7, 0.45]], flash: [['chime', -0.02, 0, 0.5], ['impact', -0.02, 0, 0.25]], wipe: [['whoosh', -0.35, 0.8, 0.45], ['shimmer', -0.1, 0, 0.3]],
-    flip: [['whoosh', -0.3, 0.5, 0.35], ['pop', 0, 0, 0.3]], iris: [['shimmer', -0.3, 0, 0.4]], slide: [['whoosh', -0.35, 0.6, 0.3]] };
-  S.forEach((sc, i) => { if (i) (TSND[sc.trans] || []).forEach(([type, dt, dur, gain]) => sc.cues.push({ t: dt, type, dur: dur || undefined, gain, trans: true })); });
   const cues = S.flatMap((s) => s.cues.map((c) => ({ ...c, t: +(c.t + s.start).toFixed(3), seg: s.id })));
-  ALLCUES = cues;
   return { renderFrame, duration: DURATION, fps: 30, clock: S.map((s) => ({ id: s.id, start: s.start, dur: s.dur })), segments: S.map((s) => ({ id: s.id, start: s.start, end: s.start + s.dur })), cues };
 }
