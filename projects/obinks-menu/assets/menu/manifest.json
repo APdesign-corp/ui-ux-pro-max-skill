@@ -1,0 +1,1143 @@
+{
+ "logo": {
+  "file": "logo.png",
+  "w": 968,
+  "h": 398,
+  "src": "menu-8",
+  "label": "Logo O'BINKS (O rouge + BINKS blanc, lettrage brush, liseré blanc)",
+  "box": [
+   106,
+   323,
+   968,
+   398
+  ]
+ },
+ "logo_slogan": {
+  "file": "logo_slogan.png",
+  "w": 509,
+  "h": 298,
+  "src": "menu-5",
+  "label": "Logo O'BINKS + TASTE THE DIFFERENCE (capture 5)",
+  "box": [
+   327,
+   200,
+   509,
+   298
+  ]
+ },
+ "logo_alt": {
+  "file": "logo_alt.png",
+  "w": 711,
+  "h": 263,
+  "src": "menu-6",
+  "label": "Logo O'BINKS (variante, capture 6)",
+  "box": [
+   195,
+   270,
+   711,
+   263
+  ]
+ },
+ "crousty": {
+  "file": "crousty.png",
+  "w": 670,
+  "h": 531,
+  "src": "menu-1",
+  "label": "Crousty Binks : barquette noire O'BINKS, riz, tenders, sauces",
+  "box": [
+   208,
+   476,
+   670,
+   531
+  ]
+ },
+ "coca_cherry": {
+  "file": "coca_cherry.png",
+  "w": 198,
+  "h": 408,
+  "src": "menu-1",
+  "label": "Canette Coca-Cola cherry (boisson du Crousty Binks)",
+  "box": [
+   41,
+   468,
+   198,
+   408
+  ],
+  "fadeBottom": true
+ },
+ "tacos_nuggets": {
+  "file": "tacos_nuggets.png",
+  "w": 249,
+  "h": 252,
+  "src": "menu-1",
+  "label": "Tacos nuggets",
+  "box": [
+   22,
+   1566,
+   249,
+   252
+  ]
+ },
+ "tacos_tenders": {
+  "file": "tacos_tenders.png",
+  "w": 266,
+  "h": 258,
+  "src": "menu-1",
+  "label": "Tacos tenders",
+  "box": [
+   281,
+   1562,
+   266,
+   258
+  ]
+ },
+ "tacos_cordonbleu": {
+  "file": "tacos_cordonbleu.png",
+  "w": 263,
+  "h": 258,
+  "src": "menu-1",
+  "label": "Tacos cordon bleu",
+  "box": [
+   570,
+   1562,
+   263,
+   258
+  ]
+ },
+ "tacos_tandoori": {
+  "file": "tacos_tandoori.png",
+  "w": 268,
+  "h": 258,
+  "src": "menu-1",
+  "label": "Tacos poulet mariné tandoori",
+  "box": [
+   857,
+   1562,
+   268,
+   258
+  ]
+ },
+ "sauce_fromagere": {
+  "file": "sauce_fromagere.png",
+  "w": 184,
+  "h": 143,
+  "src": "menu-1",
+  "label": "Pot de sauce fromagère (tacos)",
+  "box": [
+   300,
+   2057,
+   184,
+   143
+  ]
+ },
+ "sauces_tacos": {
+  "file": "sauces_tacos.png",
+  "w": 532,
+  "h": 91,
+  "src": "menu-1",
+  "label": "Rangée de 6 pots de sauce (CHOISIS TA SAUCE, tacos)",
+  "box": [
+   525,
+   2102,
+   532,
+   91
+  ]
+ },
+ "supp_piquante": {
+  "file": "supp_piquante.png",
+  "w": 70,
+  "h": 63,
+  "src": "menu-1",
+  "label": "Icône piment (supplément sauce piquante)",
+  "box": [
+   1050,
+   630,
+   70,
+   63
+  ]
+ },
+ "supp_creme": {
+  "file": "supp_creme.png",
+  "w": 82,
+  "h": 67,
+  "src": "menu-1",
+  "label": "Icône pot de sauce crème (supplément)",
+  "box": [
+   1044,
+   820,
+   82,
+   67
+  ]
+ },
+ "supp_tenders": {
+  "file": "supp_tenders.png",
+  "w": 120,
+  "h": 101,
+  "src": "menu-1",
+  "label": "Icône tender (supplément tenders)",
+  "box": [
+   1008,
+   997,
+   120,
+   101
+  ]
+ },
+ "sandwich_ocheesy": {
+  "file": "sandwich_ocheesy.png",
+  "w": 399,
+  "h": 141,
+  "src": "menu-4",
+  "label": "Sandwich (baguette) O'CHEESY — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   21,
+   452,
+   399,
+   141
+  ],
+  "recipe": "O'CHEESY",
+  "fadeBottom": true
+ },
+ "sandwich_doublesmash": {
+  "file": "sandwich_doublesmash.png",
+  "w": 376,
+  "h": 127,
+  "src": "menu-4",
+  "label": "Sandwich (baguette) DOUBLE SMASH — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   411,
+   466,
+   376,
+   127
+  ],
+  "recipe": "DOUBLE SMASH",
+  "fadeBottom": true
+ },
+ "sandwich_raclette": {
+  "file": "sandwich_raclette.png",
+  "w": 366,
+  "h": 131,
+  "src": "menu-4",
+  "label": "Sandwich (baguette) RACLETTE — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   788,
+   462,
+   366,
+   131
+  ],
+  "recipe": "RACLETTE",
+  "fadeBottom": true
+ },
+ "sandwich_ocrispy": {
+  "file": "sandwich_ocrispy.png",
+  "w": 399,
+  "h": 146,
+  "src": "menu-4",
+  "label": "Sandwich (baguette) O'CRISPY — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   20,
+   745,
+   399,
+   146
+  ],
+  "recipe": "O'CRISPY",
+  "fadeBottom": true
+ },
+ "sandwich_opepper": {
+  "file": "sandwich_opepper.png",
+  "w": 372,
+  "h": 140,
+  "src": "menu-4",
+  "label": "Sandwich (baguette) O'PEPPER — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   415,
+   751,
+   372,
+   140
+  ],
+  "recipe": "O'PEPPER",
+  "fadeBottom": true
+ },
+ "sandwich_chevremiel": {
+  "file": "sandwich_chevremiel.png",
+  "w": 369,
+  "h": 133,
+  "src": "menu-4",
+  "label": "Sandwich (baguette) CHÈVRE MIEL — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   784,
+   758,
+   369,
+   133
+  ],
+  "recipe": "CHÈVRE MIEL",
+  "fadeBottom": true
+ },
+ "sandwich_barbecue": {
+  "file": "sandwich_barbecue.png",
+  "w": 510,
+  "h": 161,
+  "src": "menu-4",
+  "label": "Sandwich (baguette) BARBECUE — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   52,
+   1001,
+   510,
+   161
+  ],
+  "recipe": "BARBECUE",
+  "fadeBottom": true
+ },
+ "sandwich_bigbinks": {
+  "file": "sandwich_bigbinks.png",
+  "w": 514,
+  "h": 111,
+  "src": "menu-4",
+  "label": "Sandwich (baguette) BIG BINKS — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   614,
+   1051,
+   514,
+   111
+  ],
+  "recipe": "BIG BINKS",
+  "fadeBottom": true
+ },
+ "burger_ocheesy": {
+  "file": "burger_ocheesy.png",
+  "w": 272,
+  "h": 135,
+  "src": "menu-4",
+  "label": "Hamburger O'CHEESY — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   108,
+   1419,
+   272,
+   135
+  ],
+  "recipe": "O'CHEESY",
+  "fadeBottom": true
+ },
+ "burger_doublesmash": {
+  "file": "burger_doublesmash.png",
+  "w": 283,
+  "h": 104,
+  "src": "menu-4",
+  "label": "Hamburger DOUBLE SMASH — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   457,
+   1450,
+   283,
+   104
+  ],
+  "recipe": "DOUBLE SMASH",
+  "fadeBottom": true
+ },
+ "burger_raclette": {
+  "file": "burger_raclette.png",
+  "w": 225,
+  "h": 106,
+  "src": "menu-4",
+  "label": "Hamburger RACLETTE — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   838,
+   1448,
+   225,
+   106
+  ],
+  "recipe": "RACLETTE",
+  "fadeBottom": true
+ },
+ "burger_ocrispy": {
+  "file": "burger_ocrispy.png",
+  "w": 312,
+  "h": 119,
+  "src": "menu-4",
+  "label": "Hamburger O'CRISPY — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   75,
+   1717,
+   312,
+   119
+  ],
+  "recipe": "O'CRISPY",
+  "fadeBottom": true
+ },
+ "burger_opepper": {
+  "file": "burger_opepper.png",
+  "w": 296,
+  "h": 121,
+  "src": "menu-4",
+  "label": "Hamburger O'PEPPER — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   447,
+   1715,
+   296,
+   121
+  ],
+  "recipe": "O'PEPPER",
+  "fadeBottom": true
+ },
+ "burger_chevremiel": {
+  "file": "burger_chevremiel.png",
+  "w": 302,
+  "h": 119,
+  "src": "menu-4",
+  "label": "Hamburger CHÈVRE MIEL — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   805,
+   1717,
+   302,
+   119
+  ],
+  "recipe": "CHÈVRE MIEL",
+  "fadeBottom": true
+ },
+ "burger_barbecue": {
+  "file": "burger_barbecue.png",
+  "w": 390,
+  "h": 157,
+  "src": "menu-4",
+  "label": "Hamburger BARBECUE — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   135,
+   1925,
+   390,
+   157
+  ],
+  "recipe": "BARBECUE",
+  "fadeBottom": true
+ },
+ "burger_bigbinks": {
+  "file": "burger_bigbinks.png",
+  "w": 339,
+  "h": 158,
+  "src": "menu-4",
+  "label": "Hamburger BIG BINKS — bas en fondu (masqué par les prix sur le menu)",
+  "box": [
+   707,
+   1924,
+   339,
+   158
+  ],
+  "recipe": "BIG BINKS",
+  "fadeBottom": true
+ },
+ "kapsalone": {
+  "file": "kapsalone.png",
+  "w": 582,
+  "h": 1404,
+  "src": "menu-6",
+  "label": "Kapsalone complet (pile éclatée : salade+sauce, oignon, tomate, cheddar, viande, frites, barquette)",
+  "box": [
+   16,
+   562,
+   582,
+   1404
+  ]
+ },
+ "kapsalone_salade": {
+  "file": "kapsalone_salade.png",
+  "w": 560,
+  "h": 282,
+  "src": "menu-6",
+  "label": "Kapsalone : salade + sauce",
+  "box": [
+   38,
+   562,
+   560,
+   282
+  ],
+  "layer": true
+ },
+ "kapsalone_oignon": {
+  "file": "kapsalone_oignon.png",
+  "w": 535,
+  "h": 158,
+  "src": "menu-6",
+  "label": "Kapsalone : oignon rouge",
+  "box": [
+   63,
+   836,
+   535,
+   158
+  ],
+  "layer": true
+ },
+ "kapsalone_tomate": {
+  "file": "kapsalone_tomate.png",
+  "w": 555,
+  "h": 194,
+  "src": "menu-6",
+  "label": "Kapsalone : tomate",
+  "box": [
+   43,
+   980,
+   555,
+   194
+  ],
+  "layer": true
+ },
+ "kapsalone_cheddar": {
+  "file": "kapsalone_cheddar.png",
+  "w": 566,
+  "h": 150,
+  "src": "menu-6",
+  "label": "Kapsalone : cheddar fondu",
+  "box": [
+   32,
+   1158,
+   566,
+   150
+  ],
+  "layer": true
+ },
+ "kapsalone_viande": {
+  "file": "kapsalone_viande.png",
+  "w": 575,
+  "h": 328,
+  "src": "menu-6",
+  "label": "Kapsalone : viande (poulet)",
+  "box": [
+   23,
+   1290,
+   575,
+   328
+  ],
+  "layer": true
+ },
+ "kapsalone_frites": {
+  "file": "kapsalone_frites.png",
+  "w": 582,
+  "h": 364,
+  "src": "menu-6",
+  "label": "Kapsalone : frites + barquette alu",
+  "box": [
+   16,
+   1602,
+   582,
+   364
+  ],
+  "layer": true
+ },
+ "hotdog": {
+  "file": "hotdog.png",
+  "w": 1161,
+  "h": 873,
+  "src": "menu-5",
+  "label": "Les deux hot dogs (saucisse de poulet, ketchup-moutarde-miel, oignon crispy, persil, cornichon)",
+  "box": [
+   9,
+   835,
+   1161,
+   873
+  ]
+ },
+ "hotdog_front": {
+  "file": "hotdog_front.png",
+  "w": 866,
+  "h": 671,
+  "src": "menu-5",
+  "label": "Hot dog (premier plan)",
+  "box": [
+   9,
+   1037,
+   866,
+   671
+  ]
+ },
+ "hotdog_back": {
+  "file": "hotdog_back.png",
+  "w": 685,
+  "h": 467,
+  "src": "menu-5",
+  "label": "Hot dog (arrière-plan)",
+  "box": [
+   485,
+   835,
+   685,
+   467
+  ]
+ },
+ "hotdog_ing_1": {
+  "file": "hotdog_ing_1.png",
+  "w": 216,
+  "h": 225,
+  "src": "menu-5",
+  "label": "Rond ingrédient hot dog : KETCHUP MOUTARDE MIEL",
+  "box": [
+   24,
+   1826,
+   216,
+   225
+  ],
+  "ingredient": "KETCHUP MOUTARDE MIEL"
+ },
+ "hotdog_ing_2": {
+  "file": "hotdog_ing_2.png",
+  "w": 217,
+  "h": 220,
+  "src": "menu-5",
+  "label": "Rond ingrédient hot dog : SAUCISSE DE POULET",
+  "box": [
+   250,
+   1831,
+   217,
+   220
+  ],
+  "ingredient": "SAUCISSE DE POULET"
+ },
+ "hotdog_ing_3": {
+  "file": "hotdog_ing_3.png",
+  "w": 216,
+  "h": 220,
+  "src": "menu-5",
+  "label": "Rond ingrédient hot dog : OIGNON CRISPY",
+  "box": [
+   479,
+   1831,
+   216,
+   220
+  ],
+  "ingredient": "OIGNON CRISPY"
+ },
+ "hotdog_ing_4": {
+  "file": "hotdog_ing_4.png",
+  "w": 216,
+  "h": 220,
+  "src": "menu-5",
+  "label": "Rond ingrédient hot dog : PERSIL EN DÉCORATION",
+  "box": [
+   705,
+   1831,
+   216,
+   220
+  ],
+  "ingredient": "PERSIL EN DÉCORATION"
+ },
+ "hotdog_ing_5": {
+  "file": "hotdog_ing_5.png",
+  "w": 216,
+  "h": 223,
+  "src": "menu-5",
+  "label": "Rond ingrédient hot dog : CORNICHON",
+  "box": [
+   934,
+   1828,
+   216,
+   223
+  ],
+  "ingredient": "CORNICHON"
+ },
+ "texmex_tenders": {
+  "file": "texmex_tenders.png",
+  "w": 527,
+  "h": 173,
+  "src": "menu-3",
+  "label": "Tenders (barquette)",
+  "box": [
+   57,
+   497,
+   527,
+   173
+  ],
+  "fadeBottom": true
+ },
+ "texmex_nuggets": {
+  "file": "texmex_nuggets.png",
+  "w": 450,
+  "h": 166,
+  "src": "menu-3",
+  "label": "Nuggets (barquette)",
+  "box": [
+   636,
+   534,
+   450,
+   166
+  ],
+  "fadeBottom": true
+ },
+ "texmex_wings": {
+  "file": "texmex_wings.png",
+  "w": 471,
+  "h": 157,
+  "src": "menu-3",
+  "label": "Wings (barquette)",
+  "box": [
+   104,
+   830,
+   471,
+   157
+  ],
+  "fadeBottom": true
+ },
+ "texmex_mozza": {
+  "file": "texmex_mozza.png",
+  "w": 402,
+  "h": 243,
+  "src": "menu-3",
+  "label": "Mozza sticks (fromage filant)",
+  "box": [
+   650,
+   824,
+   402,
+   243
+  ]
+ },
+ "texmex_camembert": {
+  "file": "texmex_camembert.png",
+  "w": 372,
+  "h": 229,
+  "src": "menu-3",
+  "label": "Croq camembert",
+  "box": [
+   136,
+   1118,
+   372,
+   229
+  ]
+ },
+ "texmex_jalapenos": {
+  "file": "texmex_jalapenos.png",
+  "w": 327,
+  "h": 226,
+  "src": "menu-3",
+  "label": "Jalapenos crème",
+  "box": [
+   727,
+   1115,
+   327,
+   226
+  ]
+ },
+ "frites_cheddar": {
+  "file": "frites_cheddar.png",
+  "w": 366,
+  "h": 135,
+  "src": "menu-3",
+  "label": "Frites cheddar bacon",
+  "box": [
+   23,
+   1503,
+   366,
+   135
+  ],
+  "fadeBottom": true
+ },
+ "frites_gaufrette": {
+  "file": "frites_gaufrette.png",
+  "w": 335,
+  "h": 138,
+  "src": "menu-3",
+  "label": "Frites gaufrette",
+  "box": [
+   415,
+   1500,
+   335,
+   138
+  ],
+  "fadeBottom": true
+ },
+ "can_coca": {
+  "file": "can_coca.png",
+  "w": 137,
+  "h": 301,
+  "src": "menu-3",
+  "label": "Canette Coca-Cola cherry",
+  "box": [
+   765,
+   1453,
+   137,
+   301
+  ]
+ },
+ "can_oasis": {
+  "file": "can_oasis.png",
+  "w": 130,
+  "h": 242,
+  "src": "menu-3",
+  "label": "Canette Oasis tropical (bas en fondu)",
+  "box": [
+   899,
+   1450,
+   130,
+   242
+  ],
+  "fadeBottom": true
+ },
+ "can_lipton": {
+  "file": "can_lipton.png",
+  "w": 134,
+  "h": 300,
+  "src": "menu-3",
+  "label": "Canette Lipton pêche (ice tea)",
+  "box": [
+   1022,
+   1456,
+   134,
+   300
+  ]
+ },
+ "sauce_brazil": {
+  "file": "sauce_brazil.png",
+  "w": 182,
+  "h": 81,
+  "src": "menu-3",
+  "label": "Pot de sauce brazil",
+  "box": [
+   54,
+   1883,
+   182,
+   81
+  ]
+ },
+ "sauce_toscane": {
+  "file": "sauce_toscane.png",
+  "w": 182,
+  "h": 81,
+  "src": "menu-3",
+  "label": "Pot de sauce toscane",
+  "box": [
+   271,
+   1883,
+   182,
+   81
+  ]
+ },
+ "sauce_cocktail": {
+  "file": "sauce_cocktail.png",
+  "w": 182,
+  "h": 81,
+  "src": "menu-3",
+  "label": "Pot de sauce cocktail",
+  "box": [
+   495,
+   1883,
+   182,
+   81
+  ]
+ },
+ "sauce_mayonnaise": {
+  "file": "sauce_mayonnaise.png",
+  "w": 182,
+  "h": 81,
+  "src": "menu-3",
+  "label": "Pot de sauce mayonnaise",
+  "box": [
+   713,
+   1883,
+   182,
+   81
+  ]
+ },
+ "sauce_ketchup": {
+  "file": "sauce_ketchup.png",
+  "w": 182,
+  "h": 81,
+  "src": "menu-3",
+  "label": "Pot de sauce ketchup",
+  "box": [
+   929,
+   1883,
+   182,
+   81
+  ]
+ },
+ "sauce_tartare": {
+  "file": "sauce_tartare.png",
+  "w": 182,
+  "h": 90,
+  "src": "menu-3",
+  "label": "Pot de sauce tartare",
+  "box": [
+   54,
+   2055,
+   182,
+   90
+  ]
+ },
+ "sauce_algerienne": {
+  "file": "sauce_algerienne.png",
+  "w": 182,
+  "h": 90,
+  "src": "menu-3",
+  "label": "Pot de sauce algerienne",
+  "box": [
+   273,
+   2055,
+   182,
+   90
+  ]
+ },
+ "sauce_andalouse": {
+  "file": "sauce_andalouse.png",
+  "w": 182,
+  "h": 90,
+  "src": "menu-3",
+  "label": "Pot de sauce andalouse",
+  "box": [
+   495,
+   2055,
+   182,
+   90
+  ]
+ },
+ "sauce_samourai": {
+  "file": "sauce_samourai.png",
+  "w": 182,
+  "h": 90,
+  "src": "menu-3",
+  "label": "Pot de sauce samourai",
+  "box": [
+   714,
+   2055,
+   182,
+   90
+  ]
+ },
+ "sauce_americaine": {
+  "file": "sauce_americaine.png",
+  "w": 182,
+  "h": 90,
+  "src": "menu-3",
+  "label": "Pot de sauce americaine",
+  "box": [
+   931,
+   2055,
+   182,
+   90
+  ]
+ },
+ "tiramisu": {
+  "file": "tiramisu.png",
+  "w": 798,
+  "h": 585,
+  "src": "menu-2",
+  "label": "Tiramisu en verrines (Oreo, Bueno, Raffaello, Spéculoos) + garnitures",
+  "box": [
+   372,
+   276,
+   798,
+   585
+  ]
+ },
+ "milkshake_fraisebanane": {
+  "file": "milkshake_fraisebanane.png",
+  "w": 205,
+  "h": 362,
+  "src": "menu-2",
+  "label": "Milkshake Fraise banane",
+  "box": [
+   0,
+   1145,
+   205,
+   362
+  ],
+  "flavor": "Fraise banane"
+ },
+ "milkshake_oreo": {
+  "file": "milkshake_oreo.png",
+  "w": 163,
+  "h": 308,
+  "src": "menu-2",
+  "label": "Milkshake Oreo",
+  "box": [
+   193,
+   1162,
+   163,
+   308
+  ],
+  "flavor": "Oreo"
+ },
+ "milkshake_bueno": {
+  "file": "milkshake_bueno.png",
+  "w": 169,
+  "h": 332,
+  "src": "menu-2",
+  "label": "Milkshake Bueno",
+  "box": [
+   341,
+   1169,
+   169,
+   332
+  ],
+  "flavor": "Bueno"
+ },
+ "milkshake_speculoos": {
+  "file": "milkshake_speculoos.png",
+  "w": 233,
+  "h": 372,
+  "src": "menu-2",
+  "label": "Milkshake Spéculoos",
+  "box": [
+   458,
+   1134,
+   233,
+   372
+  ],
+  "flavor": "Spéculoos"
+ },
+ "milkshake_snickers": {
+  "file": "milkshake_snickers.png",
+  "w": 177,
+  "h": 319,
+  "src": "menu-2",
+  "label": "Milkshake Snickers",
+  "box": [
+   662,
+   1165,
+   177,
+   319
+  ],
+  "flavor": "Snickers"
+ },
+ "milkshake_pistache": {
+  "file": "milkshake_pistache.png",
+  "w": 188,
+  "h": 321,
+  "src": "menu-2",
+  "label": "Milkshake Pistache",
+  "box": [
+   820,
+   1181,
+   188,
+   321
+  ],
+  "flavor": "Pistache"
+ },
+ "milkshake_raffaello": {
+  "file": "milkshake_raffaello.png",
+  "w": 171,
+  "h": 367,
+  "src": "menu-2",
+  "label": "Milkshake Raffaello",
+  "box": [
+   994,
+   1132,
+   171,
+   367
+  ],
+  "flavor": "Raffaello"
+ },
+ "crepes": {
+  "file": "crepes.png",
+  "w": 403,
+  "h": 443,
+  "src": "menu-2",
+  "label": "Crêpes (Nutella, Spéculoos, Oreo, Bueno)",
+  "box": [
+   351,
+   1686,
+   403,
+   443
+  ]
+ },
+ "gaufre": {
+  "file": "gaufre.png",
+  "w": 506,
+  "h": 419,
+  "src": "menu-2",
+  "label": "Gaufres (dont gaufre sur bâtonnet)",
+  "box": [
+   664,
+   1781,
+   506,
+   419
+  ]
+ },
+ "mojito_fraise": {
+  "file": "mojito_fraise.png",
+  "w": 388,
+  "h": 448,
+  "src": "menu-7",
+  "label": "Mojito Fraise",
+  "box": [
+   98,
+   448,
+   388,
+   448
+  ],
+  "flavor": "Fraise"
+ },
+ "mojito_violette": {
+  "file": "mojito_violette.png",
+  "w": 336,
+  "h": 462,
+  "src": "menu-7",
+  "label": "Mojito Violette",
+  "box": [
+   726,
+   449,
+   336,
+   462
+  ],
+  "flavor": "Violette"
+ },
+ "mojito_original": {
+  "file": "mojito_original.png",
+  "w": 412,
+  "h": 440,
+  "src": "menu-7",
+  "label": "Mojito Original",
+  "box": [
+   92,
+   1107,
+   412,
+   440
+  ],
+  "flavor": "Original"
+ },
+ "mojito_pasteque": {
+  "file": "mojito_pasteque.png",
+  "w": 482,
+  "h": 455,
+  "src": "menu-7",
+  "label": "Mojito Pastèque",
+  "box": [
+   609,
+   1107,
+   482,
+   455
+  ],
+  "flavor": "Pastèque"
+ },
+ "mojito_bubblegum": {
+  "file": "mojito_bubblegum.png",
+  "w": 241,
+  "h": 341,
+  "src": "menu-7",
+  "label": "Mojito Bubble gum",
+  "box": [
+   461,
+   1706,
+   241,
+   341
+  ],
+  "flavor": "Bubble gum"
+ },
+ "lampadaire": {
+  "file": "lampadaire.png",
+  "w": 141,
+  "h": 1098,
+  "src": "menu-7",
+  "label": "Lampadaire de rue (lanterne allumée + mât)",
+  "box": [
+   506,
+   538,
+   141,
+   1098
+  ]
+ },
+ "livraison": {
+  "file": "livraison.png",
+  "w": 1168,
+  "h": 1271,
+  "src": "menu-9",
+  "label": "Plateau livraison : boîte (riz/poulet), frites, milkshake caramel, sauce",
+  "box": [
+   2,
+   858,
+   1168,
+   1271
+  ]
+ }
+}
