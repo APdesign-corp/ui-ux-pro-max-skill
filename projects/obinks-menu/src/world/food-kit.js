@@ -360,6 +360,17 @@ function buildTextures() {
     T.cakeN = normalTex(heightField(S, (u, v) => pfbm(u, v, 10, 4, 113) - (w(u, v) < 0.12 ? 0.3 : 0)), S, 6);
   }
   // --- frite (texture pomme de terre)
+  // --- fraise : alvéoles des akènes (carte de détail claire + normales en creux)
+  {
+    const S = 256;
+    const w = worley(9, 131);
+    T.berry = pixTex(S, (u, v) => {
+      const d = w(u, v);
+      const k = d < 0.06 ? 1.0 : d < 0.13 ? 0.72 + (d - 0.06) * 2.5 : 0.92 + 0.08 * pfbm(u, v, 6, 3, 132);
+      return [c255(k), c255(d < 0.06 ? 0.95 : k), c255(d < 0.06 ? 0.7 : k)];
+    });
+    T.berryN = normalTex(heightField(S, (u, v) => { const d = w(u, v); return -smooth(clamp(1 - d / 0.15)) * 0.7 + smooth(clamp(1 - d / 0.055)) * 0.45; }), S, 5);
+  }
   T.fry = pixTex(128, (u, v) => { const k = 0.88 + 0.12 * pfbm(u, v, 6, 3, 121); const s = pfbm(u, v, 20, 2, 122) > 0.7 ? 0.85 : 1; return [c255(k * s), c255(k * s * 0.97), c255(k * s * 0.9)]; });
   return T;
 }
@@ -422,7 +433,7 @@ export function kit() {
   M.pickle = P({ vertexColors: true, map: T.soft, normalMap: T.softN, normalScale: n(0.5), roughness: 0.25, clearcoat: 0.9, clearcoatRoughness: 0.1 });
   M.tomatoCut = P({ map: T.tomato, roughness: 0.22, clearcoat: 1, clearcoatRoughness: 0.06, emissive: new THREE.Color('#ff2000'), emissiveIntensity: 0.05 });
   M.tomatoSkin = P({ color: '#c8160e', roughness: 0.18, clearcoat: 1, clearcoatRoughness: 0.05 });
-  M.fries = P({ vertexColors: true, map: T.fry, normalMap: T.softN, normalScale: n(0.5), roughness: 0.52, clearcoat: 0.25, clearcoatRoughness: 0.4, sheen: 0.25, sheenColor: new THREE.Color('#ffe08a') });
+  M.fries = P({ vertexColors: true, map: T.fry, normalMap: T.softN, normalScale: n(0.6), roughness: 0.66, clearcoat: 0.12, clearcoatRoughness: 0.55, specularIntensity: 0.6, sheen: 0.2, sheenColor: new THREE.Color('#ffd070'), sheenRoughness: 0.6 });
   M.crispyOnion = P({ vertexColors: true, map: T.bread, normalMap: T.breadN, normalScale: n(1), roughness: 0.5, clearcoat: 0.3 });
   M.parsley = P({ vertexColors: true, roughness: 0.45, clearcoat: 0.4, side: THREE.DoubleSide });
   M.walnut = P({ color: '#8a5530', map: T.soft, normalMap: T.cakeN, normalScale: n(1.5), roughness: 0.6, clearcoat: 0.2 });
@@ -438,7 +449,8 @@ export function kit() {
   M.glassTint = new THREE.MeshBasicMaterial({ color: '#c8d0d8', transparent: true, opacity: 0.045, depthWrite: false });
   M.cupPlastic = P({ color: '#000000', roughness: 0.14, metalness: 0, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, clearcoat: 0.8, clearcoatRoughness: 0.1, envMapIntensity: 0.75, specularIntensity: 0.5 });
   // Desserts
-  M.cream = P({ vertexColors: true, color: '#d9d2c6', map: T.soft, normalMap: T.softN, normalScale: n(0.4), roughness: 0.5, sheen: 0.35, sheenColor: new THREE.Color('#ffffff'), sheenRoughness: 0.45, clearcoat: 0.2, clearcoatRoughness: 0.35 });
+  // crème / chantilly : très diffusante → ombres relevées (émissif tiède faible = diffusion simulée)
+  M.cream = P({ vertexColors: true, color: '#d9d2c6', map: T.soft, normalMap: T.softN, normalScale: n(0.4), roughness: 0.5, sheen: 0.35, sheenColor: new THREE.Color('#ffffff'), sheenRoughness: 0.45, clearcoat: 0.2, clearcoatRoughness: 0.35, emissive: new THREE.Color('#2e2822'), emissiveIntensity: 1 });
   M.cake = P({ vertexColors: true, map: T.cake, normalMap: T.cakeN, normalScale: n(1.1), roughness: 0.75, sheen: 0.3, sheenColor: new THREE.Color('#d9a066') });
   M.crumbs = P({ vertexColors: true, map: T.cake, normalMap: T.cakeN, normalScale: n(1), roughness: 0.7 });
   M.chocolate = P({ color: '#3a1d0e', roughness: 0.22, clearcoat: 0.9, clearcoatRoughness: 0.08, sheen: 0.3, sheenColor: new THREE.Color('#a0603a') });
@@ -447,7 +459,7 @@ export function kit() {
   M.speculoos = P({ color: '#b5651d', map: T.cake, normalMap: T.cakeN, normalScale: n(0.9), roughness: 0.7, sheen: 0.3, sheenColor: new THREE.Color('#ffb070') });
   M.wafer = P({ color: '#d79a55', map: T.grillX, normalMap: T.grillXN, normalScale: n(0.8), roughness: 0.6 });
   M.coconut = P({ color: '#dcd8cf', map: T.cake, normalMap: T.breadN, normalScale: n(1.4), roughness: 0.7, sheen: 0.6, sheenColor: new THREE.Color('#ffffff') });
-  M.strawberry = P({ vertexColors: true, map: T.soft, normalMap: T.softN, normalScale: n(0.5), roughness: 0.2, clearcoat: 1, clearcoatRoughness: 0.08 });
+  M.strawberry = P({ vertexColors: true, map: T.berry, normalMap: T.berryN, normalScale: n(0.9), roughness: 0.28, clearcoat: 1, clearcoatRoughness: 0.08, sheen: 0.2, sheenColor: new THREE.Color('#ff8080') });
   M.banana = P({ vertexColors: true, map: T.soft, normalMap: T.softN, normalScale: n(0.4), roughness: 0.45, clearcoat: 0.4, sheen: 0.3, sheenColor: new THREE.Color('#fff6c0') });
   M.pistachio = P({ vertexColors: true, map: T.soft, normalMap: T.cakeN, normalScale: n(0.7), roughness: 0.5, clearcoat: 0.3 });
   M.peanut = P({ color: '#c08a4a', map: T.soft, normalMap: T.softN, normalScale: n(0.6), roughness: 0.5, clearcoat: 0.3 });

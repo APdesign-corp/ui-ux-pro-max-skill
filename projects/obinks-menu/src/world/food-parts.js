@@ -529,9 +529,17 @@ export function drizzle(R, id, { seed = 29, n = 4, y = 0, yFn = null, radius = 0
 /** Frites (InstancedMesh) : bâtonnets dorés à bouts plus foncés. place(i, rr) → { p:[x,y,z], r:[x,y,z], len } */
 export function fries(n, seed, placeFn, { thick = 0.034 } = {}) {
   const K = kit();
-  const g = new THREE.CylinderGeometry(0.5, 0.5, 1, 6, 3);
-  g.rotateY(Math.PI / 6);
-  paint(g, (x, y) => mixC(C('#ffe28a'), C('#d0902e'), Math.pow(Math.abs(y) * 2, 4)));
+  // bâtonnet à section carrée aux arêtes arrondies (pas un cylindre) : facettes nettes de vraie frite
+  const g = new THREE.CylinderGeometry(0.5, 0.5, 1, 8, 2);
+  const sq = superR(1, 1, 5), gp = g.attributes.position;
+  for (let i = 0; i < gp.count; i++) {
+    const x = gp.getX(i), z = gp.getZ(i), r = Math.hypot(x, z);
+    if (r < 1e-6) continue;
+    const a = Math.atan2(z, x) + Math.PI / 8, k = sq(a) * 0.5 / 0.5;
+    gp.setX(i, Math.cos(a) * r * k); gp.setZ(i, Math.sin(a) * r * k);
+  }
+  g.computeVertexNormals(); weldNormals(g);
+  paint(g, (x, y) => mixC(C('#fbd774'), C('#c47c22'), Math.pow(Math.abs(y) * 2, 3.5)));
   const im = new THREE.InstancedMesh(g, K.M.fries, n);
   const rr = rng(seed), m = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), p = new THREE.Vector3(), s = new THREE.Vector3(), c = new THREE.Color();
   for (let i = 0; i < n; i++) {

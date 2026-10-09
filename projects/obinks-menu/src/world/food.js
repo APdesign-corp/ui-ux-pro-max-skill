@@ -550,7 +550,7 @@ function biscuitRect(w = 0.08, d = 0.05, th = 0.014) {
 }
 
 /** Garniture d'un dessert selon le parfum : renvoie un Group posé à y = 0 (dessus de la crème). */
-function topping(flavor, R, { seed = 700, scale = 1, dome = () => 0 } = {}) {
+function topping(flavor, R, { seed = 700, scale = 1, dome = () => 0, lines = true } = {}) {
   const K = kit();
   const g = new THREE.Group();
   const P = (n, s, o = {}) => scatter(R, n, seed + s, { margin: o.margin ?? 0.7, minD: o.minD ?? 0 });
@@ -574,9 +574,11 @@ function topping(flavor, R, { seed = 700, scale = 1, dome = () => 0 } = {}) {
         const b = new THREE.Mesh(buenoBar(0.12 * scale), K.M.wafer);
         b.position.set(x * scale, dome(x, z) + y * scale, z * scale); b.rotation.set(rx, ry, 0.1 * i);
         g.add(b);
-        const st = drizzle((a) => 0.05, 'chocolat', { seed: seed + 40 + i, n: 2, radius: 0.004, y: 0.036, margin: 1 });
-        st.obj.position.copy(b.position); st.obj.rotation.copy(b.rotation);
-        g.add(st.obj);
+        if (lines) {
+          const st = drizzle((a) => 0.05, 'chocolat', { seed: seed + 40 + i, n: 2, radius: 0.004, y: 0.036, margin: 1 });
+          st.obj.position.copy(b.position); st.obj.rotation.copy(b.rotation);
+          g.add(st.obj);
+        }
       });
     } else {
       P(5, 3, { minD: 0.08 }).forEach(([x, z, k], i) => {
@@ -589,7 +591,7 @@ function topping(flavor, R, { seed = 700, scale = 1, dome = () => 0 } = {}) {
         return { p: [x, dome(x, z) + 0.012, z], s: [0.014, 0.01, 0.011] };
       }, { seg: 7, flat: 0.8 }));
     }
-    g.add(drizzle(R, sn ? 'caramel' : 'chocolat', { seed: seed + 2, n: 4, radius: 0.007, yFn: (x, z) => dome(x, z) + 0.012, margin: 0.85 }).obj);
+    if (lines) g.add(drizzle(R, sn ? 'caramel' : 'chocolat', { seed: seed + 2, n: 4, radius: 0.007, yFn: (x, z) => dome(x, z) + 0.012, margin: 0.85 }).obj);
     if (!sn) g.add(crumbs(40, '#4a2412', '#7a4a26', 0.012));
   } else if (flavor === 'raffaello') {
     g.add(bits(120, seed + 5, K.M.coconut, (i, rr) => {
@@ -608,14 +610,15 @@ function topping(flavor, R, { seed = 700, scale = 1, dome = () => 0 } = {}) {
       b.position.set(x * scale, dome(x, z) + y * scale, z * scale); b.rotation.set(rx, ry, 0.1);
       g.add(b);
     });
-    g.add(drizzle(R, 'caramel', { seed: seed + 3, n: 3, radius: 0.006, yFn: (x, z) => dome(x, z) + 0.01, margin: 0.8 }).obj);
+    if (lines) g.add(drizzle(R, 'caramel', { seed: seed + 3, n: 3, radius: 0.006, yFn: (x, z) => dome(x, z) + 0.01, margin: 0.8 }).obj);
   } else if (flavor === 'fraisebanane') {
     P(4, 4, { minD: 0.09 }).forEach(([x, z, k], i) => {
       const s = lump({ seg: 16, amp: 0.08, freq: 3, seed: seed + 80 + i, scale: [0.054 * scale, 0.066 * scale, 0.054 * scale] });
       const pp = s.attributes.position;
       for (let j = 0; j < pp.count; j++) { const y = pp.getY(j); const t = clamp((y / (0.066 * scale) + 1) / 2); pp.setX(j, pp.getX(j) * (0.55 + 0.45 * t)); pp.setZ(j, pp.getZ(j) * (0.55 + 0.45 * t)); }
       s.computeVertexNormals();
-      paint(s, (px, py, pz) => (py > 0.05 * scale ? C('#3a8a22') : mixC(C('#e01822'), C('#ff4a4a'), (vn2(px * 300, py * 300, i) * 0.5 + 0.5) * 0.4 + (Math.sin(px * 260) * Math.sin(py * 260 + pz * 200) > 0.85 ? 0.8 : 0))));
+      // corps rouge dégradé (plus clair vers la pointe), collerette verte côté large
+      paint(s, (px, py) => (py > 0.054 * scale ? C('#3f9a26') : mixC(C('#d0101c'), C('#ff5a4a'), clamp(0.15 + (0.05 * scale - py) / (0.13 * scale) * 0.35 + vn2(px * 120, py * 120, i) * 0.12))));
       const m = new THREE.Mesh(s, K.M.strawberry);
       m.position.set(x, dome(x, z) + 0.045 * scale, z); m.rotation.set(Math.PI + (k - 0.5) * 0.8, k * 6, 0);
       g.add(m);
@@ -626,13 +629,13 @@ function topping(flavor, R, { seed = 700, scale = 1, dome = () => 0 } = {}) {
       m.position.set(x, dome(x, z) + 0.03, z); m.rotation.set(1.1 * (k - 0.2), k * 6, 0.35);
       g.add(m);
     });
-    g.add(drizzle(R, 'fraise', { seed: seed + 6, n: 3, radius: 0.006, yFn: (x, z) => dome(x, z) + 0.012, margin: 0.8 }).obj);
+    if (lines) g.add(drizzle(R, 'fraise', { seed: seed + 6, n: 3, radius: 0.006, yFn: (x, z) => dome(x, z) + 0.012, margin: 0.8 }).obj);
   } else if (flavor === 'pistache') {
     g.add(bits(40, seed + 8, K.M.pistachio, (i, rr) => {
       const a = rr() * TAU, k = Math.sqrt(rr()) * 0.85, x = Math.cos(a) * R(a) * k, z = Math.sin(a) * R(a) * k;
       return { p: [x, dome(x, z) + 0.01, z], s: [0.016, 0.009, 0.011] };
     }, { seg: 7, flat: 0.8, colorFn: (i, rr, c) => c.copy(mixC(C('#8fbf3a'), C('#c9a36a'), rr() * 0.6)) }));
-    g.add(drizzle(R, 'pistache', { seed: seed + 9, n: 3, radius: 0.007, yFn: (x, z) => dome(x, z) + 0.012, margin: 0.8 }).obj);
+    if (lines) g.add(drizzle(R, 'pistache', { seed: seed + 9, n: 3, radius: 0.007, yFn: (x, z) => dome(x, z) + 0.012, margin: 0.8 }).obj);
   }
   return g;
 }
@@ -737,19 +740,21 @@ function milkshake(recipe) {
   bodyGeo.computeVertexNormals();
   const body = { obj: mesh(bodyGeo, creamyMat('shake-' + flavor, D.shake, { speck: !!D.speck })), h: 0 };
   // chantilly : spirale cannelée
-  const turns = 2.6, cH = 0.27, r0 = rAt(H) - 0.075;
+  const turns = 2.4, cH = 0.23, r0 = rAt(H) - 0.08;
   const curve = new THREE.Curve();
   curve.getPoint = (u, target = new THREE.Vector3()) => {
     const a = u * turns * TAU, rr = r0 * Math.pow(1 - u, 0.85) + 0.004;
     return target.set(Math.cos(a) * rr, yTop + 0.03 + cH * Math.pow(u, 0.9), Math.sin(a) * rr);
   };
   const prof = [];
-  for (let i = 0; i < 16; i++) { const a = (i / 16) * TAU, rr = 0.072 * (1 + 0.14 * Math.cos(a * 8)); prof.push([Math.cos(a) * rr, Math.sin(a) * rr]); }
-  const ch = sweepGeo(curve, prof, 220, (u) => (1 - 0.5 * u) * smooth(clamp(u * 25)) * (1 - smooth(clamp((u - 0.94) / 0.06))) + 0.02);
+  for (let i = 0; i < 16; i++) { const a = (i / 16) * TAU, rr = 0.086 * (1 + 0.12 * Math.cos(a * 8)); prof.push([Math.cos(a) * rr, Math.sin(a) * rr]); }
+  // tours qui se chevauchent (pas d'assiettes empilées) : la montée par tour < diamètre du boudin
+  const ch = sweepGeo(curve, prof, 220, (u) => (1 - 0.32 * u) * smooth(clamp(u * 20)) * (1 - smooth(clamp((u - 0.9) / 0.1)) * 0.85) + 0.03);
   paint(ch, () => C('#ffffff'));
   const chantilly = { obj: mesh(ch, K.M.cream), h: 0 };
   const domeY = (x, z) => yTop + 0.03 + cH * Math.pow(clamp(1 - Math.hypot(x, z) / r0), 1.1) * 0.85;
-  const top = topping(flavor, (a) => r0 * 0.95, { seed: 780, dome: (x, z) => domeY(x, z) - (yTop + 0.03) });
+  // pas de filets sur la chantilly en spirale (ils flottaient en « brindilles ») : les coulures du gobelet suffisent
+  const top = topping(flavor, (a) => r0 * 0.95, { seed: 780, dome: (x, z) => domeY(x, z) - (yTop + 0.03), lines: false });
   top.position.y = yTop + 0.03 + 0.02;
   const defs = [
     L_('gobelet', 'Coulures', gobelet, { minor: true }),
