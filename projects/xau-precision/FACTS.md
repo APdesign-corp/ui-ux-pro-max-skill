@@ -1,7 +1,8 @@
 # XAU PRÉCISION — faits (sources : messages du client + captures fournies)
 
 - Canal **Telegram « XAU PRÉCISION »** : suivre les trades du client (sur l'or, XAUUSD).
-- **TikTok** : il faut **1 000 abonnés** pour pouvoir prendre des trades **en direct** (live).
+- **TikTok @muzz.traderID** : le client a déjà les 1 000 abonnés → trades **en direct** (live). Ne plus parler d'objectif d'abonnés.
+- Son : bruitages seuls, SANS musique (le client ajoute sa musique sur TikTok).
 - Photo de profil : `assets/src/logo.png` (monogramme MT couronné, « MUZZ.TRADERID », taureau d'or, graphique XAUUSD).
 - Trade montré (captures `mt5.png`, `tv-positions.png`, `tv-entry.jpg`) :
   - XAUUSD **BUY 0.15**, entrée **3990.77**

@@ -660,7 +660,8 @@ def main():
     from music_xau import music_trap
     music = music_trap(total)
     music = music + convolve_st(music, reverb_ir(1.6))[: len(music)] * 0.12
-    mix = norm(sfx) * 0.38 + norm(music) * 0.62
+    # le client ajoute sa propre musique sur TikTok : bruitages seuls
+    mix = norm(sfx) * 0.9
     mix = np.tanh(mix * 1.1) / np.tanh(1.1)
     mix = mix / (np.max(np.abs(mix)) or 1) * (10 ** (-1 / 20))
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
