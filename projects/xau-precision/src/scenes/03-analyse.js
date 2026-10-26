@@ -70,7 +70,7 @@ export default function create(ctx) {
       const bx = V ? S.l + 20 * u : S.l, by = V ? S.t + 70 * u : H * 0.2;
       veil(ui, bx - 40 * u, by - 60 * u, (V ? S.w : 760 * u), sz * 6.5, 0.7 * fade);
       ui.save(); ui.globalAlpha = fade;
-      eyebrow(ui, "L'ANALYSE", bx, by, 30 * u, seg(lt, 0.3, 0.8), 'left');
+      eyebrow(ui, "ÉTAPE 1/3 · L'ANALYSE", bx, by, 30 * u, seg(lt, 0.3, 0.8), 'left');
       const items = [[T_WK, 'Zone repérée', 'WK'], [T_LIQ, 'Liquidité visée', '$$$'], [T_TRAP, 'Piège identifié', 'trap']];
       items.forEach(([a, txt, tag], i) => {
         const yy = by + sz * (1.5 + i * 1.3);

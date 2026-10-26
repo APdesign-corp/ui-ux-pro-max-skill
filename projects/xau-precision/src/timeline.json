@@ -1,5 +1,5 @@
 {
- "duration": 47.9,
+ "duration": 45.1,
  "fps": 60,
  "bpm": 120,
  "segments": [
@@ -12,49 +12,49 @@
   {
    "id": "market",
    "start": 4.4,
-   "end": 9.4,
-   "title": "Survol d'un paysage de bougies 3D bleues/blanches : L'OR bouge vite / je le trade avec PRÉCISION"
+   "end": 6.6,
+   "title": "Survol rapide des bougies 3D : VOICI LE TRADE, ÉTAPE PAR ÉTAPE"
   },
   {
    "id": "analyse",
-   "start": 9.4,
-   "end": 14.4,
+   "start": 6.6,
+   "end": 11.6,
    "title": "Le vrai graphique en 3D : zone WK, liquidité $$$, trap"
   },
   {
    "id": "entry",
-   "start": 14.4,
-   "end": 18.4,
+   "start": 11.6,
+   "end": 15.6,
    "title": "Position BUY 0.15 à 3990.77, boîte bleue/rouge, ticket d'ordre"
   },
   {
    "id": "run",
-   "start": 18.4,
-   "end": 24.4,
+   "start": 15.6,
+   "end": 21.6,
    "title": "Les bougies montent vers le TP 4033.58, SL remonté à 4002.27, +359,20 €"
   },
   {
    "id": "proof",
-   "start": 24.4,
-   "end": 28.9,
+   "start": 21.6,
+   "end": 26.1,
    "title": "Captures réelles MT5 / TradingView dans deux téléphones 3D"
   },
   {
    "id": "telegram",
-   "start": 28.9,
-   "end": 37.4,
+   "start": 26.1,
+   "end": 34.6,
    "title": "Rejoindre le canal Telegram XAU PRÉCISION : abonnement, défilement des médias réels, photos en 3D"
   },
   {
    "id": "tiktok",
-   "start": 37.4,
-   "end": 43.4,
+   "start": 34.6,
+   "end": 40.6,
    "title": "TikTok Gold Hunter XAUUSD : la flèche clique Suivre (1080→1081) puis la cloche ; LIVE bientôt ; portail dans la photo"
   },
   {
    "id": "final",
-   "start": 43.4,
-   "end": 47.9,
+   "start": 40.6,
+   "end": 45.1,
    "title": "Photo de profil sur pièce d'or 3D, XAU PRÉCISION, rejoins-nous"
   }
  ]

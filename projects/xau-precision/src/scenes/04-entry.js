@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { E, clamp, lerp, seg } from '../core/anim.js';
 import { createCandles, tradeSeries, zoneBox, priceLine, gridFloor, px, py, ENTRY_I, ENTRY, TP, BLUE, RED, GOLD } from '../world/chart.js';
 import { touchRipple } from '../core/type.js';
-import { G, rich, glassCard, priceTag, setFont, veil } from './_ui.js';
+import { G, rich, glassCard, priceTag, setFont, veil, eyebrow } from './_ui.js';
 
 const T_BOX = 0.25, T_CARD = 0.95, T_TAP = 1.55, T_HEAD = 0.55;
 export const cues = [
@@ -73,6 +73,7 @@ export default function create(ctx) {
       const out = E.inCubic(seg(lt, 3.5, 3.75));
       ui.save(); ui.globalAlpha = 1 - out;
       veil(ui, (V ? W / 2 : S.r - 420 * u) - 300 * u, hy - s, 600 * u, s * 1.4, 0.5);
+      eyebrow(ui, "ÉTAPE 2/3 · L'ENTRÉE", V ? W / 2 : S.r - 200 * u, hy - s * 0.95, 28 * u, seg(lt, 0.3, 0.6), 'center');
       rich(ui, [["J'ENTRE", 'w'], ['.', 'g']], V ? W / 2 : S.r, hy, { size: s, k: seg(lt, T_HEAD, T_HEAD + 0.3), align: V ? 'center' : 'right', weight: 900 });
       // ---- ticket d'ordre
       const cw = (V ? 760 : 560) * u, ch = (V ? 430 : 330) * u;

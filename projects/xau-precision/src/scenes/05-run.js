@@ -87,7 +87,7 @@ export default function create(ctx) {
       if (kc > 0) {
         veil(ui, cx - (V ? 380 : 40) * u, cy - cs * 1.3, 760 * u, cs * 2.6, 0.6 * kc);
         ui.save(); ui.globalAlpha = kc;
-        eyebrow(ui, 'GAIN EN COURS · BUY 0.15', cx, cy - cs * 0.95, 26 * u, kc, V ? 'center' : 'left');
+        eyebrow(ui, 'ÉTAPE 3/3 · GAIN EN COURS', cx, cy - cs * 0.95, 26 * u, kc, V ? 'center' : 'left');
         rich(ui, [[fmtEur(pnl), 'b']], cx, cy + cs * 0.15, { size: cs, align: V ? 'center' : 'left', weight: 800, glow: 0.8 });
         ui.restore();
       }

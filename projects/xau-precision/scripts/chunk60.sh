@@ -3,8 +3,8 @@
 set -e
 cd "$(dirname "$0")/.."
 M=out/xau-precision-9x16-1080x1920-30fps.mp4
-DUR=47.9
-CH=(0 16 32 $DUR)
+DUR=45.1
+CH=(0 15 30 $DUR)
 for k in 0 1 2; do
   a=${CH[$k]}; b=${CH[$((k+1))]}; d=out/c60_$k; clip=out/c60_$k.mp4
   [ -f $clip ] && continue

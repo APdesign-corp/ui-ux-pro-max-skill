@@ -10,7 +10,7 @@ import { canvasTexture } from '../world/textures.js';
 import { G, goldFill, eyebrow, rich, goldStreaks } from './_ui.js';
 
 const T_LAND = 2.05, T_XAU = 2.1, T_PREC = 2.35, T_SUB = 2.9, T_DIVE = 3.9, T_END = 4.4;
-const HOOK = [[0.04, 'TU VEUX PRENDRE', 'w'], [0.42, 'MES TRADES', 'g'], [0.8, 'EN MÊME TEMPS', 'w'], [1.08, 'QUE MOI ?', 'g']];
+const HOOK = [[0.0, '+635 €', 'g'], [0.45, 'EN UN SEUL TRADE', 'w'], [0.8, "SUR L'OR", 'g'], [1.15, 'JE TE MONTRE COMMENT ↓', 'w']];
 export const cues = [
   { t: 0.0, type: 'impact', gain: 1.0 },
   { t: 0.04, type: 'glitch', gain: 0.8 },
@@ -89,16 +89,16 @@ export default function create(ctx) {
         radialGlow(fx, W / 2, H * 0.45, 1100 * u, G.goldDeep, 0.12 * hk);
         for (const [a] of HOOK) { if (lt >= a && lt < a + 0.3) { post.shock = [0.5, 0.5, E.outCubic(seg(lt, a, a + 0.3)) * 1.0, 0.6 * (1 - seg(lt, a, a + 0.3))]; post.rgb = Math.max(post.rgb, 0.012 * (1 - seg(lt, a, a + 0.2))); post.flash += 0.35 * Math.exp(-(lt - a) / 0.05); } }
         const hs = (V ? 128 : 112) * u;
-        const lines = V ? HOOK.map(([a, w, c]) => [a, w, c]) : [[0.04, 'TU VEUX PRENDRE MES TRADES', 'mix'], [0.8, 'EN MÊME TEMPS QUE MOI ?', 'mix2']];
+        const lines = V ? HOOK.map(([a, w, c]) => [a, w, c]) : [[0.0, '+635 €', 'big'], [0.45, 'EN UN SEUL TRADE', 'mix'], [1.15, 'JE TE MONTRE COMMENT ↓', 'mix2']];
         ui.save(); ui.globalAlpha = hk;
         const y0 = H * (V ? 0.32 : 0.4);
         lines.forEach(([a, w, c], i) => {
-          const sz = V ? hs * (c === 'g' ? 1.15 : 0.82) : hs;
-          const yy = V ? y0 + i * hs * 1.12 : y0 + i * hs * 1.25;
+          const sz = i === 0 ? hs * (V ? 2.0 : 1.7) : V ? hs * (c === 'g' ? 1.15 : 0.72) : hs * 0.75;
+          const yy = i === 0 ? y0 - hs * (V ? 0.55 : 0.6) : V ? y0 + hs * (0.75 + (i - 1) * 1.0) : y0 + hs * (0.6 + (i - 1) * 1.0);
           const sc = 1 + (1 - E.outExpo(seg(lt, a, a + 0.25))) * 1.6;
           if (lt < a) return;
           ui.save(); ui.translate(W / 2, yy); ui.scale(sc, sc); ui.translate(-W / 2, -yy);
-          const parts = c === 'mix' ? [['TU VEUX PRENDRE ', 'w'], ['MES TRADES', 'g']] : c === 'mix2' ? [['EN MÊME TEMPS ', 'w'], ['QUE MOI ?', 'g']] : [[w, c]];
+          const parts = c === 'big' ? [[w, 'g']] : c === 'mix' ? [['EN UN SEUL TRADE ', 'w'], ["SUR L'OR", 'g']] : c === 'mix2' ? [['JE TE MONTRE COMMENT ↓', 'w']] : [[w, c]];
           rich(ui, parts, W / 2, yy, { size: sz, weight: 900, glow: 1.2, maxW: (V ? 0.95 : 0.9) * W, a: clamp((lt - a) / 0.08) });
           ui.restore();
         });
