@@ -80,7 +80,7 @@ export default function create(ctx) {
       }
       eyebrow(ui, 'NE RATE PLUS MES TRADES', x0, y, 30 * u, seg(t, T_NET, T_NET + 0.4), al);
       const mw = V ? S.w : S.r - x0;
-      rich(ui, [['Abonne-toi sur TikTok ', 'l'], ['@muzz.traderID', 'g']], x0, y + s * 0.78, { size: s * 0.4, k: seg(t, T_CTA, T_CTA + 0.4), align: al, weight: 800, maxW: mw, glow: 0.8 });
+      rich(ui, [['Abonne-toi sur TikTok ', 'l'], ['GOLD ', 'g'], ['HUNTER', 's']], x0, y + s * 0.78, { size: s * 0.4, k: seg(t, T_CTA, T_CTA + 0.4), align: al, weight: 800, maxW: mw, glow: 0.8 });
       rich(ui, [['Rejoins le canal Telegram ', 'l'], ['XAU PRÉCISION', 'g']], x0, y + s * 1.38, { size: s * 0.4, k: seg(t, T_CTA + 0.35, T_CTA + 0.75), align: al, weight: 800, maxW: mw, glow: 0.8 });
       ui.globalAlpha = (1 - fold) * 0.75 * seg(t, T_RISK, T_RISK + 0.4);
       setFont(ui, 20 * u * (V ? 1.15 : 1), 400, 0.04); ui.fillStyle = G.muted; ui.textAlign = V ? 'center' : 'left';

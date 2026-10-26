@@ -94,7 +94,7 @@ export default function create(ctx) {
       const yA = V ? S.t + 90 * u : H * 0.25;
       veil(ui, x0 - (V ? 450 : 40) * u, yA - s, 900 * u, s * 2.2, 0.55);
       eyebrow(ui, 'SUR TIKTOK', x0, yA - s * 0.6, 28 * u, seg(lt, 0.2, 0.6), al);
-      rich(ui, [['@muzz.traderID', 'g']], x0, yA + s * 0.55, { size: s * 0.8, k: seg(lt, 0.3, 0.7), align: al, maxW: V ? S.w : 820 * u, glow: 0.6 });
+      rich(ui, [['GOLD ', 'g'], ['HUNTER', 's']], x0, yA + s * 0.55, { size: s * 0.8, k: seg(lt, 0.3, 0.7), align: al, maxW: V ? S.w : 820 * u, glow: 0.6 });
       const yB = V ? H * 0.67 : H * 0.58;
       const kl = seg(lt, T_LIVE, T_LIVE + 0.4);
       veil(ui, x0 - (V ? 450 : 40) * u, yB - s, 900 * u, s * 3.2, 0.55 * kl);
