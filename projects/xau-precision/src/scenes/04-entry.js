@@ -29,7 +29,7 @@ export default function create(ctx) {
   const lE = priceLine(BLUE, px(80) - px(ENTRY_I)), lT = priceLine(GOLD, px(80) - px(ENTRY_I), true);
   group.add(win.group, risk.group, lE.group, lT.group);
   const grid = gridFloor(60, 0.4, GOLD, 0.08); grid.position.y = py(3966); group.add(grid);
-  const X0 = px(ENTRY_I) - 0.05, X1 = px(93);
+  const X0 = px(ENTRY_I) - 0.05, X1 = px(97);
 
   const camera = (lt) => {
     const k = E.inOutCubic(seg(lt, 0, 2.6));
