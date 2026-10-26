@@ -130,9 +130,14 @@ export async function boot(canvas) {
     return Math.min(1.2, a);
   };
 
+  // « coups de zoom » de caméra sur les temps forts + léger bougé caméra épaule (toujours vivant)
+  const PUNCH = { impact: 1, boom: 1.3, slam: 0.9, hit: 0.6, click: 0.5, whip: 0.4 };
+  const punchAt = (t) => { let a = 0; for (const q of allCues) if (PUNCH[q.type]) a += PUNCH[q.type] * (q.gain ?? 1) * pulse(t, q.t, 0.01, 0.16); return Math.min(1.4, a); };
   const camState = (s, lt) => {
     const c = s.inst.camera(Math.max(0, lt));
-    return { pos: c.pos, target: c.target, roll: c.roll || 0, fov: c.fov || 35, near: c.near, far: c.far };
+    const T = s.start + lt, pk = punchAt(T);
+    const hx = noise1(T * 0.9 + 3) * 0.018, hy = noise1(T * 0.7 + 11) * 0.014;
+    return { pos: [c.pos[0] + hx, c.pos[1] + hy, c.pos[2]], target: c.target, roll: (c.roll || 0) + noise1(T * 0.5 + 7) * 0.006, fov: (c.fov || 35) * (1 - 0.075 * pk), near: c.near, far: c.far };
   };
   const tmpA = new THREE.Vector3(), tmpB = new THREE.Vector3(), tmpF = new THREE.Vector3();
   const prevCam = new THREE.PerspectiveCamera();

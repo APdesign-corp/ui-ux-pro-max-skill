@@ -34,7 +34,7 @@ export default function create(ctx) {
     const push = E.inOutCubic(seg(lt, 4.4, 5));
     const tx = lerp(lerp(cx0, cx1, k), px(ENTRY_I), push), ty = lerp(lerp(py(4002), py(3994), k), py(3990.8), push);
     const R = lerp(V ? 10.5 : 6.6, V ? 4.2 : 2.8, push);
-    const a = lerp(0.42, 0.2, k) + push * 0.25;
+    const a = lerp(0.85, -0.2, k) + push * 0.45 + 0.06 * Math.sin(lt * 1.1);
     // décalage : le graphique à droite (16:9) / en bas (9:16), le texte a sa place
     const ox = (V ? 0 : -2.3) * (1 - push), oy = (V ? 1.5 : 0) * (1 - push);
     return { pos: [tx + ox + Math.sin(a) * R, ty + oy + lerp(0.9, 0.35, push), Math.cos(a) * R], target: [tx + ox, ty + oy, 0], roll: lerp(-0.035, 0.02, k), fov: V ? 46 : 34 };
