@@ -42,7 +42,8 @@ const MODULES = { intro: s01, market: s02, analyse: s03, entry: s04, run: s05, p
 
 // Images du client (logo, captures réelles) : <img> + texture Three
 async function loadImages(THREE) {
-  const files = { logo: 'assets/src/logo.png', tvEntry: 'assets/src/tv-entry.jpg', mt5: 'assets/src/mt5.png', tvPos: 'assets/src/tv-positions.png' };
+  const files = { logo: 'assets/src/logo.png', tvEntry: 'assets/src/tv-entry.jpg', mt5: 'assets/src/mt5.png', tvPos: 'assets/src/tv-positions.png', strip: 'assets/tg/strip.jpg',
+    c1: 'assets/tg/c1.jpg', c2: 'assets/tg/c2.jpg', c3: 'assets/tg/c3.jpg', c4: 'assets/tg/c4.jpg', c5: 'assets/tg/c5.jpg', c6: 'assets/tg/c6.jpg', c7: 'assets/tg/c7.jpg' };
   const out = {};
   await Promise.all(Object.entries(files).map(async ([k, url]) => {
     const img = new Image(); img.src = url; await img.decode();

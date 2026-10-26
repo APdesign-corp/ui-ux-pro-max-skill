@@ -654,7 +654,7 @@ def main():
     sfx = (dry + convolve_st(wet, reverb_ir(1.2))[: len(dry)])[:N]
     # O'BINKS (48 s) : groove 3 → 18.6 s, souffle (fumée), groove 19 → 44.9 s, logo 45.2 s
     # XAU PRÉCISION (41 s) : groove 3.5 → 23.4, souffle (preuve), groove 24 → 36.3, final 36.5
-    plan = dict(sections=[(3.5, 23.4, True, True, True), (24.0, 32.5, True, True, True), (32.5, 36.3, True, False, True)], pad_end=36.0, brk=23.4, fin=36.5) if total > 35 else None
+    plan = dict(sections=[(3.5, 23.4, True, True, True), (24.0, 36.5, True, True, True), (36.5, 40.3, True, False, True)], pad_end=40.0, brk=23.4, fin=40.5) if total > 35 else None
     music = music_portails(total, plan=plan)
     mix = norm(sfx) * 0.55 + norm(music) * 0.42
     mix = np.tanh(mix * 1.1) / np.tanh(1.1)
