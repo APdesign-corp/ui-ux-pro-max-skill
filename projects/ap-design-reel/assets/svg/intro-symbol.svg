@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" fill="none" stroke="#39ff14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Symbole d'ouverture : interface HUD + téléphone + pistes de circuit.
+       Tous les tracés sont animés au trait (draw-on) puis convergent vers le centre.
+       Le contour "phone" démarre en haut au centre, dans le sens horaire, pour se
+       morpher proprement vers "badge" (logo-badge.svg). -->
+  <g id="rings">
+    <circle id="ring-outer" cx="500" cy="500" r="400"/>
+    <circle id="ring-main" cx="500" cy="500" r="330"/>
+    <circle id="ring-inner" cx="500" cy="500" r="262"/>
+  </g>
+  <g id="arcs">
+    <path id="arc-a" d="M500 60 A440 440 0 0 1 880 280"/>
+    <path id="arc-b" d="M500 940 A440 440 0 0 1 120 720"/>
+    <path id="arc-c" d="M940 500 A440 440 0 0 1 820 800"/>
+    <path id="arc-d" d="M60 500 A440 440 0 0 1 180 200"/>
+  </g>
+  <g id="device">
+    <path id="phone" d="M500 300 H555 A35 35 0 0 1 590 335 V665 A35 35 0 0 1 555 700 H445 A35 35 0 0 1 410 665 V335 A35 35 0 0 1 445 300 Z"/>
+    <path id="phone-island" d="M484 324 H516"/>
+  </g>
+  <g id="traces">
+    <path id="trace-1" d="M590 400 H660 L700 360 H780"/>
+    <path id="trace-2" d="M590 470 H720 L760 510 H830"/>
+    <path id="trace-3" d="M590 600 H650 L700 650 V720"/>
+    <path id="trace-4" d="M410 380 H350 L300 330 V270"/>
+    <path id="trace-5" d="M410 500 H280 L240 460 H170"/>
+    <path id="trace-6" d="M410 620 H340 L300 660 H220"/>
+    <path id="trace-7" d="M500 300 V230 L540 190 V170"/>
+    <path id="trace-8" d="M500 700 V780 L460 820 V840"/>
+  </g>
+  <g id="nodes">
+    <circle cx="780" cy="360" r="7"/>
+    <circle cx="830" cy="510" r="7"/>
+    <circle cx="700" cy="720" r="7"/>
+    <circle cx="300" cy="270" r="7"/>
+    <circle cx="170" cy="460" r="7"/>
+    <circle cx="220" cy="660" r="7"/>
+    <circle cx="540" cy="170" r="7"/>
+    <circle cx="460" cy="840" r="7"/>
+  </g>
+  <path id="ticks" d="M500 22 V48 M500 952 V978 M22 500 H48 M952 500 H978"/>
+</svg>

@@ -1,0 +1,212 @@
+{
+  "_doc": "Script voix off (texte EXACT fourni par le client). Chaque phrase est synthétisée d'un seul tenant (intonation naturelle) ; les pauses de la direction d'acteur ('breaks') sont ensuite insérées dans le creux d'énergie qui suit le mot indiqué. 'text' = texte attendu (affiché / contrôlé par ASR), 'tts' = graphie envoyée au moteur (respellings phonétiques des noms de marque), 'speed' = débit relatif, 'gain_db' = courbe d'énergie, 'gap_before' = silence avant la phrase (s). Les instants de TOUS les mots sont mesurés après synthèse (alignement ASR Parakeet) et servent à monter l'image.",
+  "respell": {
+    "Center": "Cènnteur",
+    "Western": "Ouesteurn",
+    "Union": "Iounionne",
+    "Ria": "Ria"
+  },
+  "lines": [
+    {
+      "id": "L1",
+      "scene": "intro",
+      "tone": "calme, mystérieux, premium",
+      "gap_before": 0.38,
+      "chunks": [
+        {
+          "id": "L1",
+          "text": "À Liège, votre smartphone mérite mieux.",
+          "speed": 0.94,
+          "gain_db": -1.5,
+          "breaks": [
+            {
+              "after": "Liège",
+              "sec": 0.3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L2",
+      "scene": "phones",
+      "tone": "confiance, précision",
+      "gap_before": 0.6,
+      "chunks": [
+        {
+          "id": "L2",
+          "text": "Découvrez GSM Center.",
+          "speed": 0.95,
+          "gain_db": 0.0,
+          "breaks": [
+            {
+              "after": "Découvrez",
+              "sec": 0.1
+            }
+          ],
+          "takes_mul": 2
+        }
+      ]
+    },
+    {
+      "id": "L3",
+      "scene": "repair",
+      "tone": "confiance, précision",
+      "gap_before": 0.85,
+      "chunks": [
+        {
+          "id": "L3",
+          "text": "Téléphonie, réparation… et expertise.",
+          "speed": 1.0,
+          "gain_db": 0.0,
+          "breaks": [
+            {
+              "after": "Téléphonie",
+              "sec": 0.1
+            },
+            {
+              "after": "réparation",
+              "sec": 0.3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L4",
+      "scene": "accessories",
+      "tone": "plus dynamique",
+      "gap_before": 0.55,
+      "chunks": [
+        {
+          "id": "L4",
+          "text": "Internet, multimédia, accessoires…",
+          "speed": 1.04,
+          "gain_db": 0.5,
+          "breaks": [
+            {
+              "after": "Internet",
+              "sec": 0.06
+            },
+            {
+              "after": "multimédia",
+              "sec": 0.06
+            }
+          ],
+          "tts_alt": [
+            "Internet, multi-média, accessoires…"
+          ],
+          "takes_mul": 2
+        }
+      ]
+    },
+    {
+      "id": "L5",
+      "scene": "transfer",
+      "tone": "plus énergique",
+      "gap_before": 0.36,
+      "chunks": [
+        {
+          "id": "L5",
+          "text": "Et pour vos transferts internationaux, Western Union et Ria.",
+          "speed": 1.0,
+          "gain_db": 1.0,
+          "breaks": [
+            {
+              "after": "internationaux",
+              "sec": 0.12
+            },
+            {
+              "after": "Union",
+              "sec": 0.05
+            }
+          ],
+          "tts_alt": [
+            "Et pour vos transferts internationaux : Western Union, et Ria."
+          ],
+          "takes_mul": 2
+        }
+      ]
+    },
+    {
+      "id": "L6",
+      "scene": "final",
+      "tone": "montée émotionnelle",
+      "gap_before": 0.8,
+      "chunks": [
+        {
+          "id": "L6",
+          "text": "Tout ce dont vous avez besoin… au même endroit.",
+          "speed": 0.97,
+          "gain_db": 1.0,
+          "breaks": [
+            {
+              "after": "besoin",
+              "sec": 0.28
+            }
+          ],
+          "tts_alt": [
+            "Tout ce dont vous avez besoin. Au même endroit."
+          ],
+          "takes_mul": 2
+        }
+      ]
+    },
+    {
+      "id": "L7",
+      "scene": "final",
+      "tone": "très assurée, signature de marque",
+      "gap_before": 0.45,
+      "chunks": [
+        {
+          "id": "L7a",
+          "text": "GSM Center Liège.",
+          "speed": 0.9,
+          "gain_db": 1.5,
+          "pause": 0.36,
+          "breaks": [],
+          "takes_mul": 3
+        },
+        {
+          "id": "L7b",
+          "text": "Votre technologie, notre expertise.",
+          "speed": 0.9,
+          "gain_db": 1.5,
+          "breaks": [
+            {
+              "after": "technologie",
+              "sec": 0.18
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "emphasis": [
+    {
+      "word": "L1.mieux",
+      "db": 2.0
+    },
+    {
+      "word": "L2.Center",
+      "db": 1.0
+    },
+    {
+      "word": "L3.expertise",
+      "db": 1.5
+    },
+    {
+      "word": "L5.Ria",
+      "db": 1.0
+    },
+    {
+      "word": "L7a.GSM",
+      "db": 1.0
+    },
+    {
+      "word": "L7b.expertise",
+      "db": 2.0
+    }
+  ],
+  "_doc_emphasis": "Accentuation (direction d'acteur) : gain appliqué au mixage sur la durée du mot, après compression (rampes 25 ms)."
+}

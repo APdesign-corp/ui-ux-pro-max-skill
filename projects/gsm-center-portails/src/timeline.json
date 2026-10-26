@@ -1,0 +1,16 @@
+{
+  "duration": 30,
+  "fps": 60,
+  "bpm": 120,
+  "segments": [
+    { "id": "ignite",    "start": 0,  "end": 2,  "title": "Noir, point de lumière, éclair, impact, GSM CENTER géant + onde de choc" },
+    { "id": "orbit",     "start": 2,  "end": 5,  "title": "Les iPhone surgissent de la profondeur, orbite 360° qui accélère, écrans qui s'allument un à un" },
+    { "id": "roll",      "start": 5,  "end": 8,  "title": "Roll 360° + whip pan, impact ; « Les derniers smartphones. » ; TRAVERSÉE 1 (plongée dans un écran)" },
+    { "id": "interface", "start": 8,  "end": 11, "title": "Monde Interface : tunnel de cartes inclinées, frappe, compteurs, lignes de vitesse ; TRAVERSÉE 2 (carte mère)" },
+    { "id": "circuits",  "start": 11, "end": 14, "title": "Monde Circuits : pistes lumineuses, puces 3D, flux ; dolly zoom ; changement de direction brutal ; entrée dans le verre" },
+    { "id": "glass",     "start": 14, "end": 18, "title": "TRAVERSÉE 3 : le verre explose au ralenti puis se reforme à l'envers ; RÉPARATION, compteur 100 %" },
+    { "id": "gear",      "start": 18, "end": 22, "title": "Montage ultra rapide accessoires (coques, chargeurs, écouteurs) ; speed ramps ; TRAVERSÉE 4 (chute libre dans un écran)" },
+    { "id": "city",      "start": 22, "end": 26, "title": "Monde Ville : Liège de nuit stylisée, adresse, spirale de caméra ; TRAVERSÉE 5 (portail)" },
+    { "id": "final",     "start": 26, "end": 30, "title": "Studio : un iPhone, GSM CENTER, Rue St Léonard 203 — 4000 Liège, appel à l'action ; boucle vers le point de lumière" }
+  ]
+}

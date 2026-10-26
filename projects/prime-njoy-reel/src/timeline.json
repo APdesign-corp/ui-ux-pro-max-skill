@@ -1,0 +1,499 @@
+{
+ "_doc": "GÉNÉRÉ par scripts/build_timeline.py à partir de voice/vo_layout.json — ne pas éditer à la main. Temps local des scènes = secondes ; synchronisation sur les mots via les markers ; cues = sound design en temps absolu.",
+ "duration": 20.027,
+ "vo": {
+  "file": "voice/vo_master.wav",
+  "dry": "voice/vo_dry.wav",
+  "voice": "kokoro-siwis",
+  "gender": "F",
+  "emphasis": [
+   {
+    "word": "L1.cher",
+    "from": 2.966,
+    "to": 3.449,
+    "db": 1.5
+   },
+   {
+    "word": "L4.45",
+    "from": 10.666,
+    "to": 11.016,
+    "db": 1.5
+   },
+   {
+    "word": "L5.connexion",
+    "from": 12.257,
+    "to": 13.087,
+    "db": 1.0
+   }
+  ]
+ },
+ "markers": {
+  "L1a.Internet": 0.312,
+  "L1.Internet": 0.312,
+  "L1a.télé": 0.9,
+  "L1.télé": 0.9,
+  "L1a.mobile": 1.3,
+  "L1.mobile": 1.3,
+  "L1a.start": 0.312,
+  "L1a.end": 1.804,
+  "L1b.Vous": 1.928,
+  "L1.Vous": 1.928,
+  "L1b.payez": 2.036,
+  "L1.payez": 2.036,
+  "L1b.encore": 2.516,
+  "L1.encore": 2.516,
+  "L1b.trop": 2.756,
+  "L1.trop": 2.756,
+  "L1b.cher": 2.996,
+  "L1.cher": 2.996,
+  "L1b.start": 1.928,
+  "L1b.end": 3.399,
+  "L1.start": 0.312,
+  "L1.end": 3.399,
+  "L2.Avec": 3.804,
+  "L2.Prime": 3.912,
+  "L2.N'Joy": 4.552,
+  "L2.tout": 4.952,
+  "L2.est": 5.112,
+  "L2.réuni": 5.272,
+  "L2.start": 3.804,
+  "L2.end": 5.576,
+  "L3.La": 5.92,
+  "L3.télé": 6.108,
+  "L3.Internet": 6.988,
+  "L3.le": 7.948,
+  "L3.GSM": 8.108,
+  "L3.start": 5.92,
+  "L3.end": 8.984,
+  "L4a.Le": 9.388,
+  "L4.Le": 9.388,
+  "L4a.tout": 9.576,
+  "L4.tout": 9.576,
+  "L4a.pour": 9.896,
+  "L4.pour": 9.896,
+  "L4a.45": 10.696,
+  "L4.45": 10.696,
+  "L4a.par": 11.016,
+  "L4.par": 11.016,
+  "L4a.mois": 11.256,
+  "L4.mois": 11.256,
+  "L4a.start": 9.388,
+  "L4a.end": 11.455,
+  "L4.start": 9.388,
+  "L4.end": 11.455,
+  "L5.Plus": 11.859,
+  "L5.qu'une": 11.967,
+  "L5.connexion": 12.287,
+  "L5.un": 13.087,
+  "L5.meilleur": 13.247,
+  "L5.quotidien": 13.647,
+  "L5.start": 11.859,
+  "L5.end": 14.262,
+  "L6.Prime": 14.706,
+  "L6.N'Joy": 15.294,
+  "L6.Télécom": 15.934,
+  "L6.et": 16.494,
+  "L6.énergie": 16.654,
+  "L6.Ensemble": 17.374,
+  "L6.allons": 17.854,
+  "L6.plus": 18.334,
+  "L6.loin": 18.494,
+  "L6.start": 14.706,
+  "L6.end": 18.727
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "start": 0,
+   "end": 3.684,
+   "design": 3.684,
+   "pre": 0,
+   "post": 0.36,
+   "anchors": []
+  },
+  {
+   "id": "unite",
+   "start": 3.684,
+   "end": 5.78,
+   "design": 2.096,
+   "pre": 0,
+   "post": 0.36,
+   "anchors": []
+  },
+  {
+   "id": "products",
+   "start": 5.78,
+   "end": 9.248,
+   "design": 3.468,
+   "pre": 0,
+   "post": 0.36,
+   "anchors": []
+  },
+  {
+   "id": "offer",
+   "start": 9.248,
+   "end": 11.739,
+   "design": 2.491,
+   "pre": 0,
+   "post": 0.36,
+   "anchors": []
+  },
+  {
+   "id": "promise",
+   "start": 11.739,
+   "end": 14.486,
+   "design": 2.747,
+   "pre": 0,
+   "post": 0.36,
+   "anchors": []
+  },
+  {
+   "id": "brand",
+   "start": 14.486,
+   "end": 20.027,
+   "design": 5.541,
+   "pre": 0,
+   "post": 0,
+   "anchors": []
+  }
+ ],
+ "music": {
+  "bpm": 118,
+  "pulseFrom": 3.684,
+  "pulseTo": 14.436,
+  "hatsFrom": 5.78,
+  "silenceFrom": 14.466,
+  "padFrom": 14.706,
+  "swellFrom": 14.706,
+  "resolveAt": 18.877,
+  "roots": [
+   [
+    0,
+    49.0
+   ],
+   [
+    3.684,
+    43.65
+   ],
+   [
+    5.78,
+    49.0
+   ],
+   [
+    9.248,
+    55.0
+   ],
+   [
+    11.739,
+    46.25
+   ],
+   [
+    14.486,
+    49.0
+   ]
+  ]
+ },
+ "cues": [
+  {
+   "t": 0.0,
+   "type": "impact",
+   "dur": 1.0,
+   "gain": 0.55,
+   "tone": "soft"
+  },
+  {
+   "t": 0.312,
+   "type": "pop",
+   "dur": 0.2,
+   "gain": 0.5
+  },
+  {
+   "t": 0.342,
+   "type": "blip",
+   "dur": 0.12,
+   "gain": 0.25
+  },
+  {
+   "t": 0.9,
+   "type": "pop",
+   "dur": 0.2,
+   "gain": 0.5
+  },
+  {
+   "t": 0.93,
+   "type": "blip",
+   "dur": 0.12,
+   "gain": 0.25
+  },
+  {
+   "t": 1.3,
+   "type": "pop",
+   "dur": 0.2,
+   "gain": 0.5
+  },
+  {
+   "t": 1.33,
+   "type": "blip",
+   "dur": 0.12,
+   "gain": 0.25
+  },
+  {
+   "t": 2.646,
+   "type": "riser",
+   "dur": 0.35,
+   "gain": 0.4
+  },
+  {
+   "t": 2.996,
+   "type": "hit",
+   "dur": 0.9,
+   "gain": 0.75
+  },
+  {
+   "t": 3.196,
+   "type": "glass",
+   "dur": 0.8,
+   "gain": 0.45
+  },
+  {
+   "t": 3.324,
+   "type": "swish",
+   "dur": 0.4,
+   "gain": 0.45,
+   "pan": [
+    -0.5,
+    0.5
+   ]
+  },
+  {
+   "t": 3.684,
+   "type": "sub",
+   "dur": 1.2,
+   "gain": 0.5
+  },
+  {
+   "t": 3.734,
+   "type": "suck",
+   "dur": 0.4,
+   "gain": 0.35
+  },
+  {
+   "t": 3.912,
+   "type": "shimmer",
+   "dur": 0.8,
+   "gain": 0.35
+  },
+  {
+   "t": 4.552,
+   "type": "pop",
+   "dur": 0.2,
+   "gain": 0.45
+  },
+  {
+   "t": 4.972,
+   "type": "zips",
+   "dur": 0.8,
+   "gain": 0.3
+  },
+  {
+   "t": 5.392,
+   "type": "impact",
+   "dur": 1.6,
+   "gain": 0.8
+  },
+  {
+   "t": 5.48,
+   "type": "whoosh",
+   "dur": 0.55,
+   "gain": 0.55,
+   "pan": [
+    0,
+    0
+   ]
+  },
+  {
+   "t": 6.108,
+   "type": "digital",
+   "dur": 0.4,
+   "gain": 0.45
+  },
+  {
+   "t": 6.258,
+   "type": "hit",
+   "dur": 0.7,
+   "gain": 0.4
+  },
+  {
+   "t": 6.988,
+   "type": "transmit",
+   "dur": 0.9,
+   "gain": 0.4
+  },
+  {
+   "t": 7.238,
+   "type": "click",
+   "dur": 0.3,
+   "gain": 0.45
+  },
+  {
+   "t": 8.008,
+   "type": "swish",
+   "dur": 0.35,
+   "gain": 0.4,
+   "pan": [
+    0.8,
+    -0.2
+   ]
+  },
+  {
+   "t": 8.408,
+   "type": "click",
+   "dur": 0.3,
+   "gain": 0.4
+  },
+  {
+   "t": 8.928,
+   "type": "whoosh",
+   "dur": 0.45,
+   "gain": 0.6,
+   "pan": [
+    -0.8,
+    0.8
+   ]
+  },
+  {
+   "t": 9.268,
+   "type": "swish",
+   "dur": 0.4,
+   "gain": 0.4
+  },
+  {
+   "t": 10.396,
+   "type": "ticks",
+   "dur": 0.3,
+   "gain": 0.35
+  },
+  {
+   "t": 10.696,
+   "type": "impact",
+   "dur": 1.4,
+   "gain": 0.85,
+   "tone": "bright"
+  },
+  {
+   "t": 10.716,
+   "type": "burst",
+   "dur": 0.5,
+   "gain": 0.4
+  },
+  {
+   "t": 10.776,
+   "type": "snap",
+   "dur": 0.5,
+   "gain": 0.4
+  },
+  {
+   "t": 11.356,
+   "type": "pop",
+   "dur": 0.2,
+   "gain": 0.45
+  },
+  {
+   "t": 11.539,
+   "type": "burst",
+   "dur": 0.5,
+   "gain": 0.6
+  },
+  {
+   "t": 11.619,
+   "type": "hit",
+   "dur": 0.8,
+   "gain": 0.6
+  },
+  {
+   "t": 11.789,
+   "type": "shimmer",
+   "dur": 0.8,
+   "gain": 0.3
+  },
+  {
+   "t": 11.859,
+   "type": "blip",
+   "dur": 0.14,
+   "gain": 0.3
+  },
+  {
+   "t": 12.287,
+   "type": "blip",
+   "dur": 0.14,
+   "gain": 0.3
+  },
+  {
+   "t": 13.087,
+   "type": "blip",
+   "dur": 0.14,
+   "gain": 0.3
+  },
+  {
+   "t": 13.647,
+   "type": "blip",
+   "dur": 0.14,
+   "gain": 0.3
+  },
+  {
+   "t": 13.947,
+   "type": "success",
+   "dur": 0.9,
+   "gain": 0.35
+  },
+  {
+   "t": 14.136,
+   "type": "zips",
+   "dur": 0.8,
+   "gain": 0.35
+  },
+  {
+   "t": 14.506,
+   "type": "suck",
+   "dur": 0.6,
+   "gain": 0.35
+  },
+  {
+   "t": 14.706,
+   "type": "impact",
+   "dur": 2.2,
+   "gain": 0.85
+  },
+  {
+   "t": 15.344,
+   "type": "shimmer",
+   "dur": 0.8,
+   "gain": 0.35
+  },
+  {
+   "t": 15.934,
+   "type": "pop",
+   "dur": 0.2,
+   "gain": 0.45
+  },
+  {
+   "t": 16.654,
+   "type": "pulse2",
+   "dur": 0.6,
+   "gain": 0.45
+  },
+  {
+   "t": 17.374,
+   "type": "glass",
+   "dur": 1.0,
+   "gain": 0.3
+  },
+  {
+   "t": 18.877,
+   "type": "impact",
+   "dur": 1.4,
+   "gain": 0.5,
+   "tone": "bright"
+  }
+ ]
+}

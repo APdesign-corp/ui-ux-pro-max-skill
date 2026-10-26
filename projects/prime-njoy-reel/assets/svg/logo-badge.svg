@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" fill="none" stroke="#39ff14" stroke-width="2">
+  <!-- Pastille du logo GSM Center (carré arrondi, rayon 30 %, comme sur le site).
+       Même point de départ et même sens que "phone" dans intro-symbol.svg (morphing). -->
+  <defs>
+    <linearGradient id="badge-fill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4dff4d"/>
+      <stop offset="1" stop-color="#14e0a0"/>
+    </linearGradient>
+  </defs>
+  <path id="badge" d="M500 425 H530 A45 45 0 0 1 575 470 V530 A45 45 0 0 1 530 575 H470 A45 45 0 0 1 425 530 V470 A45 45 0 0 1 470 425 Z" fill="url(#badge-fill)"/>
+  <circle id="badge-ring" cx="500" cy="500" r="75"/>
+</svg>

@@ -1,0 +1,633 @@
+{
+ "voice": "kokoro-siwis",
+ "gender": "F",
+ "params": {
+  "voice": "kokoro-siwis",
+  "models": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/models",
+  "out": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/pnj/kok",
+  "script": "/home/user/ui-ux-pro-max-skill/projects/prime-njoy-reel/voice/script.json",
+  "aligner": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/models/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
+  "speed": 1.0,
+  "noise_scale": 0.667,
+  "noise_w": 0.8,
+  "respell": null,
+  "threads": 4,
+  "speed_jitter": 0.04,
+  "expr": 0.03,
+  "takes": 6,
+  "judge_whisper": "/tmp/claude-0/-home-user-ui-ux-pro-max-skill/c0b74001-fd63-5eb6-ad0f-38aa13b79e00/scratchpad/models/sherpa-onnx-whisper-small",
+  "variants": null
+ },
+ "respell": {},
+ "lines": [
+  {
+   "id": "L1",
+   "scene": "hook",
+   "tone": "accroche, interpellation",
+   "start": 0.3,
+   "chunks": [
+    {
+     "id": "L1a",
+     "text": "Internet, télé, mobile…",
+     "tts": "Internet ! Télé ! Mobile !",
+     "start": 0.3,
+     "end": 1.816,
+     "speech": [
+      0.312,
+      1.804
+     ],
+     "words": [
+      [
+       "Internet",
+       0.312
+      ],
+      [
+       "télé",
+       0.9
+      ],
+      [
+       "mobile",
+       1.3
+      ]
+     ],
+     "aligned_words": 3,
+     "asr_on_raw": "Internet télé mobile",
+     "native_sr": 24000,
+     "takes": null,
+     "chosen_take": 0
+    },
+    {
+     "id": "L1b",
+     "text": "Vous payez encore trop cher ?",
+     "tts": "Vous payez encore... trop cher ?",
+     "start": 1.916,
+     "end": 3.412,
+     "speech": [
+      1.928,
+      3.399
+     ],
+     "words": [
+      [
+       "Vous",
+       1.928
+      ],
+      [
+       "payez",
+       2.036
+      ],
+      [
+       "encore",
+       2.516
+      ],
+      [
+       "trop",
+       2.756
+      ],
+      [
+       "cher",
+       2.996
+      ]
+     ],
+     "aligned_words": 5,
+     "asr_on_raw": "Vous payez encore trop cher.",
+     "native_sr": 24000,
+     "takes": [
+      {
+       "tts": "Vous payez encore trop cher ?",
+       "sr": 24000,
+       "dur": 1.552,
+       "asr_p": "Vous payez encore trop cher.",
+       "wer_p": 0.0,
+       "asr_w": "Vous payez encore trop cher.",
+       "wer_w": 0.0,
+       "expr": 9.285,
+       "score": -0.263
+      },
+      {
+       "tts": "Vous payez encore... trop cher ?",
+       "sr": 24000,
+       "dur": 1.496,
+       "asr_p": "Vous payez encore trop cher.",
+       "wer_p": 0.0,
+       "asr_w": "Vous payez encore trop cher.",
+       "wer_w": 0.0,
+       "expr": 9.479,
+       "score": -0.28
+      },
+      {
+       "tts": "Vous payez encore trop cher ?",
+       "sr": 24000,
+       "dur": 1.488,
+       "asr_p": "Vous payez encore trop cher.",
+       "wer_p": 0.0,
+       "asr_w": "Vous payez encore trop cher.",
+       "wer_w": 0.0,
+       "expr": 9.202,
+       "score": -0.273
+      },
+      {
+       "tts": "Vous payez encore... trop cher ?",
+       "sr": 24000,
+       "dur": 1.461,
+       "asr_p": "Vous payez encore trop cher.",
+       "wer_p": 0.0,
+       "asr_w": "Vous payez encore trop cher.",
+       "wer_w": 0.0,
+       "expr": 9.153,
+       "score": -0.272
+      },
+      {
+       "tts": "Vous payez encore trop cher ?",
+       "sr": 24000,
+       "dur": 1.441,
+       "asr_p": "Vous payez encore trop cher.",
+       "wer_p": 0.0,
+       "asr_w": "Vous payez encore trop cher.",
+       "wer_w": 0.0,
+       "expr": 9.218,
+       "score": -0.27
+      },
+      {
+       "tts": "Vous payez encore... trop cher ?",
+       "sr": 24000,
+       "dur": 1.421,
+       "asr_p": "Vous payez encore trop cher.",
+       "wer_p": 0.0,
+       "asr_w": "Vous payez encore trop cher.",
+       "wer_w": 0.0,
+       "expr": 9.152,
+       "score": -0.264
+      }
+     ],
+     "chosen_take": 1
+    }
+   ],
+   "end": 3.412
+  },
+  {
+   "id": "L2",
+   "scene": "unite",
+   "tone": "solution, chaleureux",
+   "start": 3.792,
+   "chunks": [
+    {
+     "id": "L2",
+     "text": "Avec Prime N'Joy, tout est réuni.",
+     "tts": "Avec Praïmèndjoï, tout est réuni.",
+     "start": 3.792,
+     "end": 5.588,
+     "speech": [
+      3.804,
+      5.576
+     ],
+     "words": [
+      [
+       "Avec",
+       3.804
+      ],
+      [
+       "Prime",
+       3.912
+      ],
+      [
+       "N'Joy",
+       4.552
+      ],
+      [
+       "tout",
+       4.952
+      ],
+      [
+       "est",
+       5.112
+      ],
+      [
+       "réuni",
+       5.272
+      ]
+     ],
+     "aligned_words": 6,
+     "asr_on_raw": "Avec Prime<unk> Joy, tout est réuni.",
+     "native_sr": 24000,
+     "takes": [
+      {
+       "tts": "Avec Praïmèndjoï, tout est réuni.",
+       "sr": 24000,
+       "dur": 1.961,
+       "asr_p": "Avec Prime and Joy, tout est réuni.",
+       "wer_p": 0.333,
+       "asr_w": "Avec Prime Enjoy, toutes est réunies.",
+       "wer_w": 0.333,
+       "expr": 6.71,
+       "score": 0.828
+      },
+      {
+       "tts": "Avec Praïmèndjoï... tout est réuni !",
+       "sr": 24000,
+       "dur": 1.774,
+       "asr_p": "Avec Prime<unk> Joy tout est réuni.",
+       "wer_p": 0.333,
+       "asr_w": "Avec Prime Enjoy, toutes est réunies.",
+       "wer_w": 0.333,
+       "expr": 6.47,
+       "score": 0.808
+      },
+      {
+       "tts": "Avec Praïmèndjoï, tout est réuni.",
+       "sr": 24000,
+       "dur": 1.915,
+       "asr_p": "Avec Prime and Joy, tout est réuni.",
+       "wer_p": 0.333,
+       "asr_w": "Avec Prime Enjoy, tout est réuni.",
+       "wer_w": 0.0,
+       "expr": 6.544,
+       "score": 0.492
+      },
+      {
+       "tts": "Avec Praïmèndjoï... tout est réuni !",
+       "sr": 24000,
+       "dur": 1.698,
+       "asr_p": "Avec Prime<unk> Joy tout est réuni.",
+       "wer_p": 0.333,
+       "asr_w": "Avec Prime Enjoy, toutes est réunies.",
+       "wer_w": 0.333,
+       "expr": 6.697,
+       "score": 0.814
+      },
+      {
+       "tts": "Avec Praïmèndjoï, tout est réuni.",
+       "sr": 24000,
+       "dur": 1.796,
+       "asr_p": "Avec Prime<unk> Joy, tout est réuni.",
+       "wer_p": 0.333,
+       "asr_w": "Avec Prime Enjoy, tout est réuni.",
+       "wer_w": 0.0,
+       "expr": 6.892,
+       "score": 0.462
+      },
+      {
+       "tts": "Avec Praïmèndjoï... tout est réuni !",
+       "sr": 24000,
+       "dur": 1.692,
+       "asr_p": "Avec Prime<unk> Joy tout est réuni.",
+       "wer_p": 0.333,
+       "asr_w": "Avec Prime Enjoy, tout est réuni.",
+       "wer_w": 0.0,
+       "expr": 6.729,
+       "score": 0.48
+      }
+     ],
+     "chosen_take": 4
+    }
+   ],
+   "end": 5.588
+  },
+  {
+   "id": "L3",
+   "scene": "products",
+   "tone": "énumération rythmée",
+   "start": 5.908,
+   "chunks": [
+    {
+     "id": "L3",
+     "text": "La télé, Internet, le GSM.",
+     "tts": "La télé. Internet. Le G.S.M.",
+     "start": 5.908,
+     "end": 8.996,
+     "speech": [
+      5.92,
+      8.984
+     ],
+     "words": [
+      [
+       "La",
+       5.92
+      ],
+      [
+       "télé",
+       6.108
+      ],
+      [
+       "Internet",
+       6.988
+      ],
+      [
+       "le",
+       7.948
+      ],
+      [
+       "GSM",
+       8.108
+      ]
+     ],
+     "aligned_words": 5,
+     "asr_on_raw": "La télé, Internet, le GSM.",
+     "native_sr": 24000,
+     "takes": null,
+     "chosen_take": 0
+    }
+   ],
+   "end": 8.996
+  },
+  {
+   "id": "L4",
+   "scene": "offer",
+   "tone": "offre, enthousiaste",
+   "start": 9.376,
+   "chunks": [
+    {
+     "id": "L4a",
+     "text": "Le tout pour 45 € par mois.",
+     "tts": "Le tout... pour quarante-cinq euros par mois !",
+     "start": 9.376,
+     "end": 11.467,
+     "speech": [
+      9.388,
+      11.455
+     ],
+     "words": [
+      [
+       "Le",
+       9.388
+      ],
+      [
+       "tout",
+       9.576
+      ],
+      [
+       "pour",
+       9.896
+      ],
+      [
+       "45",
+       10.696
+      ],
+      [
+       "par",
+       11.016
+      ],
+      [
+       "mois",
+       11.256
+      ]
+     ],
+     "aligned_words": 6,
+     "asr_on_raw": "Le tout pour 45 euros par mois.",
+     "native_sr": 24000,
+     "takes": [
+      {
+       "tts": "Le tout pour quarante-cinq euros par mois !",
+       "sr": 24000,
+       "dur": 2.152,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 6.226,
+       "score": 0.324
+      },
+      {
+       "tts": "Le tout... pour quarante-cinq euros par mois !",
+       "sr": 24000,
+       "dur": 2.127,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 6.666,
+       "score": 0.307
+      },
+      {
+       "tts": "Le tout pour quarante-cinq euros par mois !",
+       "sr": 24000,
+       "dur": 2.067,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 6.719,
+       "score": 0.3
+      },
+      {
+       "tts": "Le tout... pour quarante-cinq euros par mois !",
+       "sr": 24000,
+       "dur": 2.091,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 6.948,
+       "score": 0.293
+      },
+      {
+       "tts": "Le tout pour quarante-cinq euros par mois !",
+       "sr": 24000,
+       "dur": 1.961,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 6.648,
+       "score": 0.318
+      },
+      {
+       "tts": "Le tout... pour quarante-cinq euros par mois !",
+       "sr": 24000,
+       "dur": 2.011,
+       "asr_p": "Le tout pour 45 euros par mois.",
+       "wer_p": 0.167,
+       "asr_w": "Le tout pour 45 euros par mois.",
+       "wer_w": 0.167,
+       "expr": 6.932,
+       "score": 0.302
+      }
+     ],
+     "chosen_take": 3
+    }
+   ],
+   "end": 11.467
+  },
+  {
+   "id": "L5",
+   "scene": "promise",
+   "tone": "promesse, posé",
+   "start": 11.847,
+   "chunks": [
+    {
+     "id": "L5",
+     "text": "Plus qu'une connexion, un meilleur quotidien.",
+     "tts": "Plus qu'une connexion, un meilleur quotidien.",
+     "start": 11.847,
+     "end": 14.274,
+     "speech": [
+      11.859,
+      14.262
+     ],
+     "words": [
+      [
+       "Plus",
+       11.859
+      ],
+      [
+       "qu'une",
+       11.967
+      ],
+      [
+       "connexion",
+       12.287
+      ],
+      [
+       "un",
+       13.087
+      ],
+      [
+       "meilleur",
+       13.247
+      ],
+      [
+       "quotidien",
+       13.647
+      ]
+     ],
+     "aligned_words": 6,
+     "asr_on_raw": "Plus qu'une connexion, un meilleur quotidien.",
+     "native_sr": 24000,
+     "takes": [
+      {
+       "tts": "Plus qu'une connexion, un meilleur quotidien.",
+       "sr": 24000,
+       "dur": 2.427,
+       "asr_p": "Plus qu'une connexion, un meilleur quotidien.",
+       "wer_p": 0.0,
+       "asr_w": "plus qu'une connexion, un meilleur quotidien.",
+       "wer_w": 0.0,
+       "expr": 6.64,
+       "score": -0.164
+      },
+      {
+       "tts": "Plus qu'une connexion... un meilleur quotidien.",
+       "sr": 24000,
+       "dur": 2.115,
+       "asr_p": "Plus qu'une connexion en meilleur quotidien.",
+       "wer_p": 0.167,
+       "asr_w": "Vlu qu'une connexion meilleure quotidien.",
+       "wer_w": 0.5,
+       "expr": 6.874,
+       "score": 0.635
+      },
+      {
+       "tts": "Plus qu'une connexion, un meilleur quotidien.",
+       "sr": 24000,
+       "dur": 2.3,
+       "asr_p": "Plus qu'une connexion, un meilleur quotidien.",
+       "wer_p": 0.0,
+       "asr_w": "plus qu'une connexion en meilleur quotidien.",
+       "wer_w": 0.167,
+       "expr": 7.108,
+       "score": -0.029
+      },
+      {
+       "tts": "Plus qu'une connexion... un meilleur quotidien.",
+       "sr": 24000,
+       "dur": 2.044,
+       "asr_p": "Plus qu'une connexion au meilleur quotidien.",
+       "wer_p": 0.167,
+       "asr_w": "plus qu'une connexion meilleure quotidien.",
+       "wer_w": 0.333,
+       "expr": 7.02,
+       "score": 0.474
+      },
+      {
+       "tts": "Plus qu'une connexion, un meilleur quotidien.",
+       "sr": 24000,
+       "dur": 2.235,
+       "asr_p": "Plus qu'une connexion, un meilleur quotidien.",
+       "wer_p": 0.0,
+       "asr_w": "plus qu'une connexion en meilleur quotidien.",
+       "wer_w": 0.167,
+       "expr": 6.931,
+       "score": -0.033
+      },
+      {
+       "tts": "Plus qu'une connexion... un meilleur quotidien.",
+       "sr": 24000,
+       "dur": 2.001,
+       "asr_p": "Plus qu'une connexion en meilleur quotidien.",
+       "wer_p": 0.167,
+       "asr_w": "plus qu'une connexion meilleure quotidien.",
+       "wer_w": 0.333,
+       "expr": 6.758,
+       "score": 0.488
+      }
+     ],
+     "chosen_take": 0
+    }
+   ],
+   "end": 14.274
+  },
+  {
+   "id": "L6",
+   "scene": "brand",
+   "tone": "signature",
+   "start": 14.694,
+   "chunks": [
+    {
+     "id": "L6",
+     "text": "Prime N'Joy. Télécom et énergie. Ensemble, allons plus loin.",
+     "tts": "Praïmèndjoï. Télécom, et énergie. Ensemble... allons plus loin !",
+     "start": 14.694,
+     "end": 18.739,
+     "speech": [
+      14.706,
+      18.727
+     ],
+     "words": [
+      [
+       "Prime",
+       14.706
+      ],
+      [
+       "N'Joy",
+       15.294
+      ],
+      [
+       "Télécom",
+       15.934
+      ],
+      [
+       "et",
+       16.494
+      ],
+      [
+       "énergie",
+       16.654
+      ],
+      [
+       "Ensemble",
+       17.374
+      ],
+      [
+       "allons",
+       17.854
+      ],
+      [
+       "plus",
+       18.334
+      ],
+      [
+       "loin",
+       18.494
+      ]
+     ],
+     "aligned_words": 9,
+     "asr_on_raw": "Prime<unk> Joy, Télécom et Energie. Ensemble allons plus loin.",
+     "native_sr": 24000,
+     "takes": null,
+     "chosen_take": 0
+    }
+   ],
+   "end": 18.739
+  }
+ ],
+ "vo_end": 18.739
+}

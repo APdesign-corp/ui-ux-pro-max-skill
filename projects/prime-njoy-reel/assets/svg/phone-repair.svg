@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 400" fill="none" stroke="#f4f8f4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Mini animation "réparation" : écran fissuré -> fissures qui se résorbent -> validation. -->
+  <path id="body" d="M120 20 H186 A34 34 0 0 1 220 54 V346 A34 34 0 0 1 186 380 H54 A34 34 0 0 1 20 346 V54 A34 34 0 0 1 54 20 Z"/>
+  <path id="island" d="M104 42 H136"/>
+  <g id="cracks" stroke-width="2">
+    <path d="M150 130 L176 92 L192 70"/>
+    <path d="M150 130 L196 150 L214 146"/>
+    <path d="M150 130 L132 196 L108 236 L96 292"/>
+    <path d="M150 130 L96 110 L48 122"/>
+    <path d="M132 196 L170 236 L204 252"/>
+    <path d="M108 236 L58 252"/>
+    <path d="M150 130 L168 172 L196 196"/>
+  </g>
+  <circle id="check-ring" cx="120" cy="214" r="54" stroke="#39ff14"/>
+  <path id="check" d="M94 216 L113 235 L148 194" stroke="#39ff14" stroke-width="5"/>
+</svg>

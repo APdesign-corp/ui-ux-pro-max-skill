@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr-BE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>O'BINKS — Taste the difference (motion design)</title>
+<script type="importmap">
+{ "imports": {
+  "three": "./node_modules/three/build/three.module.js",
+  "three/addons/": "./node_modules/three/examples/jsm/",
+  "topojson-client": "./node_modules/topojson-client/src/index.js"
+} }
+</script>
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; background: #000; overflow: hidden; font-family: system-ui, sans-serif; color: #cfe; }
+  #stage { position: fixed; inset: 0; display: grid; place-items: center; }
+  canvas#c { display: block; background: #040605; }
+  body:not(.render) canvas#c { max-width: 100vw; max-height: calc(100vh - 56px); width: auto !important; height: auto !important; }
+  #bar { position: fixed; left: 0; right: 0; bottom: 0; height: 56px; display: flex; gap: 12px; align-items: center; padding: 0 16px;
+         background: rgba(8,12,9,.92); border-top: 1px solid #1d241d; font-size: 13px; }
+  #bar button { background: #39ff14; color: #031200; border: 0; border-radius: 999px; padding: 8px 16px; font-weight: 700; cursor: pointer; }
+  #bar input[type=range] { flex: 1; accent-color: #39ff14; }
+  #tc { font-variant-numeric: tabular-nums; min-width: 120px; }
+  body.render #bar { display: none; }
+  #loading { position: fixed; inset: 0; display: grid; place-items: center; color: #39ff14; letter-spacing: .3em; font-size: 12px; }
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="c"></canvas></div>
+<div id="loading">CHARGEMENT…</div>
+<div id="bar">
+  <button id="play">▶ Lecture</button>
+  <input id="scrub" type="range" min="0" max="57" step="0.0167" value="0">
+  <span id="tc">00.00 s</span>
+  <span>Espace : lecture · ←/→ : image par image · ?format=9x16 · ?w=1920&amp;h=1080</span>
+</div>
+<script type="module">
+  import { boot } from './src/main.js';
+  const q = new URLSearchParams(location.search);
+  if (q.has('render')) document.body.classList.add('render');
+  else if (!q.has('w') && !q.has('format')) {
+    // prévisualisation : 1080p par défaut (le rendu final est en 4K via scripts/render.mjs)
+    q.set('w', '1920'); q.set('h', '1080'); history.replaceState(null, '', '?' + q);
+  }
+  const ad = await boot(document.getElementById('c'));
+  document.getElementById('loading').remove();
+  window.__ad = ad;
+  const scrub = document.getElementById('scrub'), tc = document.getElementById('tc'), btn = document.getElementById('play');
+  scrub.max = ad.duration;
+  let t = ad.cfg.startAt || 0, playing = false, last = 0;
+  const show = () => { ad.renderFrame(t); scrub.value = t; tc.textContent = t.toFixed(2).padStart(5, '0') + ' s'; };
+  if (!q.has('render')) {
+    show();
+    const loop = (now) => {
+      if (playing) { t += Math.min(0.1, (now - last) / 1000); if (t >= ad.duration) t = 0; show(); }
+      last = now; requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+    btn.onclick = () => { playing = !playing; btn.textContent = playing ? '❚❚ Pause' : '▶ Lecture'; };
+    scrub.oninput = () => { t = +scrub.value; show(); };
+    addEventListener('keydown', (e) => {
+      if (e.code === 'Space') { e.preventDefault(); btn.click(); }
+      if (e.code === 'ArrowRight') { t = Math.min(ad.duration, t + 1 / ad.fps); show(); }
+      if (e.code === 'ArrowLeft') { t = Math.max(0, t - 1 / ad.fps); show(); }
+    });
+  }
+  window.__adReady = true;
+</script>
+</body>
+</html>

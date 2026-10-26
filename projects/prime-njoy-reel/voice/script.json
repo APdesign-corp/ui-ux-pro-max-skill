@@ -1,0 +1,128 @@
+{
+ "_doc": "Voix off Prime N'Joy (maquette). 'text' = texte exact affiché (sous-titres), 'tts' = graphie dite.",
+ "respell": {},
+ "emphasis": [
+  {
+   "word": "L1.cher",
+   "db": 1.5
+  },
+  {
+   "word": "L4.45",
+   "db": 1.5
+  },
+  {
+   "word": "L5.connexion",
+   "db": 1.0
+  }
+ ],
+ "lines": [
+  {
+   "id": "L1",
+   "scene": "hook",
+   "tone": "accroche, interpellation",
+   "gap_before": 0.3,
+   "chunks": [
+    {
+     "id": "L1a",
+     "text": "Internet, télé, mobile…",
+     "tts": "Internet ! Télé ! Mobile !",
+     "speed": 0.92,
+     "gain_db": 1.5,
+     "pause": 0.1
+    },
+    {
+     "id": "L1b",
+     "text": "Vous payez encore trop cher ?",
+     "speed": 0.97,
+     "gain_db": 1.5,
+     "tts_alt": [
+      "Vous payez encore... trop cher ?"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "L2",
+   "scene": "unite",
+   "tone": "solution, chaleureux",
+   "gap_before": 0.38,
+   "chunks": [
+    {
+     "id": "L2",
+     "text": "Avec Prime N'Joy, tout est réuni.",
+     "tts": "Avec Praïmèndjoï, tout est réuni.",
+     "speed": 0.97,
+     "gain_db": 1.5,
+     "tts_alt": [
+      "Avec Praïmèndjoï... tout est réuni !"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "L3",
+   "scene": "products",
+   "tone": "énumération rythmée",
+   "gap_before": 0.32,
+   "chunks": [
+    {
+     "id": "L3",
+     "text": "La télé, Internet, le GSM.",
+     "tts": "La télé. Internet. Le G.S.M.",
+     "speed": 0.92,
+     "gain_db": 1.5
+    }
+   ]
+  },
+  {
+   "id": "L4",
+   "scene": "offer",
+   "tone": "offre, enthousiaste",
+   "gap_before": 0.38,
+   "chunks": [
+    {
+     "id": "L4a",
+     "text": "Le tout pour 45 € par mois.",
+     "tts": "Le tout pour quarante-cinq euros par mois !",
+     "speed": 0.97,
+     "gain_db": 2,
+     "tts_alt": [
+      "Le tout... pour quarante-cinq euros par mois !"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "L5",
+   "scene": "promise",
+   "tone": "promesse, posé",
+   "gap_before": 0.38,
+   "chunks": [
+    {
+     "id": "L5",
+     "text": "Plus qu'une connexion, un meilleur quotidien.",
+     "speed": 0.95,
+     "gain_db": 1.5,
+     "tts_alt": [
+      "Plus qu'une connexion... un meilleur quotidien."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "L6",
+   "scene": "brand",
+   "tone": "signature",
+   "gap_before": 0.42,
+   "chunks": [
+    {
+     "id": "L6",
+     "text": "Prime N'Joy. Télécom et énergie. Ensemble, allons plus loin.",
+     "tts": "Praïmèndjoï. Télécom, et énergie. Ensemble... allons plus loin !",
+     "speed": 0.92,
+     "gain_db": 1.5
+    }
+   ]
+  }
+ ]
+}
