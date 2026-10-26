@@ -1,5 +1,5 @@
 {
- "duration": 45,
+ "duration": 47,
  "fps": 60,
  "bpm": 120,
  "segments": [
@@ -48,13 +48,13 @@
   {
    "id": "tiktok",
    "start": 36.5,
-   "end": 40.5,
-   "title": "TikTok @muzz.traderID : mes trades en direct (LIVE)"
+   "end": 42.5,
+   "title": "TikTok Gold Hunter XAUUSD : la flèche clique Suivre (1080→1081) puis la cloche ; LIVE bientôt ; portail dans la photo"
   },
   {
    "id": "final",
-   "start": 40.5,
-   "end": 45,
+   "start": 42.5,
+   "end": 47,
    "title": "Photo de profil sur pièce d'or 3D, XAU PRÉCISION, rejoins-nous"
   }
  ]

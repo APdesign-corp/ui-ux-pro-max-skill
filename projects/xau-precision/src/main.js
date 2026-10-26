@@ -204,6 +204,20 @@ export async function boot(canvas) {
     if (s.inst.group) s.inst.group.visible = true;
     s.inst.update(f);
 
+    // ---------- raccords : à chaque frontière de segment, aberration + zoom radial + lame de lumière or
+    for (const b of segs) {
+      if (b.start <= 0) continue;
+      const d = t - b.start, k = Math.exp(-Math.pow(d / 0.1, 2));
+      if (k < 0.01) continue;
+      post.rgb = Math.max(post.rgb, 0.007 * k);
+      post.ca += 0.004 * k;
+      post.zoomBlur += (d < 0 ? 0.14 : -0.1) * k;
+      const fxg = engine.fx, x = (0.5 + d * 6) * W;
+      fxg.save(); fxg.globalCompositeOperation = 'lighter';
+      const gr = fxg.createLinearGradient(x - W * 0.25, 0, x + W * 0.25, H);
+      gr.addColorStop(0, 'rgba(255,224,138,0)'); gr.addColorStop(0.5, `rgba(255,224,138,${0.55 * k})`); gr.addColorStop(1, 'rgba(255,224,138,0)');
+      fxg.fillStyle = gr; fxg.fillRect(0, 0, W, H); fxg.restore();
+    }
     // ---------- effets globaux synchronisés sur les cues
     const gl = glitchAt(t);
     post.glitch = Math.max(post.glitch, gl);
