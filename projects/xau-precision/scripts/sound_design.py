@@ -641,12 +641,15 @@ def main():
     dry = np.zeros((N + SR * 4, 2))
     wet = np.zeros_like(dry)
     sheet = []
+    # Bruitages « organiques » uniquement (pas de bips / data / servo synthétiques), gains doux
+    KEEP = {'whoosh': 0.8, 'swish': 0.7, 'whip': 0.8, 'impact': 0.75, 'boom': 0.8, 'hit': 0.55, 'slam': 0.6, 'riser': 0.5,
+            'suck': 0.6, 'glass': 0.4, 'shimmer': 0.35, 'click': 0.5, 'sub': 0.7, 'flash': 0.35, 'pop': 0.3}
     for c in info['cues']:
         at = float(c['t'])
-        if at >= total:
+        if at >= total or c['type'] not in KEEP:
             continue
         snd, _ = render_cue(c)
-        g = float(c.get('gain', 1.0))
+        g = float(c.get('gain', 1.0)) * KEEP[c['type']]
         i = n_(at)
         dry[i:i + len(snd)] += snd[: len(dry) - i] * g
         wet[i:i + len(snd)] += snd[: len(dry) - i] * g * WET.get(c['type'], 0.15)
@@ -654,9 +657,10 @@ def main():
     sfx = (dry + convolve_st(wet, reverb_ir(1.2))[: len(dry)])[:N]
     # O'BINKS (48 s) : groove 3 → 18.6 s, souffle (fumée), groove 19 → 44.9 s, logo 45.2 s
     # XAU PRÉCISION (41 s) : groove 3.5 → 23.4, souffle (preuve), groove 24 → 36.3, final 36.5
-    plan = dict(sections=[(3.5, 23.4, True, True, True), (24.0, 36.5, True, True, True), (36.5, 40.3, True, False, True)], pad_end=40.0, brk=23.4, fin=40.5) if total > 35 else None
-    music = music_portails(total, plan=plan)
-    mix = norm(sfx) * 0.55 + norm(music) * 0.42
+    from music_xau import music_trap
+    music = music_trap(total)
+    music = music + convolve_st(music, reverb_ir(1.6))[: len(music)] * 0.12
+    mix = norm(sfx) * 0.38 + norm(music) * 0.62
     mix = np.tanh(mix * 1.1) / np.tanh(1.1)
     mix = mix / (np.max(np.abs(mix)) or 1) * (10 ** (-1 / 20))
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
