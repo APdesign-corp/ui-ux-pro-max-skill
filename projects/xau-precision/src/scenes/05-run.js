@@ -1,14 +1,14 @@
 // 05 — LA MONTÉE (17.5 → 23.5 s) : les bougies se forment une à une (bleues / blanches) et
 // montent vers le TP ; la caméra suit la tête du marché ; compteur de gain en direct ;
-// 2.4 le SL remonte à 4002.27 (au-dessus de l'entrée : « STOP EN PROFIT ») ; 4.0 « +359,20 € ».
+// 2.4 le SL remonte à 4002.27 (au-dessus de l'entrée : « STOP EN PROFIT ») ; 4.0 « +500,00 € » (gain final indiqué par le client).
 import * as THREE from 'three';
 import { E, clamp, lerp, seg } from '../core/anim.js';
 import { createCandles, tradeSeries, zoneBox, priceLine, gridFloor, px, py, ENTRY_I, ENTRY, TP, SL, LAST, BLUE, RED, GOLD } from '../world/chart.js';
 import { sparks, radialGlow } from '../core/draw.js';
 import { G, rich, eyebrow, priceTag, fmtP, fmtEur, veil, glassCard, setFont } from './_ui.js';
 
-const T0 = 0.2, STEP = 0.1, N_END = 76, T_SL = 2.4, T_WIN = 4.0;
-const PNL = 359.20;
+const T0 = 0.2, STEP = 0.072, N_END = 91, T_SL = 2.4, T_WIN = 4.0;
+const PNL = 500.0;
 export const cues = [
   { t: 0.0, type: 'whoosh', dur: 0.4, gain: 0.5 },
   { t: 0.2, type: 'data', dur: 3.4, gain: 0.3 },
@@ -28,7 +28,7 @@ export default function create(ctx) {
   const series = tradeSeries();
   const chart = createCandles(series, { width: 0.64, depth: 0.14 });
   group.add(chart.group);
-  const X0 = px(ENTRY_I) - 0.05, X1 = px(78);
+  const X0 = px(ENTRY_I) - 0.05, X1 = px(93);
   const win = zoneBox(BLUE, 0.1), risk = zoneBox(RED, 0.15);
   const lE = priceLine(BLUE, X1 - X0), lT = priceLine(GOLD, X1 - X0, true), lS = priceLine(RED, X1 - X0, true);
   group.add(win.group, risk.group, lE.group, lT.group, lS.group);
@@ -36,7 +36,7 @@ export default function create(ctx) {
 
   const headAt = (lt) => { const c = ENTRY_I + 1 + (lt - T0) / STEP; return clamp(c, ENTRY_I + 1, N_END); };
   // prix de tête lissé (caméra)
-  const priceAt = (c) => { const i = clamp(Math.floor(c) - 1, 0, 75), fr = c - Math.floor(c); const d = series[i], n = series[Math.min(75, i + 1)]; return lerp(d.c, n.c, fr); };
+  const priceAt = (c) => { const i = clamp(Math.floor(c) - 1, 0, N_END - 1), fr = c - Math.floor(c); const d = series[i], n = series[Math.min(N_END - 1, i + 1)]; return lerp(d.c, n.c, fr); };
   const camera = (lt) => {
     const c = headAt(lt);
     let sm = 0; for (let k = 0; k < 6; k++) sm += priceAt(Math.max(ENTRY_I + 1, c - k * 1.5)); sm /= 6;
@@ -112,7 +112,7 @@ export default function create(ctx) {
         sparks(fx, W / 2, wy - ws * 0.35, lt - T_WIN, f, { count: 90, life: 1.2 });
         ui.save(); ui.globalAlpha = kw;
         ui.translate(W / 2, wy); ui.scale(lerp(1.6, 1, kw), lerp(1.6, 1, kw)); ui.translate(-W / 2, -wy);
-        rich(ui, [['+359,20 €', 'g']], W / 2, wy, { size: ws, weight: 900, glow: 1.4, maxW: S.w });
+        rich(ui, [['+500,00 €', 'g']], W / 2, wy, { size: ws, weight: 900, glow: 1.4, maxW: S.w });
         rich(ui, [['SUR CE TRADE · ', 'm'], ['XAUUSD', 'w']], W / 2, wy + ws * 0.62, { size: ws * 0.2, k: seg(lt, T_WIN + 0.3, T_WIN + 0.7), weight: 700, tracking: 0.2 });
         ui.restore();
       }

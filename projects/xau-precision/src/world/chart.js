@@ -10,21 +10,21 @@ import { rng, clamp, lerp, E } from '../core/anim.js';
 
 export const BLUE = '#2f9bff', WHITE = '#f2f4f8', GOLD = '#f2c14e', RED = '#e0343a';
 export const P0 = 4000, K = 0.075, DX = 0.16;
-export const ENTRY_I = 41, ENTRY = 3990.77, TP = 4033.58, SL = 4002.27, LAST = 4017.56;
+export const ENTRY_I = 41, ENTRY = 3990.77, TP = 4033.58, SL = 4002.27, LAST = 4028.06, NS = 91;
 export const py = (p) => (p - P0) * K;
 export const px = (i) => i * DX;
 
-/** Série du vrai trade (déterministe). 76 bougies M5 condensées. */
+/** Série du vrai trade (déterministe). 91 bougies M5 condensées (jusqu'à +500 € selon le client). */
 export function tradeSeries() {
   const keys = [[0, 4026], [4, 4029], [6, 4031], [8, 4028], [10, 4012], [11, 3987], [13, 3995], [16, 3999], [19, 3992], [22, 4000],
     [25, 3993], [28, 4001], [31, 3994], [33, 3997], [35, 3989], [37, 3983], [38, 3981.5], [40, 3986], [41, 3990.77],
-    [44, 4003], [46, 4008], [48, 3999], [51, 4012], [53, 4005], [56, 4016], [59, 4008], [62, 4019], [65, 4010], [68, 4018], [71, 4012], [74, 4019], [75, 4017.56]];
+    [44, 4003], [46, 4008], [48, 3999], [51, 4012], [53, 4005], [56, 4016], [59, 4008], [62, 4019], [65, 4010], [68, 4018], [71, 4012], [74, 4019], [75, 4017.56], [78, 4022], [80, 4016], [83, 4025], [86, 4020], [89, 4027], [90, 4028.06]];
   const at = (i) => { for (let k = 0; k < keys.length - 1; k++) { const [a, pa] = keys[k], [b, pb] = keys[k + 1]; if (i >= a && i <= b) return lerp(pa, pb, (i - a) / (b - a || 1)); } return keys[keys.length - 1][1]; };
   const r = rng(7);
   const out = [];
   let prev = at(0);
-  for (let i = 0; i < 76; i++) {
-    let c = at(i) + (i === ENTRY_I || i === 75 || i === 38 ? 0 : (r() - 0.5) * 3.2);
+  for (let i = 0; i < NS; i++) {
+    let c = at(i) + (i === ENTRY_I || i === NS - 1 || i === 38 ? 0 : (r() - 0.5) * 3.2);
     const o = prev;
     const h = Math.max(o, c) + 0.4 + r() * (i === 11 ? 1 : 2.2), l = Math.min(o, c) - 0.4 - r() * (i === 38 ? 0.5 : 2.2);
     out.push({ o, h, l: i === 38 ? 3979.6 : l, c });
