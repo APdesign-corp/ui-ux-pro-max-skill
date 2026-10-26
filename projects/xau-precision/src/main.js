@@ -209,6 +209,10 @@ export async function boot(canvas) {
     if (s.inst.group) s.inst.group.visible = true;
     s.inst.update(f);
 
+    // ---------- textes nets : le calque texte ne reçoit presque pas de flou de mouvement (lisibilité),
+    // sauf pendant les raccords entre segments
+    { let nearCut = 0; for (const b of segs) if (b.start > 0) nearCut = Math.max(nearCut, Math.exp(-Math.pow((t - b.start) / 0.15, 2)));
+      post.uiBlur = Math.min(post.uiBlur, 0.12 + 0.88 * nearCut); }
     // ---------- raccords : à chaque frontière de segment, aberration + zoom radial + lame de lumière or
     for (const b of segs) {
       if (b.start <= 0) continue;
