@@ -1,0 +1,16 @@
+{
+  "duration": 41,
+  "fps": 60,
+  "bpm": 120,
+  "segments": [
+    { "id": "intro",    "start": 0,    "end": 3.5,  "title": "Lingot d'or 3D, impact, XAU PRÉCISION" },
+    { "id": "market",   "start": 3.5,  "end": 8.5,  "title": "Survol d'un paysage de bougies 3D bleues/blanches : L'OR bouge vite / je le trade avec PRÉCISION" },
+    { "id": "analyse",  "start": 8.5,  "end": 13.5, "title": "Le vrai graphique en 3D : zone WK, liquidité $$$, trap" },
+    { "id": "entry",    "start": 13.5, "end": 17.5, "title": "Position BUY 0.15 à 3990.77, boîte bleue/rouge, ticket d'ordre" },
+    { "id": "run",      "start": 17.5, "end": 23.5, "title": "Les bougies montent vers le TP 4033.58, SL remonté à 4002.27, +359,20 €" },
+    { "id": "proof",    "start": 23.5, "end": 28,   "title": "Captures réelles MT5 / TradingView dans deux téléphones 3D" },
+    { "id": "telegram", "start": 28,   "end": 32.5, "title": "Canal Telegram XAU PRÉCISION : rejoindre, suivre mes trades" },
+    { "id": "tiktok",   "start": 32.5, "end": 36.5, "title": "Objectif 1 000 abonnés TikTok pour trader en direct" },
+    { "id": "final",    "start": 36.5, "end": 41,   "title": "Photo de profil sur pièce d'or 3D, XAU PRÉCISION, rejoins-nous" }
+  ]
+}

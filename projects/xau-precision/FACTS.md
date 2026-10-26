@@ -1,0 +1,13 @@
+# XAU PRÉCISION — faits (sources : messages du client + captures fournies)
+
+- Canal **Telegram « XAU PRÉCISION »** : suivre les trades du client (sur l'or, XAUUSD).
+- **TikTok** : il faut **1 000 abonnés** pour pouvoir prendre des trades **en direct** (live).
+- Photo de profil : `assets/src/logo.png` (monogramme MT couronné, « MUZZ.TRADERID », taureau d'or, graphique XAUUSD).
+- Trade montré (captures `mt5.png`, `tv-positions.png`, `tv-entry.jpg`) :
+  - XAUUSD **BUY 0.15**, entrée **3990.77**
+  - **TP 4033.58**, **SL 4002.27** (SL remonté au-dessus de l'entrée = gain sécurisé)
+  - Capture MT5 : cours 4017.56, **+359.20 EUR** ; capture TradingView : 3990.77 → 4015.85, 336.19
+  - Annotations du client sur TradingView : WK (zone), $$$ (liquidité), trap, TP1, BE
+  - Bougies : bleues (hausse) et blanches (baisse)
+- Les captures ne montrent PAS le TP touché : la vidéo montre la montée vers le TP et le gain réel +359,20 €.
+- Mention légale ajoutée : « Le trading comporte un risque de perte en capital. »
