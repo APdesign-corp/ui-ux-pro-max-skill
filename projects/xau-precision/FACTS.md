@@ -1,6 +1,6 @@
 # XAU PRÉCISION — faits (sources : messages du client + captures fournies)
 
-- Canal **Telegram « XAU PRÉCISION »** : suivre les trades du client (sur l'or, XAUUSD).
+- Canal **Telegram « XAU PRÉCISION »** : le client y poste ses trades en direct ; les membres les prennent en même temps que lui (or, XAUUSD).
 - **TikTok GOLD HUNTER (TikTok)** : le client a déjà les 1 000 abonnés → trades **en direct** (live). Ne plus parler d'objectif d'abonnés.
 - Son : bruitages seuls, SANS musique (le client ajoute sa musique sur TikTok).
 - Photo de profil : `assets/src/logo.png` (monogramme MT couronné, « GOLD HUNTER · XAUUSD », taureau d'or, graphique XAUUSD).

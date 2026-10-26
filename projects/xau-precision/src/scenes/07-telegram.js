@@ -225,8 +225,8 @@ export default function create(ctx) {
         const yc = V ? S.b - 260 * u : H * 0.8;
         ui.save(); ui.globalAlpha = Cc;
         veil(ui, W / 2 - 520 * u, yc - s * 1.1, 1040 * u, s * 2.4, 0.65);
-        rich(ui, [['57 PHOTOS', 'g'], [' · 1 VIDÉO', 'w']], W / 2, yc, { size: s * 0.56, k: Cc, weight: 800, maxW: V ? S.w : 1200 * u, glow: 0.6 });
-        rich(ui, [['Abonne-toi, ', 'l'], ['suis mes trades.', 'w']], W / 2, yc + s * 0.8, { size: s * 0.48, k: seg(lt, T_FLY + 0.9, T_FLY + 1.3), weight: 600, maxW: V ? S.w : 1200 * u });
+        rich(ui, [['JE POSTE MES TRADES ', 'w'], ['EN DIRECT', 'g']], W / 2, yc, { size: s * 0.56, k: Cc, weight: 800, maxW: V ? S.w : 1200 * u, glow: 0.6 });
+        rich(ui, [['Prends-les ', 'l'], ['en même temps que moi.', 'w']], W / 2, yc + s * 0.8, { size: s * 0.48, k: seg(lt, T_FLY + 0.9, T_FLY + 1.3), weight: 600, maxW: V ? S.w : 1200 * u });
         ui.restore();
       }
       void clamp;
