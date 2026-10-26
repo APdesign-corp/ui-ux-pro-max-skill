@@ -9,7 +9,7 @@ for k in 0 1 2; do
   a=${CH[$k]}; b=${CH[$((k+1))]}; d=out/c60_$k; clip=out/c60_$k.mp4
   [ -f $clip ] && continue
   mkdir -p $d
-  if [ ! -f $d/.seeded ]; then
+  if [ -f $M ] && [ ! -f $d/.seeded ]; then
     tmp=out/c60_tmp; rm -rf $tmp; mkdir -p $tmp
     ffmpeg -hide_banner -loglevel error -ss $a -to $b -i $M -start_number 0 $tmp/g_%05d.png
     for f in $tmp/g_*.png; do j=$((10#$(basename $f .png | cut -c3-))); mv $f $d/f_$(printf %05d $((2*j))).png; done
