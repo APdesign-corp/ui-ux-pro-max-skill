@@ -13,4 +13,4 @@
 - Les captures ne montrent PAS le TP touché : la vidéo montre la montée vers le TP et le gain réel +359,20 €.
 - Mention légale ajoutée : « Le trading comporte un risque de perte en capital. »
 
-- Gain final du trade : **+640 €, TP 4033.58 atteint** (confirmé par le client, capture non fournie) ; la capture MT5 intermédiaire montre +359.20 EUR.
+- Gain final du trade : **+635 €, TP 4033.58 atteint** (confirmé par le client, capture non fournie) ; la capture MT5 intermédiaire montre +359.20 EUR.

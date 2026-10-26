@@ -14,7 +14,7 @@ export const ENTRY_I = 41, ENTRY = 3990.77, TP = 4033.58, SL = 4002.27, LAST = 4
 export const py = (p) => (p - P0) * K;
 export const px = (i) => i * DX;
 
-/** Série du vrai trade (déterministe). 91 bougies M5 condensées (jusqu'au TP 4033.58 : +640 € selon le client). */
+/** Série du vrai trade (déterministe). 91 bougies M5 condensées (jusqu'au TP 4033.58 : +635 € selon le client). */
 export function tradeSeries() {
   const keys = [[0, 4026], [4, 4029], [6, 4031], [8, 4028], [10, 4012], [11, 3987], [13, 3995], [16, 3999], [19, 3992], [22, 4000],
     [25, 3993], [28, 4001], [31, 3994], [33, 3997], [35, 3989], [37, 3983], [38, 3981.5], [40, 3986], [41, 3990.77],
